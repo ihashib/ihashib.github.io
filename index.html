@@ -28,6 +28,15 @@
           <li><a href="#projects" class="nav-link">Projects</a></li>
           <li><a href="#education" class="nav-link">Education</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
+          <li>
+            <a
+              href="cv/Md-Hashibul-Islam-CV.pdf"
+              class="nav-link download-cv"
+              download
+            >
+              <i class="fas fa-download"></i> CV
+            </a>
+          </li>
         </ul>
         <div class="hamburger">
           <span class="bar"></span>
@@ -50,12 +59,18 @@
           <div class="hero-buttons">
             <a href="#projects" class="btn btn-primary">View Projects</a>
             <a href="#contact" class="btn btn-secondary">Contact Me</a>
+            <a
+              href="cv/Md-Hashibul-Islam-CV.pdf"
+              class="btn btn-tertiary"
+              download
+            >
+              <i class="fas fa-download"></i> Download CV
+            </a>
           </div>
         </div>
         <div class="hero-image">
-          <div class="image-placeholder">
-            <i class="fas fa-user"></i>
-            <!-- Replace with your image: <img src="images/profile.jpg" alt="Md. Hashibul Islam"> -->
+          <div class="profile-image-container">
+            <img src="images/profile.jpg" alt="Md. Hashibul Islam" />
           </div>
         </div>
       </div>
@@ -70,8 +85,10 @@
             <h3>Programming Languages</h3>
             <div class="skill-items">
               <span class="skill-tag">Java</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">TypeScript</span>
               <span class="skill-tag">Python</span>
-              <span class="skill-tag">Embedded C/C++</span>
+              <span class="skill-tag">C/C++</span>
             </div>
           </div>
           <div class="skill-category">
@@ -80,11 +97,13 @@
               <span class="skill-tag">Spring Boot</span>
               <span class="skill-tag">Spring Security</span>
               <span class="skill-tag">Spring JPA</span>
-              <span class="skill-tag">Maven</span>
-              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">JHipster</span>
               <span class="skill-tag">GraphQL</span>
-              <span class="skill-tag">WebRTC</span>
+              <span class="skill-tag">REST API</span>
               <span class="skill-tag">RabbitMQ</span>
+              <span class="skill-tag">Redis</span>
+              <span class="skill-tag">MapStruct</span>
+              <span class="skill-tag">Threading</span>
             </div>
           </div>
           <div class="skill-category">
@@ -95,18 +114,32 @@
               <span class="skill-tag">MongoDB</span>
               <span class="skill-tag">MongoTemplate</span>
               <span class="skill-tag">Hibernate</span>
-              <span class="skill-tag">Redis</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Cloud & DevOps</h3>
+            <div class="skill-items">
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Jenkins</span>
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">Digital Ocean</span>
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">GitHub</span>
+              <span class="skill-tag">Bitbucket</span>
+              <span class="skill-tag">CI/CD Pipelines</span>
             </div>
           </div>
           <div class="skill-category">
             <h3>Development Tools</h3>
             <div class="skill-items">
-              <span class="skill-tag">Git</span>
-              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Maven</span>
+              <span class="skill-tag">ApiDog</span>
+              <span class="skill-tag">Postman</span>
+              <span class="skill-tag">Swagger</span>
               <span class="skill-tag">Jira</span>
               <span class="skill-tag">Linux</span>
-              <span class="skill-tag">Jenkins</span>
               <span class="skill-tag">Shell Scripting</span>
+              <span class="skill-tag">Agile/Scrum</span>
             </div>
           </div>
         </div>
@@ -123,24 +156,104 @@
             <div class="timeline-content">
               <h3>Software Engineer</h3>
               <h4>NASIR SYNTAX SOLUTION LTD., Dhaka</h4>
-              <ul>
-                <li>
-                  Contributing as a backend Java developer in building a
-                  multinational marketplace platform
-                </li>
-                <li>
-                  Designed and implemented an end-to-end order fulfillment
-                  pipeline
-                </li>
-                <li>Built a flexible packaging and delivery system</li>
-                <li>
-                  Implemented robust inventory reservation and product
-                  management
-                </li>
-                <li>
-                  Developed a versioned dynamic template configuration system
-                </li>
-              </ul>
+              <div class="project-module">
+                <h5>Shop Service Module (SSM)</h5>
+                <ul>
+                  <li>
+                    Building the Shop Service module enabling sellers to add and
+                    manage services in their shops, including service
+                    registration, category management, service calendar and
+                    service location management.
+                  </li>
+                  <li>
+                    Integrating service campaigns and fulfillment, extending
+                    campaign logic to services and connecting accepted bids to
+                    contracts, checkout/payment, and Delivery module workflows
+                    for end-to-end service lifecycle management.
+                  </li>
+                  <li>
+                    Developed the Bid Request system allowing buyers to create
+                    multi-category service requests, where sellers can bid per
+                    category with validation to prevent duplicate bids and
+                    support multiple sellers per category.
+                  </li>
+                </ul>
+              </div>
+              <div class="project-module">
+                <h5>Price Engine Module (PEM)</h5>
+                <ul>
+                  <li>
+                    Built a Price Engine using Java CompletableFuture to fetch
+                    and compute product and service pricing in parallel (base
+                    price, campaigns, promo codes, shipping).
+                  </li>
+                  <li>
+                    Designed a modular and extensible calculation pipeline
+                    separating product and service pricing and supporting
+                    multiple campaigns.
+                  </li>
+                </ul>
+              </div>
+              <div class="project-module">
+                <h5>Order Management Module (OMM)</h5>
+                <ul>
+                  <li>
+                    Designed and implemented an end-to-end order fulfillment
+                    pipeline covering add-to-cart, checkout, order placement,
+                    per-seller order splitting, and seller-level order receipt
+                    with multi-step order/package statuses.
+                  </li>
+                  <li>
+                    Built a flexible packaging and delivery system that creates
+                    packages with multiple product parts, manages package
+                    requests for pickup/drop-off, and records package journey
+                    stages to track every package.
+                  </li>
+                  <li>
+                    Implemented a inventory reservation and product management,
+                    a two-way seller and hub handshake, and status-transition
+                    validation with rollback to ensure data integrity across
+                    complex seller, hub, and delivery workflows.
+                  </li>
+                </ul>
+              </div>
+              <div class="project-module">
+                <h5>Platform Configuration Module (PCM)</h5>
+                <ul>
+                  <li>
+                    Developed a versioned dynamic template engine for users to
+                    customize home, seller, and campaign pages with marketplace
+                    integration.
+                  </li>
+                  <li>
+                    Built a policy-making module allowing version-controlled
+                    creation of platform policies like warranty, return/refund,
+                    and cancellation.
+                  </li>
+                  <li>
+                    Implemented inter-service APIs and configuration layers for
+                    microservices like ItemPool, Shelf, and Tag to enable
+                    dynamic content composition and rendering.
+                  </li>
+                </ul>
+              </div>
+              <div class="project-module">
+                <h5>User Management Module (UMM)</h5>
+                <ul>
+                  <li>
+                    Implemented a role-based authorization system integrating
+                    user roles, role groups, and permissions for access control.
+                  </li>
+                  <li>
+                    Developed user registration, account, and login modules for
+                    user and role management.
+                  </li>
+                </ul>
+              </div>
+              <p class="additional-info">
+                Keeping detailed documentation for all services built for
+                developers and stakeholders.
+              </p>
             </div>
           </div>
           <div class="timeline-item">
@@ -148,17 +261,51 @@
             <div class="timeline-content">
               <h3>Software Engineer</h3>
               <h4>DARAZ BANGLADESH LTD.-ALIBABA GROUP, Dhaka</h4>
-              <ul>
-                <li>
-                  Actively developed microservices using Java and Spring Boot
-                </li>
-                <li>Built an HMAC-SHA256-based authentication SDK</li>
-                <li>Implemented an OAuth2-based authorization service</li>
-                <li>
-                  Developed and maintained a Spring-based logistics integration
-                  module
-                </li>
-              </ul>
+              <div class="project-module">
+                <h5>Open Daraz</h5>
+                <ul>
+                  <li>
+                    Built an HMAC-SHA256-based authentication SDK to enable
+                    secure third-party integration with Daraz APIs.
+                  </li>
+                  <li>
+                    Implemented an OAuth2-based authorization service for
+                    external developers and partners.
+                  </li>
+                  <li>
+                    Thoroughly tested and documented Open Daraz APIs using
+                    Postman to ensure reliability and ease of adoption.
+                  </li>
+                </ul>
+              </div>
+              <div class="project-module">
+                <h5>Third Party Logistics (TPL)</h5>
+                <ul>
+                  <li>
+                    Developed and maintained a Spring-based logistics
+                    integration module serving 20+ partners across 4 Asian
+                    countries.
+                  </li>
+                  <li>
+                    Implemented a location management system to support
+                    efficient tracking and operations with partners.
+                  </li>
+                  <li>
+                    Developed and maintained order pipelines and tracking for
+                    logistics partners.
+                  </li>
+                  <li>
+                    Utilized Alibaba SLS to actively monitor, analyze, and
+                    report on application logs and system performance.
+                  </li>
+                </ul>
+              </div>
+              <p class="additional-info">
+                Developed a Python OpenCV and deep learning-based image
+                processing application for the graphics team. Collaborated with
+                a cross-functional team of 7 engineers and PMs from Lazada using
+                agile methodologies.
+              </p>
             </div>
           </div>
           <div class="timeline-item">
@@ -178,6 +325,15 @@
                 <li>
                   Interfaced sensors using different communication protocols
                   including MODBUS, I2C and UART
+                </li>
+                <li>
+                  Designed and implemented custom GUIs for ST7567 5-inch
+                  displays using baremetal C
+                </li>
+                <li>
+                  Performed R&D for new embedded systems and sensors;
+                  continuously tested firmware and hardware for quality
+                  assurance
                 </li>
               </ul>
             </div>
@@ -215,32 +371,77 @@
               <span class="project-year">2024 - Present</span>
             </div>
             <p>
-              A platform for short-form news delivery, inspired by Inshorts.
+              Built a short-form news aggregation platform inspired by Inshorts,
+              scraping content from major Bangladeshi outlets using a scraper.
             </p>
             <div class="project-tech">
               <span>Python</span>
               <span>Java</span>
               <span>Spring Boot</span>
+              <span>JHipster</span>
+              <span>Node.js</span>
               <span>RabbitMQ</span>
               <span>Redis</span>
+              <span>PostgreSQL</span>
+              <span>Docker</span>
             </div>
+            <p class="project-details">
+              Developing microservices for cataloging, delivery, and
+              authentication, routed via an API gateway with Redis caching and
+              rate-limiting. Enabled asynchronous event-driven communication
+              with RabbitMQ for decoupled service interaction.
+            </p>
             <a href="#" class="project-link">Visit Website</a>
           </div>
           <div class="project-card">
             <div class="project-header">
-              <h3>DARAZ E-COMMERCE IMAGE PROCESSING</h3>
+              <h3>OPEN DARAZ PLATFORM</h3>
               <span class="project-year">2023</span>
             </div>
             <p>
-              A multi-platform desktop e-commerce image processing application.
+              Developed a Spring-based REST platform simplifying product and
+              order management for Daraz sellers through direct API integration.
             </p>
             <div class="project-tech">
-              <span>Python</span>
-              <span>OpenCV</span>
-              <span>Machine Learning</span>
-              <span>TkInter</span>
+              <span>Java</span>
+              <span>Spring</span>
+              <span>Hibernate</span>
+              <span>React.js</span>
+              <span>OAuth2</span>
+              <span>Postman</span>
+              <span>JUnit</span>
             </div>
+            <p class="project-details">
+              Implemented secure OAuth2 authentication and connected the system
+              directly to Daraz Seller Center APIs. Documented and tested
+              endpoints with Postman; automated regression testing with JUnit.
+            </p>
             <a href="#" class="project-link">Private Source</a>
+          </div>
+          <div class="project-card">
+            <div class="project-header">
+              <h3>FREE-FLYING ROBOT CONTROL SOFTWARE (ASTROBEE)</h3>
+              <span class="project-year">2021</span>
+            </div>
+            <p>
+              Developed robotic control and navigation software for NASA's
+              Astrobee robot used aboard the International Space Station.
+            </p>
+            <div class="project-tech">
+              <span>Java</span>
+              <span>OpenCV-Contrib</span>
+              <span>ROS Kinetic</span>
+              <span>RViz</span>
+              <span>Docker</span>
+              <span>Android Studio</span>
+            </div>
+            <p class="project-details">
+              Implemented real-time pose estimation using QR/AR tag detection
+              with OpenCV-Contrib and visualized robot motion in ROS RViz.
+              Integrated JAXA's Astrobee API and containerized development
+              environment using Docker.
+            </p>
+            <a href="#" class="project-link">View Project</a>
           </div>
         </div>
       </div>
@@ -294,12 +495,26 @@
               <i class="fas fa-map-marker-alt"></i>
               <p>Uttar Badda, Dhaka 1212</p>
             </div>
+            <div class="contact-item">
+              <i class="fas fa-file-pdf"></i>
+              <p>
+                <a
+                  href="cv/Md-Hashibul-Islam-CV.pdf"
+                  download
+                  class="download-link"
+                >
+                  Download My CV
+                </a>
+              </p>
+            </div>
             <div class="social-links">
-              <a href="linkedin.com/in/ihashib"
+              <a href="https://linkedin.com/in/ihashib" target="_blank"
                 ><i class="fab fa-linkedin"></i
               ></a>
-              <a href="github.com/ihashib"><i class="fab fa-github"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="https://github.com/ihashib" target="_blank"
+                ><i class="fab fa-github"></i
+              ></a>
+              <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
             </div>
           </div>
           <form class="contact-form">
