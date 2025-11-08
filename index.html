@@ -521,15 +521,17 @@
             class="contact-form"
             action="https://formspree.io/f/mgvrwozw"
             method="POST"
+            id="contactForm"
           >
             <input type="text" name="name" placeholder="Your Name" required />
 
             <input
               type="email"
-              name="_replyto"
+              name="email"
               placeholder="Your Email"
               required
             />
+
             <textarea
               name="message"
               placeholder="Your Message"
@@ -540,10 +542,15 @@
             <input
               type="hidden"
               name="_subject"
-              value="Portfolio website message"
+              value="New message from Portfolio Website"
             />
 
+            <!-- Formspree honeypot spam protection -->
+            <input type="text" name="_gotcha" style="display: none" />
+
             <button type="submit" class="btn btn-primary">Send Message</button>
+
+            <p id="form-status" style="display: none; margin-top: 10px"></p>
           </form>
         </div>
       </div>
