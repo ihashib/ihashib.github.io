@@ -517,11 +517,33 @@
               <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
             </div>
           </div>
-          <form class="contact-form">
-            <input type="text" placeholder="Your Name" required />
-            <input type="email" placeholder="Your Email" required />
-            <textarea placeholder="Your Message" rows="5" required></textarea>
-            <button type="submit">Send Message</button>
+          <form
+            class="contact-form"
+            action="https://formspree.io/f/mgvrwozw"
+            method="POST"
+          >
+            <input type="text" name="name" placeholder="Your Name" required />
+
+            <input
+              type="email"
+              name="_replyto"
+              placeholder="Your Email"
+              required
+            />
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              rows="5"
+              required
+            ></textarea>
+
+            <input
+              type="hidden"
+              name="_subject"
+              value="Portfolio website message"
+            />
+
+            <button type="submit" class="btn btn-primary">Send Message</button>
           </form>
         </div>
       </div>
