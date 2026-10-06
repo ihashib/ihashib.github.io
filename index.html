@@ -3,564 +3,276 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Md. Hashibul Islam - Software Engineer</title>
-    <link rel="stylesheet" href="styles/style.css" />
+    <title>Md Hashibul Islam · Software Engineer</title>
+    <meta
+      name="description"
+      content="Md Hashibul Islam, backend software engineer in Dhaka. Java, Spring Boot and microservices for MetLife, Daraz (Alibaba Group), Nasir Group and Jamil Group. KIBO RPC 2021 runner-up."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
-    <!-- Navigation -->
-    <nav id="navbar">
-      <div class="nav-container">
-        <div class="nav-logo">
-          <h2>Hashibul Islam</h2>
-        </div>
-        <ul class="nav-menu">
-          <li><a href="#home" class="nav-link">Home</a></li>
-          <li><a href="#skills" class="nav-link">Skills</a></li>
-          <li><a href="#experience" class="nav-link">Experience</a></li>
-          <li><a href="#projects" class="nav-link">Projects</a></li>
-          <li><a href="#education" class="nav-link">Education</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" id="top">
+      <nav class="nav wrap" aria-label="Main">
+        <a href="#top" class="nav-name">Hashibul Islam</a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">
+          <span class="sr-only">Menu</span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#space">Space robotics</a></li>
+          <li><a href="#career">Career</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
           <li>
-            <a
-              href="cv/Md-Hashibul-Islam-CV.pdf"
-              class="nav-link download-cv"
-              download
-            >
-              <i class="fas fa-download"></i> CV
+            <a href="cv/Md-Hashibul-Islam-CV.pdf" class="nav-cv" download>
+              <i class="fas fa-arrow-down" aria-hidden="true"></i> Download CV
             </a>
           </li>
         </ul>
-        <div class="hamburger">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-      <div class="hero-container">
-        <div class="hero-content">
-          <h1>Md. Hashibul Islam</h1>
-          <h2>Software Engineer</h2>
-          <p>
-            Backend specialist with expertise in Java, Spring Ecosystem and
-            microservices architecture
+    <main id="main">
+      <!-- Hero -->
+      <section class="hero wrap">
+        <div class="hero-text">
+          <h1 class="hero-name">Md Hashibul Islam</h1>
+          <p class="hero-lede">
+            Software engineer building secure, high-throughput backend services
+            in Java and Spring Boot. Currently at MetLife Bangladesh. Started out
+            writing code that ran aboard the International Space Station.
           </p>
-          <div class="hero-buttons">
-            <a href="#projects" class="btn btn-primary">View Projects</a>
-            <a href="#contact" class="btn btn-secondary">Contact Me</a>
-            <a
-              href="cv/Md-Hashibul-Islam-CV.pdf"
-              class="btn btn-tertiary"
-              download
-            >
-              <i class="fas fa-download"></i> Download CV
-            </a>
+          <div class="hero-actions">
+            <a href="#career" class="btn btn-solid">See my career</a>
+            <a href="#contact" class="btn btn-line">Get in touch</a>
           </div>
         </div>
-        <div class="hero-image">
-          <div class="profile-image-container">
-            <img src="images/profile.jpg" alt="Md. Hashibul Islam" />
-          </div>
+        <div class="hero-portrait">
+          <div class="orbit" aria-hidden="true"><span class="orbit-dot"></span></div>
+          <img src="images/profile.jpg" alt="Portrait of Md Hashibul Islam" width="300" height="300" />
         </div>
-      </div>
-    </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-      <div class="container">
-        <h2 class="section-title">Technical Skills</h2>
-        <div class="skills-grid">
-          <div class="skill-category">
-            <h3>Programming Languages</h3>
-            <div class="skill-items">
-              <span class="skill-tag">Java</span>
-              <span class="skill-tag">JavaScript</span>
-              <span class="skill-tag">TypeScript</span>
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">C/C++</span>
-            </div>
-          </div>
-          <div class="skill-category">
-            <h3>Back-end Tools</h3>
-            <div class="skill-items">
-              <span class="skill-tag">Spring Boot</span>
-              <span class="skill-tag">Spring Security</span>
-              <span class="skill-tag">Spring JPA</span>
-              <span class="skill-tag">JHipster</span>
-              <span class="skill-tag">GraphQL</span>
-              <span class="skill-tag">REST API</span>
-              <span class="skill-tag">RabbitMQ</span>
-              <span class="skill-tag">Redis</span>
-              <span class="skill-tag">MapStruct</span>
-              <span class="skill-tag">Threading</span>
-            </div>
-          </div>
-          <div class="skill-category">
-            <h3>Database & ORM</h3>
-            <div class="skill-items">
-              <span class="skill-tag">PostgreSQL</span>
-              <span class="skill-tag">MySQL</span>
-              <span class="skill-tag">MongoDB</span>
-              <span class="skill-tag">MongoTemplate</span>
-              <span class="skill-tag">Hibernate</span>
-            </div>
-          </div>
-          <div class="skill-category">
-            <h3>Cloud & DevOps</h3>
-            <div class="skill-items">
-              <span class="skill-tag">Docker</span>
-              <span class="skill-tag">Jenkins</span>
-              <span class="skill-tag">AWS</span>
-              <span class="skill-tag">Digital Ocean</span>
-              <span class="skill-tag">Git</span>
-              <span class="skill-tag">GitHub</span>
-              <span class="skill-tag">Bitbucket</span>
-              <span class="skill-tag">CI/CD Pipelines</span>
-            </div>
-          </div>
-          <div class="skill-category">
-            <h3>Development Tools</h3>
-            <div class="skill-items">
-              <span class="skill-tag">Maven</span>
-              <span class="skill-tag">ApiDog</span>
-              <span class="skill-tag">Postman</span>
-              <span class="skill-tag">Swagger</span>
-              <span class="skill-tag">Jira</span>
-              <span class="skill-tag">Linux</span>
-              <span class="skill-tag">Shell Scripting</span>
-              <span class="skill-tag">Agile/Scrum</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        <ul class="employers" aria-label="Companies I have worked for">
+          <li>
+          <h2 class="space-title" id="space-title">Code in orbit, rovers for Mars</h2>
+          <p class="space-intro">
+            Before backend systems, I worked on robots built for space, as a
+            student at BRAC University.
+          </p>
 
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-      <div class="container">
-        <h2 class="section-title">Professional Experience</h2>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-date">July 2024 - Present</div>
-            <div class="timeline-content">
-              <h3>Software Engineer</h3>
-              <h4>NASIR SYNTAX SOLUTION LTD., Dhaka</h4>
-              <div class="project-module">
-                <h5>Shop Service Module (SSM)</h5>
-                <ul>
-                  <li>
-                    Building the Shop Service module enabling sellers to add and
-                    manage services in their shops, including service
-                    registration, category management, service calendar and
-                    service location management.
-                  </li>
-                  <li>
-                    Integrating service campaigns and fulfillment, extending
-                    campaign logic to services and connecting accepted bids to
-                    contracts, checkout/payment, and Delivery module workflows
-                    for end-to-end service lifecycle management.
-                  </li>
-                  <li>
-                    Developed the Bid Request system allowing buyers to create
-                    multi-category service requests, where sellers can bid per
-                    category with validation to prevent duplicate bids and
-                    support multiple sellers per category.
-                  </li>
-                </ul>
-              </div>
-              <div class="project-module">
-                <h5>Price Engine Module (PEM)</h5>
-                <ul>
-                  <li>
-                    Built a Price Engine using Java CompletableFuture to fetch
-                    and compute product and service pricing in parallel (base
-                    price, campaigns, promo codes, shipping).
-                  </li>
-                  <li>
-                    Designed a modular and extensible calculation pipeline
-                    separating product and service pricing and supporting
-                    multiple campaigns.
-                  </li>
-                </ul>
-              </div>
-              <div class="project-module">
-                <h5>Order Management Module (OMM)</h5>
-                <ul>
-                  <li>
-                    Designed and implemented an end-to-end order fulfillment
-                    pipeline covering add-to-cart, checkout, order placement,
-                    per-seller order splitting, and seller-level order receipt
-                    with multi-step order/package statuses.
-                  </li>
-                  <li>
-                    Built a flexible packaging and delivery system that creates
-                    packages with multiple product parts, manages package
-                    requests for pickup/drop-off, and records package journey
-                    stages to track every package.
-                  </li>
-                  <li>
-                    Implemented a inventory reservation and product management,
-                    a two-way seller and hub handshake, and status-transition
-                    validation with rollback to ensure data integrity across
-                    complex seller, hub, and delivery workflows.
-                  </li>
-                </ul>
-              </div>
-              <div class="project-module">
-                <h5>Platform Configuration Module (PCM)</h5>
-                <ul>
-                  <li>
-                    Developed a versioned dynamic template engine for users to
-                    customize home, seller, and campaign pages with marketplace
-                    integration.
-                  </li>
-                  <li>
-                    Built a policy-making module allowing version-controlled
-                    creation of platform policies like warranty, return/refund,
-                    and cancellation.
-                  </li>
-                  <li>
-                    Implemented inter-service APIs and configuration layers for
-                    microservices like ItemPool, Shelf, and Tag to enable
-                    dynamic content composition and rendering.
-                  </li>
-                </ul>
-              </div>
-              <div class="project-module">
-                <h5>User Management Module (UMM)</h5>
-                <ul>
-                  <li>
-                    Implemented a role-based authorization system integrating
-                    user roles, role groups, and permissions for access control.
-                  </li>
-                  <li>
-                    Developed user registration, account, and login modules for
-                    user and role management.
-                  </li>
-                </ul>
-              </div>
-              <p class="additional-info">
-                Keeping detailed documentation for all services built for
-                developers and stakeholders.
+          <div class="feats">
+            <article class="feat feat-main">
+              <p class="feat-year">2021</p>
+              <h3>Runner-up, KIBO Robot Programming Challenge</h3>
+              <p class="feat-org">Organised by JAXA, Japan</p>
+              <p>
+                Our team was the first from Bangladesh to upload a computer
+                program to the International Space Station. The program drove
+                NASA's Astrobee free-flying robot inside JAXA's Kibo module.
               </p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">February 2023 - March 2024</div>
-            <div class="timeline-content">
-              <h3>Software Engineer</h3>
-              <h4>DARAZ BANGLADESH LTD.-ALIBABA GROUP, Dhaka</h4>
-              <div class="project-module">
-                <h5>Open Daraz</h5>
-                <ul>
-                  <li>
-                    Built an HMAC-SHA256-based authentication SDK to enable
-                    secure third-party integration with Daraz APIs.
-                  </li>
-                  <li>
-                    Implemented an OAuth2-based authorization service for
-                    external developers and partners.
-                  </li>
-                  <li>
-                    Thoroughly tested and documented Open Daraz APIs using
-                    Postman to ensure reliability and ease of adoption.
-                  </li>
-                </ul>
-              </div>
-              <div class="project-module">
-                <h5>Third Party Logistics (TPL)</h5>
-                <ul>
-                  <li>
-                    Developed and maintained a Spring-based logistics
-                    integration module serving 20+ partners across 4 Asian
-                    countries.
-                  </li>
-                  <li>
-                    Implemented a location management system to support
-                    efficient tracking and operations with partners.
-                  </li>
-                  <li>
-                    Developed and maintained order pipelines and tracking for
-                    logistics partners.
-                  </li>
-                  <li>
-                    Utilized Alibaba SLS to actively monitor, analyze, and
-                    report on application logs and system performance.
-                  </li>
-                </ul>
-              </div>
-              <p class="additional-info">
-                Developed a Python OpenCV and deep learning-based image
-                processing application for the graphics team. Collaborated with
-                a cross-functional team of 7 engineers and PMs from Lazada using
-                agile methodologies.
+              <p>
+                I built the control and navigation software in Java, with
+                real-time pose estimation from QR and AR tag detection using
+                OpenCV-Contrib, tested in ROS and RViz.
               </p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">August 2021 - August 2022</div>
-            <div class="timeline-content">
-              <h3>Embedded Software Engineer</h3>
-              <h4>AQUALINK BANGLADESH LTD., Dhaka</h4>
-              <ul>
-                <li>
-                  Developed software for IoT systems with STM32, AVR and ESP32
-                  micro-controllers with C/C++
-                </li>
-                <li>
-                  Written several libraries for STM32 including MODBUS/RS485 and
-                  ST7567 display module
-                </li>
-                <li>
-                  Interfaced sensors using different communication protocols
-                  including MODBUS, I2C and UART
-                </li>
-                <li>
-                  Designed and implemented custom GUIs for ST7567 5-inch
-                  displays using baremetal C
-                </li>
-                <li>
-                  Performed R&D for new embedded systems and sensors;
-                  continuously tested firmware and hardware for quality
-                  assurance
-                </li>
-              </ul>
-            </div>
+              <a class="feat-link" href="https://drive.google.com/file/d/1LbiIwbwHw3qAXxAm_29r-K4MXJxWULG2/view" target="_blank" rel="noopener noreferrer">
+                View the Astrobee project <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+              </a>
+            </article>
+
+            <article class="feat">
+              <p class="feat-year">2020</p>
+              <h3>Third place, University Rover Challenge</h3>
+              <p class="feat-org">The Mars Society, USA</p>
+              <p>
+                Member of BRACU Mongol Tori, BRAC University's Mars rover team.
+                During the COVID-19 pandemic the competition was judged on the
+                System Acceptance Review.
+              </p>
+            </article>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-      <div class="container">
-        <h2 class="section-title">Projects</h2>
-        <div class="projects-grid">
-          <div class="project-card">
-            <div class="project-header">
-              <h3>TEEBAY E-COMMERCE</h3>
+      <!-- Career -->
+      <section class="section wrap" id="career" aria-labelledby="career-title">
+        <div class="section-head">
+          <h2 id="career-title">Career</h2>
+          <p>
+            Five years across two multinationals and two of Bangladesh's
+            groups of companies, from microcontrollers to microservices.
+          </p>
+        </div>
+
+        <ol class="timeline">
+          <li class="job">
+            <div class="job-when">
+              <span>Jul 2026</span><span>Present</span>
+            </div>
+            <div class="job-body">
+              <p class="job-kind">Multinational</p>
+              <h3>MetLife Bangladesh</h3>
+              <p class="job-role">Software Engineer · Consultant via ADN Diginet</p>
+              <p>
+                Developing secure microservices with Java, Spring Boot, MSSQL and
+                Microsoft Azure for MyLife by MetLife, the platform that brings
+                sales and sales-support tools together. Strict API compliance,
+                unit testing, SonarQube and CI/CD in an Agile team.
+              </p>
+              <details>
+                <summary>Service360 module</summary>
+                <ul>
+                  <li>Designed a generalised database for Service360 to support upcoming business needs.</li>
+                  <li>Migrated existing tables to the new schema with complex queries while keeping relations and cardinalities intact.</li>
+              <span>Jan 2023</span><span>Mar 2024</span>
+            </div>
+            <div class="job-body">
+              <p class="job-kind">Multinational</p>
+              <h3>Daraz Bangladesh, Alibaba Group</h3>
+              <p class="job-role">Software Engineer</p>
+              <p>
+                Built Java and Spring Boot microservices in a cross-functional
+                team of 7 engineers and PMs with Lazada.
+              </p>
+              <details>
+                <summary>Open Daraz</summary>
+                <ul>
+                  <li>HMAC-SHA256 authentication SDK for secure third-party integration with Daraz APIs.</li>
+                  <li>OAuth2 authorisation service for external developers and partners.</li>
+                  <li>Tested and documented the Open Daraz APIs in Postman.</li>
+                </ul>
+              </details>
+              <details>
+                <summary>Third Party Logistics</summary>
+                <ul>
+                  <li>Spring-based logistics integration serving 20+ partners across 4 Asian countries.</li>
+                  <li>Location management, order pipelines and tracking for logistics partners.</li>
+                  <li>Monitored logs and performance with Alibaba SLS.</li>
+                  <li>Also built a Python, OpenCV and deep-learning image processing tool for the graphics team.</li>
+                </ul>
+              </details>
+            </div>
+          </li>
+
+          <li class="job">
+            <div class="job-when">
+              <span>Aug 2021</span><span>Dec 2022</span>
+            </div>
+            <div class="job-body">
+              <p class="job-kind">Group of companies</p>
+              <h3>AquaLink Bangladesh, Jamil Group</h3>
+              <p class="job-role">Embedded Software Engineer</p>
+              <p>
+                Firmware for IoT systems on STM32, AVR and ESP32 in C/C++.
+              </p>
+              <details>
+                <summary>Details</summary>
+                <ul>
+                  <li>Wrote STM32 libraries for MODBUS/RS485 and the ST7567 display module.</li>
+                  <li>Interfaced sensors over MODBUS, I2C and UART.</li>
+          <article class="project">
+            <div class="project-top">
+              <h3>Teebay</h3>
               <span class="project-year">2025</span>
             </div>
-            <p>
-              A marketplace enabling users to register and manage their own
-              product listings to rent or sell.
-            </p>
-            <div class="project-tech">
-              <span>Java</span>
-              <span>Spring Boot</span>
-              <span>GraphQL</span>
-              <span>React</span>
-              <span>PostgreSQL</span>
-            </div>
-            <a href="https://github.com/ihashib/teebay-deployment" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-          </div>
-          <div class="project-card">
-            <div class="project-header">
-              <h3>KOLOM.AI NEWS PLATFORM</h3>
-              <span class="project-year">2024 - Present</span>
-            </div>
-            <p>
-              Built a short-form news aggregation platform inspired by Inshorts,
-              scraping content from major Bangladeshi outlets using a scraper.
-            </p>
-            <div class="project-tech">
-              <span>Python</span>
-              <span>Java</span>
-              <span>Spring Boot</span>
-              <span>JHipster</span>
-              <span>Node.js</span>
-              <span>RabbitMQ</span>
-              <span>Redis</span>
-              <span>PostgreSQL</span>
-              <span>Docker</span>
-            </div>
-            <p class="project-details">
-              Developing microservices for cataloging, delivery, and
-              authentication, routed via an API gateway with Redis caching and
-              rate-limiting. Enabled asynchronous event-driven communication
-              with RabbitMQ for decoupled service interaction.
-            </p>
-            <a href="https://www.kolom.ai/" class="project-link" target="_blank" rel="noopener noreferrer">Visit Website</a>
-          </div>
-          <div class="project-card">
-            <div class="project-header">
-              <h3>OPEN DARAZ PLATFORM</h3>
+            <p>A marketplace where people list their own products to rent out or sell.</p>
+            <p class="project-stack">Java, Spring Boot, GraphQL, React, PostgreSQL</p>
+            <a class="project-link" href="https://github.com/ihashib/teebay-deployment" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+          </article>
+
+          <article class="project">
+            <div class="project-top">
+              <h3>Open Daraz</h3>
               <span class="project-year">2023</span>
             </div>
             <p>
-              Developed a Spring-based REST platform simplifying product and
-              order management for Daraz sellers through direct API integration.
+              REST platform letting Daraz sellers manage products and orders
+              through direct API integration, secured with OAuth2.
             </p>
-            <div class="project-tech">
-              <span>Java</span>
-              <span>Spring</span>
-              <span>Hibernate</span>
-              <span>React.js</span>
-              <span>OAuth2</span>
-              <span>Postman</span>
-              <span>JUnit</span>
-            </div>
-            <p class="project-details">
-              Implemented secure OAuth2 authentication and connected the system
-              directly to Daraz Seller Center APIs. Documented and tested
-              endpoints with Postman; automated regression testing with JUnit.
-            </p>
-            <a href="https://open.daraz.com/" class="project-link" target="_blank" rel="noopener noreferrer">Private Source</a>
-          </div>
-          <div class="project-card">
-            <div class="project-header">
-              <h3>FREE-FLYING ROBOT CONTROL SOFTWARE (ASTROBEE)</h3>
-              <span class="project-year">2021</span>
-            </div>
-            <p>
-              Developed robotic control and navigation software for NASA's
-              Astrobee robot used aboard the International Space Station.
-            </p>
-            <div class="project-tech">
-              <span>Java</span>
-              <span>OpenCV-Contrib</span>
-              <span>ROS Kinetic</span>
-              <span>RViz</span>
-              <span>Docker</span>
-              <span>Android Studio</span>
-            </div>
-            <p class="project-details">
-              Implemented real-time pose estimation using QR/AR tag detection
-              with OpenCV-Contrib and visualized robot motion in ROS RViz.
-              Integrated JAXA's Astrobee API and containerized development
-              environment using Docker.
-            </p>
-            <a href="https://drive.google.com/file/d/1LbiIwbwHw3qAXxAm_29r-K4MXJxWULG2/view" class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>
-          </div>
+            <p class="project-stack">Java, Spring, Hibernate, OAuth2, JUnit</p>
+            <a class="project-link" href="https://open.daraz.com/" target="_blank" rel="noopener noreferrer">Visit Open Daraz</a>
+          </article>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Education Section -->
-    <section id="education" class="education">
-      <div class="container">
-        <h2 class="section-title">Education & Awards</h2>
-        <div class="education-container">
-          <div class="education-item">
-            <h3>BSc. in Computer Science and Engineering</h3>
-            <h4>BRAC University, Dhaka</h4>
-            <p>2017-2021 • CGPA: 3.54/4.00</p>
-          </div>
-          <div class="awards">
-            <div class="award-item">
-              <h3>Runner-Up, KIBO Robot Programming Challenge 2021</h3>
-              <p>
-                First Bangladeshi team to upload a computer program to the
-                International Space Station(ISS)
-              </p>
-            </div>
-            <div class="award-item">
-              <h3>Third Place, University Rover Challenge 2020</h3>
-              <p>
-                Part of BRACU Mongol Tori. Score is judged by SAR result during
-                COVID pandemic.
-              </p>
-            </div>
-          </div>
+      <!-- Skills -->
+      <section class="section wrap" id="skills" aria-labelledby="skills-title">
+        <div class="section-head">
+          <h2 id="skills-title">Skills</h2>
+          <p>Java first, with the tools that keep services correct in production.</p>
         </div>
-      </div>
-    </section>
+        <dl class="skills">
+          <div><dt>Languages</dt><dd>Java (primary), JavaScript, TypeScript, Embedded C</dd></div>
+          <div><dt>Backend</dt><dd>Spring Framework, JHipster, GraphQL, gRPC, REST, WebSocket, WebRTC, RabbitMQ, Kafka, Redis, concurrency and multithreading</dd></div>
+          <div><dt>Data</dt><dd>MSSQL, PostgreSQL, MySQL, MongoDB, Hibernate, MongoTemplate</dd></div>
+          <div><dt>Cloud and DevOps</dt><dd>Azure, AWS, DigitalOcean, Docker, Nginx, Linux, Git, CI/CD pipelines</dd></div>
+          <div><dt>Frontend</dt><dd>React, HTML, CSS, Bootstrap</dd></div>
+          <div><dt>Tools</dt><dd>Gradle, Maven, Postman, Swagger/OpenAPI, SonarQube, Azure Boards, Jira, Agile/Scrum</dd></div>
+        </dl>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-      <div class="container">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-container">
+        <div class="edu">
+          <h3>BSc in Computer Science and Engineering</h3>
+          <p>BRAC University, Dhaka, 2017 to 2021. CGPA 3.54 out of 4.00.</p>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="wrap contact-inner">
           <div class="contact-info">
-            <div class="contact-item">
-              <i class="fas fa-phone"></i>
-              <p>+8801960174282</p>
-            </div>
-            <div class="contact-item">
-              <i class="fas fa-envelope"></i>
-              <p>ihashib2@gmail.com</p>
-            </div>
-            <div class="contact-item">
-              <i class="fas fa-map-marker-alt"></i>
-              <p>Uttar Badda, Dhaka 1212</p>
-            </div>
-            <div class="contact-item">
-              <i class="fas fa-file-pdf"></i>
-              <p>
-                <a
-                  href="cv/Md-Hashibul-Islam-CV.pdf"
-                  download
-                  class="download-link"
-                >
-                  Download My CV
-                </a>
-              </p>
-            </div>
-            <div class="social-links">
-              <a href="https://linkedin.com/in/ihashib" target="_blank"
-                ><i class="fab fa-linkedin"></i
-              ></a>
-              <a href="https://github.com/ihashib" target="_blank"
-                ><i class="fab fa-github"></i
-              ></a>
-              <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <h2 id="contact-title">Let's talk</h2>
+            <p>Open to backend engineering roles and interesting problems. The fastest way to reach me is email.</p>
+            <ul class="contact-list">
+              <li><i class="fas fa-envelope" aria-hidden="true"></i><a href="mailto:ihashib2@gmail.com">ihashib2@gmail.com</a></li>
+              <li><i class="fas fa-phone" aria-hidden="true"></i><a href="tel:+8801960174282">+880 1960 174282</a></li>
+              <li><i class="fas fa-location-dot" aria-hidden="true"></i><span>Uttar Badda, Dhaka</span></li>
+            </ul>
+            <div class="socials">
+              <a href="https://linkedin.com/in/ihashib" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://github.com/ihashib" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+              <a href="cv/Md-Hashibul-Islam-CV.pdf" download aria-label="Download CV"><i class="fas fa-file-arrow-down"></i></a>
             </div>
           </div>
-          <form
-            class="contact-form"
-            action="https://formspree.io/f/mgvrwozw"
-            method="POST"
-            id="contactForm"
-          >
-            <input type="text" name="name" placeholder="Your Name" required />
 
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              required
-            />
-
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              rows="5"
-              required
-            ></textarea>
-
-            <input
-              type="hidden"
-              name="_subject"
-              value="New message from Portfolio Website"
-            />
-
-            <!-- Formspree honeypot spam protection -->
-            <input type="text" name="_gotcha" style="display: none" />
-
-            <button type="submit" class="btn btn-primary">Send Message</button>
-
-            <p id="form-status" style="display: none; margin-top: 10px"></p>
+          <form class="contact-form" action="https://formspree.io/f/mgvrwozw" method="POST" novalidate>
+            <label>
+              <span>Name</span>
+              <input type="text" name="name" autocomplete="name" required />
+            </label>
+            <label>
+              <span>Email</span>
+              <input type="email" name="email" autocomplete="email" required />
+            </label>
+            <label>
+              <span>Message</span>
+              <textarea name="message" rows="5" required></textarea>
+            </label>
+            <input type="hidden" name="_subject" value="New message from portfolio website" />
+            <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" />
+            <button type="submit" class="btn btn-solid">Send message</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
           </form>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="container">
-        <p>&copy; 2025 Md. Hashibul Islam. All Rights Reserved.</p>
-      </div>
+    <footer class="footer wrap">
+      <p>© <span id="year">2026</span> Md Hashibul Islam</p>
+      <a href="#top">Back to top</a>
     </footer>
 
     <script src="scripts/script.js"></script>
