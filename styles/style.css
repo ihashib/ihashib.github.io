@@ -291,7 +291,14 @@ kbd {
   height: var(--header-h);
 }
 
+/* On the home page the hero already shows the name, so the header's copy
+   stays hidden until you scroll past it (only when JS can bring it back) */
+.js .is-home .site-header:not(.past-hero) .nav-name {
+  opacity: 0;
+  visibility: hidden;
+}
 .nav-name {
+  transition: opacity 0.25s, visibility 0.25s;
   display: inline-flex;
   align-items: center;
   gap: 10px;

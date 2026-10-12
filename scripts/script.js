@@ -235,8 +235,11 @@ if (tilesSection) {
   const toOverview = document.querySelector(".to-overview");
   const hero = document.querySelector(".hero");
   let ticking = false;
+  const heroName = document.querySelector(".hero-name");
   const updateFloating = () => {
     ticking = false;
+    // Header name appears once the big hero name has scrolled under the header
+    header.classList.toggle("past-hero", heroName.getBoundingClientRect().bottom < header.offsetHeight);
     const railShown = hero.getBoundingClientRect().bottom < 0;
     rail.classList.toggle("is-shown", railShown);
     if (!railShown) rail.classList.remove("is-open");
