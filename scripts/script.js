@@ -89,8 +89,173 @@ if (document.body.classList.contains("is-home") && "IntersectionObserver" in win
     },
     { rootMargin: "-45% 0px -50% 0px" }
   );
-  document.querySelectorAll("main section[id]").forEach((s) => spy.observe(s));
+  // Watch every section, including ones with no nav link (hero, education,
+  // skills), so the highlight clears when you scroll back to them.
+  document.querySelectorAll("main > section").forEach((s) => spy.observe(s));
 }
+
+// Tiles and the section list: a tile (or a name in the list) glides to its
+// section and becomes a browser history step, so Back returns you. Tiles for
+// sections you've already read get a small dot.
+const tilesSection = document.getElementById("overview");
+if (tilesSection) {
+  const behavior = reduceMotion ? "auto" : "smooth";
+  const tileFor = (id) => tilesSection.querySelector(`.tile[href="#${id}"]`);
+  const rail = document.querySelector(".section-rail");
+  const railLinks = rail.querySelectorAll("a[data-rail]");
+  let current = null;
+
+  let visited = [];
+  try {
+    visited = JSON.parse(sessionStorage.getItem("visitedSections") || "[]");
+  } catch (e) {}
+  const markVisited = (id) => {
+    const tile = tileFor(id);
+    if (!tile) return;
+    tile.classList.add("is-visited");
+    if (!visited.includes(id)) {
+      visited.push(id);
+      try {
+        sessionStorage.setItem("visitedSections", JSON.stringify(visited));
+      } catch (e) {}
+    }
+  };
+  visited.forEach(markVisited);
+
+  function setActive(id) {
+    railLinks.forEach((a) => {
+      if (a.dataset.rail === id) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    });
+  }
+
+  // Move focus only when navigating by keyboard; clicks and taps leave none
+  let usingKeyboard = false;
+  document.addEventListener("keydown", () => (usingKeyboard = true), true);
+  document.addEventListener("pointerdown", () => (usingKeyboard = false), true);
+
+  function goTo(id) {
+    const target = document.getElementById(id);
+    if (!target) return;
+    history.pushState({ section: id }, "", "#" + id);
+    if (id === "overview") {
+      // Land on the tile you came from, so you keep your place
+      const tile = current && tileFor(current);
+      (tile || tilesSection).scrollIntoView({ behavior, block: tile ? "center" : "start" });
+      if (tile && usingKeyboard) tile.focus({ preventScroll: true });
+      return;
+    }
+    target.scrollIntoView({ behavior, block: "start" });
+    const heading = target.querySelector("h2");
+    if (heading && usingKeyboard) {
+      heading.setAttribute("tabindex", "-1");
+      heading.focus({ preventScroll: true });
+    }
+    markVisited(id);
+  }
+
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    if (link.closest(".tiles") || link.closest(".section-rail") || link.classList.contains("to-overview")) {
+      e.preventDefault();
+      rail.classList.remove("is-open");
+      goTo(link.getAttribute("href").slice(1));
+    }
+  });
+
+  // Narrower screens: a thin bar of section segments. Hovering (mouse) or
+  // tapping (touch) expands it into names; choosing one, tapping elsewhere
+  // or scrolling folds it back.
+  const narrow = window.matchMedia("(max-width: 1179px)");
+  const setRailOpen = (open) => rail.classList.toggle("is-open", open);
+  rail.addEventListener("pointerenter", (e) => {
+    if (narrow.matches && e.pointerType === "mouse") setRailOpen(true);
+  });
+  rail.addEventListener("pointerleave", (e) => {
+    if (e.pointerType === "mouse") setRailOpen(false);
+  });
+  // A first tap on the collapsed bar only expands it
+  rail.addEventListener(
+    "click",
+    (e) => {
+      if (narrow.matches && !rail.classList.contains("is-open")) {
+        e.preventDefault();
+        e.stopPropagation();
+        setRailOpen(true);
+        openedAt = window.scrollY;
+      }
+    },
+    true
+  );
+  rail.addEventListener("focusin", () => narrow.matches && setRailOpen(true));
+  rail.addEventListener("focusout", (e) => {
+    if (!rail.contains(e.relatedTarget)) setRailOpen(false);
+  });
+  document.addEventListener("click", (e) => {
+    if (!rail.contains(e.target)) setRailOpen(false);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && rail.classList.contains("is-open")) setRailOpen(false);
+  });
+  let openedAt = 0;
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (rail.classList.contains("is-open") && Math.abs(window.scrollY - openedAt) > 40) setRailOpen(false);
+    },
+    { passive: true }
+  );
+
+  if ("IntersectionObserver" in window) {
+    // Which section is the reader in? A section counts as read once they
+    // stay on it for a moment, not when it scrolls past on the way.
+    let dwell;
+    const sectionSpy = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const id = entry.target.id;
+          setActive(id);
+          if (id === "overview") return;
+          current = id;
+          clearTimeout(dwell);
+          dwell = setTimeout(() => current === id && markVisited(id), 1500);
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px" }
+    );
+    document.querySelectorAll("main > section[id]").forEach((sec) => sectionSpy.observe(sec));
+
+  }
+
+  // The section bar appears once the first screen is scrolled away, and the
+  // floating "Overview" button once the tiles are. Checked on every scroll
+  // (not by intersection), so jumping straight past them still works.
+  const toOverview = document.querySelector(".to-overview");
+  const hero = document.querySelector(".hero");
+  let ticking = false;
+  const updateFloating = () => {
+    ticking = false;
+    const railShown = hero.getBoundingClientRect().bottom < 0;
+    rail.classList.toggle("is-shown", railShown);
+    if (!railShown) rail.classList.remove("is-open");
+    toOverview.classList.toggle("is-shown", tilesSection.getBoundingClientRect().bottom < 0);
+  };
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateFloating);
+      }
+    },
+    { passive: true }
+  );
+  window.addEventListener("resize", updateFloating);
+  updateFloating();
+}
+
 
 // Copy to clipboard
 async function copyText(text) {
@@ -198,8 +363,9 @@ const go = (href) => () => {
 
 const staticCommands = [
   { group: "Go to", icon: "fa-briefcase", label: "Career", keys: "work experience jobs metlife nasir daraz aqualink", run: go(url("/#career")) },
-  { group: "Go to", icon: "fa-satellite", label: "Space robotics", keys: "iss astrobee kibo jaxa nasa mars rover mongol tori urc irc ubiquiti fpv radio ros ip camera awards", run: go(url("/#space")) },
-  { group: "Go to", icon: "fa-cubes", label: "Projects", keys: "decoraan marketplace nasir clear frame open daraz purrvelous kibo astrobee arm ros gazebo", run: go(url("/#projects")) },
+  { group: "Go to", icon: "fa-robot", label: "Robotics", keys: "space iss astrobee kibo jaxa nasa mars rover mongol tori urc irc ubiquiti fpv radio ros ip camera awards line following pid self balancing arm inverse kinematics gazebo", run: go(url("/#robotics")) },
+  { group: "Go to", icon: "fa-microchip", label: "IoT", keys: "aqualink sensometer hydrometer greenhouse farming firmware stm32 esp32 sensors", run: go(url("/#iot")) },
+  { group: "Go to", icon: "fa-cubes", label: "Projects", keys: "decoraan marketplace nasir clear frame open daraz purrvelous", run: go(url("/#projects")) },
   { group: "Go to", icon: "fa-pen-nib", label: "Writing", keys: "blog posts articles", run: go(url("/blog/")) },
   { group: "Go to", icon: "fa-graduation-cap", label: "Education", keys: "university brac bsc cse degree", run: go(url("/#education")) },
   { group: "Go to", icon: "fa-screwdriver-wrench", label: "Skills", keys: "java spring stack tools embedded firmware stm32 esp32 freertos", run: go(url("/#skills")) },

@@ -10,7 +10,7 @@ Built with [Jekyll](https://jekyllrb.com/), which GitHub Pages builds automatica
 _config.yml          Site settings (title, URL, plugins, permalinks)
 _layouts/            default.html (shared shell), post.html (blog post)
 _includes/           head, header, footer, command palette, post card
-index.html           Portfolio home page
+index.html           Home page: hero, tiles, then every section
 blog/index.html      Blog listing with search and tag filter
 _posts/              Published blog posts (Markdown)
 _drafts/             Unpublished drafts
