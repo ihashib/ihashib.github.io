@@ -1,0 +1,26 @@
+<dialog class="palette" aria-label="Search and jump">
+  <form method="dialog" class="palette-box" role="search">
+    <div class="palette-field">
+      <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+      <input
+        type="text"
+        class="palette-input"
+        placeholder="Jump to a section, post or action…"
+        aria-label="Search"
+        role="combobox"
+        aria-expanded="true"
+        aria-controls="palette-list"
+        aria-autocomplete="list"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <kbd>Esc</kbd>
+    </div>
+    <ul class="palette-list" id="palette-list" role="listbox"></ul>
+    <p class="palette-foot">
+      <span><kbd>↑</kbd><kbd>↓</kbd> move</span>
+      <span><kbd>Enter</kbd> open</span>
+      <span><kbd>Esc</kbd> close</span>
+    </p>
+  </form>
+</dialog>

@@ -1,136 +1,61 @@
-# Md. Hashibul Islam — Personal Portfolio Website
+# ihashib.github.io
 
-Hello — I'm Md. Hashibul Islam, a software engineer building backend systems, microservices, and practical tooling for web and embedded projects. This repository contains the source for my personal portfolio website (static HTML/CSS), which highlights my skills, experience, projects, and ways to get in touch.
+Source for [ihashib.github.io](https://ihashib.github.io): the portfolio and blog of Md Hashibul Islam, software engineer.
 
----
+Built with [Jekyll](https://jekyllrb.com/), which GitHub Pages builds automatically on every push to `main`. There's no separate server, database or CI to maintain.
 
-## Quick preview
-
-Open `index.html` in your browser to view the site locally (no build step required). The site is fully static and purposefully lightweight so it works well on low-resource machines and can be deployed to GitHub Pages, Netlify, or any static host.
-
----
-
-## What’s in this repo
+## What's here
 
 ```
-/ (project root)
-├─ index.html               # Main site
-├─ styles/
-│  └─ style.css             # All styling and variables
-├─ scripts/
-│  └─ script.js             # Small interactivity (nav toggle, etc.)
-├─ images/
-│  └─ profile.jpg           # Profile photo used on hero
-├─ cv/
-│  └─ Md-Hashibul-Islam-CV.pdf
-└─ README.md                # This file
+_config.yml          Site settings (title, URL, plugins, permalinks)
+_layouts/            default.html (shared shell), post.html (blog post)
+_includes/           head, header, footer, command palette, post card
+index.html           Portfolio home page
+blog/index.html      Blog listing with search and tag filter
+_posts/              Published blog posts (Markdown)
+_drafts/             Unpublished drafts
+search.json          Post index used by the Ctrl/⌘ K palette
+styles/style.css     All styles, light and dark themes
+scripts/script.js    Theme, palette, nav, blog filter, contact form
+cv/                  Downloadable CV
 ```
 
----
+Features: light/dark theme (follows the system, with a manual toggle), a Ctrl/⌘ K command palette, a blog with tags, search, reading time, an RSS feed (`/blog/feed.xml`), a sitemap and SEO/Open Graph tags.
 
-## Purpose & goals
+## Writing a post
 
-This site is a clean, readable résumé-style portfolio with three practical goals:
+1. Create `_posts/YYYY-MM-DD-your-slug.md`:
 
-1. Present work and accomplishments clearly for technical reviewers and hiring managers.
-2. Make it easy for recruiters and collaborators to contact me.
-3. Be easily forked or adapted by other engineers — minimal dependencies, accessible markup, and clear styles.
+   ```markdown
+   ---
+   title: "Your title"
+   description: "One or two sentences shown on cards and in search results."
+   tags: [java, spring-boot]
+   ---
 
-The layout emphasizes readability: a hero area, skill sections, a timeline-style experience section, and project cards. The design uses a calm green-teal palette, clear typography (Poppins), and consistent spacing for legibility.
+   Your post in Markdown. Fenced code blocks get syntax highlighting.
+   ```
 
----
+2. Commit and push. The post appears at `/blog/your-slug/` in a minute or two.
 
-## Key features
+Work in progress lives in `_drafts/` (no date in the filename) and is not published.
 
-- **Static and fast**: plain HTML/CSS with a small JS file for UX niceties.
-- **Responsive**: mobile-first tweaks collapse the timeline and stack content on small screens.
-- **Readable experience timeline**: big content blocks, clear date labels, and separated project modules for each role.
-- **Projects & highlights**: concise cards with tech stacks and links to sources or demos.
-- **Downloadable CV**: one-click PDF download in the header and contact section.
-- **Easy customization**: color variables and component classes make theme and layout updates straightforward.
+## Run locally
 
----
-
-## Technologies used
-
-- Plain HTML5 + CSS3 (custom variables for theme)
-- Minimal vanilla JavaScript (nav toggle & small behaviors)
-- Google Fonts (Poppins)
-- Font Awesome for icons (CDN)
-
-No build tooling — everything runs in the browser immediately.
-
----
-
-## How to run locally
-
-1. Clone or download the repository.
-2. Make sure the folder structure is preserved (styles, scripts, images, cv).
-3. Open `index.html` in a browser (double-click, or `Open File…` from the browser menu).
-
-If you prefer a local server (useful for testing relative asset paths), you can run a simple server:
-
-- With Python 3:
+With Docker (no Ruby install needed):
 
 ```bash
-# from the project root
-python -m http.server 8000
-# then visit http://localhost:8000
+docker run --rm -it -p 4000:4000 -v "$PWD":/srv/site -w /srv/site \
+  -e BUNDLE_PATH=/srv/site/vendor/bundle ruby:3.3 \
+  sh -c "bundle install && bundle exec jekyll serve --host 0.0.0.0 --drafts --livereload"
 ```
 
-- With Node (if you have `http-server`):
+Or with Ruby installed: `bundle install && bundle exec jekyll serve --drafts`.
 
-```bash
-npx http-server -c-1
-```
+Then open http://localhost:4000.
 
----
+Previewing through code-server (VS Code in the browser)? Its `/proxy/` path breaks the site's absolute links, so serve under its `/absproxy/` path instead: replace `--livereload` with `--baseurl /absproxy/4000` and open `https://<your-code-server>/absproxy/4000/`.
 
-## Customization notes (quick)
+## Contact form
 
-- Colors: edit `:root` variables in `styles/style.css` (`--primary-color`, `--secondary-color`, etc.).
-- Fonts: swap the Google Fonts link in `index.html` for any other family and adjust font sizes in the stylesheet.
-- Timeline width / readability: tweak `.timeline` or `.container` `max-width` and `.timeline-item` widths to increase line length for better reading on wide screens. (The stylesheet contains responsive rules for smaller screens.)
-- Add sections: replicate the markup pattern used in `#projects` or `#education` and follow the existing utility class patterns for spacing and cards.
-
----
-
-## Deployment tips
-
-- **GitHub Pages**: push the repository to a GitHub repo and enable GitHub Pages from the repository settings (use the `main` branch root).
-- **Netlify**: drag-and-drop the repo folder to Netlify Drop or connect the repo and use the default build settings (no build command required).
-- **Vercel**: add the project and set the output directory to the repo root (static).
-
-Because the site is static, CDN caching and HTTPS come for free on most static hosts — no backend or server config needed.
-
----
-
-## Accessibility & performance
-
-- Uses semantic tags (`section`, headings, lists) for structure and clarity.
-- Avoids heavy images and large third-party libraries for quick load times.
-- Contrast and spacing chosen to help scanability; feel free to run Lighthouse and tweak font sizes for your target audience.
-
----
-
-## Credits & acknowledgements
-
-- Icons: Font Awesome (free CDN).
-- Fonts: Google Fonts (Poppins).
-- Inspiration: personal portfolio patterns common in developer resumes — clarity and honesty first.
-
----
-
-## License
-
-MIT License — feel free to reuse and adapt this code. If you fork the repo, a small `Attribution` line in the footer or README is appreciated but not required.
-
----
-
-## Contact
-
-- Email: ihashib2@gmail.com
-- LinkedIn: https://linkedin.com/in/ihashib
-- GitHub: https://github.com/ihashib
-
-If you want me to tailor the README tone (shorter, more formal, or very concise) or include a short changelog and contribution guidelines, say the word and I’ll prepare it.
+The form posts to [Formspree](https://formspree.io/). Change the form `action` in `index.html` to use a different endpoint.

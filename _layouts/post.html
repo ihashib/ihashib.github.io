@@ -1,0 +1,51 @@
+---
+layout: default
+body_class: is-post
+---
+{% assign words = content | strip_html | number_of_words %}
+{% assign minutes = words | divided_by: 220 | at_least: 1 %}
+<article class="post wrap" itemscope itemtype="https://schema.org/BlogPosting">
+  <header class="post-head">
+    <a class="back-link" href="{{ '/blog/' | relative_url }}"><i class="fas fa-arrow-left" aria-hidden="true"></i> All writing</a>
+    <p class="post-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%-d %B %Y" }}</time>
+      <span aria-hidden="true">·</span>
+      <span>{{ minutes }} min read</span>
+    </p>
+    <h1 class="post-title" itemprop="headline">{{ page.title }}</h1>
+    {% if page.description %}<p class="post-dek">{{ page.description }}</p>{% endif %}
+    {% if page.tags.size > 0 %}
+      <ul class="tags" aria-label="Tags">
+        {% for tag in page.tags %}<li><a class="tag" href="{{ '/blog/' | relative_url }}?tag={{ tag | uri_escape }}">{{ tag }}</a></li>{% endfor %}
+      </ul>
+    {% endif %}
+  </header>
+
+  <div class="prose" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+  <footer class="post-foot">
+    <div class="post-author">
+      <img src="{{ '/images/profile.jpg' | relative_url }}" alt="" width="56" height="56" loading="lazy" />
+      <p>
+        <strong>Md Hashibul Islam</strong> is a backend engineer in Dhaka working with Java, Spring Boot and microservices.
+        <a href="{{ '/#contact' | relative_url }}">Get in touch</a> or follow along via <a href="{{ '/blog/feed.xml' | relative_url }}">RSS</a>.
+      </p>
+    </div>
+    {% if page.previous or page.next %}
+      <nav class="post-nav" aria-label="More posts">
+        {% if page.previous %}
+          <a class="post-nav-link" href="{{ page.previous.url | relative_url }}">
+            <span>Older</span>{{ page.previous.title }}
+          </a>
+        {% endif %}
+        {% if page.next %}
+          <a class="post-nav-link is-next" href="{{ page.next.url | relative_url }}">
+            <span>Newer</span>{{ page.next.title }}
+          </a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  </footer>
+</article>

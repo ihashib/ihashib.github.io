@@ -1,0 +1,37 @@
+<header class="site-header" id="top">
+  <nav class="nav wrap" aria-label="Main">
+    <a href="{{ '/' | relative_url }}" class="nav-name">
+      <span class="nav-mark" aria-hidden="true"></span>Hashibul Islam
+    </a>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="{{ '/#career' | relative_url }}" data-section="career">Career</a></li>
+      <li><a href="{{ '/#space' | relative_url }}" data-section="space">Space</a></li>
+      <li><a href="{{ '/#projects' | relative_url }}" data-section="projects">Projects</a></li>
+      <li><a href="{{ '/blog/' | relative_url }}" data-section="writing"{% if page.url contains '/blog/' %} aria-current="page"{% endif %}>Writing</a></li>
+      <li><a href="{{ '/#contact' | relative_url }}" data-section="contact">Contact</a></li>
+      <li>
+        <a href="{{ '/cv/Md-Hashibul-Islam-CV.pdf' | relative_url }}" class="nav-cv" download>
+          <i class="fas fa-arrow-down" aria-hidden="true"></i> CV
+        </a>
+      </li>
+    </ul>
+
+    <div class="nav-tools">
+      <button class="icon-btn palette-open" type="button" aria-label="Search and jump (Ctrl K)" title="Search and jump">
+        <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+        <kbd class="kbd-hint" aria-hidden="true">Ctrl K</kbd>
+      </button>
+      <button class="icon-btn theme-toggle" type="button" aria-label="Switch colour theme" title="Switch colour theme">
+        <i class="fas fa-moon" aria-hidden="true"></i>
+        <i class="fas fa-sun" aria-hidden="true"></i>
+      </button>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">
+        <span class="sr-only">Menu</span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </div>
+  </nav>
+  <div class="read-progress" aria-hidden="true"></div>
+</header>

@@ -1,0 +1,51 @@
+title: Md Hashibul Islam
+tagline: Software Engineer
+description: >-
+  Md Hashibul Islam, backend software engineer in Dhaka. Java, Spring Boot and
+  microservices for MetLife, Nasir Group, Daraz (Alibaba Group) and Jamil Group.
+  Writes about backend engineering. KIBO RPC 2021 runner-up.
+url: https://ihashib.github.io
+baseurl: ""
+lang: en
+timezone: Asia/Dhaka
+
+author:
+  name: Md Hashibul Islam
+  email: ihashib2@gmail.com
+  url: https://ihashib.github.io
+
+social:
+  name: Md Hashibul Islam
+  links:
+    - https://linkedin.com/in/ihashib
+    - https://github.com/ihashib
+
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+permalink: /blog/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+feed:
+  path: blog/feed.xml
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .jekyll-cache

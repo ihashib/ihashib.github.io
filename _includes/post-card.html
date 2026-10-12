@@ -1,0 +1,17 @@
+{% assign words = include.post.content | strip_html | number_of_words %}
+{% assign minutes = words | divided_by: 220 | at_least: 1 %}
+<li class="post-card" data-reveal
+    data-tags="{{ include.post.tags | join: '|' | downcase }}"
+    data-search="{{ include.post.title | downcase | escape }} {{ include.post.description | downcase | escape }} {{ include.post.tags | join: ' ' | downcase }}">
+  <p class="post-card-meta">
+    <time datetime="{{ include.post.date | date_to_xmlschema }}">{{ include.post.date | date: "%-d %b %Y" }}</time>
+    <span aria-hidden="true">·</span> {{ minutes }} min read
+  </p>
+  <h3><a href="{{ include.post.url | relative_url }}">{{ include.post.title }}</a></h3>
+  {% if include.post.description %}<p class="post-card-dek">{{ include.post.description }}</p>{% endif %}
+  {% if include.post.tags.size > 0 %}
+    <ul class="tags">
+      {% for tag in include.post.tags %}<li><span class="tag">{{ tag }}</span></li>{% endfor %}
+    </ul>
+  {% endif %}
+</li>
