@@ -33,7 +33,10 @@ body_class: is-home
 
 <!-- Tiles: Start-menu style shortcuts; each opens its section page -->
 <section class="tiles-section wrap" id="overview" aria-labelledby="overview-title">
-  <h2 class="group-label tiles-label" id="overview-title"><i class="fas fa-table-cells-large" aria-hidden="true"></i> Overview</h2>
+  <div class="tiles-head">
+    <h2 class="group-label tiles-label" id="overview-title"><i class="fas fa-table-cells-large" aria-hidden="true"></i> Overview</h2>
+    <p class="tiles-hint"><span class="hint-click">Click</span><span class="hint-tap">Tap</span> a tile to see the details</p>
+  </div>
   <div class="tiles-wrap">
     <div class="tiles">
       <a class="tile tile-w t-navy" href="{{ '/career/' | relative_url }}">
