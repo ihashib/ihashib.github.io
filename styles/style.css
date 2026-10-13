@@ -473,6 +473,47 @@ kbd {
   z-index: 1;
   background: var(--line);
 }
+/* Line-drawn ring around the photo: dotted orbit, thin inner line and two
+   slowly turning arcs */
+.portrait-ring {
+  position: absolute;
+  inset: -9%;
+  width: 118%;
+  height: 118%;
+  overflow: visible;
+  fill: none;
+  pointer-events: none;
+}
+.ring-dots {
+  stroke: var(--steel);
+  stroke-width: 0.5;
+  stroke-dasharray: 0.1 1.9;
+  stroke-linecap: round;
+  opacity: 0.6;
+}
+.ring-line {
+  stroke: var(--line);
+  stroke-width: 0.5;
+}
+.ring-spin {
+  transform-origin: 50% 50%;
+  animation: ring-spin 40s linear infinite;
+}
+.ring-arc {
+  stroke: var(--signal);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-dasharray: 18 82;
+}
+.ring-arc-short {
+  stroke-dasharray: 5 95;
+  stroke-dashoffset: -50;
+}
+@keyframes ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 .stats {
   grid-column: 1 / -1;
@@ -2490,8 +2531,8 @@ button.tag.is-active {
   .hero-portrait {
     grid-row: 1;
     justify-self: center;
-    width: 150px;
-    margin-top: 16px;
+    width: min(230px, 62vw);
+    margin-top: 28px;
   }
   .status-chip {
     display: flex;
