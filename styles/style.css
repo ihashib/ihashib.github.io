@@ -93,6 +93,14 @@ body {
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.25s, color 0.25s;
   overflow-x: clip;
+  /* Footer stays at the bottom of the screen on short pages */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+main {
+  flex: 1 0 auto;
 }
 
 img {
@@ -405,7 +413,7 @@ kbd {
   grid-template-columns: 1.35fr 1fr;
   align-items: center;
   column-gap: 48px;
-  padding-top: clamp(40px, 8vw, 96px);
+  padding-top: clamp(20px, 3.5vw, 44px);
   padding-bottom: 56px;
 }
 
@@ -437,13 +445,6 @@ kbd {
   line-height: 1;
   letter-spacing: -0.03em;
   white-space: nowrap;
-}
-
-.hero-lede {
-  margin-top: 28px;
-  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
-  color: var(--steel);
-  max-width: 34em;
 }
 
 .hero-actions {
@@ -517,11 +518,10 @@ kbd {
 }
 
 .stats {
-  grid-column: 1 / -1;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  margin-top: 72px;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 28px;
   border-top: 1px solid var(--line);
 }
 .stats li {
@@ -549,7 +549,7 @@ kbd {
   transition: color 0.2s;
   font-family: var(--display);
   font-weight: 800;
-  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
   line-height: 1;
   letter-spacing: -0.03em;
 }
@@ -2747,19 +2747,16 @@ button.tag.is-active {
   }
   /* Keep the hero buttons on the first screen of a phone */
   .hero {
-    padding-top: 20px;
+    padding-top: 0;
     row-gap: 20px;
   }
+  /* The ring reaches 9% past the photo, so clear it below the header */
   .hero-portrait {
-    width: min(150px, 40vw);
-    margin-top: 0;
+    width: min(190px, 50vw);
+    margin-top: 28px;
   }
   .status-chip {
     margin-bottom: 14px;
-  }
-  .hero-lede {
-    margin-top: 16px;
-    font-size: 1.02rem;
   }
   .hero-actions {
     margin-top: 22px;
