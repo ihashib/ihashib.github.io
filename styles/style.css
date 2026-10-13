@@ -1258,14 +1258,6 @@ details li::marker {
   gap: 4px;
   padding: 44px 16px 14px;
 }
-.tile-face-icon {
-  align-items: center;
-  justify-content: center;
-  padding-top: 36px;
-}
-.tile-face-icon i {
-  font-size: clamp(1.4rem, 26cqmin, 3rem);
-}
 .tile-face small {
   font-size: 0.78rem;
   font-weight: 500;
