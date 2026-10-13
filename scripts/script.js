@@ -15,13 +15,12 @@ if (isMac) {
 
 // Theme
 const root = document.documentElement;
-const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
-const currentTheme = () => root.dataset.theme || (darkQuery.matches ? "dark" : "light");
+const currentTheme = () => root.dataset.theme || "dark";
 
 function setTheme(theme) {
   root.dataset.theme = theme;
   try {
-    localStorage.setItem("theme", theme);
+    sessionStorage.setItem("theme", theme);
   } catch (e) {}
 }
 function toggleTheme() {
