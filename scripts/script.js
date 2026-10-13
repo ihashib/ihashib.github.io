@@ -131,7 +131,8 @@ if (rail) {
   );
 }
 
-// Home: the header's name appears once the big hero name scrolls under it
+// Home: the header shows @ihashib over the hero, then swaps to the name
+// once the big hero name scrolls under it
 const heroName = document.querySelector(".hero-name");
 if (heroName) {
   let ticking = false;
