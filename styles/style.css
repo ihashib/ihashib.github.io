@@ -1405,7 +1405,7 @@ details li::marker {
   opacity: 0.85;
 }
 .tile-face .tile-via {
-  font: 500 0.78rem var(--body);
+  font: 500 0.66rem var(--body);
   font-style: normal;
   opacity: 0.8;
 }
@@ -1480,18 +1480,22 @@ details li::marker {
 }
 
 /* Tile colours stay the same in light and dark themes */
-.t-navy { --tile-bg: #1d3461; }
+/* Colour follows importance: Career and Projects (the big tiles) get the
+   richest colours, sections sit a step calmer, and the small link tiles stay
+   quiet, except Contact, the one warm call to action */
+.t-navy { --tile-bg: #1f5bb0; }
+.t-clay { --tile-bg: #0f7d6e; }
 .t-night { --tile-bg: #0e1a33; }
+.t-blue { --tile-bg: #4351b0; }
+.t-slate { --tile-bg: #2f6e9b; }
+.t-violet { --tile-bg: #6249a8; }
+.t-ember { --tile-bg: #237a8e; }
+.t-clay-deep { --tile-bg: #b4466a; }
+.t-steel { --tile-bg: #3b4c62; }
+.t-graphite { --tile-bg: #2b3138; }
+.t-linkedin { --tile-bg: #2a5c90; }
 .t-orange { --tile-bg: #e4572e; }
-.t-clay { --tile-bg: #a86450; }
-.t-clay-deep { --tile-bg: #8c5847; }
 .t-orange-dark { --tile-bg: #b93d18; }
-.t-slate { --tile-bg: #3e5c76; }
-.t-blue { --tile-bg: #1f5f8b; }
-.t-ember { --tile-bg: #2d6a6a; }
-.t-violet { --tile-bg: #5b4b8a; }
-.t-graphite { --tile-bg: #24292f; }
-.t-linkedin { --tile-bg: #0a66c2; }
 .t-night {
   border-color: #2a3a5c;
 }
