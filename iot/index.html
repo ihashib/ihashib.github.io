@@ -1,0 +1,56 @@
+---
+layout: section
+title: IoT
+description: "Connected devices, from industrial sensors at AquaLink Bangladesh to my own builds."
+---
+<!-- IoT -->
+<section class="section wrap" id="iot" aria-labelledby="iot-title">
+  <div class="section-head" data-reveal>
+    <h1 id="iot-title">IoT</h1>
+    <p>Connected devices, from industrial sensors at AquaLink Bangladesh to my own builds.</p>
+  </div>
+
+  <div class="projects projects-3">
+    <article id="sensometer" class="project" data-reveal>
+      <figure class="media">
+        <img src="{{ '/images/iot/' | relative_url }}sensometer.jpg" alt="AquaLink Sensometer" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
+        <span class="media-empty"><i class="fas fa-image" aria-hidden="true"></i> Photo coming soon</span>
+      </figure>
+      <div class="project-top">
+        <h3>Sensometer</h3>
+        <span class="project-year">AquaLink · 2021 to 2022</span>
+      </div>
+      <p>Industrial sensor-to-cloud device. I built and maintained its firmware: an STM32F4 main MCU with an ESP32 co-processor handling real-time telemetry and secure data pipelines.</p>
+      <ul class="stack" aria-label="Stack">
+        <li>Embedded C</li><li>C++</li><li>STM32F4</li><li>ESP32</li>
+      </ul>
+    </article>
+
+    <article id="hydrometer" class="project" data-reveal>
+      <figure class="media">
+        <img src="{{ '/images/iot/' | relative_url }}hydrometer.jpg" alt="AquaLink Hydrometer" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
+        <span class="media-empty"><i class="fas fa-image" aria-hidden="true"></i> Photo coming soon</span>
+      </figure>
+      <div class="project-top">
+        <h3>Hydrometer</h3>
+        <span class="project-year">AquaLink · 2021 to 2022</span>
+      </div>
+      <p>Field device for aquaculture and agriculture. Firmware for an STM32F2 with an ESP8266 co-processor, dual RS485/MODBUS sensors and low-power operation, plus the driver and GUI for its ST7567 display.</p>
+      <ul class="stack" aria-label="Stack">
+        <li>Embedded C</li><li>STM32F2</li><li>ESP8266</li><li>MODBUS/RS485</li>
+      </ul>
+    </article>
+
+    <article id="greenhouse" class="project" data-reveal>
+      <figure class="media">
+        <img src="{{ '/images/iot/' | relative_url }}greenhouse.jpg" alt="Greenhouse monitoring and farming robot" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
+        <span class="media-empty"><i class="fas fa-image" aria-hidden="true"></i> Photo coming soon</span>
+      </figure>
+      <div class="project-top">
+        <h3>Greenhouse monitoring and farming robot</h3>
+        <span class="project-year">Own build</span>
+      </div>
+      <p>Monitors conditions inside a greenhouse and pairs it with a farming robot that works the crops.</p>
+    </article>
+  </div>
+</section>

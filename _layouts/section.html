@@ -1,0 +1,46 @@
+---
+layout: default
+body_class: is-section
+---
+{%- comment -%} Pages in reading order, skipping the blog, for previous/next {%- endcomment -%}
+{%- assign pages_in_order = site.data.sections | where_exp: "s", "s.external_page != true" -%}
+{%- for s in pages_in_order -%}
+  {%- if s.url == page.url -%}
+    {%- assign i = forloop.index0 -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign last = pages_in_order.size | minus: 1 -%}
+{%- assign prev_i = i | minus: 1 -%}
+{%- assign next_i = i | plus: 1 -%}
+{%- if i > 0 -%}{%- assign prev = pages_in_order[prev_i] -%}{%- endif -%}
+{%- if i < last -%}{%- assign next = pages_in_order[next_i] -%}{%- endif -%}
+
+<div class="crumbs-band{% if page.dark %} is-dark{% endif %}{% if page.dark == 'deep' %} is-deep{% endif %}">
+  <nav class="crumbs wrap" aria-label="Breadcrumb">
+    <a href="{{ '/#overview' | relative_url }}"><i class="fas fa-arrow-left" aria-hidden="true"></i> Overview</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">{{ page.title }}</span>
+  </nav>
+</div>
+
+{{ content }}
+
+<nav class="pager wrap" aria-label="More sections">
+  {% if prev %}
+    <a class="pager-link pager-prev" href="{{ prev.url | relative_url }}" aria-label="Previous: {{ prev.title }}"><i class="fas fa-arrow-left" aria-hidden="true"></i> {{ prev.title }}</a>
+  {% else %}
+    <span></span>
+  {% endif %}
+  <a class="pager-link pager-home" href="{{ '/#overview' | relative_url }}"><i class="fas fa-table-cells-large" aria-hidden="true"></i> Overview</a>
+  {% if next %}
+    <a class="pager-link pager-next" href="{{ next.url | relative_url }}" aria-label="Next: {{ next.title }}">{{ next.title }} <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+  {% else %}
+    <span></span>
+  {% endif %}
+</nav>
+
+{% include section-rail.html %}
+
+<a class="to-overview is-shown" href="{{ '/#overview' | relative_url }}">
+  <i class="fas fa-arrow-up" aria-hidden="true"></i> Overview
+</a>

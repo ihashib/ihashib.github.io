@@ -1,0 +1,207 @@
+---
+layout: section
+title: Robotics
+description: "KIBO RPC runner-up with code on the ISS, the systems backbone of the Mongol Tori Mars rover, and robots of my own."
+dark: true
+---
+<!-- Space highlight -->
+<section class="space" id="robotics" aria-labelledby="space-title">
+  <svg class="space-orbits" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <ellipse cx="980" cy="120" rx="420" ry="160" />
+    <ellipse cx="980" cy="120" rx="300" ry="110" />
+    <ellipse cx="980" cy="120" rx="180" ry="62" />
+    <circle cx="620" cy="155" r="5" />
+    <circle cx="1220" cy="210" r="4" />
+  </svg>
+  <div class="wrap space-inner">
+    <h1 class="space-title" id="space-title" data-reveal>Code in orbit, rovers for Mars</h1>
+    <p class="space-intro" data-reveal>
+      Before backend systems, I spent my university years writing software for
+      robots: flight code for NASA's Astrobee aboard the ISS, the systems
+      backbone of BRAC University's Mars rover, and robots of my own.
+    </p>
+
+    <div class="space-track" id="kibo">
+      <div class="track-head" data-reveal>
+        <p class="track-label"><i class="fas fa-satellite" aria-hidden="true"></i> In orbit</p>
+        <h3>KIBO Robot Programming Challenge</h3>
+        <p>JAXA, Japan · Team Enigma Systems · 2021 and 2022</p>
+      </div>
+
+      <div class="feats">
+        <article class="feat feat-main" data-reveal>
+          <figure class="media">
+            <img src="{{ '/images/space/' | relative_url }}kibo-rpc-2021.jpg" alt="Team Enigma Systems at the KIBO Robot Programming Challenge 2021" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
+            <span class="media-empty"><i class="fas fa-image" aria-hidden="true"></i> Photo coming soon</span>
+          </figure>
+          <p class="feat-year">2021</p>
+          <h3>Runner-up, KIBO Robot Programming Challenge</h3>
+          <p class="feat-org">Final round held aboard the International Space Station</p>
+          <p>
+            The first team from Bangladesh to upload a computer program to the
+            International Space Station. It flew NASA's Astrobee free-flying
+            robot inside JAXA's Kibo module.
+          </p>
+          <p>
+            I built the control and navigation software in Java, with real-time
+            pose estimation from QR and AR tags using OpenCV-Contrib, tested in
+            ROS and RViz.
+          </p>
+          <ul class="feat-notes">
+            <li>1st in the national round</li>
+            <li>3rd in the international programming skills round</li>
+            <li>Crew Award</li>
+          </ul>
+          <a class="feat-link" href="https://drive.google.com/file/d/1LbiIwbwHw3qAXxAm_29r-K4MXJxWULG2/view" target="_blank" rel="noopener noreferrer">
+            View the Astrobee project <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          </a>
+        </article>
+
+        <div class="feat-stack">
+          <article class="feat" data-reveal>
+            <figure class="media">
+              <img src="{{ '/images/space/' | relative_url }}kibo-rpc-2022.jpg" alt="KIBO Robot Programming Challenge 2022 Crew Award" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
+              <span class="media-empty"><i class="fas fa-image" aria-hidden="true"></i> Photo coming soon</span>
+            </figure>
+            <p class="feat-year">2022</p>
+            <h3>Back on the ISS, Crew Award again</h3>
+            <p class="feat-org">KIBO RPC, JAXA</p>
+            <p>
+              Won the national round again, and our program ran on Astrobee
+              aboard the ISS for the second year in a row.
+            </p>
+          </article>
+          <article class="feat" data-reveal>
+            <figure class="media">
+              <img src="{{ '/images/space/' | relative_url }}kibo-rpc-6.jpg" alt="KIBO RPC 6 skeleton code for STEMX-365 teams" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
+              <span class="media-empty"><i class="fas fa-image" aria-hidden="true"></i> Photo coming soon</span>
+            </figure>
+            <p class="feat-year">2025</p>
+            <h3>Passing it on</h3>
+            <p class="feat-org">STEMX-365</p>
+            <p>
+              Wrote the reference Astrobee skeleton code for KIBO RPC 6 teams.
+            </p>
+            <a class="feat-link" href="https://github.com/ihashib/kibo-rpc-6-skeleton" target="_blank" rel="noopener noreferrer">
+              View on GitHub <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            </a>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-track" id="mongol-tori">
+      <div class="track-head" data-reveal>
+        <p class="track-label"><i class="fas fa-shuttle-space" aria-hidden="true"></i> Rovers for Mars</p>
+        <h3>BRACU Mongol Tori</h3>
+        <p>BRAC University's Mars rover team · Sub-team lead · 2019 to 2021</p>
+      </div>
+
+      <div class="feats">
+        <article class="feat feat-main" data-reveal>
+          <figure class="media">
+            <img src="{{ '/images/space/' | relative_url }}mongol-tori.jpg" alt="The BRACU Mongol Tori Mars rover" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
+            <span class="media-empty"><i class="fas fa-image" aria-hidden="true"></i> Photo coming soon</span>
+          </figure>
+          <h3>The rover's systems backbone</h3>
+          <p class="feat-org">Software, radio links, cameras and the base station</p>
+          <p>
+            Mongol Tori designs and builds a Mars rover prototype that competes
+            against university teams from around the world, driving rough
+            terrain, operating a robotic arm and running science tasks far from
+            its operators. I orchestrated the backbone that ties it together:
+            the software that drives the rover and the links that connect it to
+            the people operating it.
+          </p>
+          <ul class="feat-list">
+            <li class="is-highlight">
+              <span class="feat-flag">First on the rover</span>
+              <strong>ROS:</strong> I taught myself ROS during the COVID break and
+              brought it to Mongol Tori for the first time as the rover's control
+              stack, alongside a Python socket-based control system and inverse
+              kinematics with Gazebo simulation for the 6-DOF arm.
+            </li>
+            <li><strong>Long-range link:</strong> Ubiquiti Rocket M2 radios with sector antennas and Bullet M2 radios with omni antennas.</li>
+            <li><strong>Cameras:</strong> analog 5.8 GHz FPV and digital IP cameras placed around the rover for remote operation.</li>
+            <li><strong>Backup:</strong> a 700 MHz communication link for when the main link drops.</li>
+            <li><strong>Base station:</strong> the network for controlling and monitoring the rover.</li>
+          </ul>
+          <a class="feat-link" href="https://github.com/ihashib/6DOF_arm_simulation_gazebo" target="_blank" rel="noopener noreferrer">
+            View the arm simulation <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          </a>
+        </article>
+
+        <article class="feat" data-reveal>
+          <p class="feat-org results-title">Results</p>
+          <ol class="results" id="rover-results">
+            <li>
+              <figure class="media">
+                <img src="{{ '/images/space/' | relative_url }}urc-2020.jpg" alt="BRACU Mongol Tori at the University Rover Challenge 2020" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
+                <span class="media-empty"><i class="fas fa-image" aria-hidden="true"></i> Photo coming soon</span>
+              </figure>
+              <span class="place">3<sup>rd</sup></span>
+              <span><strong>University Rover Challenge 2020</strong>The Mars Society, USA. Judged on the System Acceptance Review during the pandemic</span>
+            </li>
+            <li>
+              <figure class="media">
+                <img src="{{ '/images/space/' | relative_url }}urc-2021.jpg" alt="BRACU Mongol Tori at the University Rover Challenge 2021" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
+                <span class="media-empty"><i class="fas fa-image" aria-hidden="true"></i> Photo coming soon</span>
+              </figure>
+              <span class="place">4<sup>th</sup></span>
+              <span><strong>University Rover Challenge 2021</strong>The Mars Society, USA</span>
+            </li>
+            <li>
+              <figure class="media">
+                <img src="{{ '/images/space/' | relative_url }}irc-2020.jpg" alt="BRACU Mongol Tori at the International Rover Challenge 2020" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
+                <span class="media-empty"><i class="fas fa-image" aria-hidden="true"></i> Photo coming soon</span>
+              </figure>
+              <span class="place">7<sup>th</sup></span>
+              <span><strong>International Rover Challenge 2020</strong>Out of 21 teams from around the world</span>
+            </li>
+          </ol>
+        </article>
+      </div>
+    </div>
+
+    <div class="space-track" id="bench">
+      <div class="track-head" data-reveal>
+        <p class="track-label"><i class="fas fa-robot" aria-hidden="true"></i> On my bench</p>
+        <h3>Robots I built myself</h3>
+        <p>From a PID line follower to a 6-DOF arm with a simulated twin</p>
+      </div>
+
+      <div class="bench">
+        <article class="feat" id="line-follower" data-reveal>
+          <figure class="media">
+            <img src="{{ '/images/robotics/' | relative_url }}line-follower.jpg" alt="PID line-following robot" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
+            <span class="media-empty"><i class="fas fa-image" aria-hidden="true"></i> Photo coming soon</span>
+          </figure>
+          <h3>PID line-following robot</h3>
+          <p class="feat-org">2017 to 2018</p>
+          <p>A line-following robot steered by a PID controller that keeps it centred on the track.</p>
+        </article>
+        <article class="feat" id="self-balancing" data-reveal>
+          <figure class="media">
+            <img src="{{ '/images/robotics/' | relative_url }}self-balancing.jpg" alt="Self-balancing robot" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
+            <span class="media-empty"><i class="fas fa-image" aria-hidden="true"></i> Photo coming soon</span>
+          </figure>
+          <h3>Self-balancing robot</h3>
+          <p class="feat-org">Own build</p>
+          <p>A two-wheeled robot that keeps itself upright with closed-loop control.</p>
+        </article>
+        <article class="feat" id="robotic-arm" data-reveal>
+          <figure class="media">
+            <img src="{{ '/images/robotics/' | relative_url }}robotic-arm.jpg" alt="6-DOF robotic arm and its Gazebo shadow" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
+            <span class="media-empty"><i class="fas fa-image" aria-hidden="true"></i> Photo coming soon</span>
+          </figure>
+          <h3>6-DOF robotic arm</h3>
+          <p class="feat-org">2020 to 2021</p>
+          <p>Inverse kinematics for a six-joint arm, with a ROS and Gazebo shadow that mirrors the arm in simulation.</p>
+          <a class="feat-link" href="https://github.com/ihashib/6DOF_arm_simulation_gazebo" target="_blank" rel="noopener noreferrer">
+            View the simulation <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          </a>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+# One list drives the header menu, the section bar and the previous/next
+# links. Order here is the reading order.
+- id: education
+  title: Education
+  url: /education/
+  icon: fa-graduation-cap
+- id: career
+  title: Career
+  url: /career/
+  icon: fa-briefcase
+- id: robotics
+  title: Robotics
+  url: /robotics/
+  icon: fa-robot
+- id: iot
+  title: IoT
+  url: /iot/
+  icon: fa-microchip
+- id: projects
+  title: Projects
+  url: /projects/
+  icon: fa-cubes
+- id: skills
+  title: Skills
+  url: /skills/
+  icon: fa-screwdriver-wrench
+- id: writing
+  title: Writing
+  url: /blog/
+  icon: fa-pen-nib
+  external_page: true
+- id: contact
+  title: Contact
+  url: /contact/
+  icon: fa-paper-plane

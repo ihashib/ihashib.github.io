@@ -8,9 +8,15 @@ Built with [Jekyll](https://jekyllrb.com/), which GitHub Pages builds automatica
 
 ```
 _config.yml          Site settings (title, URL, plugins, permalinks)
-_layouts/            default.html (shared shell), post.html (blog post)
-_includes/           head, header, footer, command palette, post card
-index.html           Home page: hero, tiles, then every section
+_layouts/            default.html (shared shell), post.html (blog post), section.html (section pages)
+_includes/           head, header, footer, command palette, post card, section bar
+index.html           Home page: hero and overview tiles
+education/ career/   One page per section, each opened from its tile
+robotics/ iot/
+projects/ skills/
+contact/
+_data/sections.yml   Section list and order; drives the header menu,
+                     section bar and previous/next links
 blog/index.html      Blog listing with search and tag filter
 _posts/              Published blog posts (Markdown)
 _drafts/             Unpublished drafts

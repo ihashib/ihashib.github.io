@@ -1,0 +1,50 @@
+---
+layout: section
+title: Contact
+description: "Get in touch with Md Hashibul Islam about backend engineering roles and interesting problems."
+dark: deep
+---
+<!-- Contact -->
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap contact-inner">
+    <div class="contact-info">
+      <h1 id="contact-title">Let's talk</h1>
+      <p>Open to backend engineering roles and interesting problems. The fastest way to reach me is email.</p>
+      <ul class="contact-list">
+        <li>
+          <i class="fas fa-envelope" aria-hidden="true"></i><a href="mailto:ihashib2@gmail.com">ihashib2@gmail.com</a>
+          <button type="button" class="copy-btn" data-copy="ihashib2@gmail.com" aria-label="Copy email address">
+            <i class="far fa-copy" aria-hidden="true"></i><span class="copy-label">Copy</span>
+          </button>
+        </li>
+        <li><i class="fas fa-phone" aria-hidden="true"></i><a href="tel:+8801960174282">+880 1960 174282</a></li>
+        <li><i class="fas fa-location-dot" aria-hidden="true"></i><span>Dhaka, Bangladesh</span></li>
+      </ul>
+      <div class="socials">
+        <a href="https://linkedin.com/in/ihashib" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/ihashib" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="{{ '/blog/feed.xml' | relative_url }}" aria-label="Blog RSS feed"><i class="fas fa-rss"></i></a>
+        <a href="{{ '/cv/Md-Hashibul-Islam-CV.pdf' | relative_url }}" download aria-label="Download CV"><i class="fas fa-file-arrow-down"></i></a>
+      </div>
+    </div>
+
+    <form class="contact-form" action="https://formspree.io/f/mgvrwozw" method="POST" novalidate>
+      <label>
+        <span>Name</span>
+        <input type="text" name="name" autocomplete="name" required />
+      </label>
+      <label>
+        <span>Email</span>
+        <input type="email" name="email" autocomplete="email" required />
+      </label>
+      <label>
+        <span>Message</span>
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+      <input type="hidden" name="_subject" value="New message from portfolio website" />
+      <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <button type="submit" class="btn btn-solid">Send message <i class="fas fa-paper-plane" aria-hidden="true"></i></button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
