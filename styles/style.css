@@ -608,6 +608,38 @@ kbd {
     display: none;
   }
 }
+/* On phones the header stacks, leaving room beside the short Skills title */
+.section-art-head {
+  display: none;
+}
+
+/* Phones: show the whole drawing. The art lives in the right half of each
+   2:1 viewBox, so draw the box at twice the screen width, right-aligned,
+   and that half fills the screen instead of being cropped by "slice". */
+@media (max-width: 900px) {
+  .section-art,
+  .space-orbits {
+    inset: 0 0 auto auto;
+    left: auto;
+    width: 200vw;
+    height: auto;
+    aspect-ratio: 2 / 1;
+    transform: none;
+  }
+  .section-art {
+    right: calc(50% - 50vw);
+  }
+  .section-art-head {
+    display: block;
+    top: clamp(64px, 9vw, 112px);
+    right: var(--gutter);
+    width: 84px;
+    height: 42px;
+    aspect-ratio: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
 .contact .section-art {
   stroke: var(--night-line);
 }
@@ -2712,6 +2744,25 @@ button.tag.is-active {
 @media (max-width: 560px) {
   .hero-hint {
     display: none;
+  }
+  /* Keep the hero buttons on the first screen of a phone */
+  .hero {
+    padding-top: 20px;
+    row-gap: 20px;
+  }
+  .hero-portrait {
+    width: min(150px, 40vw);
+    margin-top: 0;
+  }
+  .status-chip {
+    margin-bottom: 14px;
+  }
+  .hero-lede {
+    margin-top: 16px;
+    font-size: 1.02rem;
+  }
+  .hero-actions {
+    margin-top: 22px;
   }
   .feat {
     padding: 22px 18px;
