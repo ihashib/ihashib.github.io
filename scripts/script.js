@@ -73,6 +73,18 @@ if ("IntersectionObserver" in window && !reduceMotion) {
   revealEls.forEach((el) => el.classList.add("in"));
 }
 
+// Section pages open on their first item rather than the top of the page,
+// unless the link points somewhere specific or the browser is restoring a
+// scroll position (back/forward or reload).
+if (document.querySelector(".crumbs-band") && !location.hash) {
+  const nav = performance.getEntriesByType("navigation")[0];
+  const restoring = nav && (nav.type === "back_forward" || nav.type === "reload");
+  const first = document.querySelector("main :is(.track-head, article, .job, .edu, .skills)");
+  if (first && !restoring && window.scrollY === 0) {
+    first.scrollIntoView({ block: "start", behavior: "instant" });
+  }
+}
+
 // Section bar (section pages). On narrower screens it is a thin bar that
 // expands into names on hover (mouse) or first tap (touch); picking a page,
 // tapping elsewhere or scrolling folds it back.
