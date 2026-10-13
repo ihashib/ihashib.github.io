@@ -457,9 +457,19 @@ kbd {
 /* Side-by-side layout: keep all three buttons on one line, easing their
    size down on narrower windows so they still fit the text column */
 @media (min-width: 901px) {
-  /* Lift the text column a little; the portrait stays where it is */
+  /* The hero fills the first screen so the overview starts below the fold,
+     with its content centred vertically */
+  .hero {
+    min-height: calc(100vh - var(--header-h));
+    min-height: calc(100svh - var(--header-h));
+    align-content: center;
+  }
+  /* Lift the text column a little and the portrait a little more */
   .hero-text {
     transform: translateY(-18px);
+  }
+  .hero-portrait {
+    transform: translateY(-36px);
   }
   .hero-actions {
     flex-wrap: nowrap;
@@ -597,6 +607,10 @@ kbd {
 .section + .section {
   border-top: 1px solid var(--line);
 }
+/* Pages whose visible heading was removed start closer to the breadcrumb */
+.section:has(> h1.sr-only) {
+  padding-top: clamp(28px, 4vw, 48px);
+}
 
 /* Section page backdrop: line art across the top, like the Robotics orbits */
 .has-art {
@@ -639,10 +653,6 @@ kbd {
     display: none;
   }
 }
-/* On phones the header stacks, leaving room beside the short Skills title */
-.section-art-head {
-  display: none;
-}
 
 /* Phones: show the whole drawing. The art lives in the right half of each
    2:1 viewBox, so draw the box at twice the screen width, right-aligned,
@@ -659,16 +669,6 @@ kbd {
   }
   .section-art {
     right: calc(50% - 50vw);
-  }
-  .section-art-head {
-    display: block;
-    top: clamp(64px, 9vw, 112px);
-    right: var(--gutter);
-    width: 84px;
-    height: 42px;
-    aspect-ratio: auto;
-    -webkit-mask-image: none;
-    mask-image: none;
   }
 }
 .contact .section-art {
@@ -897,7 +897,7 @@ details li::marker {
 .feat {
   border: 1px solid var(--night-line);
   border-radius: var(--radius-lg);
-  padding: clamp(24px, 3.5vw, 40px);
+  padding: clamp(18px, 2.2vw, 26px);
   background: rgba(14, 26, 51, 0.7);
 }
 .feat-main {
@@ -972,7 +972,8 @@ details li::marker {
   font-size: clamp(1.4rem, 2.4vw, 1.8rem);
   font-weight: 600;
 }
-.feat > h3:first-child {
+.feat > h3:first-child,
+.feat .card-body > h3:first-child {
   margin-top: 0;
 }
 .feat:not(.feat-main) h3 {
@@ -986,7 +987,8 @@ details li::marker {
 .feat p + p {
   margin-top: 12px;
 }
-.feat > p:not(.feat-year):not(.feat-org) {
+.feat > p:not(.feat-year):not(.feat-org),
+.feat .card-body > p:not(.feat-year):not(.feat-org) {
   max-width: 38em;
 }
 .feat-list {
@@ -1071,7 +1073,13 @@ details li::marker {
 }
 
 .space-track {
-  margin-top: clamp(56px, 7vw, 88px);
+  margin-top: clamp(32px, 4vw, 48px);
+}
+.sr-only + .space-track {
+  margin-top: 0;
+}
+.space-track + .space-track {
+  margin-top: clamp(48px, 6vw, 72px);
 }
 .track-head {
   display: grid;
@@ -1162,7 +1170,7 @@ details li::marker {
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  padding: clamp(22px, 3vw, 32px);
+  padding: clamp(18px, 2vw, 24px);
   display: flex;
   flex-direction: column;
   transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
@@ -1196,7 +1204,8 @@ details li::marker {
   color: var(--steel);
   font-size: 0.95rem;
 }
-.project > p {
+.project > p,
+.project .card-body > p {
   max-width: 44em;
 }
 .project-link {
@@ -1236,6 +1245,95 @@ details li::marker {
 }
 .projects + .group-label {
   margin-top: 56px;
+}
+
+/* Long cards: a video link with two photos stacked under it */
+.card-media {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.card-media .media {
+  margin: 0;
+}
+.media-pair {
+  display: grid;
+  gap: 10px;
+}
+.media-video {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 8px;
+  color: var(--night-ink);
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+.media-video i {
+  font-size: 2.6rem;
+  color: var(--signal);
+}
+.media-video:hover {
+  border-color: var(--signal);
+}
+
+/* Card text sits in .card-body so the photo can go beside it */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Desktop: one card per row, photo on the left and text on the right, so
+   the page reads straight down instead of across tall side-by-side cards */
+@media (min-width: 901px) {
+  .projects,
+  .projects-3,
+  .feats,
+  .bench {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .feat-stack {
+    gap: 16px;
+  }
+  .project:has(> .media),
+  .feat:has(> .media),
+  .feat:has(> .card-media) {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: clamp(20px, 2.4vw, 32px);
+    align-items: start;
+  }
+  .project > .media,
+  .feat > .media,
+  .feat > .card-media {
+    margin: 0;
+  }
+  .card-body {
+    align-self: stretch;
+  }
+  /* The rover results card is full width now: its three places sit in a row */
+  .results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .results li + li {
+    border-top: 0;
+  }
+  /* Columns are narrow, so the place sits above its text */
+  .results li {
+    grid-template-columns: 1fr;
+    align-content: start;
+    gap: 10px;
+    padding: 12px 0 0;
+  }
+  .results .place {
+    font-size: 2.2rem;
+  }
 }
 
 /* Featured space project: dark card like the space section */
@@ -2746,7 +2844,7 @@ button.tag.is-active {
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
   .bench,
   .projects-3 {
     grid-template-columns: 1fr 1fr;
