@@ -92,6 +92,7 @@ body {
   background: var(--paper);
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.25s, color 0.25s;
+  overflow-x: clip;
 }
 
 img {
@@ -564,6 +565,51 @@ kbd {
 }
 .section + .section {
   border-top: 1px solid var(--line);
+}
+
+/* Section page backdrop: line art across the top, like the Robotics orbits */
+.has-art {
+  position: relative;
+  isolation: isolate;
+}
+.section-art {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: -1;
+  width: 100vw;
+  height: min(560px, 100%);
+  transform: translateX(-50%);
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 1.2;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(#000 55%, transparent);
+  mask-image: linear-gradient(#000 55%, transparent);
+}
+/* Skills has no panels to sit behind, so its brackets live in the side
+   margins outside the content and only show when those margins are wide */
+.section-art-side {
+  left: auto;
+  width: calc(50vw - var(--wrap) / 2 - 24px);
+  height: min(480px, 100%);
+  transform: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.section-art-side.is-left {
+  right: calc(100% + 12px);
+}
+.section-art-side.is-right {
+  left: calc(100% + 12px);
+}
+@media (max-width: 1359px) {
+  .section-art-side {
+    display: none;
+  }
+}
+.contact .section-art {
+  stroke: var(--night-line);
 }
 
 .section-head {
