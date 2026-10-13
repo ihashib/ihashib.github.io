@@ -439,8 +439,8 @@ kbd {
 /* One line, scaled to the text column (the name is ~7.9em wide) */
 .hero-name {
   font-family: var(--name);
-  font-size: clamp(2rem, 6vw, 4.5rem);
-  font-size: min(12.4cqi, 6.25rem);
+  font-size: clamp(1.85rem, 5.5vw, 4.1rem);
+  font-size: min(11.4cqi, 5.75rem);
   font-weight: 900;
   line-height: 1;
   letter-spacing: -0.03em;
@@ -452,6 +452,23 @@ kbd {
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 32px;
+}
+
+/* Side-by-side layout: keep all three buttons on one line, easing their
+   size down on narrower windows so they still fit the text column */
+@media (min-width: 901px) {
+  /* Lift the text column a little; the portrait stays where it is */
+  .hero-text {
+    transform: translateY(-18px);
+  }
+  .hero-actions {
+    flex-wrap: nowrap;
+  }
+  .hero-actions .btn {
+    white-space: nowrap;
+    font-size: clamp(0.88rem, 1.05vw, 1rem);
+    padding-inline: clamp(14px, 1.6vw, 22px);
+  }
 }
 
 .hero-hint {
@@ -515,6 +532,20 @@ kbd {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* One-line bio under the name */
+.hero-tags {
+  margin-top: 18px;
+  font-family: var(--display);
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--steel);
+}
+.hero-tags span {
+  margin-inline: 0.45em;
+  color: var(--signal);
 }
 
 .stats {
@@ -2609,6 +2640,9 @@ button.tag.is-active {
     width: fit-content;
     margin-inline: auto;
   }
+  .hero-name {
+    text-align: center;
+  }
   .stats {
     grid-template-columns: 1fr 1fr;
     margin-top: 16px;
@@ -2752,14 +2786,42 @@ button.tag.is-active {
   }
   /* The ring reaches 9% past the photo, so clear it below the header */
   .hero-portrait {
-    width: min(190px, 50vw);
-    margin-top: 28px;
+    width: min(180px, 48vw);
+    margin-top: 18px;
   }
   .status-chip {
-    margin-bottom: 14px;
+    margin-bottom: 12px;
+  }
+  .hero-tags {
+    margin-top: 12px;
+  }
+  /* Compact stats so the buttons stay in view */
+  .stats {
+    margin-top: 16px;
+    row-gap: 14px;
+  }
+  .stats li {
+    padding-top: 12px;
+  }
+  .stats li + li {
+    padding-left: 14px;
+  }
+  .stats a {
+    gap: 3px;
+  }
+  .stats strong {
+    font-size: 1.45rem;
+  }
+  .stats span {
+    font-size: 0.82rem;
+    line-height: 1.35;
   }
   .hero-actions {
-    margin-top: 22px;
+    margin-top: 30px;
+    gap: 6px 10px;
+  }
+  .hero-actions .btn {
+    padding-block: 12px;
   }
   .feat {
     padding: 22px 18px;
