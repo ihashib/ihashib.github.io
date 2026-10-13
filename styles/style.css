@@ -1164,12 +1164,14 @@ details li::marker {
   display: grid;
   place-items: center;
 }
-.tile-m {
-  grid-column: span 2;
-  grid-row: span 2;
-}
+/* Career is the one wide tile; the sections after it are 2 x 2 and the
+   links are 1 x 1. On narrow screens IoT and Writing go half height. */
 .tile-w {
   grid-column: span 4;
+  grid-row: span 2;
+}
+.tile-m {
+  grid-column: span 2;
   grid-row: span 2;
 }
 .tile:active {
@@ -1181,23 +1183,23 @@ details li::marker {
   border-radius: 0;
 }
 
+/* The section name sits top left, where the eye lands first */
 .tile-name {
   position: absolute;
-  left: 12px;
-  bottom: 10px;
+  left: 16px;
+  top: 14px;
   z-index: 3;
-  font-size: 0.85rem;
-  font-weight: 600;
-  line-height: 1;
+  font: 700 clamp(0.95rem, 9cqmin, 1.3rem)/1 var(--display);
+  letter-spacing: -0.01em;
 }
 .tile-s .tile-name {
   left: 8px;
-  bottom: 7px;
-  font-size: 0.75rem;
+  top: 8px;
+  font-size: 0.8rem;
 }
 .tile-s > i {
   font-size: clamp(1rem, 30cqmin, 2rem);
-  margin-bottom: 8px;
+  margin-top: 14px;
 }
 
 .tile-faces {
@@ -1213,12 +1215,12 @@ details li::marker {
   flex-direction: column;
   justify-content: flex-end;
   gap: 4px;
-  padding: 14px 16px 36px;
+  padding: 44px 16px 14px;
 }
 .tile-face-icon {
   align-items: center;
   justify-content: center;
-  padding-bottom: 28px;
+  padding-top: 36px;
 }
 .tile-face-icon i {
   font-size: clamp(1.4rem, 26cqmin, 3rem);
@@ -1236,11 +1238,17 @@ details li::marker {
   font-size: 0.85rem;
   opacity: 0.85;
 }
+.tile-face .tile-via {
+  font: 500 0.78rem var(--body);
+  font-style: normal;
+  opacity: 0.8;
+}
+/* Kept close to the other tiles' text so it doesn't outshine Career and Projects */
 .tile-face .tile-big {
-  font-size: clamp(1.05rem, 17cqh, 2.3rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  max-width: 16ch;
+  /* also capped by the tile's width so each line stays on one line */
+  font-size: min(clamp(0.9rem, 11cqh, 1.4rem), 9.5cqw);
+  line-height: 1.15;
+  max-width: 24ch;
 }
 
 @container (max-height: 190px) {
@@ -1248,7 +1256,7 @@ details li::marker {
     display: none;
   }
   .tile-face {
-    padding: 10px 12px 30px;
+    padding: 36px 12px 10px;
   }
 }
 @container (max-height: 110px) {
@@ -1256,35 +1264,53 @@ details li::marker {
     display: none;
   }
   .tile-face {
-    padding: 8px 10px 26px;
+    padding: 28px 10px 8px;
   }
   .tile-name {
-    bottom: 8px;
-    font-size: 0.75rem;
+    left: 10px;
+    top: 9px;
+    font-size: 0.9rem;
   }
 }
 @container (max-height: 70px) {
+  /* Too short for details: the name alone */
+  .tile-face {
+    display: none;
+  }
   .tile-s > i {
-    margin-bottom: 10px;
+    margin-top: 12px;
   }
   .tile-s .tile-name {
-    font-size: 0.68rem;
-    bottom: 5px;
+    font-size: 0.7rem;
+    top: 5px;
   }
 }
 
-.tile-orbit {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+/* Line drawings fill the space between the name and the text, so they can
+   never overlap the text; on a tile with no room left they shrink away */
+.tile-art {
+  flex: 1 1 0;
+  min-height: 0;
+  width: 46%;
+  align-self: flex-end;
+  margin-bottom: 10px;
+  overflow: visible;
   fill: none;
-  stroke: #2a3a5c;
-  stroke-width: 1.2;
+  stroke: rgba(255, 255, 255, 0.24);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
-.tile-orbit circle {
-  fill: var(--signal);
+.tile-art * {
+  vector-effect: non-scaling-stroke;
+}
+.tile-art circle {
+  fill: rgba(255, 255, 255, 0.3);
   stroke: none;
+}
+/* The darkest tile needs brighter lines to show as clearly as the rest */
+.t-night .tile-art {
+  stroke: rgba(255, 255, 255, 0.36);
 }
 
 /* Tile colours stay the same in light and dark themes */
@@ -1546,6 +1572,13 @@ details li::marker {
   pointer-events: auto;
   transform: translate(-50%, 0);
 }
+/* Desktop already shows Overview in the header, section bar and breadcrumb,
+   so the floating button is only for mobile layouts (header in ☰ menu) */
+@media (min-width: 1024px) {
+  .to-overview {
+    display: none;
+  }
+}
 .to-overview:hover {
   background: var(--signal-ink);
   color: #fff;
@@ -1555,7 +1588,7 @@ details li::marker {
 }
 
 /* Short, wide screens (phones turned sideways): 8 x 4 cells so the grid
-   still fits; four tiles go half height and the small ones go wide */
+   still fits; IoT and Writing go half height */
 @media (max-height: 520px) and (orientation: landscape) {
   .tiles-section.tiles-section {
     --tiles-chrome: 26px;
@@ -1569,20 +1602,26 @@ details li::marker {
     height: max(180px, calc(100vh - var(--header-h) - var(--tiles-chrome)));
     height: max(180px, calc(100svh - var(--header-h) - var(--tiles-chrome)));
   }
-  .tiles .tile-flat-short {
+  .tiles .tile-strip {
     grid-row: span 1;
   }
-  .tiles .tile-s {
-    grid-column: span 2;
+  .tile-strip .tile-art {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: auto;
+    height: 38%;
+    aspect-ratio: 1;
+    margin: 0;
   }
-  .tile-flat-short .tile-face small,
-  .tile-flat-short .tile-face span {
+  .tile-strip .tile-face small,
+  .tile-strip .tile-face span {
     display: none;
   }
-  .tile-flat-short .tile-face {
-    padding: 6px 10px 24px;
+  .tile-strip .tile-face {
+    padding: 26px 10px 6px;
   }
-  .tile-flat-short .tile-face strong {
+  .tile-strip .tile-face strong {
     font-size: 0.85rem;
     white-space: nowrap;
     overflow: hidden;
@@ -2507,17 +2546,26 @@ button.tag.is-active {
     height: max(360px, min(calc(100vh - var(--header-h) - var(--tiles-chrome)), calc(200cqi + var(--gap))));
     height: max(360px, min(calc(100svh - var(--header-h) - var(--tiles-chrome)), calc(200cqi + var(--gap))));
   }
-  .tile-flat-sm {
+  .tiles .tile-strip {
     grid-row: span 1;
   }
-  .tile-flat-sm .tile-face small,
-  .tile-flat-sm .tile-face span {
+  .tile-strip .tile-art {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: auto;
+    height: 38%;
+    aspect-ratio: 1;
+    margin: 0;
+  }
+  .tile-strip .tile-face small,
+  .tile-strip .tile-face span {
     display: none;
   }
-  .tile-flat-sm .tile-face {
-    padding: 6px 10px 24px;
+  .tile-strip .tile-face {
+    padding: 26px 10px 6px;
   }
-  .tile-flat-sm .tile-face strong {
+  .tile-strip .tile-face strong {
     font-size: 0.85rem;
     white-space: nowrap;
     overflow: hidden;
