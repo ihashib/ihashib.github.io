@@ -250,7 +250,7 @@ const staticCommands = [
   { group: "Go to", icon: "fa-briefcase", label: "Career", keys: "work experience jobs metlife nasir daraz aqualink", run: go(url("/career/")) },
   { group: "Go to", icon: "fa-robot", label: "Robotics", keys: "space iss astrobee kibo jaxa nasa mars rover mongol tori urc irc ubiquiti fpv radio ros ip camera awards line following pid self balancing arm inverse kinematics gazebo", run: go(url("/robotics/")) },
   { group: "Go to", icon: "fa-microchip", label: "IoT", keys: "aqualink sensometer hydrometer greenhouse farming firmware stm32 esp32 sensors", run: go(url("/iot/")) },
-  { group: "Go to", icon: "fa-cubes", label: "Projects", keys: "decoraan marketplace nasir clear frame open daraz purrvelous", run: go(url("/projects/")) },
+  { group: "Go to", icon: "fa-cubes", label: "Software", keys: "projects 3pl logistics delivery astrobee iss kibo decoraan marketplace nasir clear frame open daraz purrvelous", run: go(url("/projects/")) },
   { group: "Go to", icon: "fa-pen-nib", label: "Writing", keys: "blog posts articles", run: go(url("/blog/")) },
   { group: "Go to", icon: "fa-screwdriver-wrench", label: "Skills", keys: "java spring stack tools embedded firmware stm32 esp32 freertos", run: go(url("/skills/")) },
   { group: "Go to", icon: "fa-paper-plane", label: "Contact", keys: "email message hire talk", run: go(url("/contact/")) },
@@ -421,6 +421,21 @@ document.addEventListener("keydown", (e) => {
     setMenu(false);
     toggle.focus();
   }
+});
+
+// Video slots: swap the thumbnail for the YouTube player on click, so the
+// player only loads when wanted. Without JS the slot stays a plain link.
+document.querySelectorAll("[data-youtube]").forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    const frame = document.createElement("iframe");
+    frame.className = link.className + " is-playing";
+    frame.src = `https://www.youtube-nocookie.com/embed/${link.dataset.youtube}?autoplay=1&rel=0`;
+    frame.title = link.getAttribute("aria-label") || "Video";
+    frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    frame.allowFullscreen = true;
+    link.replaceWith(frame);
+  });
 });
 
 // Contact form (Formspree)

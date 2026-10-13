@@ -1,9 +1,9 @@
 ---
 layout: section
-title: Projects
+title: Software
 description: "Products and tools built and shipped: Decoraan, Clear Frame, Open Daraz and Purrvelous."
 ---
-<!-- Projects -->
+<!-- Software -->
 <section class="section wrap has-art" id="projects" aria-labelledby="projects-title">
   <svg class="section-art" viewBox="0 0 1200 600" preserveAspectRatio="xMaxYMin slice" aria-hidden="true">
     <path d="M980 40 1110 105 980 170 850 105Z" />
@@ -11,9 +11,33 @@ description: "Products and tools built and shipped: Decoraan, Clear Frame, Open 
     <path d="M760 300 825 332 760 364 695 332Z" />
     <path d="M695 332V407L760 439 825 407V332M760 364V439" />
   </svg>
-  <h1 class="sr-only" id="projects-title">Projects</h1>
+  <h1 class="sr-only" id="projects-title">Software</h1>
 
   <div class="projects">
+    <article id="astrobee" class="project" data-reveal>
+      <figure class="media">
+        <img src="{{ '/images/projects/' | relative_url }}astrobee.jpg" alt="NASA's Astrobee free-flying robot aboard the ISS" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
+        <span class="media-empty"><i class="fas fa-image" aria-hidden="true"></i> Photo coming soon</span>
+      </figure>
+      <div class="card-body">
+        <div class="project-top">
+          <h3>Astrobee Robot Software</h3>
+          <span class="project-year">2021 to 2022</span>
+        </div>
+        <p>
+          Control and navigation software for NASA's Astrobee free-flying robot,
+          run aboard the International Space Station in JAXA's Kibo module for
+          the KIBO Robot Programming Challenge. Real-time pose estimation from
+          QR and AR tags guides the robot, tested in ROS and RViz before flight.
+          Runner-up in 2021 and Crew Award winner in 2021 and 2022.
+        </p>
+        <ul class="stack" aria-label="Stack">
+          <li>Java</li><li>OpenCV-Contrib</li><li>ROS</li><li>RViz</li>
+        </ul>
+        <a class="project-link" href="https://drive.google.com/file/d/1LbiIwbwHw3qAXxAm_29r-K4MXJxWULG2/view" target="_blank" rel="noopener noreferrer">View the Astrobee project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+      </div>
+    </article>
+
     <article id="decoraan" class="project" data-reveal>
       <figure class="media">
         <img src="{{ '/images/projects/' | relative_url }}decoraan.jpg" alt="Decoraan marketplace" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
@@ -33,6 +57,49 @@ description: "Products and tools built and shipped: Decoraan, Clear Frame, Open 
         </p>
         <ul class="stack" aria-label="Stack">
           <li>Java</li><li>Spring Boot</li><li>Microservices</li><li>PostgreSQL</li><li>CompletableFuture</li>
+        </ul>
+      </div>
+    </article>
+
+    <article id="open-daraz" class="project" data-reveal>
+      <figure class="media">
+        <img src="{{ '/images/projects/' | relative_url }}open-daraz.jpg" alt="Open Daraz platform" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
+        <span class="media-empty"><i class="fas fa-image" aria-hidden="true"></i> Photo coming soon</span>
+      </figure>
+      <div class="card-body">
+        <div class="project-top">
+          <h3>Open Daraz</h3>
+          <span class="project-year">2023</span>
+        </div>
+        <p>
+          REST platform that lets Daraz sellers manage products and orders
+          through direct API integration, secured with OAuth2.
+        </p>
+        <ul class="stack" aria-label="Stack">
+          <li>Java</li><li>Spring</li><li>Hibernate</li><li>OAuth2</li><li>JUnit</li>
+        </ul>
+        <a class="project-link" href="https://open.daraz.com/" target="_blank" rel="noopener noreferrer">Visit Open Daraz <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+      </div>
+    </article>
+
+    <article id="daraz-3pl" class="project" data-reveal>
+      <figure class="media">
+        <img src="{{ '/images/projects/' | relative_url }}daraz-3pl.jpg" alt="Daraz third-party logistics module" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
+        <span class="media-empty"><i class="fas fa-image" aria-hidden="true"></i> Photo coming soon</span>
+      </figure>
+      <div class="card-body">
+        <div class="project-top">
+          <h3>3PL Logistics Module</h3>
+          <span class="project-year">2023 to 2024</span>
+        </div>
+        <p>
+          Daraz's third-party logistics module, serving 20+ delivery partners
+          across Bangladesh, Nepal, Sri Lanka and Pakistan. I built and
+          maintained location management, order pipelines and partner
+          tracking, monitored with Alibaba SLS and deployed on Alibaba Cloud.
+        </p>
+        <ul class="stack" aria-label="Stack">
+          <li>Java</li><li>Spring</li><li>PostgreSQL</li><li>Redis</li><li>Docker</li><li>Alibaba Cloud</li>
         </ul>
       </div>
     </article>
@@ -57,27 +124,6 @@ description: "Products and tools built and shipped: Decoraan, Clear Frame, Open 
           <li>Python</li><li>OpenCV</li><li>Tkinter</li><li>MobileNetV3</li><li>U-2-Net</li>
         </ul>
         <a class="project-link" href="https://github.com/ihashib/Clear-Frame" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> View on GitHub</a>
-      </div>
-    </article>
-
-    <article id="open-daraz" class="project" data-reveal>
-      <figure class="media">
-        <img src="{{ '/images/projects/' | relative_url }}open-daraz.jpg" alt="Open Daraz platform" loading="lazy" onerror="this.parentElement.classList.add('is-empty');this.remove()" />
-        <span class="media-empty"><i class="fas fa-image" aria-hidden="true"></i> Photo coming soon</span>
-      </figure>
-      <div class="card-body">
-        <div class="project-top">
-          <h3>Open Daraz</h3>
-          <span class="project-year">2023</span>
-        </div>
-        <p>
-          REST platform that lets Daraz sellers manage products and orders
-          through direct API integration, secured with OAuth2.
-        </p>
-        <ul class="stack" aria-label="Stack">
-          <li>Java</li><li>Spring</li><li>Hibernate</li><li>OAuth2</li><li>JUnit</li>
-        </ul>
-        <a class="project-link" href="https://open.daraz.com/" target="_blank" rel="noopener noreferrer">Visit Open Daraz <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
       </div>
     </article>
 

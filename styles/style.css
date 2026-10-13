@@ -1289,6 +1289,11 @@ details li::marker {
 .media-video:hover img {
   filter: brightness(0.6);
 }
+iframe.media-video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 .media-video:hover {
   border-color: var(--signal);
 }

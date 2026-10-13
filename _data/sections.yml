@@ -17,7 +17,7 @@
   url: /iot/
   icon: fa-microchip
 - id: projects
-  title: Projects
+  title: Software
   url: /projects/
   icon: fa-cubes
 - id: skills
