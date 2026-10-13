@@ -250,7 +250,7 @@ const staticCommands = [
   { group: "Go to", icon: "fa-briefcase", label: "Career", keys: "work experience jobs metlife nasir daraz aqualink", run: go(url("/career/")) },
   { group: "Go to", icon: "fa-robot", label: "Robotics", keys: "space iss astrobee kibo jaxa nasa mars rover mongol tori urc irc ubiquiti fpv radio ros ip camera awards line following pid self balancing arm inverse kinematics gazebo", run: go(url("/robotics/")) },
   { group: "Go to", icon: "fa-microchip", label: "IoT", keys: "aqualink sensometer hydrometer greenhouse farming firmware stm32 esp32 sensors", run: go(url("/iot/")) },
-  { group: "Go to", icon: "fa-cubes", label: "Software", keys: "projects 3pl logistics delivery astrobee iss kibo decoraan marketplace nasir clear frame open daraz purrvelous", run: go(url("/projects/")) },
+  { group: "Go to", icon: "fa-cubes", label: "Software", keys: "projects 3pl logistics delivery astrobee iss kibo decoraan marketplace nasir clear frame open daraz purrvelous ecommerce store shop", run: go(url("/projects/")) },
   { group: "Go to", icon: "fa-pen-nib", label: "Writing", keys: "blog posts articles", run: go(url("/blog/")) },
   { group: "Go to", icon: "fa-screwdriver-wrench", label: "Skills", keys: "java spring stack tools embedded firmware stm32 esp32 freertos", run: go(url("/skills/")) },
   { group: "Go to", icon: "fa-paper-plane", label: "Contact", keys: "email message hire talk", run: go(url("/contact/")) },
@@ -437,6 +437,46 @@ document.querySelectorAll("[data-youtube]").forEach((link) => {
     link.replaceWith(frame);
   });
 });
+
+// Photos: click or tap one to open it full size. Escape, the close button,
+// a click anywhere or the back of the dialog closes it.
+const mediaImages = document.querySelectorAll(".media img");
+if (mediaImages.length) {
+  const box = document.createElement("dialog");
+  box.className = "lightbox";
+  box.setAttribute("aria-label", "Photo");
+  box.innerHTML = '<button type="button" class="lightbox-close" aria-label="Close photo"><i class="fas fa-xmark" aria-hidden="true"></i></button><img alt="" /><p></p>';
+  document.body.append(box);
+  const big = box.querySelector("img");
+  const caption = box.querySelector("p");
+  let opener = null;
+
+  const open = (img) => {
+    opener = img;
+    big.src = img.currentSrc || img.src;
+    big.alt = img.alt;
+    caption.textContent = img.alt;
+    box.showModal();
+  };
+  box.addEventListener("click", () => box.close());
+  box.addEventListener("close", () => {
+    big.removeAttribute("src");
+    opener?.focus();
+  });
+
+  mediaImages.forEach((img) => {
+    img.tabIndex = 0;
+    img.setAttribute("role", "button");
+    img.setAttribute("aria-label", `View larger: ${img.alt}`);
+    img.addEventListener("click", () => open(img));
+    img.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        open(img);
+      }
+    });
+  });
+}
 
 // Contact form (Formspree)
 const form = document.querySelector(".contact-form");
