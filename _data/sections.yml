@@ -34,7 +34,7 @@
   url: /contact/
   icon: fa-paper-plane
 - id: play
-  title: Play
+  title: Mini games
   url: /play/
   icon: fa-gamepad
   external_page: true

@@ -255,7 +255,7 @@ const staticCommands = [
   { group: "Go to", icon: "fa-screwdriver-wrench", label: "Skills", keys: "java spring stack tools embedded firmware stm32 esp32 freertos", run: go(url("/skills/")) },
   { group: "Go to", icon: "fa-pen-nib", label: "Writing", keys: "blog posts articles", run: go(url("/blog/")) },
   { group: "Go to", icon: "fa-paper-plane", label: "Contact", keys: "email message hire talk", run: go(url("/contact/")) },
-  { group: "Go to", icon: "fa-gamepad", label: "Play", keys: "games mini-games fun", run: go(url("/play/")) },
+  { group: "Go to", icon: "fa-gamepad", label: "Mini games", keys: "play games mini-games fun", run: go(url("/play/")) },
   { group: "Actions", icon: "fa-circle-half-stroke", label: "Switch colour theme", keys: "dark light mode", run: toggleTheme },
   {
     group: "Actions",
