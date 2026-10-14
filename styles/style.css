@@ -2027,6 +2027,14 @@ main:has(> .crumbs-band) {
   background: var(--signal);
 }
 
+/* Phones and tablets: no side bar. The ☰ menu and the floating Overview
+   button already cover navigation there */
+@media (max-width: 900px) {
+  .section-rail {
+    display: none;
+  }
+}
+
 /* Below 1180px the margin is too thin for the column, so it becomes a thin
    bar in the edge gutter: one segment per section, Overview in orange and
    your section in white. Hover or tap it to expand into names. */
