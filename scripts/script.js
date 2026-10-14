@@ -73,18 +73,6 @@ if ("IntersectionObserver" in window && !reduceMotion) {
   revealEls.forEach((el) => el.classList.add("in"));
 }
 
-// Section pages open on their first item rather than the top of the page,
-// unless the link points somewhere specific or the browser is restoring a
-// scroll position (back/forward or reload).
-if (document.querySelector(".crumbs-band") && !location.hash) {
-  const nav = performance.getEntriesByType("navigation")[0];
-  const restoring = nav && (nav.type === "back_forward" || nav.type === "reload");
-  const first = document.querySelector("main :is(.track-head, article, .job, .edu, .skills)");
-  if (first && !restoring && window.scrollY === 0) {
-    first.scrollIntoView({ block: "start", behavior: "instant" });
-  }
-}
-
 // Section bar (section pages). On narrower screens it is a thin bar that
 // expands into names on hover (mouse) or first tap (touch); picking a page,
 // tapping elsewhere or scrolling folds it back.
@@ -259,7 +247,7 @@ const go = (href) => () => {
 
 const staticCommands = [
   { group: "Go to", icon: "fa-table-cells-large", label: "Overview", keys: "home tiles start", run: go(url("/#overview")) },
-  { group: "Go to", icon: "fa-briefcase", label: "Career", keys: "work experience jobs metlife nasir daraz aqualink", run: go(url("/career/")) },
+  { group: "Go to", icon: "fa-briefcase", label: "Experience", keys: "work jobs metlife nasir daraz aqualink", run: go(url("/experience/")) },
   { group: "Go to", icon: "fa-graduation-cap", label: "Education", keys: "university brac bsc cse degree", run: go(url("/education/")) },
   { group: "Go to", icon: "fa-cubes", label: "Software", keys: "projects 3pl logistics delivery astrobee iss kibo decoraan marketplace nasir clear frame open daraz purrvelous ecommerce store shop", run: go(url("/projects/")) },
   { group: "Go to", icon: "fa-robot", label: "Robotics", keys: "space iss astrobee kibo jaxa nasa mars rover mongol tori urc irc indian ubiquiti fpv radio ros ip camera awards line following pid self balancing arm inverse kinematics gazebo", run: go(url("/robotics/")) },
@@ -325,7 +313,7 @@ function renderPalette() {
   if (!results.length) {
     const li = document.createElement("li");
     li.className = "palette-none";
-    li.textContent = "Nothing matches. Try “career”, “blog” or “email”.";
+    li.textContent = "Nothing matches. Try “experience”, “blog” or “email”.";
     paletteList.appendChild(li);
     paletteInput.removeAttribute("aria-activedescendant");
     return;

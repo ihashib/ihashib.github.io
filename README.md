@@ -11,7 +11,7 @@ _config.yml          Site settings (title, URL, plugins, permalinks)
 _layouts/            default.html (shared shell), post.html (blog post), section.html (section pages)
 _includes/           head, header, footer, command palette, post card, section bar
 index.html           Home page: hero and overview tiles
-education/ career/   One page per section, each opened from its tile
+education/ experience/   One page per section, each opened from its tile
 robotics/ iot/
 projects/ skills/
 contact/

@@ -1,8 +1,8 @@
 # One list drives the header menu, the section bar and the previous/next
 # links. Order here is the reading order.
-- id: career
-  title: Career
-  url: /career/
+- id: experience
+  title: Experience
+  url: /experience/
   icon: fa-briefcase
 - id: education
   title: Education

@@ -31,6 +31,16 @@
   --header-h: 68px;
   --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
 
+  /* Glass cards */
+  --glass-fill: linear-gradient(150deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.5));
+  --glass-border: rgba(255, 255, 255, 0.85);
+  --glass-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 0 0 1px rgba(20, 33, 61, 0.06),
+    0 12px 32px rgba(20, 33, 61, 0.08);
+  --glass-shadow-hover: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 0 0 1px rgba(20, 33, 61, 0.08),
+    0 20px 44px rgba(20, 33, 61, 0.14);
+  --glow-a: rgba(228, 87, 46, 0.12);
+  --glow-b: rgba(59, 130, 246, 0.14);
+
   color-scheme: light;
 }
 
@@ -49,6 +59,12 @@
   --header-bg: rgba(11, 19, 36, 0.82);
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
   --ok: #6fd39a;
+  --glass-fill: linear-gradient(150deg, rgba(40, 58, 98, 0.5), rgba(18, 28, 52, 0.38));
+  --glass-border: rgba(255, 255, 255, 0.09);
+  --glass-shadow: 0 1px 0 rgba(255, 255, 255, 0.07) inset, 0 10px 30px rgba(0, 0, 0, 0.18);
+  --glass-shadow-hover: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 18px 40px rgba(0, 0, 0, 0.28);
+  --glow-a: rgba(240, 102, 61, 0.12);
+  --glow-b: rgba(70, 120, 255, 0.16);
   color-scheme: dark;
 }
 
@@ -68,6 +84,12 @@
     --header-bg: rgba(11, 19, 36, 0.82);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
     --ok: #6fd39a;
+    --glass-fill: linear-gradient(150deg, rgba(40, 58, 98, 0.5), rgba(18, 28, 52, 0.38));
+    --glass-border: rgba(255, 255, 255, 0.09);
+    --glass-shadow: 0 1px 0 rgba(255, 255, 255, 0.07) inset, 0 10px 30px rgba(0, 0, 0, 0.18);
+    --glass-shadow-hover: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 18px 40px rgba(0, 0, 0, 0.28);
+    --glow-a: rgba(240, 102, 61, 0.12);
+    --glow-b: rgba(70, 120, 255, 0.16);
     color-scheme: dark;
   }
 }
@@ -747,7 +769,7 @@ kbd {
   color: var(--steel);
 }
 
-/* Career timeline */
+/* Experience timeline */
 .timeline {
   list-style: none;
   position: relative;
@@ -1549,9 +1571,8 @@ iframe.media-video {
 .js :is(.project, .feat, .edu)[data-reveal]:not(.in) {
   transform: translateY(14px);
 }
-:is(.project, .feat, .edu):has(.media):hover {
+:is(.project, .feat, .edu):hover {
   transform: translateY(-3px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
 }
 :is(.project, .feat, .edu) .media img {
   backface-visibility: hidden;
@@ -1565,6 +1586,37 @@ iframe.media-video {
   :is(.project, .feat, .edu):hover .media img {
     transform: none;
   }
+}
+
+/* Glass cards: translucent, blurred fill with a bright top edge, over a
+   soft colour glow so the blur has something to catch */
+:is(.project, .feat, .edu) {
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  backdrop-filter: blur(18px) saturate(1.5);
+  box-shadow: var(--glass-shadow);
+}
+:is(.project, .feat, .edu):hover {
+  border-color: color-mix(in srgb, var(--glass-border) 60%, var(--signal));
+  box-shadow: var(--glass-shadow-hover);
+}
+.feat-main,
+.feat-main:hover {
+  border-color: color-mix(in srgb, var(--signal) 55%, transparent);
+}
+main:has(> .crumbs-band) {
+  background:
+    radial-gradient(42rem 30rem at 88% 12%, var(--glow-b), transparent 70%),
+    radial-gradient(36rem 28rem at 6% 62%, var(--glow-a), transparent 70%);
+  background-attachment: fixed;
+}
+.space {
+  background:
+    radial-gradient(42rem 30rem at 88% 12%, var(--glow-b), transparent 70%),
+    radial-gradient(36rem 28rem at 6% 62%, var(--glow-a), transparent 70%),
+    var(--night);
+  background-attachment: fixed, fixed, scroll;
 }
 
 /* Featured space project: dark card like the space section */
@@ -1667,7 +1719,7 @@ iframe.media-video {
   display: grid;
   place-items: center;
 }
-/* Career is the one wide tile; the sections after it are 2 x 2 and the
+/* Experience is the one wide tile; the sections after it are 2 x 2 and the
    links are 1 x 1. On narrow screens Skills and Writing go half height. */
 .tile-w {
   grid-column: span 4;
@@ -1738,7 +1790,7 @@ iframe.media-video {
   font-style: normal;
   opacity: 0.8;
 }
-/* Kept close to the other tiles' text so it doesn't outshine Career and Projects */
+/* Kept close to the other tiles' text so it doesn't outshine Experience and Software */
 .tile-face .tile-big {
   /* also capped by the tile's width so each line stays on one line */
   font-size: min(clamp(0.9rem, 11cqh, 1.4rem), 9.5cqw);
@@ -1809,7 +1861,7 @@ iframe.media-video {
 }
 
 /* Tile colours stay the same in light and dark themes */
-/* Colour follows importance: Career and Projects (the big tiles) get the
+/* Colour follows importance: Experience and Software (the big tiles) get the
    richest colours, sections sit a step calmer, and the small link tiles stay
    quiet, except Contact, the one warm call to action */
 .t-navy { --tile-bg: #1f5bb0; }
@@ -2643,8 +2695,6 @@ button.tag.is-active {
 }
 .edu {
   padding: clamp(22px, 3vw, 32px);
-  background: var(--panel);
-  border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   display: grid;
   grid-template-columns: 1.4fr 1fr;
