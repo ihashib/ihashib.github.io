@@ -490,11 +490,11 @@ kbd {
 }
 /* "See my work" is the one orange call to action; the other two are quieter */
 .hero-actions .btn-solid {
-  background: var(--signal);
+  background: color-mix(in srgb, var(--signal) 78%, #1a1a2e);
   color: #fff;
 }
 .hero-actions .btn-solid:hover {
-  background: color-mix(in srgb, var(--signal) 86%, #000);
+  background: color-mix(in srgb, var(--signal) 88%, #1a1a2e);
   color: #fff;
 }
 .hero-actions .btn {
