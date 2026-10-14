@@ -46,7 +46,7 @@ defaults:
       path: ""
     values:
       image:
-        path: /images/social-preview.jpg
+        path: /images/social-card.jpg
         width: 1200
         height: 630
         alt: "Md Hashibul Islam, backend engineer: Java, Spring Boot and microservices. 4+ years in production, code ran on the ISS, built a Mars rover."
