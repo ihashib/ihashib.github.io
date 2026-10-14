@@ -264,7 +264,7 @@ const staticCommands = [
     keys: "mail",
     run: () => copyText(SITE.email),
   },
-  { group: "Actions", icon: "fa-file-arrow-down", label: "Download CV", keys: "resume pdf", run: go(url("/cv/Md-Hashibul-Islam-CV.pdf")) },
+  { group: "Actions", icon: "fa-file-arrow-down", label: "Download CV", keys: "resume pdf", run: go(url("/cv/Md_Hashibul_Islam.pdf")) },
   { group: "Elsewhere", icon: "fa-github fab", label: "GitHub", keys: "code repos", run: () => window.open("https://github.com/ihashib", "_blank", "noopener") },
   { group: "Elsewhere", icon: "fa-linkedin-in fab", label: "LinkedIn", keys: "profile", run: () => window.open("https://linkedin.com/in/ihashib", "_blank", "noopener") },
   { group: "Elsewhere", icon: "fa-rss", label: "RSS feed", keys: "subscribe blog", run: go(url("/blog/feed.xml")) },
