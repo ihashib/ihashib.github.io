@@ -488,6 +488,18 @@ kbd {
   gap: 12px;
   margin-top: 32px;
 }
+/* "See my work" is the one orange call to action; the other two are quieter */
+.hero-actions .btn-solid {
+  background: var(--signal);
+  color: #fff;
+}
+.hero-actions .btn-solid:hover {
+  background: color-mix(in srgb, var(--signal) 86%, #000);
+  color: #fff;
+}
+.hero-actions .btn {
+  justify-content: center;
+}
 
 /* Side-by-side layout: keep all three buttons on one line, easing their
    size down on narrower windows so they still fit the text column */
@@ -534,8 +546,31 @@ kbd {
   }
   .hero-actions .btn {
     white-space: nowrap;
-    font-size: clamp(0.88rem, 1.05vw, 1rem);
-    padding-inline: clamp(14px, 1.6vw, 22px);
+    font-size: clamp(0.85rem, 1vw, 0.95rem);
+    padding-inline: clamp(12px, 1.3vw, 18px);
+  }
+  /* Wider primary button, compact secondary ones */
+  .hero-actions .btn-solid {
+    font-size: clamp(0.9rem, 1.1vw, 1.02rem);
+    padding-inline: clamp(24px, 2.8vw, 40px);
+    min-width: clamp(170px, 16vw, 220px);
+  }
+}
+
+/* Stacked layout (phones, tablets): "See my work" takes the full row,
+   "Get in touch" and "Download CV" share the row below */
+@media (max-width: 900px) {
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .hero-actions .btn-solid {
+    grid-column: 1 / -1;
+  }
+  .hero-actions .btn-line {
+    padding-inline: 12px;
+    font-size: 0.95rem;
+    white-space: nowrap;
   }
 }
 
