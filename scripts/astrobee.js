@@ -126,6 +126,12 @@
     const len = Math.hypot(ax, ay) || 1;
     ax = (ax / len) * THRUST;
     ay = (ay / len) * THRUST;
+    // The on-screen joystick is analog: a light push gives a light thrust
+    const stick = window.joystick;
+    if (stick && (stick.x || stick.y)) {
+      ax = stick.x * THRUST;
+      ay = stick.y * THRUST;
+    }
 
     ship.vx += ax * dt;
     ship.vy += ay * dt;
@@ -405,21 +411,6 @@
   });
   window.addEventListener("blur", () => keys.clear());
 
-  document.querySelectorAll(".game-pad [data-dir]").forEach((btn) => {
-    const dir = btn.dataset.dir;
-    const on = (e) => {
-      e.preventDefault();
-      keys.add(dir);
-      btn.classList.add("is-down");
-    };
-    const off = () => {
-      keys.delete(dir);
-      btn.classList.remove("is-down");
-    };
-    btn.addEventListener("pointerdown", on);
-    ["pointerup", "pointerleave", "pointercancel"].forEach((ev) => btn.addEventListener(ev, off));
-    btn.addEventListener("contextmenu", (e) => e.preventDefault());
-  });
 
   root.querySelectorAll(".game-start").forEach((b) => b.addEventListener("click", start));
   canvas.tabIndex = 0;

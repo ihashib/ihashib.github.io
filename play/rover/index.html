@@ -33,7 +33,7 @@ description: "A short Mars mini-game: drive the Mongol Tori rover to collect soi
         rover crawls. Rocks cost time.</p>
       <ul class="game-keys">
         <li><kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd> or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to drive, <kbd>Space</kbd> to drop a relay</li>
-        <li class="game-keys-touch">Use the pad below to drive and drop relays</li>
+        <li class="game-keys-touch">Use the joystick below to drive, and the Relay button to drop relays</li>
       </ul>
       <button type="button" class="btn btn-solid game-start">Start <i class="fas fa-play" aria-hidden="true"></i></button>
     </div>
@@ -41,9 +41,6 @@ description: "A short Mars mini-game: drive the Mongol Tori rover to collect soi
     <div class="game-overlay" data-screen="done" hidden>
       <h2>Samples delivered</h2>
       <p class="game-result"></p>
-      <p class="game-note">I built Mongol Tori's long-range radio links, cameras and base
-        station network, so the team could drive it from far away.
-        <a href="{{ '/robotics/' | relative_url }}#mongol-tori">See the real rover</a>.</p>
       <button type="button" class="btn btn-solid game-start">Drive again <i class="fas fa-rotate-right" aria-hidden="true"></i></button>
     </div>
   </div>
@@ -51,12 +48,14 @@ description: "A short Mars mini-game: drive the Mongol Tori rover to collect soi
   <p class="game-help">Drive to the three samples, then back to base. Drop relays to stay in radio range. Turn your phone sideways for a bigger view.</p>
 
   <div class="game-pad has-action" aria-label="Rover controls">
-    <button type="button" data-dir="up" aria-label="Drive up"><i class="fas fa-chevron-up" aria-hidden="true"></i></button>
-    <button type="button" data-dir="left" aria-label="Drive left"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
-    <button type="button" data-dir="down" aria-label="Drive down"><i class="fas fa-chevron-down" aria-hidden="true"></i></button>
-    <button type="button" data-dir="right" aria-label="Drive right"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+    <div class="joystick" role="application" aria-label="Joystick: drag to steer"><i class="fas fa-caret-up" aria-hidden="true"></i><i class="fas fa-caret-right" aria-hidden="true"></i><i class="fas fa-caret-down" aria-hidden="true"></i><i class="fas fa-caret-left" aria-hidden="true"></i><span class="joystick-knob"></span></div>
     <button type="button" data-action="relay" class="game-pad-action" aria-label="Drop a radio relay"><i class="fas fa-tower-broadcast" aria-hidden="true"></i><span>Relay</span></button>
   </div>
 </section>
 
+<a class="to-overview is-shown" href="{{ '/#overview' | relative_url }}" aria-label="Back to Overview" title="Overview">
+  <i class="fas fa-table-cells-large" aria-hidden="true"></i>
+</a>
+
+<script src="{{ '/scripts/joystick.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
 <script src="{{ '/scripts/rover.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>

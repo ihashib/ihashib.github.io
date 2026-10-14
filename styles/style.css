@@ -1920,7 +1920,7 @@ main:has(> .crumbs-band) {
 .t-ember { --tile-bg: #237a8e; }
 .t-clay-deep { --tile-bg: #b4466a; }
 .t-steel { --tile-bg: #3b4c62; }
-.t-play { --tile-bg: #8a3f9e; }
+.t-play { --tile-bg: #3f7d5c; }
 .t-graphite { --tile-bg: #2b3138; }
 .t-linkedin { --tile-bg: #2a5c90; }
 .t-orange { --tile-bg: #e4572e; }
@@ -2154,34 +2154,35 @@ main:has(> .crumbs-band) {
 /* Floating button back to the overview tiles, bottom centre */
 .to-overview {
   position: fixed;
-  left: 50%;
+  right: calc(24px + env(safe-area-inset-right));
   bottom: calc(18px + env(safe-area-inset-bottom));
   z-index: 40;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: var(--ink);
-  color: var(--paper);
-  font-weight: 600;
-  font-size: 0.78rem;
-  line-height: 1.2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: var(--header-bg);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  backdrop-filter: blur(12px) saturate(1.4);
+  color: var(--steel);
+  font-size: 1.05rem;
   text-decoration: none;
   box-shadow: 0 4px 12px rgba(7, 14, 29, 0.22);
   opacity: 0;
   pointer-events: none;
-  transform: translate(-50%, 16px);
+  transform: translateY(16px);
   transition: opacity 0.25s, transform 0.25s, background-color 0.2s;
 }
 .to-overview.is-shown {
   opacity: 1;
   pointer-events: auto;
-  transform: translate(-50%, 0);
+  transform: none;
 }
-/* Desktop already shows Overview in the header, section bar and breadcrumb,
-   so the floating button is only for mobile layouts (header in ☰ menu) */
-@media (min-width: 1024px) {
+/* The floating Overview button is for phones only; tablets and desktop
+   already show Overview in the header and breadcrumb */
+@media (min-width: 561px) {
   .to-overview {
     display: none;
   }
@@ -2190,9 +2191,7 @@ main:has(> .crumbs-band) {
   background: var(--signal-ink);
   color: #fff;
 }
-.to-overview i {
-  font-size: 0.8em;
-}
+
 
 /* Short, wide screens (phones turned sideways): 8 x 4 cells so the grid
    still fits; Skills and Writing go half height */
@@ -3482,13 +3481,55 @@ button.tag.is-active {
 }
 .game-pad {
   display: none;
-  grid-template-columns: repeat(3, 64px);
-  grid-template-rows: repeat(2, 56px);
-  gap: 8px;
+  align-items: center;
   justify-content: center;
-  margin-top: 16px;
+  gap: 32px;
+  margin-top: 18px;
   user-select: none;
   -webkit-user-select: none;
+}
+/* Virtual joystick: a flat pad with direction arrows; drag the grip,
+   it springs back when released */
+.joystick {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 140px;
+  height: 140px;
+  border: 1px solid var(--glass-border);
+  border-radius: 36px;
+  background: var(--glass-fill);
+  box-shadow: var(--glass-shadow);
+  touch-action: none;
+  cursor: grab;
+}
+.joystick > i {
+  position: absolute;
+  font-size: 1rem;
+  color: var(--steel);
+  opacity: 0.7;
+}
+.joystick > .fa-caret-up { top: 8px; }
+.joystick > .fa-caret-down { bottom: 8px; }
+.joystick > .fa-caret-left { left: 12px; }
+.joystick > .fa-caret-right { right: 12px; }
+.joystick-knob {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background:
+    repeating-linear-gradient(90deg, transparent 0 9px, rgba(255, 255, 255, 0.16) 9px 11px) center / 32px 18px no-repeat,
+    #2a3654;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s var(--ease-out), background-color 0.2s;
+  pointer-events: none;
+}
+.joystick.is-active .joystick-knob {
+  transition: none;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 9px, rgba(255, 255, 255, 0.3) 9px 11px) center / 32px 18px no-repeat,
+    #34436a;
 }
 .game-pad button {
   display: grid;
@@ -3497,22 +3538,13 @@ button.tag.is-active {
   border-radius: var(--radius-md);
   background: var(--glass-fill);
   color: var(--ink);
-  font-size: 1.2rem;
   touch-action: none;
   cursor: pointer;
 }
-.game-pad button.is-down {
-  background: var(--signal);
-  color: #fff;
-}
-.game-pad [data-dir="up"] { grid-column: 2; grid-row: 1; }
-.game-pad [data-dir="left"] { grid-column: 1; grid-row: 2; }
-.game-pad [data-dir="down"] { grid-column: 2; grid-row: 2; }
-.game-pad [data-dir="right"] { grid-column: 3; grid-row: 2; }
 /* Touch screens get the on-screen pad */
 @media (hover: none), (max-width: 900px) {
   .game-pad {
-    display: grid;
+    display: flex;
   }
   .game-keys li:first-child {
     display: none;
@@ -3552,17 +3584,6 @@ button.tag.is-active {
   .game-help {
     display: block;
   }
-}
-
-/* Link to the game from the KIBO section */
-.track-play {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 6px;
-  font-weight: 600;
-  color: var(--signal-ink);
-  text-underline-offset: 4px;
 }
 
 /* Play: games hub */
@@ -3642,13 +3663,10 @@ button.tag.is-active {
   font-weight: 600;
 }
 
-/* Rover pad: an extra Relay button beside the arrows */
-.game-pad.has-action {
-  grid-template-columns: repeat(3, 64px) 92px;
-}
+/* Rover pad: a Relay button beside the joystick */
 .game-pad-action {
-  grid-column: 4;
-  grid-row: 1 / span 2;
+  width: 92px;
+  height: 92px;
   gap: 4px;
   font-size: 0.85rem;
   font-weight: 600;

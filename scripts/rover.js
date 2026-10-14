@@ -142,9 +142,17 @@
     if (keys.has("up")) ay -= 1;
     if (keys.has("down")) ay += 1;
     const len = Math.hypot(ax, ay) || 1;
+    ax /= len;
+    ay /= len;
+    // The on-screen joystick is analog: a light push drives slowly
+    const stick = window.joystick;
+    if (stick && (stick.x || stick.y)) {
+      ax = stick.x;
+      ay = stick.y;
+    }
     const power = ACCEL * (link ? 1 : NO_LINK);
-    rover.vx += (ax / len) * power * dt;
-    rover.vy += (ay / len) * power * dt;
+    rover.vx += ax * power * dt;
+    rover.vy += ay * power * dt;
 
     const inCrater = craters.some((c) => ((rover.x - c.x) / c.rx) ** 2 + ((rover.y - c.y) / c.ry) ** 2 < 1);
     const drag = Math.max(0, 1 - (inCrater ? CRATER_FRICTION : FRICTION) * dt);
@@ -448,21 +456,6 @@
   });
   window.addEventListener("blur", () => keys.clear());
 
-  document.querySelectorAll(".game-pad [data-dir]").forEach((btn) => {
-    const dir = btn.dataset.dir;
-    const on = (e) => {
-      e.preventDefault();
-      keys.add(dir);
-      btn.classList.add("is-down");
-    };
-    const off = () => {
-      keys.delete(dir);
-      btn.classList.remove("is-down");
-    };
-    btn.addEventListener("pointerdown", on);
-    ["pointerup", "pointerleave", "pointercancel"].forEach((ev) => btn.addEventListener(ev, off));
-    btn.addEventListener("contextmenu", (e) => e.preventDefault());
-  });
   const relayBtn = document.querySelector('.game-pad [data-action="relay"]');
   if (relayBtn) relayBtn.addEventListener("pointerdown", (e) => {
     e.preventDefault();

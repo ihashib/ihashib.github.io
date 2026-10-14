@@ -32,7 +32,7 @@ description: "A short zero-gravity mini-game: fly NASA's Astrobee through the Ki
         AR targets, then dock gently at the charging station.</p>
       <ul class="game-keys">
         <li><kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd> or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to thrust</li>
-        <li class="game-keys-touch">Use the pad below to thrust</li>
+        <li class="game-keys-touch">Use the joystick below to thrust</li>
       </ul>
       <button type="button" class="btn btn-solid game-start">Start <i class="fas fa-play" aria-hidden="true"></i></button>
     </div>
@@ -40,9 +40,6 @@ description: "A short zero-gravity mini-game: fly NASA's Astrobee through the Ki
     <div class="game-overlay" data-screen="done" hidden>
       <h2>Docked</h2>
       <p class="game-result"></p>
-      <p class="game-note">On the real ISS, Astrobee ran my team's navigation code,
-        with pose estimation from the same kind of AR tags.
-        <a href="{{ '/robotics/' | relative_url }}#kibo">KIBO RPC 2021 runner-up</a>.</p>
       <button type="button" class="btn btn-solid game-start">Fly again <i class="fas fa-rotate-right" aria-hidden="true"></i></button>
     </div>
   </div>
@@ -50,11 +47,13 @@ description: "A short zero-gravity mini-game: fly NASA's Astrobee through the Ki
   <p class="game-help">No gravity: thrust, then drift. Scan both AR targets, then dock gently on the right. Turn your phone sideways for a bigger view.</p>
 
   <div class="game-pad" aria-label="Thrusters">
-    <button type="button" data-dir="up" aria-label="Thrust up"><i class="fas fa-chevron-up" aria-hidden="true"></i></button>
-    <button type="button" data-dir="left" aria-label="Thrust left"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
-    <button type="button" data-dir="down" aria-label="Thrust down"><i class="fas fa-chevron-down" aria-hidden="true"></i></button>
-    <button type="button" data-dir="right" aria-label="Thrust right"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+    <div class="joystick" role="application" aria-label="Joystick: drag to steer"><i class="fas fa-caret-up" aria-hidden="true"></i><i class="fas fa-caret-right" aria-hidden="true"></i><i class="fas fa-caret-down" aria-hidden="true"></i><i class="fas fa-caret-left" aria-hidden="true"></i><span class="joystick-knob"></span></div>
   </div>
 </section>
 
+<a class="to-overview is-shown" href="{{ '/#overview' | relative_url }}" aria-label="Back to Overview" title="Overview">
+  <i class="fas fa-table-cells-large" aria-hidden="true"></i>
+</a>
+
+<script src="{{ '/scripts/joystick.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
 <script src="{{ '/scripts/astrobee.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
