@@ -2,3 +2,4 @@
 {%- assign active = false -%}
 {%- if page.url == include.section.url -%}{%- assign active = true -%}{%- endif -%}
 {%- if include.section.id == 'writing' and page.url contains '/blog/' -%}{%- assign active = true -%}{%- endif -%}
+{%- if include.section.id == 'play' and page.url contains '/play/' -%}{%- assign active = true -%}{%- endif -%}

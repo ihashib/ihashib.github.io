@@ -1,0 +1,60 @@
+---
+layout: default
+title: Astrobee Dock
+description: "A short zero-gravity mini-game: fly NASA's Astrobee through the Kibo module, scan the targets and dock it gently."
+---
+<div class="crumbs-band is-dark">
+  <nav class="crumbs wrap" aria-label="Breadcrumb">
+    <a href="{{ '/#overview' | relative_url }}"><i class="fas fa-arrow-left" aria-hidden="true"></i> Overview</a>
+    <span aria-hidden="true">/</span>
+    <a href="{{ '/play/' | relative_url }}">Play</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">Astrobee Dock</span>
+  </nav>
+</div>
+
+<section class="play wrap" aria-labelledby="play-title">
+  <div class="play-head">
+    <div>
+      <p class="track-label"><i class="fas fa-gamepad" aria-hidden="true"></i> Mini-game</p>
+      <h1 id="play-title">Astrobee Dock</h1>
+    </div>
+    <p class="play-best" aria-live="polite"></p>
+  </div>
+
+  <div class="game" id="game">
+    <canvas class="game-canvas" width="1600" height="900" role="img"
+      aria-label="Astrobee flying inside the Kibo module of the International Space Station"></canvas>
+
+    <div class="game-overlay" data-screen="start">
+      <h2>Fly Astrobee home</h2>
+      <p>There's no gravity in the Kibo module: thrust, then drift. Scan both
+        AR targets, then dock gently at the charging station.</p>
+      <ul class="game-keys">
+        <li><kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd> or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to thrust</li>
+        <li class="game-keys-touch">Use the pad below to thrust</li>
+      </ul>
+      <button type="button" class="btn btn-solid game-start">Start <i class="fas fa-play" aria-hidden="true"></i></button>
+    </div>
+
+    <div class="game-overlay" data-screen="done" hidden>
+      <h2>Docked</h2>
+      <p class="game-result"></p>
+      <p class="game-note">On the real ISS, Astrobee ran my team's navigation code,
+        with pose estimation from the same kind of AR tags.
+        <a href="{{ '/robotics/' | relative_url }}#kibo">KIBO RPC 2021 runner-up</a>.</p>
+      <button type="button" class="btn btn-solid game-start">Fly again <i class="fas fa-rotate-right" aria-hidden="true"></i></button>
+    </div>
+  </div>
+
+  <p class="game-help">No gravity: thrust, then drift. Scan both AR targets, then dock gently on the right. Turn your phone sideways for a bigger view.</p>
+
+  <div class="game-pad" aria-label="Thrusters">
+    <button type="button" data-dir="up" aria-label="Thrust up"><i class="fas fa-chevron-up" aria-hidden="true"></i></button>
+    <button type="button" data-dir="left" aria-label="Thrust left"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+    <button type="button" data-dir="down" aria-label="Thrust down"><i class="fas fa-chevron-down" aria-hidden="true"></i></button>
+    <button type="button" data-dir="right" aria-label="Thrust right"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+  </div>
+</section>
+
+<script src="{{ '/scripts/astrobee.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>

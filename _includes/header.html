@@ -9,7 +9,7 @@
       <li><a href="{{ '/#overview' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Overview</a></li>
       {%- for s in site.data.sections %}
       {%- include nav-active.html section=s %}
-      <li><a href="{{ s.url | relative_url }}"{% if active %} aria-current="page"{% endif %}>{{ s.title }}</a></li>
+      <li><a href="{{ s.url | relative_url }}"{% if active %} aria-current="page"{% endif %}{% if s.id == 'play' %} class="nav-play"{% endif %}>{% if s.id == 'play' %}<i class="fas fa-gamepad" aria-hidden="true"></i> {% endif %}{{ s.title }}</a></li>
       {%- endfor %}
       <li>
         <a href="{{ '/cv/Md_Hashibul_Islam.pdf' | relative_url }}" class="nav-cv" download>

@@ -1,0 +1,59 @@
+---
+layout: default
+title: Play
+description: "Two short mini-games from my robotics work: dock NASA's Astrobee on the ISS, or drive the Mongol Tori Mars rover."
+---
+<div class="crumbs-band is-dark">
+  <nav class="crumbs wrap" aria-label="Breadcrumb">
+    <a href="{{ '/#overview' | relative_url }}"><i class="fas fa-arrow-left" aria-hidden="true"></i> Overview</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">Play</span>
+  </nav>
+</div>
+
+<section class="play wrap" aria-labelledby="play-title">
+  <div class="play-head">
+    <div>
+      <p class="track-label"><i class="fas fa-gamepad" aria-hidden="true"></i> Mini-games</p>
+      <h1 id="play-title">Play</h1>
+    </div>
+  </div>
+  <p class="play-intro">Two short games built from things I worked on for real. About a minute each, on a keyboard or a phone.</p>
+
+  <div class="play-games">
+    <a class="play-card" href="{{ '/play/astrobee/' | relative_url }}">
+      <svg class="play-art" viewBox="0 0 320 180" aria-hidden="true">
+        <ellipse cx="160" cy="92" rx="140" ry="46" transform="rotate(-10 160 92)"/>
+        <ellipse cx="160" cy="92" rx="90" ry="28" transform="rotate(-10 160 92)"/>
+        <rect x="140" y="72" width="40" height="40" rx="7" class="fill"/>
+        <rect x="140" y="72" width="40" height="10" rx="4" class="accent"/>
+        <circle cx="38" cy="120" r="6" class="accent"/>
+      </svg>
+      <span class="play-card-body">
+        <span class="play-kicker">On the ISS · KIBO RPC</span>
+        <strong>Astrobee Dock</strong>
+        <span>Fly NASA's free-flying robot through the Kibo module in zero gravity, scan the AR targets and dock gently.</span>
+        <span class="play-go">Play <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+      </span>
+    </a>
+
+    <a class="play-card" href="{{ '/play/rover/' | relative_url }}">
+      <svg class="play-art" viewBox="0 0 320 180" aria-hidden="true">
+        <path d="M0 140C60 120 100 150 160 132S260 118 320 136"/>
+        <circle cx="60" cy="52" r="34" stroke-dasharray="4 6"/>
+        <circle cx="60" cy="52" r="56" stroke-dasharray="4 6"/>
+        <path d="M60 52V30M52 30H68"/>
+        <rect x="170" y="96" width="62" height="22" rx="5" class="fill"/>
+        <circle cx="180" cy="124" r="9"/><circle cx="201" cy="124" r="9"/><circle cx="222" cy="124" r="9"/>
+        <path d="M222 96V78L240 70"/>
+        <circle cx="282" cy="120" r="6" class="accent"/>
+      </svg>
+      <span class="play-card-body">
+        <span class="play-kicker">On Mars · BRACU Mongol Tori</span>
+        <strong>Rover Run</strong>
+        <span>Drive the rover across Mars to collect soil samples, dropping radio relays to stay in range of the base station.</span>
+        <span class="play-go">Play <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+      </span>
+    </a>
+  </div>
+</section>

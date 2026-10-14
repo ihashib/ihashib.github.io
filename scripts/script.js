@@ -255,6 +255,7 @@ const staticCommands = [
   { group: "Go to", icon: "fa-screwdriver-wrench", label: "Skills", keys: "java spring stack tools embedded firmware stm32 esp32 freertos", run: go(url("/skills/")) },
   { group: "Go to", icon: "fa-pen-nib", label: "Writing", keys: "blog posts articles", run: go(url("/blog/")) },
   { group: "Go to", icon: "fa-paper-plane", label: "Contact", keys: "email message hire talk", run: go(url("/contact/")) },
+  { group: "Go to", icon: "fa-gamepad", label: "Play", keys: "games mini-games fun", run: go(url("/play/")) },
   { group: "Actions", icon: "fa-circle-half-stroke", label: "Switch colour theme", keys: "dark light mode", run: toggleTheme },
   {
     group: "Actions",
@@ -264,6 +265,8 @@ const staticCommands = [
     keys: "mail",
     run: () => copyText(SITE.email),
   },
+  { group: "Actions", icon: "fa-gamepad", label: "Play Astrobee Dock", keys: "game play fly iss space mini-game", run: go(url("/play/astrobee/")) },
+  { group: "Actions", icon: "fa-gamepad", label: "Play Mongol Tori Rover Run", keys: "game play drive mars rover radio mini-game", run: go(url("/play/rover/")) },
   { group: "Actions", icon: "fa-file-arrow-down", label: "Download CV", keys: "resume pdf", run: go(url("/cv/Md_Hashibul_Islam.pdf")) },
   { group: "Elsewhere", icon: "fa-github fab", label: "GitHub", keys: "code repos", run: () => window.open("https://github.com/ihashib", "_blank", "noopener") },
   { group: "Elsewhere", icon: "fa-linkedin-in fab", label: "LinkedIn", keys: "profile", run: () => window.open("https://linkedin.com/in/ihashib", "_blank", "noopener") },

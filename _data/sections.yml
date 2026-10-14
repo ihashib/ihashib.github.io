@@ -33,3 +33,8 @@
   title: Contact
   url: /contact/
   icon: fa-paper-plane
+- id: play
+  title: Play
+  url: /play/
+  icon: fa-gamepad
+  external_page: true

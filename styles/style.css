@@ -1920,6 +1920,7 @@ main:has(> .crumbs-band) {
 .t-ember { --tile-bg: #237a8e; }
 .t-clay-deep { --tile-bg: #b4466a; }
 .t-steel { --tile-bg: #3b4c62; }
+.t-play { --tile-bg: #9a5b13; }
 .t-graphite { --tile-bg: #2b3138; }
 .t-linkedin { --tile-bg: #2a5c90; }
 .t-orange { --tile-bg: #e4572e; }
@@ -3393,4 +3394,271 @@ button.tag.is-active {
     opacity: 1;
     transform: none;
   }
+}
+
+/* Astrobee Dock mini-game */
+.play {
+  padding-block: clamp(20px, 3vw, 36px) clamp(48px, 7vw, 80px);
+}
+.play-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.play-head h1 {
+  margin-top: 6px;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.play-best {
+  font: 500 0.95rem var(--mono);
+  color: var(--steel);
+}
+.game {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  background: #070d1b;
+}
+.game-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  outline: none;
+  touch-action: none;
+}
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 14px;
+  padding: 24px;
+  text-align: center;
+  color: #e9edf3;
+  background: rgba(7, 13, 27, 0.72);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.game-overlay[hidden] {
+  display: none;
+}
+.game-overlay h2 {
+  font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.game-overlay p {
+  max-width: 34em;
+  color: #b8c3d6;
+}
+.game-overlay a {
+  color: var(--signal-ink);
+}
+.game-keys {
+  list-style: none;
+  font-size: 0.92rem;
+  color: #9aa8be;
+}
+.game-keys kbd {
+  display: inline-block;
+  min-width: 1.8em;
+  margin: 0 2px;
+  padding: 2px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  font: 500 0.85rem var(--mono);
+  color: #e9edf3;
+}
+.game-keys-touch {
+  display: none;
+}
+.game-pad {
+  display: none;
+  grid-template-columns: repeat(3, 64px);
+  grid-template-rows: repeat(2, 56px);
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.game-pad button {
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: var(--glass-fill);
+  color: var(--ink);
+  font-size: 1.2rem;
+  touch-action: none;
+  cursor: pointer;
+}
+.game-pad button.is-down {
+  background: var(--signal);
+  color: #fff;
+}
+.game-pad [data-dir="up"] { grid-column: 2; grid-row: 1; }
+.game-pad [data-dir="left"] { grid-column: 1; grid-row: 2; }
+.game-pad [data-dir="down"] { grid-column: 2; grid-row: 2; }
+.game-pad [data-dir="right"] { grid-column: 3; grid-row: 2; }
+/* Touch screens get the on-screen pad */
+@media (hover: none), (max-width: 900px) {
+  .game-pad {
+    display: grid;
+  }
+  .game-keys li:first-child {
+    display: none;
+  }
+  .game-keys-touch {
+    display: list-item;
+  }
+}
+.game-help {
+  display: none;
+  margin-top: 14px;
+  font-size: 0.92rem;
+  color: var(--steel);
+  text-align: center;
+}
+/* Phones: the game screen is short, so the overlay keeps only the title,
+   score and button, and the instructions move below the game */
+@media (max-width: 560px) {
+  .game-overlay {
+    gap: 8px;
+    padding: 10px;
+  }
+  .game-overlay h2 {
+    font-size: 1.15rem;
+  }
+  .game-overlay p:not(.game-result),
+  .game-keys {
+    display: none;
+  }
+  .game-overlay .game-result {
+    font-size: 0.82rem;
+  }
+  .game-overlay .btn {
+    padding: 9px 18px;
+    font-size: 0.9rem;
+  }
+  .game-help {
+    display: block;
+  }
+}
+
+/* Link to the game from the KIBO section */
+.track-play {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-weight: 600;
+  color: var(--signal-ink);
+  text-underline-offset: 4px;
+}
+
+/* Play: games hub */
+.play-intro {
+  max-width: 36em;
+  margin-bottom: 24px;
+  font-size: 1.05rem;
+  color: var(--steel);
+}
+.play-games {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: 16px;
+}
+.play-card {
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  background: var(--glass-fill);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  backdrop-filter: blur(18px) saturate(1.5);
+  box-shadow: var(--glass-shadow);
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform 0.5s var(--ease-out), border-color 0.4s ease, box-shadow 0.5s var(--ease-out);
+}
+.play-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--glass-border) 60%, var(--signal));
+  box-shadow: var(--glass-shadow-hover);
+}
+.play-art {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(160deg, #101c36, #070d1b);
+  fill: none;
+  stroke: rgba(150, 175, 230, 0.4);
+  stroke-width: 2;
+}
+.play-card:nth-child(2) .play-art {
+  background: linear-gradient(160deg, #4a2418, #2b130c);
+  stroke: rgba(255, 210, 190, 0.45);
+}
+.play-art .fill {
+  fill: #e7ebf2;
+  stroke: none;
+}
+.play-art .accent {
+  fill: var(--signal);
+  stroke: none;
+}
+.play-card-body {
+  display: grid;
+  gap: 6px;
+  padding: clamp(18px, 2.4vw, 26px);
+}
+.play-kicker {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--signal-ink);
+}
+.play-card strong {
+  font: 700 1.5rem/1.2 var(--display);
+}
+.play-card-body > span:not(.play-kicker):not(.play-go) {
+  color: var(--steel);
+}
+.play-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+/* Rover pad: an extra Relay button beside the arrows */
+.game-pad.has-action {
+  grid-template-columns: repeat(3, 64px) 92px;
+}
+.game-pad-action {
+  grid-column: 4;
+  grid-row: 1 / span 2;
+  gap: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.game-pad-action i {
+  font-size: 1.3rem;
+}
+
+/* Play in the header: a small gamepad so it's easy to spot */
+.nav-links .nav-play i {
+  margin-right: 4px;
+  color: var(--signal);
 }

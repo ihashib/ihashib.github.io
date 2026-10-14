@@ -1,0 +1,62 @@
+---
+layout: default
+title: Rover Run
+description: "A short Mars mini-game: drive the Mongol Tori rover to collect soil samples, dropping radio relays to stay in range of the base station."
+---
+<div class="crumbs-band is-dark">
+  <nav class="crumbs wrap" aria-label="Breadcrumb">
+    <a href="{{ '/#overview' | relative_url }}"><i class="fas fa-arrow-left" aria-hidden="true"></i> Overview</a>
+    <span aria-hidden="true">/</span>
+    <a href="{{ '/play/' | relative_url }}">Play</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">Rover Run</span>
+  </nav>
+</div>
+
+<section class="play wrap" aria-labelledby="play-title">
+  <div class="play-head">
+    <div>
+      <p class="track-label"><i class="fas fa-gamepad" aria-hidden="true"></i> Mini-game</p>
+      <h1 id="play-title">Rover Run</h1>
+    </div>
+    <p class="play-best" aria-live="polite"></p>
+  </div>
+
+  <div class="game" id="game">
+    <canvas class="game-canvas" width="1600" height="900" role="img"
+      aria-label="The Mongol Tori rover driving across Mars terrain"></canvas>
+
+    <div class="game-overlay" data-screen="start">
+      <h2>Bring back three samples</h2>
+      <p>Drive to the three sample sites and return to base. Stay inside radio
+        range: drop relays to reach further, or the link goes fuzzy and the
+        rover crawls. Rocks cost time.</p>
+      <ul class="game-keys">
+        <li><kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd> or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> to drive, <kbd>Space</kbd> to drop a relay</li>
+        <li class="game-keys-touch">Use the pad below to drive and drop relays</li>
+      </ul>
+      <button type="button" class="btn btn-solid game-start">Start <i class="fas fa-play" aria-hidden="true"></i></button>
+    </div>
+
+    <div class="game-overlay" data-screen="done" hidden>
+      <h2>Samples delivered</h2>
+      <p class="game-result"></p>
+      <p class="game-note">I built Mongol Tori's long-range radio links, cameras and base
+        station network, so the team could drive it from far away.
+        <a href="{{ '/robotics/' | relative_url }}#mongol-tori">See the real rover</a>.</p>
+      <button type="button" class="btn btn-solid game-start">Drive again <i class="fas fa-rotate-right" aria-hidden="true"></i></button>
+    </div>
+  </div>
+
+  <p class="game-help">Drive to the three samples, then back to base. Drop relays to stay in radio range. Turn your phone sideways for a bigger view.</p>
+
+  <div class="game-pad has-action" aria-label="Rover controls">
+    <button type="button" data-dir="up" aria-label="Drive up"><i class="fas fa-chevron-up" aria-hidden="true"></i></button>
+    <button type="button" data-dir="left" aria-label="Drive left"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+    <button type="button" data-dir="down" aria-label="Drive down"><i class="fas fa-chevron-down" aria-hidden="true"></i></button>
+    <button type="button" data-dir="right" aria-label="Drive right"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+    <button type="button" data-action="relay" class="game-pad-action" aria-label="Drop a radio relay"><i class="fas fa-tower-broadcast" aria-hidden="true"></i><span>Relay</span></button>
+  </div>
+</section>
+
+<script src="{{ '/scripts/rover.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
