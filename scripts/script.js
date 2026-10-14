@@ -259,13 +259,13 @@ const go = (href) => () => {
 
 const staticCommands = [
   { group: "Go to", icon: "fa-table-cells-large", label: "Overview", keys: "home tiles start", run: go(url("/#overview")) },
-  { group: "Go to", icon: "fa-graduation-cap", label: "Education", keys: "university brac bsc cse degree", run: go(url("/education/")) },
   { group: "Go to", icon: "fa-briefcase", label: "Career", keys: "work experience jobs metlife nasir daraz aqualink", run: go(url("/career/")) },
+  { group: "Go to", icon: "fa-graduation-cap", label: "Education", keys: "university brac bsc cse degree", run: go(url("/education/")) },
+  { group: "Go to", icon: "fa-cubes", label: "Software", keys: "projects 3pl logistics delivery astrobee iss kibo decoraan marketplace nasir clear frame open daraz purrvelous ecommerce store shop", run: go(url("/projects/")) },
   { group: "Go to", icon: "fa-robot", label: "Robotics", keys: "space iss astrobee kibo jaxa nasa mars rover mongol tori urc irc indian ubiquiti fpv radio ros ip camera awards line following pid self balancing arm inverse kinematics gazebo", run: go(url("/robotics/")) },
   { group: "Go to", icon: "fa-microchip", label: "IoT", keys: "aqualink sensometer hydrometer greenhouse farming firmware stm32 esp32 sensors", run: go(url("/iot/")) },
-  { group: "Go to", icon: "fa-cubes", label: "Software", keys: "projects 3pl logistics delivery astrobee iss kibo decoraan marketplace nasir clear frame open daraz purrvelous ecommerce store shop", run: go(url("/projects/")) },
-  { group: "Go to", icon: "fa-pen-nib", label: "Writing", keys: "blog posts articles", run: go(url("/blog/")) },
   { group: "Go to", icon: "fa-screwdriver-wrench", label: "Skills", keys: "java spring stack tools embedded firmware stm32 esp32 freertos", run: go(url("/skills/")) },
+  { group: "Go to", icon: "fa-pen-nib", label: "Writing", keys: "blog posts articles", run: go(url("/blog/")) },
   { group: "Go to", icon: "fa-paper-plane", label: "Contact", keys: "email message hire talk", run: go(url("/contact/")) },
   { group: "Actions", icon: "fa-circle-half-stroke", label: "Switch colour theme", keys: "dark light mode", run: toggleTheme },
   {
@@ -453,7 +453,7 @@ document.querySelectorAll("[data-youtube]").forEach((link) => {
 
 // Photos: click or tap one to open it full size. Escape, the close button,
 // a click anywhere or the back of the dialog closes it.
-const mediaImages = document.querySelectorAll(".media img");
+const mediaImages = document.querySelectorAll(".media:not(.media-video) img");
 if (mediaImages.length) {
   const box = document.createElement("dialog");
   box.className = "lightbox";
@@ -466,7 +466,8 @@ if (mediaImages.length) {
 
   const open = (img) => {
     opener = img;
-    big.src = img.currentSrc || img.src;
+    // A card can show a styled mockup and open the original photo
+    big.src = img.dataset.full || img.currentSrc || img.src;
     big.alt = img.alt;
     caption.textContent = img.alt;
     box.showModal();

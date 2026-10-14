@@ -29,6 +29,7 @@
   --radius-md: 12px;
   --radius-lg: 18px;
   --header-h: 68px;
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
 
   color-scheme: light;
 }
@@ -177,7 +178,7 @@ kbd {
 .js [data-reveal] {
   opacity: 0;
   transform: translateY(14px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
 }
 .js [data-reveal].in {
   opacity: 1;
@@ -955,6 +956,9 @@ details li::marker {
   object-fit: cover;
   cursor: zoom-in;
 }
+.media-video img {
+  cursor: pointer;
+}
 .media img:focus-visible {
   outline: 3px solid var(--signal);
   outline-offset: -3px;
@@ -1224,6 +1228,10 @@ details li::marker {
   grid-column: 1 / -1;
   margin: 0;
 }
+/* The results card: a tighter frame round its photos */
+.feat:has(> .results) {
+  padding: clamp(12px, 1.4vw, 16px);
+}
 .place {
   font-family: var(--display);
   font-weight: 800;
@@ -1264,7 +1272,6 @@ details li::marker {
   padding: clamp(18px, 2vw, 24px);
   display: flex;
   flex-direction: column;
-  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 .project:hover {
   border-color: color-mix(in srgb, var(--ink) 30%, var(--line));
@@ -1415,13 +1422,43 @@ iframe.media-video {
   .feat:has(> .card-media) {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-    gap: clamp(20px, 2.4vw, 32px);
-    align-items: start;
+    gap: 0;
+    align-items: stretch;
   }
+  /* The photo fills the card's whole left side, top to bottom */
   .project > .media,
-  .feat > .media,
+  .feat > .media {
+    aspect-ratio: auto;
+    min-height: 260px;
+  }
+  /* The photo fills its slot but never sets the card's height: the text
+     does, so tall portrait photos don't stretch the card */
+  .project > .media img,
+  .feat > .media img {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* Video and photos fill the column together, however tall the text is */
   .feat > .card-media {
-    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-media .media-pair {
+    flex: 1 1 auto;
+  }
+  .card-media .media-pair > .media {
+    flex: 1 1 0;
+    min-height: 180px;
+    aspect-ratio: auto;
+  }
+  /* The video keeps its 16:9 shape; the photos below take the rest */
+  .feat > .card-media > .media-video {
+    flex: none;
+  }
+  .card-media .media-pair {
+    display: flex;
+    flex-direction: column;
   }
   .card-body {
     align-self: stretch;
@@ -1430,7 +1467,7 @@ iframe.media-video {
   .results {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 10px;
   }
   .results li + li {
     border-top: 0;
@@ -1444,6 +1481,89 @@ iframe.media-video {
   }
   .results .place {
     font-size: 2.2rem;
+  }
+}
+
+/* Card photos sit flush with the card edges: no padding round them, the
+   card's rounded corners clip them, and they zoom gently on hover */
+.project:has(> .media),
+.feat:has(> .media),
+.feat:has(> .card-media),
+.edu:has(> .edu-photo) {
+  padding: 0;
+  overflow: hidden;
+}
+/* Photos sit just inside the card: a thin inset, with corners that
+   follow the card's own rounding */
+:is(.project, .feat, .edu) {
+  --media-inset: 7px;
+}
+:is(.project, .feat) > :is(.media, .card-media),
+.edu > .edu-photo {
+  margin: var(--media-inset) var(--media-inset) 0;
+  border: 0;
+  border-radius: calc(var(--radius-lg) - var(--media-inset) + 2px);
+  overflow: hidden;
+}
+:is(.project, .feat) > .card-media {
+  border-radius: 0;
+  overflow: visible;
+}
+/* Each photo in a multi-photo card is its own rounded tile */
+:is(.project, .feat) > .card-media .media {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - var(--media-inset) + 2px);
+}
+@media (min-width: 901px) {
+  /* Photo on the left: the same gap above, below and to its left */
+  :is(.project, .feat) > :is(.media, .card-media),
+  .edu > .edu-photo {
+    margin: var(--media-inset) 0 var(--media-inset) var(--media-inset);
+  }
+}
+:is(.project, .feat):has(> .media, > .card-media) > .card-body,
+.edu:has(> .edu-photo) > .edu-body {
+  padding: clamp(20px, 2.6vw, 32px);
+}
+/* Stacked video and photos: a small gap between each tile, matching the
+   inset round the edge */
+.card-media,
+.card-media .media-pair {
+  gap: var(--media-inset);
+}
+
+/* One smooth transition for cards: the scroll fade-in, a slight lift and
+   border glow on hover. The photo zooms slowly inside; the card is
+   composited so the zoom doesn't flicker at the rounded corners. */
+:is(.project, .feat, .edu) {
+  transition:
+    opacity 0.7s var(--ease-out),
+    transform 0.5s var(--ease-out),
+    border-color 0.4s ease,
+    box-shadow 0.5s var(--ease-out);
+}
+:is(.project, .feat, .edu):has(.media) {
+  isolation: isolate;
+  will-change: transform;
+}
+.js :is(.project, .feat, .edu)[data-reveal]:not(.in) {
+  transform: translateY(14px);
+}
+:is(.project, .feat, .edu):has(.media):hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+:is(.project, .feat, .edu) .media img {
+  backface-visibility: hidden;
+  transition: transform 0.9s var(--ease-out);
+}
+:is(.project, .feat, .edu):hover .media img {
+  transform: scale(1.03);
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.project, .feat, .edu):hover,
+  :is(.project, .feat, .edu):hover .media img {
+    transform: none;
   }
 }
 
@@ -1548,7 +1668,7 @@ iframe.media-video {
   place-items: center;
 }
 /* Career is the one wide tile; the sections after it are 2 x 2 and the
-   links are 1 x 1. On narrow screens IoT and Writing go half height. */
+   links are 1 x 1. On narrow screens Skills and Writing go half height. */
 .tile-w {
   grid-column: span 4;
   grid-row: span 2;
@@ -1967,7 +2087,7 @@ iframe.media-video {
 }
 
 /* Short, wide screens (phones turned sideways): 8 x 4 cells so the grid
-   still fits; IoT and Writing go half height */
+   still fits; Skills and Writing go half height */
 @media (max-height: 520px) and (orientation: landscape) {
   .tiles-section.tiles-section {
     --tiles-chrome: 26px;
@@ -2534,7 +2654,8 @@ button.tag.is-active {
 /* Convocation photo beside the degree; portrait, so a taller frame */
 .edu:has(> .edu-photo) {
   grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-  align-items: start;
+  align-items: stretch;
+  gap: 0;
 }
 .edu-photo {
   margin: 0;
@@ -2542,6 +2663,7 @@ button.tag.is-active {
 }
 .edu-body {
   display: grid;
+  align-content: start;
   gap: 20px;
 }
 .edu h3 {
@@ -2914,9 +3036,12 @@ button.tag.is-active {
   .edu:has(> .edu-photo) {
     grid-template-columns: 1fr;
   }
+  /* Phones: full-width photo across the top, square so it isn't too tall */
   .edu-photo {
-    width: min(100%, 360px);
-    justify-self: center;
+    aspect-ratio: 1;
+  }
+  .edu-photo img {
+    object-position: center 25%;
   }
   .section-head {
     gap: 12px;

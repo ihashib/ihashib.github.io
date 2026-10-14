@@ -1,13 +1,17 @@
 # One list drives the header menu, the section bar and the previous/next
 # links. Order here is the reading order.
-- id: education
-  title: Education
-  url: /education/
-  icon: fa-graduation-cap
 - id: career
   title: Career
   url: /career/
   icon: fa-briefcase
+- id: education
+  title: Education
+  url: /education/
+  icon: fa-graduation-cap
+- id: projects
+  title: Software
+  url: /projects/
+  icon: fa-cubes
 - id: robotics
   title: Robotics
   url: /robotics/
@@ -16,10 +20,6 @@
   title: IoT
   url: /iot/
   icon: fa-microchip
-- id: projects
-  title: Software
-  url: /projects/
-  icon: fa-cubes
 - id: skills
   title: Skills
   url: /skills/
