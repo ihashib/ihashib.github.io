@@ -40,7 +40,7 @@ feed:
   path: blog/feed.xml
 
 defaults:
-  # Link previews (LinkedIn, WhatsApp, Slack, X...) show the Overview tiles
+  # Link previews (LinkedIn, WhatsApp, Slack, X...) show a custom card
   # rather than the first photo on the page
   - scope:
       path: ""
@@ -49,7 +49,7 @@ defaults:
         path: /images/social-preview.jpg
         width: 1200
         height: 630
-        alt: "Md Hashibul Islam: Experience, Education, Software, Robotics, IoT and Skills"
+        alt: "Md Hashibul Islam, backend engineer: Java, Spring Boot and microservices. 4+ years in production, code ran on the ISS, built a Mars rover."
   - scope:
       path: ""
       type: posts
