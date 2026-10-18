@@ -1016,6 +1016,11 @@ details li::marker {
 .media-video img {
   cursor: pointer;
 }
+/* App screenshots show whole (cropping cuts the interface), on the app's own background */
+.media-screen img {
+  object-fit: contain;
+  background: #0c0f16;
+}
 .media img:focus-visible {
   outline: 3px solid var(--signal);
   outline-offset: -3px;
