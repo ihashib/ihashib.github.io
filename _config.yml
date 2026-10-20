@@ -49,7 +49,7 @@ defaults:
         path: /images/social-card.jpg
         width: 1200
         height: 630
-        alt: "Md Hashibul Islam, backend engineer: Java, Spring Boot and microservices. 4+ years in production, code ran on the ISS, built a Mars rover."
+        alt: "Md Hashibul Islam's portfolio overview: tiles for Experience (now at MetLife Bangladesh), Education (BSc in CSE, BRAC University), Software, Robotics (code in orbit, rovers for Mars), IoT, Skills (Spring Boot, microservices, SQL, NoSQL), Writing, mini games, contact, GitHub and LinkedIn."
   - scope:
       path: ""
       type: posts
