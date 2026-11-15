@@ -1,0 +1,136 @@
+---
+layout: section
+title: "ESP32"
+description: "My ESP32 bare-metal notes: ESP-IDF setup, GPIO, ADC, Bluetooth BLE and UART."
+---
+<style>
+.notes h2{margin:2.2rem 0 .6rem}.notes h3{margin:1.4rem 0 .4rem}.notes h4,.notes h5{margin:1rem 0 .3rem}
+.notes ul{margin:.3rem 0 .8rem;padding-left:1.3rem}.notes li{margin:.15rem 0}
+.notes pre{overflow:auto;padding:.8rem 1rem;border-radius:8px;background:rgba(127,127,127,.12);font-size:.88rem;line-height:1.45}
+.note-cards>li{margin:0;padding:0}.note-cards{margin-left:0!important;display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:1rem;padding:0;margin:1.5rem 0;list-style:none}
+.note-cover{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}.note-text{padding:1.1rem 1.2rem}.note-card{display:block;height:100%;overflow:hidden;border:1px solid rgba(127,127,127,.35);border-radius:12px;color:inherit;text-decoration:none;transition:transform .15s,border-color .15s}
+.note-card:hover,.note-card:focus-visible{transform:translateY(-2px);border-color:currentColor}
+.note-card h3{margin:0 0 .35rem;font-size:1.1rem}.note-card p{margin:0;font-size:.92rem;opacity:.8}
+.note-card small{display:block;margin-top:.6rem;opacity:.65}
+.note-jump{columns:2 14rem;padding-left:1.2rem}
+.nsec>summary .nt{flex:1}.nread{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:500;opacity:.85;cursor:pointer;margin-left:auto}.nread input{width:1.15rem;height:1.15rem;accent-color:#e8703a;cursor:pointer}.nsec.isread>summary .nt{opacity:.6}.nsec.isread>summary .nt::after{content:" \2713";color:#4cc38a}.ngroup a.isread::after{content:" \2713";color:#4cc38a}.nprog{margin-right:auto;align-self:center;font-size:.9rem;opacity:.85}.nsec>summary::after{margin-left:.25rem}.ngrp{border:1px solid rgba(127,127,127,.35);border-radius:14px;margin:0 0 .9rem;scroll-margin-top:5rem}.ngrp>summary{padding:1rem 1.2rem;cursor:pointer;list-style:none;display:flex;align-items:center;gap:.8rem;font-size:1.2rem;font-weight:800}.ngrp>summary::-webkit-details-marker{display:none}.ngrp>summary::after{content:"+";font-size:1.3rem;opacity:.6;margin-left:.25rem}.ngrp[open]>summary::after{content:"–"}.ngrp .gt{flex:1}.ngrp .gc{font-size:.85rem;font-weight:500;opacity:.8}.ngrp.alldone .gc::after{content:" \2713";color:#4cc38a}.gbody{padding:0 .8rem .6rem}.gbody .nsec{margin-bottom:.5rem}.ngroup b a{text-decoration:none;color:inherit}.nsec>summary::after,.ngrp>summary::after,.nsec[open]>summary::after,.ngrp[open]>summary::after{transform:none!important;rotate:none!important;position:static!important;width:auto!important;height:auto!important;border:0!important;background:none!important;line-height:1}.nsec.flat{border:0;border-top:1px solid rgba(127,127,127,.25);border-radius:0;padding:.9rem .4rem .5rem}.nsec.flat .fhead{display:flex;align-items:center;gap:1rem}.nsec.flat h3.nt{margin:0;font-size:1.05rem;font-weight:700}.nsec.flat .nbody{padding:.3rem 0 .2rem}.nsec.flat.isread h3.nt{opacity:.6}.nsec.flat.isread h3.nt::after{content:" \2713";color:#4cc38a}</style>
+<style>
+.nlay{display:grid;grid-template-columns:16rem minmax(0,1fr);gap:2rem;align-items:start}
+.nlay{margin-top:1.5rem}.nnav{position:sticky;top:5rem;max-height:calc(100vh - 7rem);overflow:auto;padding-right:.5rem}
+.nnav-box>summary{display:none}.ngroup{margin:0 0 1rem}.ngroup b{display:block;margin:0 0 .3rem;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.ngroup ul{list-style:none;margin:0;padding:0}.ngroup a{display:block;padding:.3rem .5rem;border-radius:6px;text-decoration:none;color:inherit;font-size:.95rem}.ngroup a:hover,.ngroup a:focus-visible{background:rgba(127,127,127,.18)}
+.nbar{display:flex;gap:.5rem;margin:0 0 1rem}.nbar button{padding:.45rem .9rem;border:1px solid rgba(127,127,127,.4);border-radius:8px;background:none;color:inherit;font:inherit;cursor:pointer}
+.nsec{border:1px solid rgba(127,127,127,.3);border-radius:12px;margin:0 0 .7rem;scroll-margin-top:5rem}
+.nsec>summary{padding:.85rem 1.1rem;font-size:1.1rem;font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1rem;align-items:center}
+.nsec>summary::-webkit-details-marker{display:none}.nsec>summary::after{content:"+";font-size:1.3rem;opacity:.6}.nsec[open]>summary::after{content:"–"}
+.nbody{padding:0 1.1rem 1rem}.nbody h3{margin:1.2rem 0 .3rem;font-size:1.02rem}.nbody h4,.nbody h5{margin:.9rem 0 .25rem;font-size:.95rem}
+.nbody ul{margin:.15rem 0 .4rem;padding-left:1.2rem}.nbody li ul{margin:.1rem 0}.nbody li{margin:.15rem 0;line-height:1.5}.nbody li>p{margin:0}.nbody pre{margin:.6rem 0}
+.ntop{position:fixed;right:1rem;bottom:1rem;width:2.8rem;height:2.8rem;border:1px solid rgba(127,127,127,.5);border-radius:50%;background:rgba(127,127,127,.25);color:inherit;font-size:1.2rem;cursor:pointer;backdrop-filter:blur(6px)}
+@media (max-width:820px){.nlay{display:block}.nnav{position:static;max-height:none;margin:0 0 1rem;padding:0}.nnav-box{border:1px solid rgba(127,127,127,.35);border-radius:12px;padding:0}
+.nnav-box>summary{display:block;padding:.85rem 1.1rem;font-weight:700;cursor:pointer}.nnav-box .ngroup{padding:0 1rem}.nnav-box[open]>summary{border-bottom:1px solid rgba(127,127,127,.3);margin-bottom:.8rem}}
+</style>
+<style>.nbody li,.nbody p{overflow-wrap:anywhere}.nbody code{white-space:pre-wrap;overflow-wrap:anywhere}</style>
+<section class="section wrap notes" id="note" aria-labelledby="note-title">
+  <p><a href="{{ '/notes/' | relative_url }}">&larr; All notes</a></p>
+  <h1 id="note-title">ESP32</h1>
+  <p style="margin:.5rem 0 0"><a href="https://docs.google.com/document/d/1JfhOHu4mxBc1TcqkB4eA8_jwobWIlUaOqv60fjErHl8/edit" target="_blank" rel="noopener noreferrer"><i class="fab fa-google-drive" aria-hidden="true"></i> Open the full notes in Google Docs</a></p>
+<div class="nlay"><nav class="nnav" aria-label="Contents"><details class="nnav-box" open><summary>Contents</summary><div class="ngroup"><b><a href="#g-getting-started">Getting started</a></b><ul><li><a href="#installation-and-first-project">Installation and first project</a></li><li><a href="#build-flash-and-monitor">Build, flash and monitor</a></li><li><a href="#logging">Logging</a></li></ul></div><div class="ngroup"><b><a href="#g-basics">Programming basics</a></b><ul><li><a href="#delay">Delay</a></li><li><a href="#blink">Blink</a></li><li><a href="#gpio">GPIO</a></li><li><a href="#analog-input-adc">Analog input (ADC)</a></li><li><a href="#keyboard-input">Keyboard input</a></li></ul></div><div class="ngroup"><b><a href="#g-wireless">Wireless and serial</a></b><ul><li><a href="#bluetooth-ble">Bluetooth BLE</a></li></ul></div></details></nav><div class="nmain"><div class="nbar"><span class="nprog" id="nprog" aria-live="polite"></span><button type="button" id="nopen">Expand all</button><button type="button" id="nshut">Collapse all</button></div><details class="ngrp" id="g-getting-started" data-ids="installation-and-first-project build-flash-and-monitor logging"><summary><span class="gt">Getting started</span><span class="gc"></span></summary><div class="gbody"><details class="nsec" id="installation-and-first-project"><summary><span class="nt">Installation and first project</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="installation-and-first-project" aria-label="Mark Installation and first project as read"><span>Read</span></label></summary><div class="nbody"><ul><li>Link: <a href="https://learnesp32.com/videos/1/1_%5Bwindows%5D%20installing%20the%20esp-idf" target="_blank" rel="noopener noreferrer">https://learnesp32.com/videos/1/1_%5Bwindows%5D%20installing%20the%20esp-idf</a></li><li>Download</li><ul><li>Ubuntu 20.04</li><ul><li>In VS Code extensions, search Espressif IDF</li><li>Install and then open the extension.</li><li>Select express install and follow the installation procedure.</li></ul><li>Windows</li><ul><li>Go to <a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html#step-2-get-esp-idf" target="_blank" rel="noopener noreferrer">https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html#step-2-get-esp-idf</a></li><li>Scroll down to find “Manual Installation”</li><li>Select Windows Installer</li><li>In the next page, click on the Windows Installer Download under ESP-IDF Tools installer</li><li>In the next page select Universal Online Installer</li><li>ESP IDF setup</li></ul><li>Open the Universal Online installer  exe file</li><li>Select  English  &gt; ok</li><li>In the next window it will scan your system, if Apply Fixes button is available, then press on it, otherwise click next</li><li>Download ESP-IDF &gt; Next</li><li>Select v4.4(release version) &gt; Next</li><li>Go to the C drive, open a new folder esp</li><li>Inside ESP IDF folder, create 2 more folders, idf  and Tools</li><li>Back to the installer, Select Full installation &gt; Next &gt; Install</li><li>NOTE: The folder names must not contain spaces.</li><li>VS Code config</li><li>Open VScode &gt; Extensions &gt; Search ESP IDF &gt; Install</li><li>Press F1,</li><li>If there’s Use Existing Setup, click on that. If not then, press Express.</li><li>After configuration is done, close the window.</li><li>Again, F1 &gt; ESP IDF New Project</li><ul><li>Give the project name, MUST NOT HAVE SPACE.</li><li>Choose ESP-IDF Board</li><li>Custom board &gt; ESP32 Module &gt; Choose template</li><li>Choose ESP-IDF in the drop down &gt; sample_project</li><li>Clock on sample project &gt; Create project using template sample project</li><li>A popup will appear, clock Yes</li><li>A new VSCode environment will appear</li><li>Select [Scan for kits] , if the following window appears</li><li>Alternatively, click on No kit selected</li><li>Select main &gt; main.c</li><li>To enhance intellisense, .vscode &gt; Settings.json</li><ul><li>&quot;C_Cpp.intelliSenseEngine&quot;: &quot;Default&quot;,</li></ul></ul></ul></ul></div></details><div class="nsec flat" id="build-flash-and-monitor"><div class="fhead"><h3 class="nt">Build, flash and monitor</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="build-flash-and-monitor" aria-label="Mark Build, flash and monitor as read"><span>Read</span></label></div><div class="nbody"><ul><li>You can build using the buttons or in terminal</li><li>For terminal:</li><ul><li>Click on</li><li><code>idf.py build        //to build project</code></li><li><code>idf.py -p PORTNUM flash monitor        //will auto build, flash and monitor</code></li><ul><li>Note: Do not use google drive folder for build, will give error while building.</li></ul></ul></ul></div></div><div class="nsec flat" id="logging"><div class="fhead"><h3 class="nt">Logging</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="logging" aria-label="Mark Logging as read"><span>Read</span></label></div><div class="nbody"><ul><li>Basics</li><li>Data Logging</li><li>Commands</li><li><code>#include “esp_log.h”</code></li><li><code>ESP_LOGE(“TAG”, “ERROR”);</code></li><li><code>ESP_LOGW(“TAG”, “Warning”);</code></li><li><code>ESP_LOGI(“TAG”, “Info”);</code></li><li><code>ESP_LOGD(“TAG”, “Debug”);</code></li><li><code>ESP_LOGV(“TAG”, “Verbose”);</code></li><li>If one of them are not working enable them from setup menu</li></ul></div></div></div></details><details class="ngrp" id="g-basics" data-ids="delay blink gpio analog-input-adc keyboard-input"><summary><span class="gt">Programming basics</span><span class="gc"></span></summary><div class="gbody"><div class="nsec flat" id="delay"><div class="fhead"><h3 class="nt">Delay</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="delay" aria-label="Mark Delay as read"><span>Read</span></label></div><div class="nbody"><ul><li>Commands</li><li><code>#include “freertos/FreeRTOS.h”</code></li><li><code>#include “freertos/task.h”</code></li><li><code>vTaskDelay(uint32_t Ticks of the MCU)</code></li><li><code>vTaskDelay(1000 / portTICK_PERIOD_MS)</code></li><li>This gives us Milliseconds, so 1000 ms</li></ul></div></div><details class="nsec" id="blink"><summary><span class="nt">Blink</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="blink" aria-label="Mark Blink as read"><span>Read</span></label></summary><div class="nbody"><ul><li>Blink (basic structure and digital out)</li><li>Commands</li><li><code>#include &lt;stdio.h&gt;</code></li><li><code>#include &quot;freertos/FreeRTOS.h&quot;</code></li><li><code>#include &quot;freertos/task.h&quot;</code></li><li><code>#include &quot;driver/gpio.h&quot;</code></li><li><code>#include &quot;esp_log.h&quot;</code></li><li><code>#include &quot;sdkconfig.h&quot;</code></li><li><code>#define LED_PIN 2   //internal for esp32 wroom 32</code></li><li><code>#define BLINK_PERIOD 1000</code></li><li><code>void app_main(void)</code></li><li>{</li><li><code>gpio_reset_pin(LED_PIN);</code></li><li><code>gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);</code></li><li>while(1)</li><li>{</li><li><code>gpio_set_level(LED_PIN, 1);</code></li><li><code>vTaskDelay(BLINK_PERIOD/portTICK_PERIOD_MS);</code></li><li><code>gpio_set_level(LED_PIN, 0);</code></li><li><code>vTaskDelay(BLINK_PERIOD/portTICK_PERIOD_MS);</code></li><li>}</li><li>}</li><li>No need to change anything in menuconfig, just generate it then build</li></ul></div></details><details class="nsec" id="gpio"><summary><span class="nt">GPIO</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="gpio" aria-label="Mark GPIO as read"><span>Read</span></label></summary><div class="nbody"><ul><li>Link</li><li><a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html" target="_blank" rel="noopener noreferrer">https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html</a></li><li><code>#include &quot;driver/gpio.h&quot;</code></li><li>Configure GPIO</li><li><code>gpio_reset_pin(PIN)</code></li><li><code>gpio_set_direction(PIN, gpio_mode)</code></li><li><code>enum gpio_mode_t</code></li><li>Values:</li><li><code>enumerator GPIO_MODE_DISABLE</code></li><li>GPIO mode : disable input and output</li><li><code>enumerator GPIO_MODE_INPUT</code></li><li>GPIO mode : input only</li><li><code>enumerator GPIO_MODE_OUTPUT</code></li><li>GPIO mode : output only mode</li><li><code>enumerator GPIO_MODE_OUTPUT_OD</code></li><li>GPIO mode : output only with open-drain mode</li><li><code>enumerator GPIO_MODE_INPUT_OUTPUT_OD</code></li><li>GPIO mode : output and input with open-drain mode</li><li><code>enumerator GPIO_MODE_INPUT_OUTPUT</code></li><li>GPIO mode : output and input mode</li><li>Digital output</li><li><code>gpio_set_level(PIN, 1/0)</code></li><li>Digital input</li><li><code>d_in = gpio_get_level(PIN)</code></li></ul></div></details><details class="nsec" id="analog-input-adc"><summary><span class="nt">Analog input (ADC)</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="analog-input-adc" aria-label="Mark Analog input (ADC) as read"><span>Read</span></label></summary><div class="nbody"><ul><li><code>#include &quot;driver/adc.h&quot;</code></li><li><code>#include &quot;esp_adc_cal.h&quot;</code></li><li>ADC pins</li><li>ADC1 channel</li></ul><pre><code>	GPIO pin
+	ADC2 channel
+	GPIO pin
+	ADC1_CHANNEL_0
+	GPIO36
+	ADC2_CHANNEL_0
+	GPIO4
+	ADC1_CHANNEL_1
+	GPIO37
+	ADC2_CHANNEL_1
+	GPIO0
+	ADC1_CHANNEL_2
+	GPIO38
+	ADC2_CHANNEL_2
+	GPIO2
+	ADC1_CHANNEL_3
+	GPIO39
+	ADC2_CHANNEL_3
+	GPIO15
+	ADC1_CHANNEL_4
+	GPIO32
+	ADC2_CHANNEL_4
+	GPIO13
+	ADC1_CHANNEL_5
+	GPIO33
+	ADC2_CHANNEL_5
+	GPIO12
+	ADC1_CHANNEL_6
+	GPIO34
+	ADC2_CHANNEL_6
+	GPIO14
+	ADC1_CHANNEL_7
+	GPIO35
+	ADC2_CHANNEL_7
+	GPIO27
+
+
+
+
+	ADC2_CHANNEL_8
+	GPIO25
+
+
+
+
+	ADC2_CHANNEL_9
+	GPIO26</code></pre><ul><li>ADC attenuation parameter</li></ul><ul><li>Attenuation parameter</li></ul><pre><code>	Input range (mV)
+	Note
+	ADC_ATTEN_DB_0
+	100 ~ 950
+	No attenuation (0dB)
+	ADC_ATTEN_DB_2_5
+	100 ~ 1250
+	2.5 dB attenuation
+	ADC_ATTEN_DB_6
+	150 ~ 1750
+	6 dB attenuation
+	ADC_ATTEN_DB_11
+	150 ~ 2450
+	11 dB attenuation</code></pre><ul><li>ESP32 ADC only works in a certian voltage range, it’s a downside of ESP32.</li></ul><ul><li>adc1_config_channel_atten(ADC1_CHANNEL_6, ADC_ATTEN_DB_11);</li><li>ADC caliberation</li><li>Due to different reference voltages of different esp chips, need to calibrate</li><li><code>esp_adc_cal_characteristics_t adc1_chars;</code></li><li><code>esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, ADC_WIDTH_BIT_DEFAULT, 0, &amp;adc1_chars);</code></li><li>Capture raw adc data</li><li>Resulution/width has to be set</li><li><code>ADC_WIDTH_BIT_DEFAULT         //12 bit</code></li><li><code>ADC_WIDTH_BIT_9</code></li><li><code>ADC_WIDTH_BIT_10</code></li><li><code>ADC_WIDTH_BIT_11</code></li><li><code>ADC_WIDTH_BIT_12</code></li><li>adc1_config_width(ADC_WIDTH_BIT_DEFAULT);</li><li><code>int raw_value = adc1_get_raw(ADC1_CHANNEL_6);</code></li><li>ADC data to voltage</li><li><code>uint32_t mV = esp_adc_cal_raw_to_voltage(adc1_get_raw(ADC1_CHANNEL_6), &amp;adc1_chars);</code></li><li>Example</li></ul></div></details><div class="nsec flat" id="keyboard-input"><div class="fhead"><h3 class="nt">Keyboard input</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="keyboard-input" aria-label="Mark Keyboard input as read"><span>Read</span></label></div><div class="nbody"><ul><li>Commands</li><li><code>void app_main(){</code></li><li><code>char c = 0;</code></li><li><code>char str[100];</code></li><li><code>memset(str, 0, sizeof(str));</code></li><li><code>while(c != ‘\n’){         //depends on carriage return</code></li><li><code>c = getchar();         //not a blocking func</code></li><li>if((c != 0xff){</li><li>str[strlen(str)] = c;</li><li><code>printf(“%c”, c);</code></li><li>}</li><li><code>vTaskDelay(100/ portTICK_PERIOD_MS);</code></li><li>}</li><li>}</li></ul></div></div></div></details><details class="ngrp" id="g-wireless" data-ids="bluetooth-ble"><summary><span class="gt">Wireless and serial</span><span class="gc"></span></summary><div class="gbody"><details class="nsec" id="bluetooth-ble"><summary><span class="nt">Bluetooth BLE</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="bluetooth-ble" aria-label="Mark Bluetooth BLE as read"><span>Read</span></label></summary><div class="nbody"><ul><li>GAP</li><li>AP is an acronym for the Generic Access Profile, and it controls</li></ul><pre><code>connections and advertising in Bluetooth. GAP is what makes your
+device visible to the outside world, and determines how two devices
+can (or can&#x27;t) interact with each other.</code></pre><ul><li>GATT</li><li>Application Example</li><li>Check bluetooth folder in ESP-IDF examples, which contains the following demos and their tutorials:</li><li>This is a GATT server demo and its tutorial. This demo creates a GATT service with an attribute table,</li><li>About GATT</li><li><a href="https://www.oreilly.com/library/view/getting-started-with/9781491900550/ch04.html" target="_blank" rel="noopener noreferrer">https://www.oreilly.com/library/view/getting-started-with/9781491900550/ch04.html</a></li><li>GATT makes it  possible for ble devices to connect and transfer user profiles and data over ble.</li><li>GATT also provides a reference profile framework that everyone needs to follow and this enables communication between devices from different vendors.</li><li>GATT uses Attribute protocol (ATT) for transport protocol. ATT organizes data hierarchically, so similar data is called characteristics and a group of similar characteristic data is called services.</li><li>GATT attributes are only given by the server. It contains config data about the services and characteristics. Attributes contain data about itself then the actual data.</li><li>They are addressable pieces of information that can contain relevant user data (or metadata) about the structure and grouping of the different attributes contained within the server.</li><li>which releases the user from adding attributes one by one. This is the recommended method of adding attributes.</li><li>bluetooth/gatt_server_service_table</li><li>GATT Server Service Table Example Walkthrough</li><li>This is a GATT server demo and its tutorial. This demo creates a GATT service by adding attributes one by one as defined by Bluedroid. The recommended method of adding attributes is presented in example above.</li><li>bluetooth/gatt_server</li><li>GATT Server Example Walkthrough</li><li>This is a BLE SPP-Like demo. This demo, which acts as a GATT server, can receive data from UART and then send the data to the peer device automatically.</li><li>bluetooth/ble_spp_server</li><li>IDF Demo</li><li>Create new project &gt; select GATT server &gt; upload</li><li>Connect to ESP32 using terminal android app</li><li>options &gt; Device &gt; Long press “hatts_table_creat_demo” &gt; Edit &gt; Custom &gt; Touch on the UUID text boxes.</li><li>Code explanation</li><li><a href="https://github.com/espressif/esp-idf/blob/v3.3/examples/bluetooth/gatt_server_service_table/tutorial/Gatt_Server_Service_Table_Example_Walkthrough.md" target="_blank" rel="noopener noreferrer">https://github.com/espressif/esp-idf/blob/v3.3/examples/bluetooth/gatt_server_service_table/tutorial/Gatt_Server_Service_Table_Example_Walkthrough.md</a></li><li>Main</li><li>initialize NVIS</li><li>Flash memory</li><li>BT controller init</li><li>BT controller enable</li><li>Bluedroid (BT stack) init</li><li>Bluedroid (BT stack) enable</li><li>GATT event handler</li><li>Assigns GATT interface (gatts_if) to GATT app profiles.</li><li>Forwards parameters to profile handlers</li><li>Parameters go via a struct heart_rate_profile_tab and reaches gatt_profile_event_handler</li><li>All events are handled here.</li><li><code>case ESP_GATTS_REG_EVT</code></li><li>device name is set</li><li>adv data is configed</li><li>scan resp is configed</li><li>attr table is created</li><li>has all the services of the app.</li><li>The esp_gatts_attr_db_t structure has two members:</li><li><code>esp_attr_control_t    attr_control;</code></li><li><code>esp_attr_desc_t       att_desc;</code></li><li>Characteristics declaration determines all the read write and notify permissions.</li><ul><li><code>case ESP_GATTS_WRITE_EVT</code></li><li>all the printing and writing data is handled here.</li><li>param-&gt;write.value contains void type data and has to be type casted.</li><li><code>case ESP_GATTS_READ_EVT</code></li><li>pending</li><li>GAP event handler</li><li>App profile registration</li><li>MTU set</li><li>UUID generation</li><li><a href="https://www.uuidgenerator.net/version4" target="_blank" rel="noopener noreferrer">https://www.uuidgenerator.net/version4</a></li><li>GATT server api</li></ul></ul></div></details></div></details></div></div>
+<button type="button" class="ntop" id="ntop" aria-label="Back to top" hidden>&uarr;</button>
+<script>
+(function(){
+  var secs=[].slice.call(document.querySelectorAll('.nsec,.ngrp')), top=document.getElementById('ntop'), nav=document.querySelector('.nnav-box');
+  function show(){var id=decodeURIComponent(location.hash.slice(1)); if(!id) return; var el=document.getElementById(id); if(!el) return; for(var d=el.closest('details');d;d=d.parentElement&&d.parentElement.closest('details')) d.open=true; setTimeout(function(){el.scrollIntoView({block:'start'});},30);}
+  if(window.matchMedia('(max-width:820px)').matches&&nav) nav.open=false;
+  document.getElementById('nopen').onclick=function(){secs.forEach(function(d){d.open=true;});};
+  document.getElementById('nshut').onclick=function(){secs.forEach(function(d){d.open=false;});};
+  document.querySelectorAll('.nnav a').forEach(function(a){a.addEventListener('click',function(){if(window.matchMedia('(max-width:820px)').matches&&nav) nav.open=false;});});
+  addEventListener('hashchange',show); show();
+  addEventListener('scroll',function(){top.hidden=scrollY<600;},{passive:true});
+  top.onclick=function(){scrollTo({top:0,behavior:'smooth'});};
+})();
+</script><script>
+(function(){
+  var KEY='notes:esp32:read', done=Object.create(null);
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; Object.keys(saved).forEach(function(k){done[k]=1;});}catch(e){}
+  var boxes=[].slice.call(document.querySelectorAll('.nread input'));
+  function paint(){
+    var n=0; boxes.forEach(function(b){var id=b.dataset.id, on=!!done[id]; b.checked=on; if(on) n++;
+      var s=document.getElementById(id); if(s) s.classList.toggle('isread',on);
+      var a=document.querySelector('.nnav a[href="#'+id+'"]'); if(a) a.classList.toggle('isread',on);});
+    document.getElementById('nprog').textContent=n+' of '+boxes.length+' read';
+  }
+  boxes.forEach(function(b){
+    b.addEventListener('click',function(e){e.stopPropagation(); if(b.checked) done[b.dataset.id]=1; else delete done[b.dataset.id];
+      try{localStorage.setItem(KEY,JSON.stringify(done));}catch(x){} paint();});
+    b.closest('label').addEventListener('click',function(e){e.stopPropagation();});
+  });
+  paint();
+})();
+</script><script>
+(function(){
+  function count(){var G=document.querySelectorAll('.ngrp'); G.forEach(function(g){var ids=g.dataset.ids.split(' '), n=0; ids.forEach(function(i){var s=document.getElementById(i); if(s&&s.classList.contains('isread')) n++;});
+    g.querySelector('.gc').textContent=n+' of '+ids.length+' read'; g.classList.toggle('alldone',n===ids.length);});}
+  document.addEventListener('click',function(){setTimeout(count,0);},true); count();
+})();
+</script></section>
