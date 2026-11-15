@@ -1,0 +1,1862 @@
+---
+layout: section
+title: Notes
+description: "My Java, OOP, concurrency and data structures and algorithms study notes."
+---
+<style>
+.notes h2{margin:2.2rem 0 .6rem}.notes h3{margin:1.4rem 0 .4rem}.notes h4,.notes h5{margin:1rem 0 .3rem}
+.notes ul{margin:.3rem 0 .8rem;padding-left:1.3rem}.notes li{margin:.15rem 0}
+.notes pre{overflow:auto;padding:.8rem 1rem;border-radius:8px;background:rgba(127,127,127,.12);font-size:.88rem;line-height:1.45}
+.notes-index{columns:2 14rem;padding-left:1.2rem}
+</style>
+<section class="section wrap notes" id="notes" aria-labelledby="notes-title">
+  <h1 id="notes-title">Notes</h1>
+  <p>My study notes on Java, object-oriented programming, concurrency, and data structures and algorithms.</p>
+  <ul class="notes-index"><li><a href="#basics">Basics</a></li><li><a href="#memory-management">Memory management</a></li><li><a href="#java-serialization">Java Serialization</a></li><li><a href="#java-oop">Java OOP</a></li><li><a href="#oop">OOP</a></li><li><a href="#class">Class</a></li><li><a href="#object">Object</a></li><li><a href="#4-pillars-of-java-oop">4 Pillars of Java OOP</a></li><li><a href="#coupling">Coupling</a></li><li><a href="#cohesion">Cohesion</a></li><li><a href="#association">Association</a></li><li><a href="#aggregation">Aggregation</a></li><li><a href="#method">Method</a></li><li><a href="#constructor">Constructor</a></li><li><a href="#static">Static</a></li><li><a href="#variables">Variables</a></li><li><a href="#call-by-reference-value">Call by Reference/value</a></li><li><a href="#super-final-this">Super, Final, This</a></li><li><a href="#annotations">Annotations</a></li><li><a href="#async-java">Async Java</a></li><li><a href="#generics">Generics</a></li><li><a href="#functional-interface">Functional Interface</a></li><li><a href="#generic-function-orchestration">Generic Function Orchestration</a></li><li><a href="#lambda-expressions">Lambda Expressions</a></li><li><a href="#threading-in-java">Threading in java</a></li><li><a href="#process">Process</a></li><li><a href="#thread">Thread</a></li><li><a href="#multitasking">Multitasking</a></li><li><a href="#multithreading">MultiThreading</a></li><li><a href="#application-thread">Application Thread</a></li><li><a href="#multiple-threads-in-an-application">Multiple Threads in an application</a></li><li><a href="#creating-threads">Creating threads</a></li><li><a href="#dsa-java">DSA Java</a></li><li><a href="#asymptotic-notations">Asymptotic notations</a></li><li><a href="#array-strings">Array &amp; Strings</a></li><li><a href="#hash-tables">Hash tables</a></li><li><a href="#collection-framework">Collection Framework</a></li><li><a href="#queue">Queue</a></li><li><a href="#priority-queue">Priority Queue</a></li><li><a href="#dequearray">DequeArray</a></li><li><a href="#list">List</a></li><li><a href="#map">Map</a></li><li><a href="#set">Set</a></li><li><a href="#tree">Tree</a></li><li><a href="#graph">Graph</a></li><li><a href="#algorithms">Algorithms</a></li><li><a href="#greedy">Greedy</a></li><li><a href="#sorting-algorithms">Sorting Algorithms</a></li><li><a href="#searching-algorithm">Searching algorithm</a></li><li><a href="#dynamic-programming">Dynamic Programming</a></li></ul>
+<h2 id="basics">Basics</h2>
+<h3 id="compiling-in-terminal">Compiling in Terminal</h3>
+<ul>
+<li>Single program</li>
+<ul>
+<li>javac programName.java</li>
+<ul>
+<li>Creates the .class file</li>
+</ul>
+<li>java programName</li>
+<ul>
+<li>Executes the file</li>
+</ul>
+</ul>
+<li>Project</li>
+<ul>
+<li>javac -classpath &lt;directory&gt; -d target -sourcepath . service/CarService.java model/*.java</li>
+</ul>
+</ul>
+<ul>
+<li>Java programs run on JVM, as a result it is platform independent</li>
+</ul>
+<h3 id="escape-sequence-n-b-t-etc">Escape sequence: \n, \b, \t etc.</h3>
+<h3 id="5-phases-of-a-java-program">5 phases of a java program</h3>
+<ul>
+<li>Edit</li>
+<li>Write code and save as source code(.java)</li>
+<li>Compile</li>
+<li>Using a Java compiler compiles code into bytecode(.class) which is only machine readable and not human readable. This makes java secure.</li>
+<li>Load</li>
+<li>JVM loads the bytecode</li>
+<li>Verify</li>
+<li>JVM verifies the code</li>
+<li>Execute</li>
+<li>JVM executes the program.</li>
+</ul>
+<h3 id="format-specifier">Format specifier</h3>
+<ul>
+<li>System.out.printf(“double = %.2f”, d);</li>
+</ul>
+<h3 id="unary-operators">Unary operators</h3>
+<ul>
+<li>+</li>
+<li>This is multiplies positive 1 to the variable and tries to make it positive</li>
+<li>x = -10</li>
+<li>x = +x</li>
+<li>result is x = -10 (-1*1 = -1)</li>
+<li>-</li>
+<li>This multiplies with -1 and tries to make it negative</li>
+<li>x = -10</li>
+<li>x = -x</li>
+<li>result is x = 10 (-1*-1 =1)</li>
+<li>++</li>
+<li>--</li>
+</ul>
+<h3 id="relational-operator">Relational operator</h3>
+<ul>
+<li>&gt;</li>
+<li>&lt;</li>
+<li>&gt;=</li>
+<li>&lt;=</li>
+<li>==</li>
+<li>!=</li>
+</ul>
+<h3 id="conditional-operator-ternary">Conditional operator (ternary)</h3>
+<ul>
+<li>e1?e2:e3</li>
+<li>If e1 is true then e2, else e3</li>
+</ul>
+<h3 id="string">String</h3>
+<ul>
+<li>We can create a string using 3 ways</li>
+</ul>
+<h5 id="string-class">String class</h5>
+<ul>
+<li>String s = “asdf”;</li>
+<li>String d = new String(“asdf”);</li>
+<li>equals(String)</li>
+<li>Comparing 2 strings with ‘==’ will compare the variable objects and not the strings itself.</li>
+<li>For this, we use s.equals(d);</li>
+<li>equalsIgnoreCase(String)</li>
+<li>Compare 2 strings while ignoring the case.</li>
+<li>contains(String)</li>
+<li>Checks if a string contains the set strings</li>
+<li>d.contains(“as”);</li>
+<li>.length()</li>
+<li>Checks length of the string</li>
+<li>isEmpty()</li>
+<li>check if the string is empty</li>
+<li>concat(String)</li>
+<li>s.concat(d);</li>
+<li>toUpperCase(String)</li>
+<li>toLowerCase(String)</li>
+<li>startsWith(String)</li>
+<li>returns boolean</li>
+<li>ends.With(String)</li>
+<li>returns boolean</li>
+<li>trim(String)</li>
+<li>trims the beginning and end spaces</li>
+<li>charAt(int)</li>
+<li>returns the char at the given index</li>
+<li>codePointAt(int)</li>
+<li>return the ascii at the given index</li>
+<li>indexOf(string)</li>
+<li>returns the index of the given char or string</li>
+<li>lastIndexOf(string)</li>
+<li>returns the last occurrence of the char or string</li>
+<li>replace(string1, string2)</li>
+<li>Replaces string1 with string2</li>
+<li>split(string)</li>
+<li>splits the string to an array and the split occurs at the specified string. ie: s.split(“ “), the string will split at every “ “.</li>
+<li>indexOf(&quot;#&quot;, i)</li>
+<li>indexOf(char, startIndex) gives the position of the char from the startIndex</li>
+</ul>
+<h5 id="string-builder">String builder</h5>
+<ul>
+<li>StringBuilder s = new StringBuilder(“this is a string”);</li>
+<li>The main difference between String class and string builder is that String class objects are immutable but string builders are mutable.</li>
+<li>Faster than Buffer</li>
+<li>Methods</li>
+<li>.append(String)</li>
+<li>.reverse()</li>
+<li>.delete(from_index, to_index)</li>
+<li>.setLength(int_length)</li>
+</ul>
+<h5 id="string-buffer">String Buffer</h5>
+<ul>
+<li>StringBuffer s = new StringBuffer(“this is a string”);</li>
+<li>The main difference between String class and string buffer is that, String class objects are immutable but string buffers are mutable.</li>
+<li>String buffer is thread safe and synchronized and slower than string builder.</li>
+<li>Methods</li>
+<li>.append(String)</li>
+<li>.reverse()</li>
+<li>.delete(from_index, to_index)</li>
+<li>.setLength(int_length)</li>
+</ul>
+<h5 id="usage-criteria">Usage criteria</h5>
+<ul>
+<li>If the Object value is not going to change, use String Class because a String object is immutable.</li>
+<li>If the Object value can change and will only be accessed from a single thread, use a StringBuilder because StringBuilder is unsynchronized.</li>
+<li>In case the Object value can change, and will be modified by multiple threads, use a StringBuffer because StringBuffer is synchronized.</li>
+</ul>
+<h5 id="string-immutability">String immutability</h5>
+<ul>
+<li>String pool</li>
+<li>Java uses a string pool to store strings. When you create a string “john”, java saves that “john” to the string pool. When another variable is declared as “john”, java does not create a new string “john”. It just points to the original string that was stored into the string pool.</li>
+<li>When you create an instance of a string using a new keyword, java creates an object outside the string pool.</li>
+<li>Example</li>
+<li>String a = “john”</li>
+<li>String b = “john”</li>
+<li>String c = new String(“john”);</li>
+<li>System.out.println(a==b);        //would return true as reference is same</li>
+<li>System.out.println(b==c);        //would return false as the reference is not the same.</li>
+<li>Security</li>
+<li>Since java uses a string pool, multiple variables can point to the same string. If string was mutable, then one of the variables would be able to change the string and cause security issues.</li>
+<li>Multithreading</li>
+<li>Multiple threads can work with one string object. So string need to be immutable.</li>
+</ul>
+<h4 id="wrapper-class">Wrapper class</h4>
+<ul>
+<li>Makes an object into primitive or primitive to object.</li>
+</ul>
+<h5 id="autoboxing">Autoboxing</h5>
+<ul>
+<li>Converts a primitive type to an object.</li>
+<li>example</li>
+<li>int x =0;</li>
+<li>Integer y = x        //conversion done</li>
+</ul>
+<h5 id="unboxing">Unboxing</h5>
+<ul>
+<li>Converts an object into primitive type</li>
+<li>Example</li>
+<li>Integer x = new Integer(0);</li>
+<li>int y = x        //conversion done</li>
+</ul>
+<h3 id="conversion-between-string-and-primitive-data-type">Conversion between String and Primitive Data type</h3>
+<h4 id="primitive-to-string">Primitive to String</h4>
+<ul>
+<li>int x = 10;</li>
+<li>String s = x.toString();</li>
+</ul>
+<h4 id="string-to-primitive">String to primitive</h4>
+<ul>
+<li>Way 1</li>
+<li>String s = “10”;</li>
+<li>int x = Integer.parseInt(s);</li>
+<li>Way 2</li>
+<li>String s = “10”;</li>
+<li>int x = Integer.valueOf(s);</li>
+</ul>
+<h3 id="decimal-to-bin-oct-and-hex-string">Decimal to bin, oct and hex string</h3>
+<ul>
+<li>int x = 10;</li>
+<li>String s = Integer.toBinaryString(x);</li>
+<li>String d = Integer.toOctalString(x);</li>
+<li>String f = Integer.toHexString(x);</li>
+</ul>
+<h3 id="bin-oct-hex-string-to-decimal">Bin, Oct, Hex string to decimal</h3>
+<ul>
+<li>String bin = “1010”;</li>
+<li>Integer dec = Integer.parseInt(bin, 2);</li>
+<li>String oct = “42”;</li>
+<li>Integer dec2 = Integer.parseInt(oct, 8);</li>
+<li>String hex = “F”;</li>
+<li>Integer dec3 = Integer.parseInt(hex, 16);</li>
+</ul>
+<h2 id="memory-management">Memory management</h2>
+<h3 id="stack-memory">Stack memory</h3>
+<ul>
+<li>Stack memory is the portion of memory that the local variables like variables, methods etc are stored in.</li>
+<li>Java uses Stack data structure which is LIFO.</li>
+<li>This works well with the local variables as they are being executed line by line.</li>
+</ul>
+<h3 id="heap-memory">Heap memory</h3>
+<ul>
+<li>Heap memory is the portion of memory that is available to the program in runtime. This is where arrays are stored.</li>
+<li>Heap  memory has 2 parts</li>
+<li>Young space</li>
+<li>This is the new data</li>
+<li>Old space</li>
+<li>This is the old or unreferenced data</li>
+<li>Example</li>
+<li>Here main and print array methods and all the declared variables will be stored in the stack memory.</li>
+<li>The array or objects are stored in heap memory during runtime.</li>
+</ul>
+<h3 id="garbage-collection">Garbage collection</h3>
+<ul>
+<li>In Java, garbage collection is done automatically.</li>
+<li>All the unreferenced objects are automatically cleaned and clearing heap memory space.</li>
+<li>When the heap memory needs cleaning, the garbage collector clears the old space of the heap memory in order of FIFO.</li>
+<li>Garbage collection can also be done in programs.</li>
+<li>Java Serialization</li>
+<ul>
+<li>Serialization and deserialization in Java</li>
+</ul>
+</ul>
+<h2 id="java-oop">Java OOP</h2>
+<h2 id="oop">OOP</h2>
+<ul>
+<li>Object oriented programming is a programming paradigm where everything is represented as objects.</li>
+</ul>
+<h2 id="class">Class</h2>
+<ul>
+<li>This is the blueprint for objects.</li>
+</ul>
+<h2 id="object">Object</h2>
+<ul>
+<li>Instance of a class.</li>
+</ul>
+<h2 id="4-pillars-of-java-oop">4 Pillars of Java OOP</h2>
+<h3 id="inheritance">Inheritance</h3>
+<ul>
+<li>When one object acquires all properties of a parent object is known as inheritance.</li>
+<li>It provides reusability and is used to achieve runtime polymorphism.</li>
+<li>Inheritance is a “is a” relation, also known as parent child relation.</li>
+<li>A car “is a” vehicle.</li>
+<li>Private variables and methods cannot be inherited.</li>
+<li>Always try to use protected access modifiers in the super class.</li>
+<li>Syntax</li>
+</ul>
+<pre><code>class Subclass-name extends Superclass-name
+{
+  //methods and fields
+}</code></pre>
+<ul>
+<li>Example</li>
+</ul>
+<ul>
+<li>class vehicle{</li>
+<li>protected int gear;</li>
+<li>protected int speed;</li>
+<li>vehicle(int gear, int speed){</li>
+<li>this.gear = gear;</li>
+<li>this.speed = speed;</li>
+<li>}</li>
+<li>protected void shiftGear(int gear){</li>
+<li>System.out.println(“gear: “+gear);</li>
+<li>}</li>
+<li>}</li>
+<li>class car extends vehicle{</li>
+<li>protected carType;</li>
+<li>car(int carType, int gear, int speed){</li>
+<li>super(gear, speed);</li>
+<li>}</li>
+<li>}</li>
+<li>class example{</li>
+<li>public static void main(String[]args){</li>
+<li>car c = new car(1, 4, 5);</li>
+<li>}</li>
+<li>}</li>
+<li>Types</li>
+<li>Hybrid and Multiple</li>
+<ul>
+<li>Hierarchical</li>
+<ul>
+<li>Hybrid</li>
+<ul>
+<li>Hybrid is the combination of different types of inheritance.</li>
+<li>Multiple inheritance is not supported in java</li>
+<li>example: C extends A and B, not possible in java</li>
+</ul>
+</ul>
+</ul>
+</ul>
+<h5 id="diamond-problem">Diamond problem</h5>
+<ul>
+<li>When there is a hierarchical inheritance and then D inherits from B and C, there is an ambiguity in which version of the same method to apply.</li>
+</ul>
+<h3 id="polymorphism">Polymorphism</h3>
+<ul>
+<li>If one task is performed in different ways, it is called polymorphism.</li>
+<li>Means have many forms.</li>
+<li>Types:</li>
+<li>Compile time/static binding</li>
+<li>Overloading a static method</li>
+<li>Run time or dynamic binding</li>
+<li>Upcasting</li>
+<li>When a reference variable of the parent class refers to a child object.</li>
+<li>A a = new b //here b extends a</li>
+<li>Runtime poly can’t be achieved by data members.</li>
+<li>In java, method overloading and overriding is used.</li>
+<li>overriding</li>
+<li>Rules</li>
+<li>Name, type, parameters, return type have to be the same.</li>
+<li>If a class cannot be inherited then its methods cannot be overridden.</li>
+<li>Final/static methods cannot be overridden.</li>
+<li>Constructor cannot be overridden.</li>
+<li>Example</li>
+<li>Binding</li>
+<ul>
+<li>Types</li>
+<li>Static (Early)</li>
+<li>When type of object is determined at compile time</li>
+<li>Dynamic (Late)</li>
+<li>When type of object is determined at run time</li>
+<li>Example: Upcasting</li>
+</ul>
+</ul>
+<h3 id="abstraction">Abstraction</h3>
+<ul>
+<li>Hiding the process and showing functionality is known as abstraction.</li>
+<li>In Java, abstract classes and interfaces are used.</li>
+<li>2 ways to achieve abstraction</li>
+</ul>
+<h5 id="abstract-class-0-100-abstract">Abstract class (0-100 abstract)</h5>
+<ul>
+<li>it has to have an abstract method and non abstract methods are optional.</li>
+<li>Has to be extended and its abstract method implemented.</li>
+<li>Can not be instantiated, meaning the abstract class’s constructor cannot be called but while creating a child object and referencing the parent object, java automatically executes the parent object’s constructor.</li>
+<li>Cannot have final and static abstract methods.</li>
+<li>Abstract methods have to be overridden.</li>
+<li>Example</li>
+</ul>
+<pre><code>abstract class Bike{
+ abstract void run();
+}
+class Honda4 extends Bike{
+@override
+void run(){System.out.println(&quot;running safely&quot;);}
+public static void main(String args[]){
+Bike obj = new Honda4();
+obj.run();
+}
+}</code></pre>
+<ul>
+<li>Interface (100 % abstract)</li>
+</ul>
+<ul>
+<li>Blueprint of a class or the rules that the class has to follow.</li>
+<li>Variables in interfaces have to be declared as static final.</li>
+<li>Methods cannot have definition, only declaration.</li>
+<li>Represents “Is A” relation.</li>
+<li>Relation between classes and interfaces</li>
+<li>Example</li>
+</ul>
+<pre><code>interface printable{
+void print();
+}
+class A6 implements printable{
+public void print(){System.out.println(&quot;Hello&quot;);}
+
+public static void main(String args[]){
+A6 obj = new A6();
+obj.print();
+}
+}</code></pre>
+<h3 id="encapsulation">Encapsulation</h3>
+<ul>
+<li>Encapsulation is a concept that enables the variables and methods of a class to act as a single unit and different access modifiers like private, protected and public keywords can be used to control the amount of data that other classes can access inside the class.</li>
+<li>Private variables in a class require getters and setters to be modified.</li>
+<li>Example: Class, bean</li>
+</ul>
+<h3 id="package">package</h3>
+<ul>
+<li>A java package is a group of similar types of classes, interfaces and sub-packages.</li>
+</ul>
+<h4 id="benefits">Benefits</h4>
+<ul>
+<li>Data hiding</li>
+<li>Reusability</li>
+<li>Modification of code without breaking it</li>
+</ul>
+<h4 id="access-modifier">Access modifier</h4>
+<ul>
+<li>Public</li>
+<ul>
+<li>Access to all</li>
+<li>Private</li>
+<li>Only the same class can access</li>
+<li>Protected</li>
+<li>Accessible from the same package or different package’s subclass by inheritance.</li>
+<li>Default</li>
+<li>Accessible from the same package</li>
+</ul>
+</ul>
+<h2 id="coupling">Coupling</h2>
+<ul>
+<li>Strong coupling</li>
+<li>When a class has detailed information about another class.</li>
+<li>Weak coupling</li>
+<li>When a class has less or no information about another class.</li>
+<li>In java we used</li>
+<li>Public, Protected, Private.</li>
+</ul>
+<h2 id="cohesion">Cohesion</h2>
+<ul>
+<li>Meaning: The sticking together of particles of the same type.</li>
+<li>When classes and objects are the same type and do related tasks in a package.</li>
+<li>Strongly Cohesive</li>
+<li>Java.io</li>
+<li>Weakly Cohesive</li>
+<li>Java.util</li>
+</ul>
+<h2 id="association">Association</h2>
+<ul>
+<li>The relationship between objects.</li>
+<li>Association can be unidirectional or bidirectional.</li>
+<li>Can be represented as “Is a” relation.</li>
+<li>4 types of association</li>
+<li>1:1</li>
+<li>1:M</li>
+<li>M:1</li>
+<li>M:M</li>
+</ul>
+<h2 id="aggregation">Aggregation</h2>
+<ul>
+<li>Aggregation is a specialized form of association. classes are related in a one way relationship.</li>
+<li>The classes are in a “has a” relation.</li>
+<li>The classes are independent of each other and can function without them.</li>
+<li>Example:</li>
+<li>Wallet has money.</li>
+<li>Example</li>
+<li>Institute, Department, Student can function without each other.</li>
+<li>Students depend on the Department and the Department depends on the Institute.</li>
+</ul>
+<h4 id="composition">Composition</h4>
+<ul>
+<li>Composition is another type of aggregation.</li>
+<li>The difference is that composition classes are not independent of each other.</li>
+<li>Like, in a computer, hardware is dependent on software and software is dependent on hardware.</li>
+<li>Method</li>
+<ul>
+<li>Types</li>
+<li>Predefined</li>
+<li>user defined</li>
+</ul>
+</ul>
+<h2 id="constructor">Constructor</h2>
+<ul>
+<li>It is used when an instance of a class is created.</li>
+<li>Rules</li>
+<li>Has to have the same name as the class.</li>
+<li>No return</li>
+<li>Cannot be abstract, static, final and synchronized.</li>
+<li>Types</li>
+<li>Default</li>
+<li>Parameterized</li>
+<li>No-Args</li>
+<li>We can overload constructors.</li>
+</ul>
+<h2 id="static">Static</h2>
+<h3 id="static-variable">Static variable</h3>
+<ul>
+<li>Static variables are declared in classes.</li>
+<li>These variables can be accessed by other objects without creating an object using the class.</li>
+<li>Multiple objects of the same static variable share 1 memory, so a static variable is created only once per class and all objects share it.</li>
+<li>Example</li>
+<li>class test{</li>
+<li>int b;</li>
+<li>static int a;</li>
+<li>}</li>
+<li>in main</li>
+<li>test.a = 5;</li>
+<li>test t = new test();</li>
+<li>t.b = 6;</li>
+<li>t.a = 7;</li>
+<li>System.out.println(test.a);   // will print 7, as it has one memory location.</li>
+</ul>
+<h3 id="static-method">Static method</h3>
+<ul>
+<li>Just like static variables, static methods do not need their class object to be declared.</li>
+<li>This is why main is a static method.</li>
+<li>Has rules</li>
+<li>Static methods cannot use non-static members.</li>
+<li>class Test{</li>
+<li>int b;</li>
+<li>static int a;</li>
+<li>static int met(){</li>
+<li>a = 5;</li>
+<li>b = 3;  //not possible;</li>
+<li>}</li>
+<li>}</li>
+<li>‘this’ keyword cannot be used in a static method.</li>
+</ul>
+<h3 id="static-block">Static block</h3>
+<ul>
+<li>Static block is a block of code where static variables can be initialized.</li>
+<li>Static block always runs before the main method.</li>
+<li>Variables declared in a static block will be a static variable.</li>
+<li>Example</li>
+<li>class Test{</li>
+<li>int b;</li>
+<li>static int a;</li>
+<li>static{</li>
+<li>a = 0;</li>
+<li>}</li>
+</ul>
+<h2 id="variables">Variables</h2>
+<ul>
+<li>Local</li>
+<li>Variables are created in methods.</li>
+<li>Local variables are treated as most important in a method.</li>
+<li>Instance</li>
+<li>Variables that are created outside methods.</li>
+<li>‘this’ keyword is used to point to the instance variables in a method.</li>
+<li>Static/Class</li>
+<li>Static variables.</li>
+<li>Cannot be declared in methods.</li>
+</ul>
+<h2 id="call-by-reference-value">Call by Reference/value</h2>
+<h3 id="call-by-reference">Call by reference</h3>
+<ul>
+<li>Call by reference means that the actual parameter is changed when the formal parameter is changed.</li>
+<li>The formal parameter just points to the actual parameter’s memory.</li>
+<li>Primitive types cannot be called by reference.</li>
+<li>User defined types can be called by reference.</li>
+<li>Example</li>
+<li>class Test{</li>
+<li>int a;</li>
+<li>}</li>
+<li>in main</li>
+<li>Test t = new Test();</li>
+<li>change(t.a);</li>
+<li>System.out.println(b.a) // is 4.</li>
+<li>void change(Test b){        //new is not used, so points to the actual</li>
+<li>b.a = 4;</li>
+<li>}</li>
+</ul>
+<h2 id="super-final-this">Super, Final, This</h2>
+<h3 id="super">Super</h3>
+<ul>
+<li>used to access variables and methods of the superclass.</li>
+<li>To call the constructor of the superclass</li>
+<li>super(parm1, parm2, …)</li>
+<li>Note: super always needs to be put at the beginning of the method.</li>
+<li>To call super class’s methods</li>
+<li>@override</li>
+<li>void foo(){</li>
+<li>super.foo();</li>
+<li>System.out.println(“child foo”);</li>
+<li>}</li>
+<li>To call super class’s variables</li>
+<li>int num = 0;</li>
+<li>num = super.num;</li>
+</ul>
+<h3 id="final">Final</h3>
+<ul>
+<li>The only difference between the final and const keyword is that final is a runtime-constant, which in turn means that its value can be assigned at runtime instead of the compile-time that we had for the const keyword. And Static const is the variable that is the same for all classes.</li>
+<li>Final variable</li>
+<li>Initialized final variable</li>
+<li>final int a = 0;</li>
+<li>Final variables cannot be changed after initialization.</li>
+<li>Blank final variables</li>
+<li>final int a;</li>
+<li>Blank final variables can be initialized via constructor</li>
+<li>Static blank final variables</li>
+<li>static final int a;</li>
+<li>These variables can only be initialized via static blocks</li>
+<li>Final methods</li>
+<li>Final methods cannot be overridden by subclasses but are inherited.</li>
+<li>Final classes</li>
+<li>Final classes cannot be inherited.</li>
+<li>This</li>
+<li>Is used to refer to the method’s or current class variable or method.</li>
+</ul>
+<h2 id="annotations">Annotations</h2>
+<h3 id="nullable">Nullable</h3>
+<ul>
+<li>In Java, the @Nullable annotation is used to indicate that a variable, parameter, or method return value can be assigned a null value. This annotation is used in code that leverages null checks to improve the robustness of applications and reduce the likelihood of NullPointerExceptions.</li>
+<li>The @Nullable annotation is typically used in the following situations:</li>
+<li>Method parameters - When a method parameter can be assigned a null value, annotate it with @Nullable to indicate this fact.</li>
+<li>Method return values - When a method can return a null value, annotate the return value with @Nullable to indicate this fact.</li>
+<li>Fields and local variables - When a field or local variable can be assigned a null value, annotate it with @Nullable to indicate this fact.</li>
+<li>By using @Nullable annotations in your code, you can help ensure that null values are handled appropriately and prevent NullPointerExceptions from occurring. Additionally, some code analysis tools can use these annotations to check for potential null pointer issues, helping you identify and fix bugs before they occur.</li>
+</ul>
+<h2 id="async-java">Async Java</h2>
+<h3 id="completablefutures">CompletableFutures</h3>
+<h4 id="what">What</h4>
+<ul>
+<li>CompletableFuture is a class that promises to return a value in the future.</li>
+<li>Doesn’t block main thread</li>
+<li>Manages own threadpool</li>
+<li>Compose by chaining multiple async operations.</li>
+<li>Combine multiple completable futures.</li>
+</ul>
+<h4 id="when-to-use">When to use</h4>
+<ul>
+<li>Quick decision</li>
+<li>Is the operation I/O bound? (Network, Database, File)</li>
+<li>└─ YES → ✅ Consider CompletableFuture</li>
+<li>└─ NO  → Are multiple independent operations running?</li>
+<li>└─ YES → ✅ Consider CompletableFuture</li>
+<li>└─ NO  → ❌ Use synchronous code</li>
+<li>I/O bound operations (not sequentially dependent)</li>
+<li>Independent operations</li>
+<li>Background tasks</li>
+<li>Timeout scenarios (when i want to timeout a call)</li>
+<li>future.get(second, TimeUnit.SECONDS);</li>
+</ul>
+<h4 id="create">Create</h4>
+<h5 id="completedfuture">completedFuture()</h5>
+<ul>
+<li>CompletableFuture&lt;String&gt; future = CompletableFuture.completedFuture(“Hello”);</li>
+<li>System.out.println(future.join()) // immediately available</li>
+</ul>
+<h5 id="supplyasync">supplyAsync()</h5>
+<ul>
+<li>Returns a value</li>
+<li>CompletableFuture&lt;String&gt; future = CompletableFuture.applyAsync(()-&gt; { return “done”});</li>
+<li>String result = future.join();</li>
+<li>System.out.println(result);</li>
+</ul>
+<h5 id="runasync">runAsync()</h5>
+<ul>
+<li>Does not return value</li>
+<li>CompletableFuture&lt;void&gt; future = CompletableFuture.runAsync(()-&gt; sout(“Done”););</li>
+<li>future.join();</li>
+</ul>
+<h4 id="composition">Composition</h4>
+<h5 id="thenapply">thenApply()</h5>
+<ul>
+<li>Transforms the result synchronously</li>
+<li>Use thenApply() for functions that return plain value</li>
+</ul>
+<h5 id="thencompose">thenCompose()</h5>
+<ul>
+<li>Transforms the result asynchronously, returns another CompletableFuture.</li>
+</ul>
+<h4 id="combination">Combination</h4>
+<h5 id="thencombine">thenCombine()</h5>
+<ul>
+<li>Combines 2 futures</li>
+<li>CompletableFuture&lt;String&gt; userFuture = CompletableFuture.supplyAsync(()-&gt; return “user”;);</li>
+<li>CompleteableFuture&lt;Integer&gt; ageFuture = CompletableFuture.supplyAsuc(()-&gt; return 20;);</li>
+<li>CompletableFuture&lt;String&gt; combined = userFuture.thenCombine(ageFuture, (name, age&gt; -&gt; return name + age;)); // here ageFuture is the 2nd future to combine with</li>
+<li>System.out.println(combined.join());</li>
+</ul>
+<h5 id="allof">allOf()</h5>
+<ul>
+<li>Waits for all futures to complete</li>
+<li>CompletableFuture&lt;Void&gt; all = CompletableFuture.allOf(f1, f2, f3);</li>
+</ul>
+<h5 id="anyof">anyof()</h5>
+<ul>
+<li>Waits for the first future to complete</li>
+<li>CompletableFuture&lt;Void&gt; all = CompletableFuture.anyOf(f1, f2, f3);</li>
+</ul>
+<h4 id="error-handling">Error handling</h4>
+<h5 id="exceptionally">exceptionally()</h5>
+<ul>
+<li>CompletableFuture&lt;String&gt; userFuture = CompletableFuture.supplyAsync(()-&gt; return “user”;)</li>
+</ul>
+<pre><code>.exceptionally(ex -&gt; return ex;);</code></pre>
+<h5 id="handle">handle()</h5>
+<ul>
+<li>Can handle both result and exception</li>
+<li>CompletableFuture&lt;String&gt; userFuture = CompletableFuture.supplyAsync(()-&gt; return “user”;)</li>
+</ul>
+<pre><code>.handle((result, ex) -&gt; sout(result); return ex;);</code></pre>
+<h2 id="generics">Generics</h2>
+<h3 id="what-is-it">What is it?</h3>
+<ul>
+<li>Allows classes, interfaces, and methods to operate on objects of various types while providing compile-time type safety. It puts a &quot;label&quot; on a container or method so Java knows exactly what type is going in and coming out.</li>
+<li>&lt;T&gt; is a placeholder for a Type. It means &quot;I don&#x27;t know what this is yet, but it will be consistent.&quot;</li>
+<li>Class Level:</li>
+<li>public class Box&lt;T&gt; { private T item; }</li>
+<li>Method Level:</li>
+<li>&lt;T&gt; goes before the return type. public &lt;T&gt; T doSomething(T item)</li>
+<li>Without Generics (Unsafe)</li>
+<li>List list = new ArrayList();</li>
+<li>list.add(&quot;hello&quot;);</li>
+<li>Integer i = (Integer) list.get(0); // Crash at runtime!</li>
+<li>With Generics (Safe)</li>
+<li>List&lt;String&gt; list = new ArrayList&lt;&gt;();</li>
+<li>list.add(&quot;hello&quot;);</li>
+<li>// list.add(123); // Compile error immediately</li>
+</ul>
+<h2 id="functional-interface">Functional Interface</h2>
+<h3 id="what-is-it">What is it?</h3>
+<ul>
+<li>An interface that has exactly one abstract method. They are the basis for Lambda expressions and Method References.</li>
+<li>They allow us to treat code (behavior) as data. We can pass a &quot;function&quot; as an argument to a method.</li>
+</ul>
+<h3 id="common-types">Common Types</h3>
+<ul>
+<li>Function&lt;T, R&gt;</li>
+<li>Input: T</li>
+<li>Output: R</li>
+<li>Use: Transformation or Extraction. &quot;Take this object and give me its ID.&quot;</li>
+<li>Function&lt;User, String&gt; getEmail = user -&gt; user.getEmail();</li>
+<li>Predicate</li>
+<li>Input: T</li>
+<li>Output: boolean</li>
+<li>Use: Filtering or Validation. &quot;Test if this object meets a condition.&quot;</li>
+<li>Predicate&lt;User&gt; isActive = user -&gt; user.getStatus() == ACTIVE;</li>
+<li>Consumer</li>
+<li>Input: T</li>
+<li>Output: void</li>
+<li>Use: Side effects. &quot;Take this object and print it / save to DB.&quot;</li>
+<li>Consumer&lt;String&gt; printer = msg -&gt; System.out.println(msg);</li>
+<li>Supplier</li>
+<li>Input: None</li>
+<li>Output: T</li>
+<li>Use: Factories / Lazy generation. &quot;Give me a new object.&quot;</li>
+<li>Supplier&lt;Double&gt; random = () -&gt; Math.random();</li>
+</ul>
+<h2 id="generic-function-orchestration">Generic Function Orchestration</h2>
+<h3 id="what-is-it">What is it?</h3>
+<ul>
+<li>The combination of Generics (The Skeleton) and Functional Interfaces (The Muscles).</li>
+<li>It creates an Orchestration Pattern where a generic method defines the process (the algorithm), but the caller defines the logic (the behavior) by passing functions.</li>
+</ul>
+<h3 id="how-it-works">How it works</h3>
+<ul>
+<li>The Generic Method</li>
+<li>Doesn&#x27;t know what the object is (&lt;T&gt;). It executes foreign methods provided by the arguments.</li>
+<li>The Function Argument</li>
+<li>Acts as the &quot;instruction manual&quot; telling the generic method how to handle &lt;T&gt;.</li>
+<li>The Method Reference</li>
+<li>The bridge connects a specific class to the generic method.</li>
+<li>Example</li>
+<li>// 1. The Generic Orchestrator</li>
+<li>public &lt;T&gt; void validateItems(</li>
+<li>List&lt;T&gt; items,                  // The unknown data</li>
+<li>Function&lt;T, Integer&gt; getQty,    // Instruction: How to get quantity</li>
+<li>Predicate&lt;Integer&gt; isValid      // Instruction: How to check if valid</li>
+<li>) {</li>
+<li>for(T item : items) {</li>
+<li>// 2. Executing foreign instructions</li>
+<li>Integer qty = getQty.apply(item);</li>
+<li>if (!isValid.test(qty)) {</li>
+<li>throw new RuntimeException(&quot;Invalid!&quot;);</li>
+<li>}</li>
+<li>}</li>
+<li>}</li>
+</ul>
+<h3 id="usage">Usage</h3>
+<ul>
+<li>The caller simply swaps the instructions based on the object type.</li>
+<li>// Validating Orders</li>
+<li>validateItems(orders, Order::getQuantity, qty -&gt; qty &gt; 0);</li>
+<li>// Validating Inventory</li>
+<li>validateItems(stock, Stock::getCount, count -&gt; count &lt; 1000);</li>
+</ul>
+<h2 id="lambda-expressions">Lambda Expressions</h2>
+<ul>
+<li>TBA</li>
+</ul>
+<pre><code>Geospatial (GIS) Data</code></pre>
+<h3 id="what-is-it">What is it?</h3>
+<ul>
+<li>Threading in java</li>
+</ul>
+<h2 id="process">Process</h2>
+<ul>
+<li>An instance of a computer program with one or many threads.</li>
+<li>Processes have their own address space in memory.</li>
+</ul>
+<h2 id="thread">Thread</h2>
+<ul>
+<li>A single sequence of execution within a process.</li>
+<li>Threads share memory of processes.</li>
+</ul>
+<h2 id="multitasking">Multitasking</h2>
+<ul>
+<li>A computer’s ability to perform multiple jobs concurrently.</li>
+</ul>
+<h2 id="multithreading">MultiThreading</h2>
+<ul>
+<li>Multiple threads within a single program.</li>
+</ul>
+<h2 id="application-thread">Application Thread</h2>
+<ul>
+<li>When we execute a Java program</li>
+<li>The JVM creates a thread object that is defined by main()</li>
+<li>When main returns, the thread dies.</li>
+</ul>
+<h2 id="multiple-threads-in-an-application">Multiple Threads in an application</h2>
+<ul>
+<li>Each thread has its private run time heap memory.</li>
+<li>When two threads execute the same method, they will have different copies of the method, including local variables.</li>
+<li>All threads see the same dynamic memory of the process.</li>
+<li>Two different threads can act on the same objects and same static fields concurrently.</li>
+</ul>
+<h2 id="creating-threads">Creating threads</h2>
+<ul>
+<li>Two ways</li>
+<li>Extend from the Thread Class and create a new instance of that class.</li>
+<li>Implementing the Runnable interface</li>
+<li>run() method for both ways have to be implemented.</li>
+</ul>
+<h3 id="thread-class">Thread class</h3>
+<pre><code>class LearnThreads extends Thread{
+  @Override
+  public void run(){        //Mandatory run() method
+       System.out.println(&quot;Executing new thread&quot;);
+       int tId = Thread.currentThread().getId();
+       //getting id of thread
+       System.out.println(tid);
+       Thread.sleep(100);
+       //sleep method for thread class, take ms.
+  }
+}
+public class CreateThreads{
+   public static void main(String[]args){
+       LearnThreads t1 = new LearnThreads();
+       LearnThreads t2 = new LearnThreads();
+       t1.start();
+       //To execute a thread object, .start() is mandatory.
+       t2.start();
+  }
+}</code></pre>
+<h3 id="runnable-interface">Runnable interface</h3>
+<pre><code>class LearnThreads implements Runnable{
+   @Override
+   public void run(){        //Mandatory run() method
+       System.out.println(&quot;Executing new thread&quot;);
+       int tId = Thread.currentThread().getId();
+       //getting id of thread
+       System.out.println(tid);
+       Thread.sleep(100);
+       //sleep method for thread class, take ms.
+   }
+}
+public class CreateThreads{
+   public static void main(String[]args){
+       Thread t1 = new Thread(new LearnThreads);
+       Thread t2 = new Thread(new LearnThreads);
+       t1.start();
+       //To execute a thread object, .start() is mandatory.
+       t2.start();
+   }
+}
+
+
+              Alternative
+
+public class CreateThreads{
+   public static void main(String[]args){
+       Thread t1 = new Thread(new Runnable() {
+            System.out.println(&quot;Executing new thread&quot;);
+           int tId = Thread.currentThread().getId();
+           //getting id of thread
+           System.out.println(tid);
+           Thread.sleep(100);
+           //sleep method for thread class, take ms.
+       });
+
+       t1.start();
+       //To execute a thread object, .start() is mandatory.
+       t2.start();
+   }
+}</code></pre>
+<h3 id="join-method-in-thread">Join method in thread</h3>
+<ul>
+<li>When we use t1.start(), the thread is started but start() does not wait for the thread to finish.</li>
+<li>The program executes t1.start() then goes on to the next line.</li>
+<li>So this may cause program flow issues.</li>
+<li>The .join() method solves the issue by waiting until the thread is done.</li>
+<li>t1.start();</li>
+<li>t2.start();</li>
+<li>t1.join();                //needs a try catch</li>
+<li>t2.join()</li>
+<li>System.out.println(count);</li>
+<li>Here, t1 and t2 are started and both increments count. Join stops the program flow and waits until the threads are done.</li>
+</ul>
+<h3 id="synchronized-method-in-thread">Synchronized method in thread</h3>
+<ul>
+<li>When multiple threads have access to the same object, they will compete for the object.</li>
+<li>synchronized method locks a thread to the object until the thread is done and prevents other threads access to the object.</li>
+</ul>
+<pre><code>public static synchronized void increaseCount(){
+   count++;
+}</code></pre>
+<h2 id="dsa-java">DSA Java</h2>
+<pre><code>Code: https://github.com/ihashib/DSA</code></pre>
+<h2 id="asymptotic-notations">Asymptotic notations</h2>
+<h3 id="big-omega">Big Omega</h3>
+<ul>
+<li>Finds the best case</li>
+</ul>
+<h3 id="big-theta">Big Theta</h3>
+<ul>
+<li>Finds the average case</li>
+</ul>
+<h3 id="big-o">Big O</h3>
+<ul>
+<li>Finds the worst case</li>
+<li>Big O measures the time and space that a program takes as its inputs grow to infinity.</li>
+<li>O(1)</li>
+<ul>
+<li>Constant time and space</li>
+<li>O(n)</li>
+<li>Linear time and space</li>
+<li>O(n^2)</li>
+<li>Quadratic time and space. Usually when it&#x27;s a nested loop, it’s n(n^2) complexity.</li>
+<li>O(n^3)</li>
+<li>Cubic. Example: 3 nested loops.</li>
+<li>O(log n)</li>
+<li>What is log?</li>
+<li>2^(?) = 8 can be written as log28 = ?</li>
+<li>Basically, what is the power of the base to make it 8.</li>
+<li>Recursion</li>
+<li>In the picture, when the recursive function is called, n is divided by 2 and then it passes the result to itself. So Each time the value gets halved. As you can see the function stops after 3 recursions. n’s value is 8 and 2^3 = 8. So it&#x27;s a logarithm function.</li>
+<ul>
+<li>Iteration</li>
+<li>while(n&gt;1)</li>
+<li>n = n/2;</li>
+<li>O(n log n)</li>
+<li>Here, n is being divided by 2 in each iteration which is O(log n)</li>
+<li>Then in each loop, i is printed n times, so O(n)</li>
+<li>Since they are in a common loop, the complexities will multiply</li>
+<ul>
+<li>O(n log n)</li>
+<li>O(2^n)</li>
+<li>Exponential</li>
+<li>O(n!)</li>
+<ul>
+<li>Calculating Time complexity</li>
+<ul>
+<li>Drop the non dominant terms and contents</li>
+<li>Fragment the code and find the complexity of each</li>
+<li>Calculate space complexity</li>
+<ul>
+<li>Each int type variable takes 2 bytes and will not change, thus O(1)</li>
+<ul>
+<li>Here the array has n size. So 2n</li>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+</ul>
+<h2 id="array-strings">Array &amp; Strings</h2>
+<ul>
+<li>Time complexity</li>
+<li>O(1)</li>
+<li>TO BE ADDED</li>
+</ul>
+<h2 id="hash-tables">Hash tables</h2>
+<ul>
+<li>Hash Function</li>
+<li>A hash function is like a magical mathematical recipe. It takes in data of any size (a word, a sentence, a whole file) and churns out a unique, fixed-size output called a &quot;hash value&quot; or &quot;hash&quot;.</li>
+<li>Think of it like a digital fingerprint for your data.</li>
+<li>The data is stored in an array, where each element has an unique index. The index comes from the mod of the hash function of the key and array size. Thus search and insertion of data is very fast.</li>
+<li>index = getHashCode(key)%arr.length</li>
+<li>Data is stored in key value pairs using a hashing function.</li>
+<li>Let a hash function H(x). H(x) maps x value at x%10 index. Here 10 is the array size.</li>
+<li>Example</li>
+<li>11, 12, 13, 14, 15 is mapped at the 1,2,3,4,5 index of an array.</li>
+<li>Implementation</li>
+<ul>
+<li>The hash function always gives the index on the array from the key.</li>
+<li>Use a manual linkedlist for storing key value pairs</li>
+<li>Linkedlist because Hash function can cause the same index for different values.</li>
+<li>When the hashed index of the array is found, we need to store and retrieve key and values considering that different keys can have same array index (because of the hash)</li>
+<li>So when inserting or retrieving, go to the index then search the linkedlist for the key</li>
+<li>Code</li>
+<li>https://github.com/ihashib/DSA/blob/main/ArrayString/src/HashTable.java</li>
+</ul>
+</ul>
+<h2 id="collection-framework">Collection Framework</h2>
+<ul>
+<li>Collection framework is a java framework that was introduced in Java 1.2.</li>
+<li>Collection framework’s classes</li>
+<li>java.util.collection</li>
+<li>java.util.map</li>
+<li>Collection framework hierarchy</li>
+<li>Queue</li>
+<ul>
+<li>FIFO (First In First Out)</li>
+<li>Queue is an interface</li>
+<li>Time complexity</li>
+<li>O(1)</li>
+<li>Iteration</li>
+<li>Iterator iterator = pq.iterator();</li>
+<li>while (iterator.hasNext()) {</li>
+<li>System.out.print(iterator.next() + &quot; &quot;);</li>
+<li>}</li>
+<li>add(int index, element)</li>
+<li>This method is used to add an element at a particular index in the queue. When a single parameter is passed, it simply adds the element at the end of the queue.</li>
+<li>size()</li>
+<li>This method is used to return the size of the queue.</li>
+<li>clear()</li>
+<li>This method is used to remove all the elements in the queue. However, the reference of the queue created is still stored.</li>
+<li>remove(int index)</li>
+<li>This method removes an element from the specified index. It shifts subsequent elements(if any) to left and decreases their indexes by 1.</li>
+<li>remove(element)</li>
+<li>This method is used to remove and return the first occurrence of the given element in the queue.</li>
+<li>get(int index)</li>
+<li>This method returns elements at the specified index.</li>
+<li>set(int index, element)</li>
+<li>This method replaces elements at a given index with the new element. This function returns the element which was just replaced by a new element.</li>
+<li>indexOf(element)</li>
+<li>This method returns the first occurrence of the given element or -1 if the element is not present in the queue.</li>
+<li>lastIndexOf(element)</li>
+<li>This method returns the last occurrence of the given element or -1 if the element is not present in the queue.</li>
+<li>equals(element)</li>
+<li>This method is used to compare the equality of the given element with the elements of the queue.</li>
+<li>isEmpty()</li>
+<li>This method is used to check if the queue is empty or not. It returns true if the queue is empty, else false.</li>
+<li>contains(element)</li>
+<li>This method is used to check if the queue contains the given element or not. It returns true if the queue contains the element.</li>
+<li>sort(Comparator comp)</li>
+<li>This method is used to sort the elements of the queue on the basis of the given comparator.</li>
+<li>Object poll()</li>
+<li>This method is used to retrieve and remove the head of the queue, or returns null if the queue is empty.</li>
+<li>Object peek()</li>
+<li>This method is used to retrieve, but does not remove, the head of this queue, or returns null if this queue is empty.</li>
+</ul>
+</ul>
+<h2 id="priority-queue">Priority Queue</h2>
+<ul>
+<li>Priority queue implements the Queue interface.</li>
+<li>Priority queue implements heap data structure and stored data in a way that the most important element gets out first.</li>
+<li>Example</li>
+<li>Inserting</li>
+<li>3, 5, 6, 1</li>
+<li>Priority queue</li>
+<li>6 5 3 1</li>
+<li>So the order is the natural ordering.</li>
+<li>Methods</li>
+<li>Same as Queue</li>
+<li>Implements min-heap or max-heap</li>
+<li>By default in Java it implements min-heap; PriorityQueue&lt;Integer&gt; pq = new PriorityQueue&lt;&gt;();</li>
+<li>Constructor: PriorityQueue&lt;E&gt;(init initalCapacity, Comparator&lt;E&gt; camparator); either can be ignored as overloads exist</li>
+<li>Comparable: class implements the interface and overrides compareTo method to use it as the class&#x27;s compareTo method. Basically making the class “I know how to compare myself to others”</li>
+<li>Comparator: Outside of class interface. Comparator has comparing(Function), comparingInt(Int)/long/double and thenComparing() for chaining. Basically “An outside judge that compares 2 classes”.</li>
+<li>sort contract in comparing: if a - b is equal to positive then b goes first then a, if negative then a goes first then b, if equal then one after another.</li>
+<li>Max heap is priorityQueue; new PriorityQueue(Collections.reverseOrder());</li>
+<li>When using maxHeap, we can poll the pq to remove the top (largest) items to find smallest and using minHeap we can find the largest</li>
+<li>Think of pq as like min heap: -&gt;[1,2,4,5,6], maxHeap: -&gt;[6,5,4,2,1]; -&gt; is inserting from front.</li>
+</ul>
+<h2 id="dequearray">DequeArray</h2>
+<ul>
+<li>It is also known as Array Double Ended Queue or Array Deck.</li>
+<li>Allows for elements to be added or removed from the array.</li>
+<li>Implements the Deque interface.</li>
+<li>Methods</li>
+<li>add()</li>
+<li>addFirst()</li>
+<li>addLast()</li>
+<li>getFirst()</li>
+<li>getLast()</li>
+<li>peek()</li>
+<li>peekFirst()</li>
+<li>peekLast()</li>
+<li>remove()</li>
+<li>removeFirst()</li>
+<li>removeLast()</li>
+<li>poll()</li>
+<li>pollFirst()</li>
+<li>pollLast()</li>
+</ul>
+<h2 id="list">List</h2>
+<ul>
+<li>List is an interface that extends to Collection interface</li>
+<li>List has 4 classes that implement it.</li>
+</ul>
+<h4 id="arraylist">ArrayList</h4>
+<ul>
+<li>Array list is not synchronized</li>
+<li>add(int index, Object element)</li>
+<li>This method is used to insert a specific element at a specific position index in a list.</li>
+<li>add(Object o)</li>
+<li>This method is used to append a specific element to the end of a list</li>
+<li>clear()</li>
+<li>This method is used to remove all the elements from any list.</li>
+<li>contains(Object o)</li>
+<li>Returns true if this list contains the specified element.</li>
+<li>get(int index)</li>
+<li>Returns the element at the specified position in this list.</li>
+<li>indexOf(Object O)</li>
+<li>The index the first occurrence of a specific element is either returned, or -1 in case the element is not in the list.</li>
+<li>isEmpty()</li>
+<li>Returns true if this list contains no elements.</li>
+<li>remove(int index)</li>
+<li>Removes the element at the specified position in this list.</li>
+<li>remove(Object o)</li>
+<li>Removes the first occurrence of the specified element from this list, if it is present.</li>
+<li>size()</li>
+<li>toArray()</li>
+<li>set(int index, object o)</li>
+<li>Used to update an element.</li>
+</ul>
+<h4 id="vector">Vector</h4>
+<ul>
+<li>Vector is thread synchronized.</li>
+<li>Constructors (unique one, there are 2 more)</li>
+<li>Vector(int size, int incr)</li>
+<li>Creates a vector whose initial capacity is specified by size and increment is specified by incr. It specifies the number of elements to allocate each time a vector is resized upward.</li>
+<li>Vector&lt;E&gt; v = new Vector&lt;E&gt;(int size, int incr);</li>
+<li>Methods are same as ArrayList</li>
+<li>Vector vs Array List</li>
+<li>1.ArrayList is not synchronized. Vector is synchronized.</li>
+<li>2.ArrayList increments 50% of the current array size if the number of elements exceeds its capacity.        Vector increments 100% means doubles the array size if the total number of elements exceeds its capacity.</li>
+<li>3.ArrayList is not a legacy class. It is introduced in JDK 1.2.Vector is a legacy class.</li>
+<li>4.ArrayList is fast because it is non-synchronized.        Vector is slow because it is synchronized,</li>
+</ul>
+<h4 id="linkedlist">LinkedList</h4>
+<ul>
+<li>Time complexity</li>
+<li>O(1)</li>
+<li>add(int index, Object)</li>
+<li>set(int index, object)</li>
+<li>Change an already existing object in an index.</li>
+<li>remove(Object):</li>
+<li>This method is used to simply remove an object from the LinkedList. If there are multiple such objects, then the first occurrence of the object is removed.</li>
+<li>remove(int index):</li>
+<li>Since a LinkedList is indexed, this method takes an integer value which simply removes the element present at that specific index in the LinkedList. After removing the element and the indices of elements are updated, so does the object of LinkedList is updated giving a new List after the deletion of element/s.</li>
+<li>Iteration</li>
+<li>for(int i = 0; i &lt; q.size(); i++){</li>
+<li>System.out.println(q.get(i));</li>
+<li>}</li>
+<li>toArray()</li>
+<li>object[] arr = list.toArray();</li>
+<li>for(object o : arr)</li>
+<li>System.out.println(o);</li>
+<li>size()</li>
+<li>removeFirst()</li>
+<li>removeLast()</li>
+</ul>
+<h4 id="stack">Stack</h4>
+<ul>
+<li>LIFO (Last In First Out)</li>
+<li>Time complexity</li>
+<li>O(1)</li>
+<li>empty()</li>
+<li>It returns true if nothing is on the top of the stack. Else, returns false.</li>
+<li>peek()</li>
+<li>Returns the element on the top of the stack, but does not remove it.</li>
+<li>pop()</li>
+<li>Removes and returns the top element of the stack. An ‘EmptyStackException’</li>
+<li>An exception is thrown if we call pop() when the invoking stack is empty.</li>
+<li>push(Object element)</li>
+<li>Pushes an element on the top of the stack.</li>
+<li>search(Object element)</li>
+<li>It determines whether an object exists in the stack. If the element is found,</li>
+<li>It returns the position of the element from the top of the stack. Else, it returns -1.</li>
+</ul>
+<h2 id="map">Map</h2>
+<ul>
+<li>The Map interface is not a subtype of the Collection interface. Therefore it behaves a bit differently from the rest of the collection types. A map contains unique keys.</li>
+<li>There are 3 classes that implement the map interface</li>
+</ul>
+<h4 id="hashmap">HashMap</h4>
+<ul>
+<li>HashMap stores data in a key value pair.</li>
+<li>The pairs are unordered.</li>
+<li>Duplicate keys are not allowed, if you insert a duplicate key, the original key will be replaced.</li>
+<li>HashMap allows only one null key and there are no restrictions on values.</li>
+<li>HashMap does not allow primitive types, wrapper needs to be applied for primitive types.</li>
+<li>Creating a HashMap</li>
+<li>HashMap&lt;Character, Integer&gt; map = new HashMap&lt;&gt;();</li>
+<li>Key is type char and value is type int.</li>
+<li>Methods</li>
+<li>clear()</li>
+<li>Removes all of the mappings from this map.</li>
+<li>containsKey(Object key)</li>
+<li>Returns true if this map contains a mapping for the specified key.</li>
+<li>containsValue(Object value)</li>
+<li>Returns true if this map maps one or more keys to the specified value.</li>
+<li>get(Object key)</li>
+<li>Returns the value to which the specified key is mapped, or null if this map contains no mapping for the key.</li>
+<li>isEmpty()</li>
+<li>Returns true if this map contains no key-value mappings.</li>
+<li>put(K key, V value)        Associates the specified value with the specified key in this map.</li>
+<li>remove(Object key)</li>
+<li>Removes the mapping for the specified key from this map if present.</li>
+<li>size()</li>
+<li>Returns the number of key-value mappings in this map.</li>
+<li>equals()</li>
+<li>Compare the specified object with this map for equality.</li>
+<li>Example: map1.equals(map2);</li>
+<li>toString()</li>
+<li>Returns a string representation of this map.</li>
+</ul>
+<h4 id="hashtable">HashTable</h4>
+<ul>
+<li>It is like HashMap but is synchronized.</li>
+</ul>
+<h4 id="linkedhashmap">LinkedHashMap</h4>
+<ul>
+<li>Same as HashMap with an additional feature of maintaining order.</li>
+<li>Creating linkedhashmap</li>
+<li>LinkedHashMap&lt;String, Boolean&gt; lhm = new LinkedHashMap&lt;&gt;();</li>
+</ul>
+<h4 id="treemap">TreeMap</h4>
+<ul>
+<li>Almost the same as HashMap with an additional feature of the pairs being sorted.</li>
+<li>Creating treemap</li>
+<li>TreeMap&lt;Integer, Character&gt; treeMap = new TreeMap&lt;&gt;();</li>
+</ul>
+<h2 id="set">Set</h2>
+<ul>
+<li>Set in an interface that has unordered unique element storing capability. Duplicate elements are not possible.</li>
+<li>There are 4 classes that implements set interface</li>
+</ul>
+<h4 id="hashset">HashSet</h4>
+<ul>
+<li>HashSet implements the set interface and uses a hash table as the underlying algorithm.</li>
+<li>Null value is allowed</li>
+<li>Orders according to hash code.</li>
+<li>Methods</li>
+<li>add(E e)</li>
+<li>Used to add the specified element if it is not present, if it is present then return false.</li>
+<li>clear()</li>
+<li>Used to remove all the elements from the set.</li>
+<li>contains(Object o)</li>
+<li>Used to return true if an element is present in a set.</li>
+<li>remove(Object o)</li>
+<li>Used to remove the element if it is present in the set.</li>
+<li>iterator()</li>
+<li>Used to return an iterator over the element in the set.</li>
+<li>isEmpty()</li>
+<li>Used to check whether the set is empty or not. Returns true for empty and false for a non-empty condition for set.</li>
+<li>size()</li>
+<li>Used to return the size of the set.</li>
+<li>clone()</li>
+<li>Used to create a shallow copy of the set.</li>
+<li>equals()</li>
+<li>Used to verify the equality of an Object with a HashSet and compare them. The list returns true only if both HashSet contains the same elements, irrespective of order.</li>
+</ul>
+<h4 id="linkedhashset">LinkedHashSet</h4>
+<ul>
+<li>Same as HashSet with the additional feature of being ordered by the order of insertion.</li>
+</ul>
+<h4 id="treeset">TreeSet</h4>
+<ul>
+<li>TreeSet extends to sortedSet.</li>
+<li>TreeSet stores elements in a sorted way.</li>
+<li>Methods</li>
+<li>Same as HashSet</li>
+</ul>
+<h4 id="enumset">EnumSet</h4>
+<h2 id="tree">Tree</h2>
+<h3 id="what-is-a-tree">What is a tree?</h3>
+<ul>
+<li>A tree is a non-linear and hierarchical  data structure because the nodes are connected in a multilevel structure, unlike arrays or linked lists that are connected in a linear way.</li>
+</ul>
+<h3 id="type-of-trees">Type of trees</h3>
+<h4 id="binary-tree">Binary Tree</h4>
+<h5 id="properties">Properties</h5>
+<ul>
+<li>Each node of a binary tree can have up to 2 children.</li>
+<li>1st node is root node</li>
+<li>A node with one child, the other is NULL.</li>
+<li>A node with no child is a leaf node.</li>
+<li>Maximum number nodes in a binary tree with height h</li>
+<li>= 2^n - 1                n = number of nodes</li>
+<li>n = 2 ^(h+1) - 1</li>
+<li>Balanced binary tree</li>
+<li>Difference between the height of the left and right subtree for every node is no more than k  (mostly 1).</li>
+<li>Height = no of edges in the longest path from root to a leaf.</li>
+<li>Diff = |h_left - h_right|</li>
+<li>Height of a empty tree is -1</li>
+<li>Height of a tree with 1 node is 0.</li>
+</ul>
+<h5 id="types-of-binary-tree">Types of binary tree</h5>
+<ul>
+<li>Strict/Proper binary tree</li>
+<li>Each node can have 2 or 0 children, no node can have 1 child.</li>
+<li>Complete binary tree</li>
+<li>All inner levels have to be filled. The last node does not need to be filled but nodes have to be left aligned.</li>
+<li>Max number of nodes at level, i = 2^i</li>
+<li>Min Height of complete binary tree</li>
+<ul>
+<li>lowerBound(log⋁2n)</li>
+<li>Time complexity</li>
+<li>O(log2n)</li>
+<li>Perfect binary tree</li>
+<li>All nodes are filled, including the 2nd to last level.</li>
+<li>Height of a perfect binary tree with n nodes</li>
+<ul>
+<li>h = log⋁2(n+1) -1</li>
+<li>Max height</li>
+<li>n-1</li>
+<li>Time complexity</li>
+<li>O(n)</li>
+</ul>
+</ul>
+</ul>
+<h5 id="binary-tree-traversal">Binary tree traversal</h5>
+<ul>
+<li>Pre-order</li>
+<li>node&gt;left&gt;right</li>
+<li>In-order</li>
+<li>left&gt;node&gt;right</li>
+<li>Post-order</li>
+<li>left&gt;right&gt;node</li>
+<li>First draw pseudo child nodes at leaf nodes.</li>
+<ul>
+<li>When you find a node once, then that’s pre-order</li>
+<li>When you find a node twice, then that’s in-order</li>
+<li>When you find a node thrice, then that’s post-order</li>
+</ul>
+</ul>
+<h5 id="implementation-of-binary-tree">Implementation of binary tree</h5>
+<ul>
+<li>Dynamically created nodes</li>
+<li>struct Node{</li>
+<li>int data;</li>
+<li>Node* left;</li>
+<li>Node* right;</li>
+<li>};</li>
+<li>code: https://github.com/ihashib/DSA/blob/main/Tree/Binary%20tree/binaryTreeTraversal/src/main/java/BinaryTree/BinaryTreeOperations.java</li>
+<li>Array</li>
+<li>Only for perfect tree</li>
+<li>Index: 0 1 2 3 4 5 6</li>
+<li>Value: 2 4 1 5 8 7 9</li>
+<li>For node at index i,</li>
+<ul>
+<li>left child index = 2i + 1</li>
+<li>right child index = 2i + 2</li>
+</ul>
+</ul>
+<h5 id="find-shortest-path-from-root">Find shortest path from root</h5>
+<ul>
+<li>Use BFS to traverse and find the target node.</li>
+<li>Keep track of parents of the nodes traversed.</li>
+<li>Hashmap is a good option</li>
+<li>When node is found, use the hashmap to backtrack through the parents.</li>
+</ul>
+<pre><code>-----BFS code-------
+if(nodeToFind == currentNode){
+while(currentNode !=null){
+path.add(0, currentNode);
+currentNode = parent.get(currentNode);
+}
+-------BFS code-----
+parent.put(currentNode.left/right, currentNode);
+-------BFS code----</code></pre>
+<h4 id="binary-search-tree">Binary Search Tree</h4>
+<ul>
+<li>A binary search tree is a binary tree where each node is less than its right child and bigger than its left child.</li>
+</ul>
+<h5 id="operation">Operation</h5>
+<ul>
+<li>Insert / Find</li>
+<li>Start at root</li>
+<li>Always insert as a leaf.</li>
+<li>Example: insert 12 in the above tree.</li>
+<li>12 &lt; 15 -&gt; Search in the left of 15</li>
+<li>12 &gt; 8 -&gt; Search in the right of 8</li>
+<li>12 &gt; 11 -&gt; Search in the right of 11</li>
+<li>12 &lt; 13 -&gt; 13 is a leaf node, insert 12 as the left child of 13</li>
+<li>Delete</li>
+<li>Delete a left node</li>
+<li>Find the leaf node and delete</li>
+<li>Delete node with one 1 child</li>
+<li>Delete the node and move the child node as the deleted node’s replacement.</li>
+<li>Delete 2 Children</li>
+<li>Take the minimum value of the delete node’s right subtree.</li>
+</ul>
+<h5 id="levels-bst">Levels BST</h5>
+<ul>
+<li>Each level of a BST can be determined using a BFS</li>
+<li>Insert a separation node in the queue at each level.</li>
+<li>To do this, insert the separation node with the root.</li>
+<li>In the while loop of the queue, check for the separation nodes, when one comes up that&#x27;s a level. Just insert another separation node here so that the next level can be determined using the queue.</li>
+</ul>
+<pre><code>queue.append(root)
+queue.append(None)  # Initial level separator
+while queue:
+   node = queue.pop(0)
+   if node is None:
+       level += 1
+       if queue != empty
+:
+           queue.append(None)</code></pre>
+<h5 id="height-of-bst">Height of BST</h5>
+<ul>
+<li>Mathematically and knowing the value for n (number of nodes</li>
+<li>Worst case: h = n - 1</li>
+<li>Best case: h ≈ log₂(n + 1) - 1</li>
+<li>Recursion Code:</li>
+</ul>
+<pre><code>def find_height(root):
+   if root is None:
+       return 0
+   else:
+       left_height = find_height(root.left)
+       right_height = find_height(root.right)
+       return max(left_height, right_height) + 1</code></pre>
+<ul>
+<li>Here, we are returning when we find a leaf node as 0 and visiting the left and right subtree of a node. The point of the recursion is to visit all the nodes, not count them.</li>
+</ul>
+<ul>
+<li>The return statement is finding the max of the node’s left and right subtree and adding 1 to account for the edge that connects the current node and its max(right, left) subtree.</li>
+<li>For Iteration, use BFS/Queue for level order traversal.</li>
+</ul>
+<h5 id="minimal-height">Minimal height</h5>
+<ul>
+<li>In a binary search tree, the height (the number of edges in the longest path from the root to a leaf node) plays a critical role in the speed of operations like searching, insertion, and deletion. The shorter the tree, the fewer comparisons you need to make to find an element.</li>
+<li>Minimal Height: What It Means</li>
+<li>A binary search tree with &quot;minimal height&quot; is the most balanced tree you can construct from a given set of sorted data. Here&#x27;s why this is important:</li>
+<li>Optimal Search Efficiency: A balanced BST ensures that the search time complexity remains at O(log n), where n is the number of nodes. This means that as the tree grows, the number of comparisons needed to find an element increases relatively slowly.</li>
+<li>Minimal Height Algo</li>
+<li>Given a sorted array, minimizing the BST&#x27;s height involves these key steps:</li>
+<li>Find the Middle Element: The middle element of the array becomes the root of the tree. This choice is strategic.</li>
+<li>Recurse Leftovers: The portion of the array to the left of the middle element becomes the left subtree, and the portion to the right becomes the right subtree.</li>
+<li>Repeat on Subarrays: Recursively apply steps 1 and 2 to the subarrays until there are no more elements.</li>
+<li>Illustrative Example</li>
+<li>Let&#x27;s say you have the sorted array [1, 2, 3, 4, 5]. Here&#x27;s how a minimal height BST would be created:</li>
+<li>The middle element, 3, becomes the root.</li>
+<li>The left subarray [1, 2] and right subarray [4, 5] are formed.</li>
+<li>Recursively, 2 becomes the root of the left subtree, and 4 becomes the root of the right subtree.</li>
+<li>Finally, 1 becomes the left child of 2, and 5 becomes the right child of 4.</li>
+<li>Code</li>
+</ul>
+<pre><code>Node minimalBst(Int[] arr, int start, int end){
+   if(node == null) return;
+   int mid = (start + end)/2;
+   Node node = new Node(arr[mid]);
+   node.left = minimalBst(arr, start, mid-1);
+   node.right = minimalBst(arr, mid+1, end);
+   return node;
+}</code></pre>
+<h5 id="valid-bst">Valid BST</h5>
+<ul>
+<li>2 ways</li>
+<li>Checking 2 sub trees</li>
+<li>Check the left subtree and determine if all nodes have smaller values than the parent.</li>
+<li>Check the right and do the same for larger values.</li>
+</ul>
+<pre><code>private boolean isValidBSTHelper(Node node, Integer min, Integer max) {
+   if (node == null) return true; // Empty subtree is valid
+   if (min != null &amp;&amp; node.data &lt;= min) return false;
+   if (max != null &amp;&amp; node.data &gt;= max) return false;
+   return isValidBSTHelper(node.left, min, node.data) &amp;&amp;
+          isValidBSTHelper(node.right, node.data, max);
+}</code></pre>
+<ul>
+<li>Inorder traversal</li>
+</ul>
+<ul>
+<li>The inorder traversal of BST always gives a sorted array in ascending order</li>
+</ul>
+<h4 id="balancing-tree">Balancing tree</h4>
+<ul>
+<li>When the right and the left subtree have the same height or the difference is 1, then it’s a balanced tree.</li>
+<li>Balanced trees are essential because they guarantee that search, insertion, and deletion operations have a time complexity of O(log n). This efficiency stems from minimizing the height of the tree.</li>
+</ul>
+<h4 id="b-tree">B-Tree</h4>
+<ul>
+<li>TBA</li>
+</ul>
+<h4 id="bst-vs-binary-tree">BST vs Binary tree</h4>
+<h3 id="heap">Heap</h3>
+<ul>
+<li>TO BE REWRITTEN</li>
+<li>Max heap is when a binary tree’s parent node is bigger than its child nodes. The child nodes do not have to be put in order.</li>
+<li>Min Heap is when a binary tree’s child node is bigger than the parent node.</li>
+<li>Heap is a complete binary tree.</li>
+<li>Heaps are best expressed in arrays. To find the node and it’s child nodes,</li>
+<ul>
+<li>left child, 2i+1</li>
+<li>right child, 2i +2</li>
+<li>Parent; (i-1)/2</li>
+<li>Insert node in heap</li>
+<li>The nodes goes at the end of the array</li>
+<li>Compare the node with parent, if parent &gt; node, swap</li>
+<li>Repeat step 2.</li>
+<li>Delete node from heap</li>
+<li>Remove the node</li>
+<li>Now Move the last node in the heap and place it at that removed node.</li>
+<li>If node &lt;= both of it’s children, then no problem</li>
+<li>But if node &gt; both children, take the smallest child and swap. Repeat.</li>
+</ul>
+</ul>
+<h2 id="graph">Graph</h2>
+<h3 id="what-is-a-graph">What is a graph?</h3>
+<ul>
+<li>Graph is a collection of nodes/vertices that are connected by edges.</li>
+<li>A graph can be directed or undirected.</li>
+<li>There can be subgraphs that are isolated from the graph.</li>
+<li>Unlike trees, graphs can have cycles.</li>
+</ul>
+<h3 id="graph-representation">Graph Representation</h3>
+<h4 id="adjacency-list">Adjacency list</h4>
+<ul>
+<li>Directed or undirected graph’s nodes and edges can be shown as a list.</li>
+<li>Example</li>
+</ul>
+<h4 id="adjacency-matrix">Adjacency matrix</h4>
+<ul>
+<li>A graph with N nodes can be shown as a nxn matrix.</li>
+<li>Each intersecting row and column represent an edge.</li>
+<li>Can be shown as boolean.</li>
+<li>Example</li>
+</ul>
+<h4 id="incidence-matrix">Incidence matrix</h4>
+<ul>
+<li>This one is concerned with edges and directed graphs.</li>
+<li>Outgoing connections like, 0 -&gt; 1 is 1.</li>
+<li>Incoming connections like, 0 &lt;- 1 is -1.</li>
+<li>No connection is 0.</li>
+</ul>
+<h3 id="graph-search">Graph Search</h3>
+<h4 id="bfs">BFS</h4>
+<ul>
+<li>BFS is useful to find the shortest path between nodes as it searches the node’s neighbors.</li>
+<li>Once a node is visited, it has to be marked to avoid cycles.</li>
+</ul>
+<h5 id="bfs-algo">BFS Algo</h5>
+<ul>
+<li>Create a queue</li>
+<li>Enqueue the starting node</li>
+<li>Until the queue is empty</li>
+<li>dequeue the node and visit</li>
+<li>Get all connected node from the current node</li>
+<li>Iterate through the connected node and if a node is not visited, enqueue the node and mark as visited.</li>
+<li>Queue is used in BFS algo because</li>
+<li>First In First Out (FIFO), this keeps track of the levels of the graph as the connected nodes of the current node are the next level to that node. Then when exploring the connected node’s node, we enqueue that node’s level as a whole. When dequeuing, each level is explored first as we enqueued the connected nodes first.</li>
+</ul>
+<h5 id="bidirectional-search">Bidirectional search</h5>
+<ul>
+<li>The fastest way to find the shortest path.</li>
+<li>BFS is used and the 2 nodes that need the shortest path start their own BFS search. The search meets at the middle point.</li>
+<li>Bidirectional search uses O(k^(d/2)) time, whereas BFS in one direction would take O(k^d) time.</li>
+</ul>
+<h4 id="dfs">DFS</h4>
+<ul>
+<li>DFS is useful for searching in a graph as it follows children of nodes.</li>
+<li>Nodes need to be marked once visited.</li>
+</ul>
+<h5 id="recursive-algo">Recursive algo</h5>
+<ul>
+<li>Start from the desired node</li>
+<li>Check if node is visited, return if not</li>
+<li>Use the node</li>
+<li>Mark node as visited</li>
+<li>Get connected nodes of the node</li>
+<li>Iterate through the connected nodes and recursively call each node.</li>
+</ul>
+<h5 id="iteration-algo">Iteration algo</h5>
+<ul>
+<li>Create a stack</li>
+<li>Push start node in stack</li>
+<li>Until stack is empty,</li>
+<li>pop the stack and use the node</li>
+<li>get nodes connected to the node</li>
+<li>Iterated through the connected nodes, if a node is not visited, push to stack and mark as visited.</li>
+<li>Stack is used in the iteration (as well as in recursive) because</li>
+<li>Last In First Out(LIFO), keeps track of the depth. We pop the current node from the stack, we push the connected nodes of the current node in the stack, the stack keeps track of the path of nodes as we go deeper and deeper. When popping, it pops from the end of the stack, resulting in backtracking to the last fork point of the graph when a deadend is reached.</li>
+</ul>
+<h3 id="topological-sort">Topological sort</h3>
+<ul>
+<li>Also known as Topsort</li>
+<li>Used for dependency sorting</li>
+<li>Packages: 1, 2, 3, 4</li>
+<li>Dependencies: 1 -&gt; 2, 2 -&gt; 3, 3 -&gt; 4</li>
+<li>Topsort: 4, 3, 2, 1</li>
+<li>So, package 4 has to be built first, then 3, then 2, then 1.</li>
+<li>2 Algorithms</li>
+<li>NOTE 1: The graph (1 -&gt; 2 -&gt; 3) here represents, 1 depends on 2, 2 depends on 3 and 3 does not have dependencies</li>
+<li>NOTE 2: The graphs has to be Directed Acyclic Graph (DAG)</li>
+</ul>
+<h5 id="dfs-based">DFS based</h5>
+<ul>
+<li>Time: O(V+E), V is vertex count and E is edge count.</li>
+<li>We traverse the graph using DFS at a random node till we find the end of the subtree. The end of the subtree means that node does not have any dependent nodes. From the DFS algo, we use the visited list and reverse it, because we want the node with no dependency first</li>
+<li>Example</li>
+<li>Graph: 1 -&gt; 2 -&gt; 3, visited[] = [1,2,3] -&gt; reverse visited[] = [3,2,1]</li>
+<li>Add the reversed visited to the order list</li>
+<li>Return order list when all nodes are traversed</li>
+</ul>
+<h5 id="kahn-s-algorithm">Kahn&#x27;s Algorithm</h5>
+<ul>
+<li>Time: O(V+E), V is vertex count, E is edge count</li>
+<li>TO BE ADDED</li>
+</ul>
+<h3 id="spanning-tree">Spanning Tree</h3>
+<ul>
+<li>Spanning tree is a tree that touches every vertex though the edges in a connected graph</li>
+</ul>
+<h4 id="number-of-spanning-trees">Number of spanning trees</h4>
+<h4 id="krustal-s-algorithm-n-log-n">Krustal’s Algorithm n log n</h4>
+<ul>
+<li>With min heap implementation, time complexity O(n log n)</li>
+</ul>
+<h4 id="algorithm">Algorithm</h4>
+<ul>
+<li>Step 1</li>
+<li>Start from the edge with the lowest weight.</li>
+<li>Step 2</li>
+<li>Select the lowest edge from the connected edges from the vertex.</li>
+<li>Step 3</li>
+<li>Repeat from step 1 and till the last vertex is discovered.</li>
+</ul>
+<h4 id="prim-s-algorithm-v-e">Prim’s Algorithm V.E</h4>
+<ul>
+<li>With heap, time complexity O(E log V)</li>
+</ul>
+<h4 id="algorithm">Algorithm</h4>
+<ul>
+<li>Step 1</li>
+<li>Select the edge with the lowest weight.</li>
+<li>Step 2</li>
+<li>Select the next edge with the lowest weight</li>
+<li>Step 3</li>
+<li>Repeat from step 1 till the last vertex is discovered.</li>
+</ul>
+<h3 id="shortest-path">Shortest path</h3>
+<h4 id="dijkstra-s-algorithm-n-2">Dijkstra’s Algorithm N^2</h4>
+<h4 id="algorithm">Algorithm</h4>
+<ul>
+<li>Step 1</li>
+<li>Start from a vertex and the initial distance from the start vertex to all nodes is infinite.</li>
+<li>Step 2</li>
+<li>Discover the vertex’s connected edges and vertices.</li>
+<li>Step 3</li>
+<li>Assign distances to the vertices</li>
+<li>if(vertex_u + edge_u_v &lt; vartex_v)</li>
+<li>Step 4</li>
+<li>Select vertex with the lowest distance</li>
+<li>Step 5</li>
+<li>repeat from step 2 till there is no node remaining.</li>
+</ul>
+<h3 id="avl-tree">AVL tree</h3>
+<h3 id="red-black-tree">Red-black tree</h3>
+<h2 id="algorithms">Algorithms</h2>
+<h3 id="optimization-problems">Optimization problems</h3>
+<ul>
+<li>khbk</li>
+</ul>
+<h2 id="greedy">Greedy</h2>
+<h3 id="theory">Theory</h3>
+<ul>
+<li>Sorting Algorithms</li>
+</ul>
+<h3 id="merge-sort-n-logn">Merge sort n logn</h3>
+<ul>
+<li>A divide and conquer algorithm and done in a recursive way.</li>
+<li>Time complexity: O(n logn)</li>
+</ul>
+<h4 id="algorithm">Algorithm</h4>
+<ul>
+<li>Take the initial array and divide equally into 2 sub arrays.</li>
+<li>Recursively divide those 2 sub arrays into their own sub arrays, usually done one subarray first, then the next.</li>
+<li>When only one element is present in an array, return. This is the recursion breaking condition.</li>
+<li>When all the arrays have one element, merge them one by one.</li>
+<li>The merge function algo works in a recursive way.</li>
+<li>Take the 2 sub arrays into the merge function and see which one is bigger, put the bigger one into the sorted array. Since we don’t know which sub array is bigger, we use a while loop and run it until one or both sub arrays run out of elements.</li>
+<li>If there are still elements remaining in one or both arrays, we put them at the back of the sorted array and return.</li>
+</ul>
+<h4 id="applications">Applications</h4>
+<ul>
+<li>Merge sort does not need random access, it uses sequential access. This using a linked list is best with merge sort as arrays take more space and with array implementation we need a temporary array.</li>
+</ul>
+<h4 id="drawbacks">Drawbacks</h4>
+<ul>
+<li>Takes extra space.</li>
+<li>Slower than other sorting algorithms.</li>
+<li>Doesn’t have an array sorted check.</li>
+</ul>
+<h3 id="quick-sort-n-logn">Quick sort n logn</h3>
+<ul>
+<li>When you think about Quick sort, think of a pivot.</li>
+<li>Also a divide and conquer algorithm that uses recursion.</li>
+<li>Time complexity: O(n logn), /Theta(n^2)</li>
+</ul>
+<h4 id="algorithm">Algorithm</h4>
+<ul>
+<li>Sorts the array by picking a pivot element. Then sorts the other elements of the array by following</li>
+<li>Elements bigger than the pivot have to be on the right.</li>
+<li>Elements smaller than the pivot have to be on the left.</li>
+<li>After swapping the big and small elements, we place the pivot at the convergence point of the iterators. So the pivot element is placed at the final sorted position.</li>
+<li>Then we sort the right and left remaining array elements in this fashion until the whole array is sorted.</li>
+<li>Partition</li>
+<li>Select the first element of the array as pivot.</li>
+<li>2 variables, high and low are pointing to the first and last element.</li>
+<li>We compare the low elements with pivot, if the element is bigger than the pivot, we keep the low index.</li>
+<li>Then we compare the high elements with pivot, if the element is lower than the pivot, we keep the high index.</li>
+<li>Then if low is less than high index, then we swap the elements.</li>
+<li>When low and high converge, we stop swapping and swap the pivot with the high index. Now the pivot is sorted.</li>
+<li>Now the left of the pivot is smaller and the right is bigger.</li>
+<li>So we need to sort those elements in a similar way, so we return the pivot position, which is the high index.</li>
+<li>Recursion</li>
+<li>This method checks if low is less than high, this is the breaking condition.</li>
+<li>We pass the array, low and high values to the partition method for the first time and we get the first pivot point.</li>
+<li>Now we pass the left of the pivot to the recursion.</li>
+<li>Then pass the right of the pivot to the recursion.</li>
+<li>Low will be bigger than high at a point and the recursion will break.</li>
+<li>PENDING: illustrations</li>
+<li>Quick sort is best for arrays as this does not require an additional array which takes more space.</li>
+</ul>
+<h3 id="heap-sort-n-log-n">Heap Sort n log n</h3>
+<ul>
+<li>// Java program for implementation of Heap Sort</li>
+<li>public class HeapSort {</li>
+<li>public void sort(int arr[])</li>
+<li>{</li>
+<li>int N = arr.length;</li>
+<li>// Build heap (rearrange array)</li>
+<li>for (int i = N / 2 - 1; i &gt;= 0; i--)</li>
+<li>heapify(arr, N, i);</li>
+<li>// One by one extract an element from heap</li>
+<li>for (int i = N - 1; i &gt; 0; i--) {</li>
+<li>// Move current root to end</li>
+<li>int temp = arr[0];</li>
+<li>arr[0] = arr[i];</li>
+<li>arr[i] = temp;</li>
+<li>// call max heapify on the reduced heap</li>
+<li>heapify(arr, i, 0);</li>
+<li>}</li>
+<li>}</li>
+<li>// To heapify a subtree rooted with node i which is</li>
+<li>// an index in arr[]. n is size of heap</li>
+<li>void heapify(int arr[], int N, int i)</li>
+<li>{</li>
+<li>int largest = i; // Initialize largest as root</li>
+<li>int l = 2 * i + 1; // left = 2*i + 1</li>
+<li>int r = 2 * i + 2; // right = 2*i + 2</li>
+<li>// If left child is larger than root</li>
+<li>if (l &lt; N &amp;&amp; arr[l] &gt; arr[largest])</li>
+<li>largest = l;</li>
+<li>// If right child is larger than largest so far</li>
+<li>if (r &lt; N &amp;&amp; arr[r] &gt; arr[largest])</li>
+<li>largest = r;</li>
+<li>// If largest is not root</li>
+<li>if (largest != i) {</li>
+<li>int swap = arr[i];</li>
+<li>arr[i] = arr[largest];</li>
+<li>arr[largest] = swap;</li>
+<li>// Recursively heapify the affected sub-tree</li>
+<li>heapify(arr, N, largest);</li>
+<li>}</li>
+<li>}</li>
+</ul>
+<h3 id="bubble-sort-n-2">Bubble sort n^2</h3>
+<ul>
+<li>Time complexity: O(n^2)</li>
+<li>3 4 1 5 2</li>
+<li>We take the array and compare 2 adjacent elements. If one is smaller than the other then we swap them.</li>
+<li>3 1 4 2 5 &gt; 1 3 2 4 5 &gt; 1 2 3 4 5</li>
+<li>Pseudocode</li>
+<li>for( i = 1 to arrayLength)</li>
+<li>for(j = 0 to arrayLength-1)</li>
+<li>if array[j] &lt; array[j+1]</li>
+<li>swap(i, j)</li>
+</ul>
+<h3 id="selection-sort-n-2">Selection sort n^2</h3>
+<ul>
+<li>Time complexity: O(n^2)</li>
+<li>3 4 1 5 2</li>
+<li>We select an element and check in the whole array that if there is a value less than it. If found then keep swapping till the selected element and the less than the selected element is swapped.</li>
+<li>1 3 4 5 2 &gt; 1 2 3 4 5</li>
+<li>Pseudocode</li>
+<li>for( i = 0 to arrayLength-1)</li>
+<li>int min = i;</li>
+<li>for(j = i+1 to arrayLength)</li>
+<li>if(arr[j] &lt; arr[min)</li>
+<li>min = j;</li>
+<li>if(min != i)</li>
+<li>swap(min, i)</li>
+</ul>
+<h3 id="insertion-sort-n-2">Insertion sort n^2</h3>
+<ul>
+<li>Time complexity: O(n^2)</li>
+<li>We start from the 0th index and look at the left. If there is an element that is lower than the current element, then swap it.</li>
+<li>3 4 1 5 2</li>
+<li>3 1 4 5 2 &gt; 1 3 4 5 2 &gt; 1 3 4 2 5 &gt; 1 3 2 4 5 &gt; 1 2 3 4 5</li>
+<li>Pseudocode</li>
+<li>for(i = 1 to arrayLength)</li>
+<li>int j = i</li>
+<li>while(j &gt; 1 &amp;&amp; arr[j] &lt; arr[j-1]</li>
+<li>swap(j, j-1)</li>
+<li>j--;</li>
+</ul>
+<h2 id="searching-algorithm">Searching algorithm</h2>
+<h3 id="interpolation-search">Interpolation search</h3>
+<h2 id="dynamic-programming">Dynamic Programming</h2>
+<h3 id="what-is-it">What is it?</h3>
+<ul>
+<li>Unlike greedy methods where a set algorithm is used to solve a problem, in dynamic programming we explore all possible solutions and pick the best one. It’s an optimization over recursion, where a recursive algorithm can take exponential time, optimization can lead to a linear time.</li>
+</ul>
+<h3 id="types-of-dp">Types of DP</h3>
+<h4 id="memoization-top-down">Memoization (Top down)</h4>
+<ul>
+<li>Recursion problems that have to calculate the same subproblem multiple times, we use an array to save the already calculated solutions. Then, when an already calculated subproblem comes again, we use the saved data.</li>
+<li>Starts from the top or destination state and calculates itself to the base case recursively.</li>
+<li>Example:</li>
+<li>fibo(n, memo[])</li>
+<li>if(n == 1 || n ==2)</li>
+<li>return 1</li>
+<li>if(memo[n] != -1){</li>
+<li>return memo[n]</li>
+<li>return fibo(n-1, memo)+fibo(n-2, memo)</li>
+<li>Here, memo is used to save the already calculated subproblems and used when the same subproblem occurs again.</li>
+</ul>
+<h4 id="tabulation-bottom-up">Tabulation (Bottom up)</h4>
+<ul>
+<li>Like memoization, tabulation uses an array to build from the base case to the destination state. As a result it’s a bottom up approach that uses iterations to solve the problem.</li>
+<li>Example:</li>
+<li>fibo(n)</li>
+<li>memo[]</li>
+<li>mem[0] = 1, memo[1] = 1;</li>
+<li>for(i = 2, till n)</li>
+<li>memo[i] = memo[i-1]+memo[i-2];</li>
+<li>return memo;</li>
+<li>As we can see, the tabulation method uses the array to build the solution from the bottom.</li>
+</ul>
+<h4 id="memoization-vs-tabulation">Memoization vs Tabulation</h4>
+<ul>
+<li>Memoization uses recursion</li>
+<li>tabulation uses iteration.</li>
+<li>Memoization uses the array as a cache that may or may not be filled</li>
+<li>tabulation uses the array to build its solution so it will be filled.</li>
+<li>Memoization is best when all subproblems are not required to be solved</li>
+<li>tabulation is best when all subproblems need to be solved.</li>
+</ul>
+<pre><code>#ib</code></pre>
+</section>

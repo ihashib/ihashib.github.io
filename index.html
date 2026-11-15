@@ -75,7 +75,7 @@ body_class: is-home
         </div>
         <span class="tile-name">Skills</span>
       </a>
-      <a class="tile tile-m tile-strip t-ember" href="{{ '/blog/' | relative_url }}">
+      <a class="tile tile-m tile-strip t-ember" href="{{ '/notes/' | relative_url }}">
         <div class="tile-faces">
           {% if site.posts.size > 0 %}
             <div class="tile-face"><svg class="tile-art" viewBox="2 38 92 52" preserveAspectRatio="xMaxYMid meet" aria-hidden="true"><path d="M4 72C22 40 38 92 56 62S82 36 92 46"/><path d="M4 86H64"/></svg><small>Latest post</small><strong>{{ site.posts.first.title }}</strong></div>
@@ -83,7 +83,7 @@ body_class: is-home
             <div class="tile-face"><svg class="tile-art" viewBox="2 38 92 52" preserveAspectRatio="xMaxYMid meet" aria-hidden="true"><path d="M4 72C22 40 38 92 56 62S82 36 92 46"/><path d="M4 86H64"/></svg><small>Notes and posts</small><strong>Backend, systems and robots</strong><span>First post coming soon</span></div>
           {% endif %}
         </div>
-        <span class="tile-name">Writing</span>
+        <span class="tile-name">Notes</span>
       </a>
       <a class="tile tile-s t-play" href="{{ '/play/' | relative_url }}" aria-label="Mini games: two short games">
         <i class="fas fa-gamepad" aria-hidden="true"></i><span class="tile-name">Mini games</span>

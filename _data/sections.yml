@@ -24,11 +24,10 @@
   title: Skills
   url: /skills/
   icon: fa-screwdriver-wrench
-- id: writing
-  title: Writing
-  url: /blog/
-  icon: fa-pen-nib
-  external_page: true
+- id: notes
+  title: Notes
+  url: /notes/
+  icon: fa-book
 - id: contact
   title: Contact
   url: /contact/
