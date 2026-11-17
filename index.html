@@ -69,19 +69,9 @@ body_class: is-home
         </div>
         <span class="tile-name">IoT</span>
       </a>
-      <a class="tile tile-m tile-strip t-blue" href="{{ '/skills/' | relative_url }}">
+      <a class="tile tile-m tile-notes t-ember" href="{{ '/notes/' | relative_url }}">
         <div class="tile-faces">
-          <div class="tile-face"><svg class="tile-art" viewBox="4 14 92 72" preserveAspectRatio="xMaxYMid meet" aria-hidden="true"><path d="M28 22 6 50 28 78M72 22 94 50 72 78M58 16 42 84"/></svg><small>Java first</small><strong>Spring Boot · Microservices · SQL · NoSQL</strong><span>Plus system architecture, cloud and firmware</span></div>
-        </div>
-        <span class="tile-name">Skills</span>
-      </a>
-      <a class="tile tile-m tile-strip t-ember" href="{{ '/notes/' | relative_url }}">
-        <div class="tile-faces">
-          {% if site.posts.size > 0 %}
-            <div class="tile-face"><svg class="tile-art" viewBox="2 38 92 52" preserveAspectRatio="xMaxYMid meet" aria-hidden="true"><path d="M4 72C22 40 38 92 56 62S82 36 92 46"/><path d="M4 86H64"/></svg><small>Latest post</small><strong>{{ site.posts.first.title }}</strong></div>
-          {% else %}
-            <div class="tile-face"><svg class="tile-art" viewBox="2 38 92 52" preserveAspectRatio="xMaxYMid meet" aria-hidden="true"><path d="M4 72C22 40 38 92 56 62S82 36 92 46"/><path d="M4 86H64"/></svg><small>Notes and posts</small><strong>Backend, systems and robots</strong><span>First post coming soon</span></div>
-          {% endif %}
+          <div class="tile-face"><svg class="tile-art" viewBox="4 12 92 76" preserveAspectRatio="xMaxYMid meet" aria-hidden="true"><path d="M50 26C40 19 24 18 8 22V80C24 76 40 77 50 84C60 77 76 76 92 80V22C76 18 60 19 50 26Z"/><path d="M50 26V84"/><path d="M16 34C24 32 33 32 42 35M16 44C24 42 33 42 42 45M16 54C24 52 33 52 42 55M16 64C24 62 30 62 36 64"/><path d="M58 35C66 32 75 32 84 34M58 45C66 42 75 42 84 44"/><rect x="60" y="52" width="20" height="14" rx="2"/><path d="M64 58H76M64 62H72"/><path d="M76 21V12L80 15L84 12V22"/></svg><small>Personal</small><strong>Study notes</strong><span>Java · Spring · SQL · ROS · Web</span></div>
         </div>
         <span class="tile-name">Notes</span>
       </a>

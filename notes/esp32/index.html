@@ -30,73 +30,303 @@ description: "My ESP32 bare-metal notes: ESP-IDF setup, GPIO, ADC, Bluetooth BLE
 .nnav-box>summary{display:block;padding:.85rem 1.1rem;font-weight:700;cursor:pointer}.nnav-box .ngroup{padding:0 1rem}.nnav-box[open]>summary{border-bottom:1px solid rgba(127,127,127,.3);margin-bottom:.8rem}}
 </style>
 <style>.nbody li,.nbody p{overflow-wrap:anywhere}.nbody code{white-space:pre-wrap;overflow-wrap:anywhere}</style>
-<section class="section wrap notes" id="note" aria-labelledby="note-title">
-  <p><a href="{{ '/notes/' | relative_url }}">&larr; All notes</a></p>
+<link rel="stylesheet" href="{{ '/notes/notes.css' | relative_url }}">
+<section class="section wrap notes" id="note" data-note="esp32" aria-labelledby="note-title">
+  <p><a href="{{ '/notes/' | relative_url }}">← All notes</a></p>
   <h1 id="note-title">ESP32</h1>
   <p style="margin:.5rem 0 0"><a href="https://docs.google.com/document/d/1JfhOHu4mxBc1TcqkB4eA8_jwobWIlUaOqv60fjErHl8/edit" target="_blank" rel="noopener noreferrer"><i class="fab fa-google-drive" aria-hidden="true"></i> Open the full notes in Google Docs</a></p>
-<div class="nlay"><nav class="nnav" aria-label="Contents"><details class="nnav-box" open><summary>Contents</summary><div class="ngroup"><b><a href="#g-getting-started">Getting started</a></b><ul><li><a href="#installation-and-first-project">Installation and first project</a></li><li><a href="#build-flash-and-monitor">Build, flash and monitor</a></li><li><a href="#logging">Logging</a></li></ul></div><div class="ngroup"><b><a href="#g-basics">Programming basics</a></b><ul><li><a href="#delay">Delay</a></li><li><a href="#blink">Blink</a></li><li><a href="#gpio">GPIO</a></li><li><a href="#analog-input-adc">Analog input (ADC)</a></li><li><a href="#keyboard-input">Keyboard input</a></li></ul></div><div class="ngroup"><b><a href="#g-wireless">Wireless and serial</a></b><ul><li><a href="#bluetooth-ble">Bluetooth BLE</a></li></ul></div></details></nav><div class="nmain"><div class="nbar"><span class="nprog" id="nprog" aria-live="polite"></span><button type="button" id="nopen">Expand all</button><button type="button" id="nshut">Collapse all</button></div><details class="ngrp" id="g-getting-started" data-ids="installation-and-first-project build-flash-and-monitor logging"><summary><span class="gt">Getting started</span><span class="gc"></span></summary><div class="gbody"><details class="nsec" id="installation-and-first-project"><summary><span class="nt">Installation and first project</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="installation-and-first-project" aria-label="Mark Installation and first project as read"><span>Read</span></label></summary><div class="nbody"><ul><li>Link: <a href="https://learnesp32.com/videos/1/1_%5Bwindows%5D%20installing%20the%20esp-idf" target="_blank" rel="noopener noreferrer">https://learnesp32.com/videos/1/1_%5Bwindows%5D%20installing%20the%20esp-idf</a></li><li>Download</li><ul><li>Ubuntu 20.04</li><ul><li>In VS Code extensions, search Espressif IDF</li><li>Install and then open the extension.</li><li>Select express install and follow the installation procedure.</li></ul><li>Windows</li><ul><li>Go to <a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html#step-2-get-esp-idf" target="_blank" rel="noopener noreferrer">https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html#step-2-get-esp-idf</a></li><li>Scroll down to find “Manual Installation”</li><li>Select Windows Installer</li><li>In the next page, click on the Windows Installer Download under ESP-IDF Tools installer</li><li>In the next page select Universal Online Installer</li><li>ESP IDF setup</li></ul><li>Open the Universal Online installer  exe file</li><li>Select  English  &gt; ok</li><li>In the next window it will scan your system, if Apply Fixes button is available, then press on it, otherwise click next</li><li>Download ESP-IDF &gt; Next</li><li>Select v4.4(release version) &gt; Next</li><li>Go to the C drive, open a new folder esp</li><li>Inside ESP IDF folder, create 2 more folders, idf  and Tools</li><li>Back to the installer, Select Full installation &gt; Next &gt; Install</li><li>NOTE: The folder names must not contain spaces.</li><li>VS Code config</li><li>Open VScode &gt; Extensions &gt; Search ESP IDF &gt; Install</li><li>Press F1,</li><li>If there’s Use Existing Setup, click on that. If not then, press Express.</li><li>After configuration is done, close the window.</li><li>Again, F1 &gt; ESP IDF New Project</li><ul><li>Give the project name, MUST NOT HAVE SPACE.</li><li>Choose ESP-IDF Board</li><li>Custom board &gt; ESP32 Module &gt; Choose template</li><li>Choose ESP-IDF in the drop down &gt; sample_project</li><li>Clock on sample project &gt; Create project using template sample project</li><li>A popup will appear, clock Yes</li><li>A new VSCode environment will appear</li><li>Select [Scan for kits] , if the following window appears</li><li>Alternatively, click on No kit selected</li><li>Select main &gt; main.c</li><li>To enhance intellisense, .vscode &gt; Settings.json</li><ul><li>&quot;C_Cpp.intelliSenseEngine&quot;: &quot;Default&quot;,</li></ul></ul></ul></ul></div></details><div class="nsec flat" id="build-flash-and-monitor"><div class="fhead"><h3 class="nt">Build, flash and monitor</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="build-flash-and-monitor" aria-label="Mark Build, flash and monitor as read"><span>Read</span></label></div><div class="nbody"><ul><li>You can build using the buttons or in terminal</li><li>For terminal:</li><ul><li>Click on</li><li><code>idf.py build        //to build project</code></li><li><code>idf.py -p PORTNUM flash monitor        //will auto build, flash and monitor</code></li><ul><li>Note: Do not use google drive folder for build, will give error while building.</li></ul></ul></ul></div></div><div class="nsec flat" id="logging"><div class="fhead"><h3 class="nt">Logging</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="logging" aria-label="Mark Logging as read"><span>Read</span></label></div><div class="nbody"><ul><li>Basics</li><li>Data Logging</li><li>Commands</li><li><code>#include “esp_log.h”</code></li><li><code>ESP_LOGE(“TAG”, “ERROR”);</code></li><li><code>ESP_LOGW(“TAG”, “Warning”);</code></li><li><code>ESP_LOGI(“TAG”, “Info”);</code></li><li><code>ESP_LOGD(“TAG”, “Debug”);</code></li><li><code>ESP_LOGV(“TAG”, “Verbose”);</code></li><li>If one of them are not working enable them from setup menu</li></ul></div></div></div></details><details class="ngrp" id="g-basics" data-ids="delay blink gpio analog-input-adc keyboard-input"><summary><span class="gt">Programming basics</span><span class="gc"></span></summary><div class="gbody"><div class="nsec flat" id="delay"><div class="fhead"><h3 class="nt">Delay</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="delay" aria-label="Mark Delay as read"><span>Read</span></label></div><div class="nbody"><ul><li>Commands</li><li><code>#include “freertos/FreeRTOS.h”</code></li><li><code>#include “freertos/task.h”</code></li><li><code>vTaskDelay(uint32_t Ticks of the MCU)</code></li><li><code>vTaskDelay(1000 / portTICK_PERIOD_MS)</code></li><li>This gives us Milliseconds, so 1000 ms</li></ul></div></div><details class="nsec" id="blink"><summary><span class="nt">Blink</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="blink" aria-label="Mark Blink as read"><span>Read</span></label></summary><div class="nbody"><ul><li>Blink (basic structure and digital out)</li><li>Commands</li><li><code>#include &lt;stdio.h&gt;</code></li><li><code>#include &quot;freertos/FreeRTOS.h&quot;</code></li><li><code>#include &quot;freertos/task.h&quot;</code></li><li><code>#include &quot;driver/gpio.h&quot;</code></li><li><code>#include &quot;esp_log.h&quot;</code></li><li><code>#include &quot;sdkconfig.h&quot;</code></li><li><code>#define LED_PIN 2   //internal for esp32 wroom 32</code></li><li><code>#define BLINK_PERIOD 1000</code></li><li><code>void app_main(void)</code></li><li>{</li><li><code>gpio_reset_pin(LED_PIN);</code></li><li><code>gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);</code></li><li>while(1)</li><li>{</li><li><code>gpio_set_level(LED_PIN, 1);</code></li><li><code>vTaskDelay(BLINK_PERIOD/portTICK_PERIOD_MS);</code></li><li><code>gpio_set_level(LED_PIN, 0);</code></li><li><code>vTaskDelay(BLINK_PERIOD/portTICK_PERIOD_MS);</code></li><li>}</li><li>}</li><li>No need to change anything in menuconfig, just generate it then build</li></ul></div></details><details class="nsec" id="gpio"><summary><span class="nt">GPIO</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="gpio" aria-label="Mark GPIO as read"><span>Read</span></label></summary><div class="nbody"><ul><li>Link</li><li><a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html" target="_blank" rel="noopener noreferrer">https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html</a></li><li><code>#include &quot;driver/gpio.h&quot;</code></li><li>Configure GPIO</li><li><code>gpio_reset_pin(PIN)</code></li><li><code>gpio_set_direction(PIN, gpio_mode)</code></li><li><code>enum gpio_mode_t</code></li><li>Values:</li><li><code>enumerator GPIO_MODE_DISABLE</code></li><li>GPIO mode : disable input and output</li><li><code>enumerator GPIO_MODE_INPUT</code></li><li>GPIO mode : input only</li><li><code>enumerator GPIO_MODE_OUTPUT</code></li><li>GPIO mode : output only mode</li><li><code>enumerator GPIO_MODE_OUTPUT_OD</code></li><li>GPIO mode : output only with open-drain mode</li><li><code>enumerator GPIO_MODE_INPUT_OUTPUT_OD</code></li><li>GPIO mode : output and input with open-drain mode</li><li><code>enumerator GPIO_MODE_INPUT_OUTPUT</code></li><li>GPIO mode : output and input mode</li><li>Digital output</li><li><code>gpio_set_level(PIN, 1/0)</code></li><li>Digital input</li><li><code>d_in = gpio_get_level(PIN)</code></li></ul></div></details><details class="nsec" id="analog-input-adc"><summary><span class="nt">Analog input (ADC)</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="analog-input-adc" aria-label="Mark Analog input (ADC) as read"><span>Read</span></label></summary><div class="nbody"><ul><li><code>#include &quot;driver/adc.h&quot;</code></li><li><code>#include &quot;esp_adc_cal.h&quot;</code></li><li>ADC pins</li><li>ADC1 channel</li></ul><pre><code>	GPIO pin
-	ADC2 channel
-	GPIO pin
-	ADC1_CHANNEL_0
-	GPIO36
-	ADC2_CHANNEL_0
-	GPIO4
-	ADC1_CHANNEL_1
-	GPIO37
-	ADC2_CHANNEL_1
-	GPIO0
-	ADC1_CHANNEL_2
-	GPIO38
-	ADC2_CHANNEL_2
-	GPIO2
-	ADC1_CHANNEL_3
-	GPIO39
-	ADC2_CHANNEL_3
-	GPIO15
-	ADC1_CHANNEL_4
-	GPIO32
-	ADC2_CHANNEL_4
-	GPIO13
-	ADC1_CHANNEL_5
-	GPIO33
-	ADC2_CHANNEL_5
-	GPIO12
-	ADC1_CHANNEL_6
-	GPIO34
-	ADC2_CHANNEL_6
-	GPIO14
-	ADC1_CHANNEL_7
-	GPIO35
-	ADC2_CHANNEL_7
-	GPIO27
 
+<div class="nlay"><nav class="nnav" aria-label="Contents"><details class="nnav-box" open><summary>Contents</summary><div class="ngroup"><b><a href="#g-getting-started">Getting started</a></b><ul><li><a href="#installation-and-first-project">Installing ESP-IDF and a first project</a></li><li><a href="#build-flash-and-monitor">Build, flash and monitor</a></li><li><a href="#logging">Logging</a></li></ul></div><div class="ngroup"><b><a href="#g-basics">Programming basics</a></b><ul><li><a href="#delay">Delay</a></li><li><a href="#blink">Blink</a></li><li><a href="#gpio">GPIO</a></li><li><a href="#analog-input-adc">Analog input (ADC)</a></li><li><a href="#keyboard-input">Keyboard input</a></li></ul></div><div class="ngroup"><b><a href="#g-wireless">Wireless and serial</a></b><ul><li><a href="#bluetooth-ble">Bluetooth Low Energy (BLE)</a></li></ul></div></details></nav><div class="nmain"><div class="nbar"><span class="nprog" id="nprog" aria-live="polite"></span><button type="button" id="nopen">Expand all</button><button type="button" id="nshut">Collapse all</button></div><details class="ngrp" id="g-getting-started" data-ids="installation-and-first-project build-flash-and-monitor logging"><summary><span class="gt">Getting started</span><span class="gc">3 topics</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-getting-started" aria-label="Mark Getting started as read"><span>Read</span></label></summary><div class="gbody"><div id="installation-and-first-project" class="nsec flat"><div class="fhead"><h3 class="nt">Installing ESP-IDF and a first project</h3></div><div class="nbody"><p>ESP-IDF is Espressif's official framework for programming the ESP32 in C. The easiest way in is the <strong>Espressif IDF</strong> extension for VS Code. There's a <a href="https://learnesp32.com/videos/1/1_%5Bwindows%5D%20installing%20the%20esp-idf" target="_blank" rel="noopener noreferrer">video walkthrough</a> too.</p>
+<h3>Ubuntu</h3>
+<ol>
+<li>In VS Code, open <strong>Extensions</strong>, search <strong>Espressif IDF</strong> and install it.</li>
+<li>Open the extension, choose <strong>Express</strong> and follow the steps.</li>
+</ol>
+<h3>Windows</h3>
+<ol>
+<li>Open the <a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/index.html#step-2-get-esp-idf" target="_blank" rel="noopener noreferrer">ESP-IDF get-started page</a>, find <strong>Manual Installation</strong> and pick <strong>Windows Installer</strong>.</li>
+<li>Download the <strong>Universal Online Installer</strong> and run it.</li>
+<li>If the system scan offers <strong>Apply Fixes</strong>, press it. Then choose <strong>Download ESP-IDF</strong> and a release version (for example v4.4).</li>
+<li>Make a folder <code>C:\esp</code> with two folders inside: <code>idf</code> and <code>tools</code>. Point the installer at them.</li>
+<li>Choose <strong>Full installation</strong> and install.</li>
+<li>In VS Code, install the <strong>ESP-IDF</strong> extension, press <kbd>F1</kbd> and pick <strong>Use Existing Setup</strong> (or <strong>Express</strong> if it isn't offered).</li>
+</ol>
+<blockquote>
+<p>No spaces in any folder or project name. ESP-IDF fails on them.</p>
+</blockquote>
+<h3>A first project</h3>
+<ol>
+<li><kbd>F1</kbd> → <strong>ESP-IDF: New Project</strong>, and give it a name (no spaces).</li>
+<li>Board: <strong>Custom board → ESP32 module</strong>.</li>
+<li>Template: <strong>ESP-IDF → sample_project</strong>, then <strong>Create project using template</strong>.</li>
+<li>If asked for a kit, pick <strong>Scan for kits</strong>. Your code goes in <code>main/main.c</code>.</li>
+</ol>
+<p>For better code completion, add this to <code>.vscode/settings.json</code>:</p>
+<pre><code class="language-json">"C_Cpp.intelliSenseEngine": "Default"
+</code></pre>
+</div></div><div class="nsec flat" id="build-flash-and-monitor"><div class="fhead"><h3 class="nt">Build, flash and monitor</h3></div><div class="nbody"><p>Use the buttons in the VS Code status bar, or the terminal:</p>
+<figure class="ndia"><svg viewBox="0 0 640 102" role="img" aria-label="ESP-IDF workflow: write, build, flash, monitor"><defs><marker id="aidf" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk" /></marker></defs><rect x="20" y="20" width="130" height="62" rx="10" class="box" /><text x="85.0" y="46" class="tb" text-anchor="middle">Write</text><text x="85.0" y="66" class="mu" text-anchor="middle">main/main.c</text><rect x="176" y="20" width="130" height="62" rx="10" class="box" /><text x="241.0" y="46" class="tb" text-anchor="middle">Build</text><text x="241.0" y="66" class="mu" text-anchor="middle">idf.py build</text><path d="M152 51L174 51" class="ln" marker-end="url(#aidf)" /><rect x="332" y="20" width="130" height="62" rx="10" class="box" /><text x="397.0" y="46" class="tb" text-anchor="middle">Flash</text><text x="397.0" y="66" class="mu" text-anchor="middle">idf.py -p PORT flash</text><path d="M308 51L330 51" class="ln" marker-end="url(#aidf)" /><rect x="488" y="20" width="130" height="62" rx="10" class="box" /><text x="553.0" y="46" class="tb" text-anchor="middle">Monitor</text><text x="553.0" y="66" class="mu" text-anchor="middle">idf.py monitor</text><path d="M464 51L486 51" class="ln" marker-end="url(#aidf)" /></svg><figcaption>The ESP-IDF loop. <code>idf.py -p PORT flash monitor</code> does the last three in one go.</figcaption></figure>
 
+<pre><code class="language-bash">idf.py build                       # compile
+idf.py -p COM3 flash monitor       # build if needed, flash, then show the serial output
+</code></pre>
+<p>Replace <code>COM3</code> with your board's port (<code>/dev/ttyUSB0</code> on Linux). Press <kbd>Ctrl</kbd>+<kbd>]</kbd> to leave the monitor.</p>
+<blockquote>
+<p>Don't keep the project in a Google Drive folder: the build fails there.</p>
+</blockquote>
+</div></div><div class="nsec flat" id="logging"><div class="fhead"><h3 class="nt">Logging</h3></div><div class="nbody"><p><code>esp_log.h</code> prints messages with a tag and a level, in colour, in the monitor.</p>
+<pre><code class="language-c">#include "esp_log.h"
 
+static const char *TAG = "app";
 
-	ADC2_CHANNEL_8
-	GPIO25
+ESP_LOGE(TAG, "Error");     // red
+ESP_LOGW(TAG, "Warning");   // yellow
+ESP_LOGI(TAG, "Info");      // green
+ESP_LOGD(TAG, "Debug");
+ESP_LOGV(TAG, "Verbose");
+</code></pre>
+<blockquote>
+<p>Debug and Verbose are hidden by default. Turn them on in <code>idf.py menuconfig</code> → <strong>Component config → Log output</strong>.</p>
+</blockquote>
+</div></div></div></details><details class="ngrp" id="g-basics" data-ids="delay blink gpio analog-input-adc keyboard-input"><summary><span class="gt">Programming basics</span><span class="gc">5 topics</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-basics" aria-label="Mark Programming basics as read"><span>Read</span></label></summary><div class="gbody"><div class="nsec flat" id="delay"><div class="fhead"><h3 class="nt">Delay</h3></div><div class="nbody"><p>ESP-IDF runs on FreeRTOS, so you wait with <code>vTaskDelay</code>. It counts in <strong>ticks</strong>, not milliseconds; divide by <code>portTICK_PERIOD_MS</code> to convert.</p>
+<pre><code class="language-c">#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 
+vTaskDelay(1000 / portTICK_PERIOD_MS);   // wait 1000 ms
+</code></pre>
+<p>While a task waits, the chip is free to run other tasks.</p>
+</div></div><div id="blink" class="nsec flat"><div class="fhead"><h3 class="nt">Blink</h3></div><div class="nbody"><p>The "hello world" of microcontrollers: the built-in LED on pin 2 (ESP32-WROOM-32 boards) on and off every second.</p>
+<pre><code class="language-c">#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "driver/gpio.h"
 
+#define LED_PIN      2
+#define BLINK_PERIOD 1000
 
+void app_main(void)
+{
+    gpio_reset_pin(LED_PIN);
+    gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
 
-	ADC2_CHANNEL_9
-	GPIO26</code></pre><ul><li>ADC attenuation parameter</li></ul><ul><li>Attenuation parameter</li></ul><pre><code>	Input range (mV)
-	Note
-	ADC_ATTEN_DB_0
-	100 ~ 950
-	No attenuation (0dB)
-	ADC_ATTEN_DB_2_5
-	100 ~ 1250
-	2.5 dB attenuation
-	ADC_ATTEN_DB_6
-	150 ~ 1750
-	6 dB attenuation
-	ADC_ATTEN_DB_11
-	150 ~ 2450
-	11 dB attenuation</code></pre><ul><li>ESP32 ADC only works in a certian voltage range, it’s a downside of ESP32.</li></ul><ul><li>adc1_config_channel_atten(ADC1_CHANNEL_6, ADC_ATTEN_DB_11);</li><li>ADC caliberation</li><li>Due to different reference voltages of different esp chips, need to calibrate</li><li><code>esp_adc_cal_characteristics_t adc1_chars;</code></li><li><code>esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, ADC_WIDTH_BIT_DEFAULT, 0, &amp;adc1_chars);</code></li><li>Capture raw adc data</li><li>Resulution/width has to be set</li><li><code>ADC_WIDTH_BIT_DEFAULT         //12 bit</code></li><li><code>ADC_WIDTH_BIT_9</code></li><li><code>ADC_WIDTH_BIT_10</code></li><li><code>ADC_WIDTH_BIT_11</code></li><li><code>ADC_WIDTH_BIT_12</code></li><li>adc1_config_width(ADC_WIDTH_BIT_DEFAULT);</li><li><code>int raw_value = adc1_get_raw(ADC1_CHANNEL_6);</code></li><li>ADC data to voltage</li><li><code>uint32_t mV = esp_adc_cal_raw_to_voltage(adc1_get_raw(ADC1_CHANNEL_6), &amp;adc1_chars);</code></li><li>Example</li></ul></div></details><div class="nsec flat" id="keyboard-input"><div class="fhead"><h3 class="nt">Keyboard input</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="keyboard-input" aria-label="Mark Keyboard input as read"><span>Read</span></label></div><div class="nbody"><ul><li>Commands</li><li><code>void app_main(){</code></li><li><code>char c = 0;</code></li><li><code>char str[100];</code></li><li><code>memset(str, 0, sizeof(str));</code></li><li><code>while(c != ‘\n’){         //depends on carriage return</code></li><li><code>c = getchar();         //not a blocking func</code></li><li>if((c != 0xff){</li><li>str[strlen(str)] = c;</li><li><code>printf(“%c”, c);</code></li><li>}</li><li><code>vTaskDelay(100/ portTICK_PERIOD_MS);</code></li><li>}</li><li>}</li></ul></div></div></div></details><details class="ngrp" id="g-wireless" data-ids="bluetooth-ble"><summary><span class="gt">Wireless and serial</span><span class="gc"></span></summary><div class="gbody"><details class="nsec" id="bluetooth-ble"><summary><span class="nt">Bluetooth BLE</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="bluetooth-ble" aria-label="Mark Bluetooth BLE as read"><span>Read</span></label></summary><div class="nbody"><ul><li>GAP</li><li>AP is an acronym for the Generic Access Profile, and it controls</li></ul><pre><code>connections and advertising in Bluetooth. GAP is what makes your
-device visible to the outside world, and determines how two devices
-can (or can&#x27;t) interact with each other.</code></pre><ul><li>GATT</li><li>Application Example</li><li>Check bluetooth folder in ESP-IDF examples, which contains the following demos and their tutorials:</li><li>This is a GATT server demo and its tutorial. This demo creates a GATT service with an attribute table,</li><li>About GATT</li><li><a href="https://www.oreilly.com/library/view/getting-started-with/9781491900550/ch04.html" target="_blank" rel="noopener noreferrer">https://www.oreilly.com/library/view/getting-started-with/9781491900550/ch04.html</a></li><li>GATT makes it  possible for ble devices to connect and transfer user profiles and data over ble.</li><li>GATT also provides a reference profile framework that everyone needs to follow and this enables communication between devices from different vendors.</li><li>GATT uses Attribute protocol (ATT) for transport protocol. ATT organizes data hierarchically, so similar data is called characteristics and a group of similar characteristic data is called services.</li><li>GATT attributes are only given by the server. It contains config data about the services and characteristics. Attributes contain data about itself then the actual data.</li><li>They are addressable pieces of information that can contain relevant user data (or metadata) about the structure and grouping of the different attributes contained within the server.</li><li>which releases the user from adding attributes one by one. This is the recommended method of adding attributes.</li><li>bluetooth/gatt_server_service_table</li><li>GATT Server Service Table Example Walkthrough</li><li>This is a GATT server demo and its tutorial. This demo creates a GATT service by adding attributes one by one as defined by Bluedroid. The recommended method of adding attributes is presented in example above.</li><li>bluetooth/gatt_server</li><li>GATT Server Example Walkthrough</li><li>This is a BLE SPP-Like demo. This demo, which acts as a GATT server, can receive data from UART and then send the data to the peer device automatically.</li><li>bluetooth/ble_spp_server</li><li>IDF Demo</li><li>Create new project &gt; select GATT server &gt; upload</li><li>Connect to ESP32 using terminal android app</li><li>options &gt; Device &gt; Long press “hatts_table_creat_demo” &gt; Edit &gt; Custom &gt; Touch on the UUID text boxes.</li><li>Code explanation</li><li><a href="https://github.com/espressif/esp-idf/blob/v3.3/examples/bluetooth/gatt_server_service_table/tutorial/Gatt_Server_Service_Table_Example_Walkthrough.md" target="_blank" rel="noopener noreferrer">https://github.com/espressif/esp-idf/blob/v3.3/examples/bluetooth/gatt_server_service_table/tutorial/Gatt_Server_Service_Table_Example_Walkthrough.md</a></li><li>Main</li><li>initialize NVIS</li><li>Flash memory</li><li>BT controller init</li><li>BT controller enable</li><li>Bluedroid (BT stack) init</li><li>Bluedroid (BT stack) enable</li><li>GATT event handler</li><li>Assigns GATT interface (gatts_if) to GATT app profiles.</li><li>Forwards parameters to profile handlers</li><li>Parameters go via a struct heart_rate_profile_tab and reaches gatt_profile_event_handler</li><li>All events are handled here.</li><li><code>case ESP_GATTS_REG_EVT</code></li><li>device name is set</li><li>adv data is configed</li><li>scan resp is configed</li><li>attr table is created</li><li>has all the services of the app.</li><li>The esp_gatts_attr_db_t structure has two members:</li><li><code>esp_attr_control_t    attr_control;</code></li><li><code>esp_attr_desc_t       att_desc;</code></li><li>Characteristics declaration determines all the read write and notify permissions.</li><ul><li><code>case ESP_GATTS_WRITE_EVT</code></li><li>all the printing and writing data is handled here.</li><li>param-&gt;write.value contains void type data and has to be type casted.</li><li><code>case ESP_GATTS_READ_EVT</code></li><li>pending</li><li>GAP event handler</li><li>App profile registration</li><li>MTU set</li><li>UUID generation</li><li><a href="https://www.uuidgenerator.net/version4" target="_blank" rel="noopener noreferrer">https://www.uuidgenerator.net/version4</a></li><li>GATT server api</li></ul></ul></div></details></div></details></div></div>
-<button type="button" class="ntop" id="ntop" aria-label="Back to top" hidden>&uarr;</button>
+    while (1) {
+        gpio_set_level(LED_PIN, 1);
+        vTaskDelay(BLINK_PERIOD / portTICK_PERIOD_MS);
+        gpio_set_level(LED_PIN, 0);
+        vTaskDelay(BLINK_PERIOD / portTICK_PERIOD_MS);
+    }
+}
+</code></pre>
+<p>Nothing to change in menuconfig: build and flash.</p>
+</div></div><div id="gpio" class="nsec flat"><div class="fhead"><h3 class="nt">GPIO</h3></div><div class="nbody"><p>General-purpose pins, read or written as 1 or 0. Full reference: <a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/peripherals/gpio.html" target="_blank" rel="noopener noreferrer">ESP-IDF GPIO docs</a>.</p>
+<pre><code class="language-c">#include "driver/gpio.h"
+
+gpio_reset_pin(PIN);
+gpio_set_direction(PIN, GPIO_MODE_OUTPUT);
+
+gpio_set_level(PIN, 1);          // digital out: 1 or 0
+int d_in = gpio_get_level(PIN);  // digital in
+</code></pre>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Pin can</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>GPIO_MODE_DISABLE</code></td>
+<td>Do nothing (off)</td>
+</tr>
+<tr>
+<td><code>GPIO_MODE_INPUT</code></td>
+<td>Read only</td>
+</tr>
+<tr>
+<td><code>GPIO_MODE_OUTPUT</code></td>
+<td>Write only</td>
+</tr>
+<tr>
+<td><code>GPIO_MODE_OUTPUT_OD</code></td>
+<td>Write, open-drain</td>
+</tr>
+<tr>
+<td><code>GPIO_MODE_INPUT_OUTPUT</code></td>
+<td>Read and write</td>
+</tr>
+<tr>
+<td><code>GPIO_MODE_INPUT_OUTPUT_OD</code></td>
+<td>Read and write, open-drain</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p><strong>Open-drain</strong> means the pin can only pull the line low; a resistor pulls it high. It's what shared lines such as I²C need.</p>
+</blockquote>
+</div></div><div id="analog-input-adc" class="nsec flat"><div class="fhead"><h3 class="nt">Analog input (ADC)</h3></div><div class="nbody"><p>The ADC turns a voltage on a pin into a number. The ESP32 has two ADCs:</p>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>ADC1</th>
+<th>GPIO</th>
+<th>ADC2</th>
+<th>GPIO</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>CHANNEL_0</code></td>
+<td>36</td>
+<td><code>CHANNEL_0</code></td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>CHANNEL_1</code></td>
+<td>37</td>
+<td><code>CHANNEL_1</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>CHANNEL_2</code></td>
+<td>38</td>
+<td><code>CHANNEL_2</code></td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>CHANNEL_3</code></td>
+<td>39</td>
+<td><code>CHANNEL_3</code></td>
+<td>15</td>
+</tr>
+<tr>
+<td><code>CHANNEL_4</code></td>
+<td>32</td>
+<td><code>CHANNEL_4</code></td>
+<td>13</td>
+</tr>
+<tr>
+<td><code>CHANNEL_5</code></td>
+<td>33</td>
+<td><code>CHANNEL_5</code></td>
+<td>12</td>
+</tr>
+<tr>
+<td><code>CHANNEL_6</code></td>
+<td>34</td>
+<td><code>CHANNEL_6</code></td>
+<td>14</td>
+</tr>
+<tr>
+<td><code>CHANNEL_7</code></td>
+<td>35</td>
+<td><code>CHANNEL_7</code></td>
+<td>27</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><code>CHANNEL_8</code></td>
+<td>25</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><code>CHANNEL_9</code></td>
+<td>26</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>Use <strong>ADC1</strong> when you can. ADC2 is shared with Wi-Fi and can't be read while Wi-Fi is on.</p>
+</blockquote>
+<h3>1. Set the attenuation</h3>
+<p>An ESP32 pin can only measure a limited voltage range. Attenuation widens it:</p>
+<figure class="ndia"><svg viewBox="0 0 760 188" role="img" aria-label="ADC input range for each attenuation setting"><text x="160" y="36" class="code" text-anchor="end">ADC_ATTEN_DB_0</text><rect x="170" y="22" width="561.0" height="20" rx="5" class="cell" /><rect x="187.0" y="22" width="144.5" height="20" rx="5" class="box hi" /><text x="339.5" y="37" class="mu" text-anchor="start">100–950 mV</text><text x="160" y="70" class="code" text-anchor="end">ADC_ATTEN_DB_2_5</text><rect x="170" y="56" width="561.0" height="20" rx="5" class="cell" /><rect x="187.0" y="56" width="195.5" height="20" rx="5" class="box hi" /><text x="390.5" y="71" class="mu" text-anchor="start">100–1250 mV</text><text x="160" y="104" class="code" text-anchor="end">ADC_ATTEN_DB_6</text><rect x="170" y="90" width="561.0" height="20" rx="5" class="cell" /><rect x="195.5" y="90" width="272.0" height="20" rx="5" class="box hi" /><text x="475.5" y="105" class="mu" text-anchor="start">150–1750 mV</text><text x="160" y="138" class="code" text-anchor="end">ADC_ATTEN_DB_11</text><rect x="170" y="124" width="561.0" height="20" rx="5" class="cell" /><rect x="195.5" y="124" width="391.0" height="20" rx="5" class="box hi" /><text x="594.5" y="139" class="mu" text-anchor="start">150–2450 mV</text><path d="M170.0 156V162" class="ln" /><text x="170.0" y="178" class="mu" text-anchor="middle">0 V</text><path d="M340.0 156V162" class="ln" /><text x="340.0" y="178" class="mu" text-anchor="middle">1 V</text><path d="M510.0 156V162" class="ln" /><text x="510.0" y="178" class="mu" text-anchor="middle">2 V</text><path d="M680.0 156V162" class="ln" /><text x="680.0" y="178" class="mu" text-anchor="middle">3 V</text></svg><figcaption>More attenuation lets the pin read higher voltages. Even at 11 dB it stops near 2.45 V, well short of 3.3 V.</figcaption></figure>
+
+<pre><code class="language-c">#include "driver/adc.h"
+#include "esp_adc_cal.h"
+
+adc1_config_channel_atten(ADC1_CHANNEL_6, ADC_ATTEN_DB_11);
+</code></pre>
+<h3>2. Set the width (resolution)</h3>
+<p><code>ADC_WIDTH_BIT_9</code> to <code>ADC_WIDTH_BIT_12</code>. The default is 12 bits, a number from 0 to 4095.</p>
+<pre><code class="language-c">adc1_config_width(ADC_WIDTH_BIT_DEFAULT);
+int raw = adc1_get_raw(ADC1_CHANNEL_6);
+</code></pre>
+<h3>3. Calibrate and convert to millivolts</h3>
+<p>Every chip's reference voltage is a little different, so calibrate before converting:</p>
+<pre><code class="language-c">esp_adc_cal_characteristics_t adc1_chars;
+esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, ADC_WIDTH_BIT_DEFAULT, 0, &amp;adc1_chars);
+
+uint32_t mV = esp_adc_cal_raw_to_voltage(adc1_get_raw(ADC1_CHANNEL_6), &amp;adc1_chars);
+</code></pre>
+<blockquote>
+<p>These <code>adc1_*</code> calls are ESP-IDF 4.x. From version 5 they are replaced by the <code>adc_oneshot_*</code> API.</p>
+</blockquote>
+</div></div><div class="nsec flat" id="keyboard-input"><div class="fhead"><h3 class="nt">Keyboard input</h3></div><div class="nbody"><p>Read a line typed into the serial monitor. <code>getchar()</code> doesn't wait: it returns <code>0xFF</code> when nothing has been typed, so the loop checks for that and pauses between tries.</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+void app_main(void)
+{
+    char c = 0;
+    char str[100];
+    memset(str, 0, sizeof(str));
+
+    while (c != '\n') {              // stop at Enter
+        c = getchar();
+        if (c != 0xff) {
+            str[strlen(str)] = c;
+            printf("%c", c);         // echo it back
+        }
+        vTaskDelay(100 / portTICK_PERIOD_MS);
+    }
+}
+</code></pre>
+</div></div></div></details><details class="ngrp" id="g-wireless" data-ids="bluetooth-ble"><summary><span class="gt">Wireless and serial</span><span class="gc">1 topic</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-wireless" aria-label="Mark Wireless and serial as read"><span>Read</span></label></summary><div class="gbody"><div id="bluetooth-ble" class="nsec flat"><div class="fhead"><h3 class="nt">Bluetooth Low Energy (BLE)</h3></div><div class="nbody"><p>Two parts of BLE matter most:</p>
+<ul>
+<li><strong>GAP</strong> (Generic Access Profile) handles <strong>advertising and connecting</strong>. It's what makes the device visible to phones, and decides who may connect.</li>
+<li><strong>GATT</strong> (Generic Attribute Profile) handles <strong>data</strong> once connected. It runs on the Attribute Protocol (ATT) and gives every device the same structure, so devices from different makers understand each other. A good intro: <a href="https://www.oreilly.com/library/view/getting-started-with/9781491900550/ch04.html" target="_blank" rel="noopener noreferrer">Getting Started with BLE, ch. 4</a>.</li>
+</ul>
+<figure class="ndia"><svg viewBox="0 0 640 214" role="img" aria-label="GATT hierarchy: server, services, characteristics"><rect x="20" y="14" width="600" height="190" rx="14" class="box" /><text x="36" y="38" class="tb" text-anchor="start">GATT server (the ESP32)</text><text x="604" y="38" class="mu" text-anchor="end">profile</text><rect x="36" y="52" width="272" height="140" rx="12" class="box hi" /><text x="50" y="74" class="tb" text-anchor="start">Heart Rate service</text><text x="294" y="74" class="code" text-anchor="end">UUID</text><rect x="50" y="86" width="244" height="42" rx="8" class="cell" /><text x="62" y="106" text-anchor="start">Measurement (characteristic)</text><text x="62" y="122" class="mu" text-anchor="start">value + read · notify</text><rect x="50" y="136" width="244" height="42" rx="8" class="cell" /><text x="62" y="156" text-anchor="start">Body location (characteristic)</text><text x="62" y="172" class="mu" text-anchor="start">value + read</text><rect x="332" y="52" width="272" height="140" rx="12" class="box hi" /><text x="346" y="74" class="tb" text-anchor="start">Battery service</text><text x="590" y="74" class="code" text-anchor="end">UUID</text><rect x="346" y="86" width="244" height="42" rx="8" class="cell" /><text x="358" y="106" text-anchor="start">Battery level (characteristic)</text><text x="358" y="122" class="mu" text-anchor="start">value + read · notify</text></svg><figcaption>GATT data is nested: a server holds services, a service holds characteristics, and each characteristic holds a value plus its permissions.</figcaption></figure>
+
+<p>The <strong>server</strong> (here, the ESP32) owns the data. Each attribute has a UUID, a value and permissions (read, write, notify). Make your own UUIDs with a <a href="https://www.uuidgenerator.net/version4" target="_blank" rel="noopener noreferrer">UUID v4 generator</a>.</p>
+<h3>The ESP-IDF examples</h3>
+<p>In ESP-IDF's <code>examples/bluetooth</code> folder:</p>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Example</th>
+<th>Shows</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>gatt_server_service_table</code></td>
+<td>A service built from an attribute <strong>table</strong> (the recommended way)</td>
+</tr>
+<tr>
+<td><code>gatt_server</code></td>
+<td>Adding attributes one by one</td>
+</tr>
+<tr>
+<td><code>ble_spp_server</code></td>
+<td>Sending UART data to a phone, like a serial cable</td>
+</tr>
+</tbody></table></div>
+<p><strong>Try it:</strong> create a project from the <strong>GATT server</strong> template and flash it. Then connect with a BLE terminal app on your phone, long-press the device, choose <strong>Edit → Custom</strong>, and enter the UUIDs.</p>
+<h3>How the service-table example works</h3>
+<p>Walkthrough: <a href="https://github.com/espressif/esp-idf/blob/v3.3/examples/bluetooth/gatt_server_service_table/tutorial/Gatt_Server_Service_Table_Example_Walkthrough.md" target="_blank" rel="noopener noreferrer">GATT server service table</a>.</p>
+<figure class="ndia"><svg viewBox="0 0 640 184" role="img" aria-label="BLE start-up order: NVS, controller init and enable, Bluedroid init and enable, register handlers and profile"><defs><marker id="abl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk" /></marker></defs><rect x="20" y="20" width="135" height="54" rx="10" class="box" /><circle cx="40" cy="47" r="11" class="dot" /><text x="40" y="51" class="dn" text-anchor="middle">1</text><text x="100" y="44" text-anchor="middle">NVS flash</text><text x="100" y="61" text-anchor="middle">init</text><rect x="175" y="20" width="135" height="54" rx="10" class="box" /><circle cx="195" cy="47" r="11" class="dot" /><text x="195" y="51" class="dn" text-anchor="middle">2</text><text x="255" y="44" text-anchor="middle">BT controller</text><text x="255" y="61" text-anchor="middle">init</text><rect x="330" y="20" width="135" height="54" rx="10" class="box" /><circle cx="350" cy="47" r="11" class="dot" /><text x="350" y="51" class="dn" text-anchor="middle">3</text><text x="410" y="44" text-anchor="middle">BT controller</text><text x="410" y="61" text-anchor="middle">enable</text><rect x="485" y="20" width="135" height="54" rx="10" class="box" /><circle cx="505" cy="47" r="11" class="dot" /><text x="505" y="51" class="dn" text-anchor="middle">4</text><text x="565" y="44" text-anchor="middle">Bluedroid</text><text x="565" y="61" text-anchor="middle">init</text><rect x="97" y="110" width="135" height="54" rx="10" class="box" /><circle cx="117" cy="137" r="11" class="dot" /><text x="117" y="141" class="dn" text-anchor="middle">5</text><text x="177" y="134" text-anchor="middle">Bluedroid</text><text x="177" y="151" text-anchor="middle">enable</text><rect x="252" y="110" width="135" height="54" rx="10" class="box hi" /><circle cx="272" cy="137" r="11" class="dot" /><text x="272" y="141" class="dn" text-anchor="middle">6</text><text x="332" y="134" text-anchor="middle">Register GATT /</text><text x="332" y="151" text-anchor="middle">GAP handlers</text><rect x="407" y="110" width="135" height="54" rx="10" class="box hi" /><circle cx="427" cy="137" r="11" class="dot" /><text x="427" y="141" class="dn" text-anchor="middle">7</text><text x="487" y="134" text-anchor="middle">Register app</text><text x="487" y="151" text-anchor="middle">profile</text><path d="M157 47L173 47" class="ln" marker-end="url(#abl)" /><path d="M312 47L328 47" class="ln" marker-end="url(#abl)" /><path d="M467 47L483 47" class="ln" marker-end="url(#abl)" /><path d="M552 76V92H164V108" class="ln" marker-end="url(#abl)" /><path d="M234 137L250 137" class="ln" marker-end="url(#abl)" /><path d="M389 137L405 137" class="ln" marker-end="url(#abl)" /></svg><figcaption>What <code>app_main</code> does before the ESP32 can talk over BLE, in order.</figcaption></figure>
+
+<p>Then events arrive in the handlers:</p>
+<ul>
+<li><strong>GATT event handler:</strong> gives each app profile its GATT interface (<code>gatts_if</code>) and passes events on to that profile's handler.</li>
+<li><code>ESP_GATTS_REG_EVT</code>: sets the device name, the advertising and scan-response data, and creates the attribute table. Each entry is an <code>esp_gatts_attr_db_t</code>:<pre><code class="language-c">esp_attr_control_t attr_control;   // who answers: the stack or your code
+esp_attr_desc_t    att_desc;       // UUID, permissions, value
+</code></pre>
+</li>
+<li><code>ESP_GATTS_WRITE_EVT</code>: the phone wrote something. <code>param-&gt;write.value</code> is raw bytes: cast it to the type you expect.</li>
+<li><code>ESP_GATTS_READ_EVT</code>: the phone asked to read a value.</li>
+<li><strong>GAP event handler:</strong> advertising started, connection parameters updated, and so on. Set the MTU (the largest packet) here.</li>
+</ul>
+</div></div></div></details></div></div>
+<button type="button" class="ntop" id="ntop" aria-label="Back to top" hidden>↑</button>
 <script>
 (function(){
   var secs=[].slice.call(document.querySelectorAll('.nsec,.ngrp')), top=document.getElementById('ntop'), nav=document.querySelector('.nnav-box');
@@ -127,10 +357,5 @@ can (or can&#x27;t) interact with each other.</code></pre><ul><li>GATT</li><li>A
   });
   paint();
 })();
-</script><script>
-(function(){
-  function count(){var G=document.querySelectorAll('.ngrp'); G.forEach(function(g){var ids=g.dataset.ids.split(' '), n=0; ids.forEach(function(i){var s=document.getElementById(i); if(s&&s.classList.contains('isread')) n++;});
-    g.querySelector('.gc').textContent=n+' of '+ids.length+' read'; g.classList.toggle('alldone',n===ids.length);});}
-  document.addEventListener('click',function(){setTimeout(count,0);},true); count();
-})();
 </script></section>
+<script src="{{ '/notes/notes.js' | relative_url }}" defer></script>

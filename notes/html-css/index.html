@@ -1,0 +1,712 @@
+---
+layout: section
+title: "HTML, CSS and Bootstrap"
+description: "My front-end notes: HTML5 tags, forms and media, CSS layout (box model, grid, flexbox) and Bootstrap."
+---
+<style>
+.notes h2{margin:2.2rem 0 .6rem}.notes h3{margin:1.4rem 0 .4rem}.notes h4,.notes h5{margin:1rem 0 .3rem}
+.notes ul{margin:.3rem 0 .8rem;padding-left:1.3rem}.notes li{margin:.15rem 0}
+.notes pre{overflow:auto;padding:.8rem 1rem;border-radius:8px;background:rgba(127,127,127,.12);font-size:.88rem;line-height:1.45}
+.note-cards>li{margin:0;padding:0}.note-cards{margin-left:0!important;display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:1rem;padding:0;margin:1.5rem 0;list-style:none}
+.note-cover{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}.note-text{padding:1.1rem 1.2rem}.note-card{display:block;height:100%;overflow:hidden;border:1px solid rgba(127,127,127,.35);border-radius:12px;color:inherit;text-decoration:none;transition:transform .15s,border-color .15s}
+.note-card:hover,.note-card:focus-visible{transform:translateY(-2px);border-color:currentColor}
+.note-card h3{margin:0 0 .35rem;font-size:1.1rem}.note-card p{margin:0;font-size:.92rem;opacity:.8}
+.note-card small{display:block;margin-top:.6rem;opacity:.65}
+.note-jump{columns:2 14rem;padding-left:1.2rem}
+.nsec>summary .nt{flex:1}.nread{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:500;opacity:.85;cursor:pointer;margin-left:auto}.nread input{width:1.15rem;height:1.15rem;accent-color:#e8703a;cursor:pointer}.nsec.isread>summary .nt{opacity:.6}.nsec.isread>summary .nt::after{content:" \2713";color:#4cc38a}.ngroup a.isread::after{content:" \2713";color:#4cc38a}.nprog{margin-right:auto;align-self:center;font-size:.9rem;opacity:.85}.nsec>summary::after{margin-left:.25rem}.ngrp{border:1px solid rgba(127,127,127,.35);border-radius:14px;margin:0 0 .9rem;scroll-margin-top:5rem}.ngrp>summary{padding:1rem 1.2rem;cursor:pointer;list-style:none;display:flex;align-items:center;gap:.8rem;font-size:1.2rem;font-weight:800}.ngrp>summary::-webkit-details-marker{display:none}.ngrp>summary::after{content:"+";font-size:1.3rem;opacity:.6;margin-left:.25rem}.ngrp[open]>summary::after{content:"–"}.ngrp .gt{flex:1}.ngrp .gc{font-size:.85rem;font-weight:500;opacity:.8}.ngrp.alldone .gc::after{content:" \2713";color:#4cc38a}.gbody{padding:0 .8rem .6rem}.gbody .nsec{margin-bottom:.5rem}.ngroup b a{text-decoration:none;color:inherit}.nsec>summary::after,.ngrp>summary::after,.nsec[open]>summary::after,.ngrp[open]>summary::after{transform:none!important;rotate:none!important;position:static!important;width:auto!important;height:auto!important;border:0!important;background:none!important;line-height:1}.nsec.flat{border:0;border-top:1px solid rgba(127,127,127,.25);border-radius:0;padding:.9rem .4rem .5rem}.nsec.flat .fhead{display:flex;align-items:center;gap:1rem}.nsec.flat h3.nt{margin:0;font-size:1.05rem;font-weight:700}.nsec.flat .nbody{padding:.3rem 0 .2rem}.nsec.flat.isread h3.nt{opacity:.6}.nsec.flat.isread h3.nt::after{content:" \2713";color:#4cc38a}</style>
+<style>
+.nlay{display:grid;grid-template-columns:16rem minmax(0,1fr);gap:2rem;align-items:start}
+.nlay{margin-top:1.5rem}.nnav{position:sticky;top:5rem;max-height:calc(100vh - 7rem);overflow:auto;padding-right:.5rem}
+.nnav-box>summary{display:none}.ngroup{margin:0 0 1rem}.ngroup b{display:block;margin:0 0 .3rem;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.ngroup ul{list-style:none;margin:0;padding:0}.ngroup a{display:block;padding:.3rem .5rem;border-radius:6px;text-decoration:none;color:inherit;font-size:.95rem}.ngroup a:hover,.ngroup a:focus-visible{background:rgba(127,127,127,.18)}
+.nbar{display:flex;gap:.5rem;margin:0 0 1rem}.nbar button{padding:.45rem .9rem;border:1px solid rgba(127,127,127,.4);border-radius:8px;background:none;color:inherit;font:inherit;cursor:pointer}
+.nsec{border:1px solid rgba(127,127,127,.3);border-radius:12px;margin:0 0 .7rem;scroll-margin-top:5rem}
+.nsec>summary{padding:.85rem 1.1rem;font-size:1.1rem;font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1rem;align-items:center}
+.nsec>summary::-webkit-details-marker{display:none}.nsec>summary::after{content:"+";font-size:1.3rem;opacity:.6}.nsec[open]>summary::after{content:"–"}
+.nbody{padding:0 1.1rem 1rem}.nbody h3{margin:1.2rem 0 .3rem;font-size:1.02rem}.nbody h4,.nbody h5{margin:.9rem 0 .25rem;font-size:.95rem}
+.nbody ul{margin:.15rem 0 .4rem;padding-left:1.2rem}.nbody li ul{margin:.1rem 0}.nbody li{margin:.15rem 0;line-height:1.5}.nbody li>p{margin:0}.nbody pre{margin:.6rem 0}
+.ntop{position:fixed;right:1rem;bottom:1rem;width:2.8rem;height:2.8rem;border:1px solid rgba(127,127,127,.5);border-radius:50%;background:rgba(127,127,127,.25);color:inherit;font-size:1.2rem;cursor:pointer;backdrop-filter:blur(6px)}
+@media (max-width:820px){.nlay{display:block}.nnav{position:static;max-height:none;margin:0 0 1rem;padding:0}.nnav-box{border:1px solid rgba(127,127,127,.35);border-radius:12px;padding:0}
+.nnav-box>summary{display:block;padding:.85rem 1.1rem;font-weight:700;cursor:pointer}.nnav-box .ngroup{padding:0 1rem}.nnav-box[open]>summary{border-bottom:1px solid rgba(127,127,127,.3);margin-bottom:.8rem}}
+</style>
+<style>.nbody li,.nbody p{overflow-wrap:anywhere}.nbody code{white-space:pre-wrap;overflow-wrap:anywhere}</style>
+<link rel="stylesheet" href="{{ '/notes/notes.css' | relative_url }}">
+<section class="section wrap notes" id="note" data-note="html-css" aria-labelledby="note-title">
+  <p><a href="{{ '/notes/' | relative_url }}">← All notes</a></p>
+  <h1 id="note-title">HTML, CSS and Bootstrap</h1>
+  <p style="margin:.5rem 0 0"><a href="https://docs.google.com/document/d/1bhynkS2bOSxDk7II6RpO6szr-TkpZk_nZQraSVuVj68/edit" target="_blank" rel="noopener noreferrer"><i class="fab fa-google-drive" aria-hidden="true"></i> Open the full notes in Google Docs</a></p>
+
+<div class="nlay"><nav class="nnav" aria-label="Contents"><details class="nnav-box" open><summary>Contents</summary><div class="ngroup"><b><a href="#g-setting-up">Getting started</a></b><ul><li><a href="#setting-up">Setting up</a></li></ul></div><div class="ngroup"><b><a href="#g-html-5-overview">HTML 5</a></b><ul><li><a href="#html-5-overview">HTML5 overview</a></li><li><a href="#basic-structure-of-html">Basic structure of a page</a></li><li><a href="#html-content-models">Block and inline elements</a></li><li><a href="#html5-semantic-tags">HTML5 semantic tags</a></li><li><a href="#meta-tag">Meta tags</a></li><li><a href="#headings">Headings</a></li><li><a href="#paragraphs">Paragraphs</a></li><li><a href="#text-highlight">Bold and italic</a></li><li><a href="#lists">Lists</a></li><li><a href="#table">Tables</a></li><li><a href="#forms">Forms</a></li><li><a href="#buttons">Buttons</a></li><li><a href="#quotations">Quotes, abbreviations and citations</a></li><li><a href="#html-character-entity-reference">Special characters</a></li><li><a href="#creating-links">Links</a></li><li><a href="#linking-sections-of-a-page">Linking to part of a page</a></li><li><a href="#displaying-images">Images</a></li><li><a href="#display-video">Video</a></li></ul></div><div class="ngroup"><b><a href="#g-css-overview">CSS</a></b><ul><li><a href="#css-overview">CSS overview</a></li><li><a href="#element-class-id-selection">Selectors: element, class and id</a></li><li><a href="#combining-selectors">Combining selectors</a></li><li><a href="#pseudo-class-link-selectors">Pseudo-classes</a></li><li><a href="#style-placement">Where to put CSS</a></li><li><a href="#conflict-resolution-cascading">The cascade: which rule wins</a></li><li><a href="#styling-text">Styling text</a></li><li><a href="#the-box-model">The box model</a></li><li><a href="#list-styling">Styling lists</a></li><li><a href="#the-background-property">Backgrounds</a></li><li><a href="#positioning-elements-by-floating">Floats</a></li><li><a href="#relative-and-absolute-element-positioning">Relative and absolute positioning</a></li><li><a href="#fixed-elements">Fixed elements</a></li><li><a href="#media-queries">Media queries</a></li><li><a href="#grid-layout">CSS grid</a></li><li><a href="#flexbox-layout">Flexbox</a></li></ul></div><div class="ngroup"><b><a href="#g-bootstrap-overview">Bootstrap</a></b><ul><li><a href="#wireframe">Wireframes</a></li><li><a href="#nav-bar">Navigation bar</a></li><li><a href="#grid-system">Bootstrap grid</a></li></ul></div></details></nav><div class="nmain"><div class="nbar"><span class="nprog" id="nprog" aria-live="polite"></span><button type="button" id="nopen">Expand all</button><button type="button" id="nshut">Collapse all</button></div><details class="ngrp" id="g-setting-up" data-ids="setting-up"><summary><span class="gt">Getting started</span><span class="gc">1 topic</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-setting-up" aria-label="Mark Getting started as read"><span>Read</span></label></summary><div class="gbody"><div id="setting-up" class="nsec flat"><div class="fhead"><h3 class="nt">Setting up</h3></div><div class="nbody"><p>What you need:</p>
+<ul>
+<li><strong>A code editor:</strong> <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">VS Code</a>.</li>
+<li><strong>Git</strong> and a <strong>GitHub</strong> account, to save and share your work.</li>
+<li><strong>Live Server</strong>, a VS Code extension that reloads the page in the browser every time you save. The easiest option.</li>
+</ul>
+<p>Prefer the terminal? <code>browser-sync</code> does the same:</p>
+<pre><code class="language-bash">npm install -g browser-sync          # needs Node.js; on Linux you may need sudo
+browser-sync start --server --files "*"
+</code></pre>
+<p><code>--server</code> serves the current folder and <code>--files "*"</code> reloads the page when any file changes.</p>
+<p><strong>Fonts:</strong> pick one on <a href="https://fonts.google.com/" target="_blank" rel="noopener noreferrer">Google Fonts</a>, then copy its <code>&lt;link&gt;</code> into your HTML and its <code>font-family</code> into your CSS.</p>
+<p><strong>Try code online:</strong> <a href="https://codepen.io" target="_blank" rel="noopener noreferrer">CodePen</a>, <a href="https://jsfiddle.net" target="_blank" rel="noopener noreferrer">JSFiddle</a>. <strong>Learn more:</strong> <a href="https://css-tricks.com" target="_blank" rel="noopener noreferrer">CSS-Tricks</a>.</p>
+</div></div></div></details><details class="ngrp" id="g-html-5-overview" data-ids="html-5-overview basic-structure-of-html html-content-models html5-semantic-tags meta-tag headings paragraphs text-highlight lists table forms buttons quotations html-character-entity-reference creating-links linking-sections-of-a-page displaying-images display-video"><summary><span class="gt">HTML 5</span><span class="gc">18 topics</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-html-5-overview" aria-label="Mark HTML 5 as read"><span>Read</span></label></summary><div class="gbody"><div class="nsec flat" id="html-5-overview"><div class="fhead"><h3 class="nt">HTML5 overview</h3></div><div class="nbody"><p><strong>HTML</strong> (HyperText Markup Language) describes what is on a page: headings, paragraphs, links, images. CSS then decides how it looks.</p>
+<p>HTML keeps growing (the WHATWG maintains it as a "living standard"), so these help:</p>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Site</th>
+<th>Use it to</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://caniuse.com" target="_blank" rel="noopener noreferrer">caniuse.com</a></td>
+<td>Check which browsers support a feature</td>
+</tr>
+<tr>
+<td><a href="https://validator.w3.org" target="_blank" rel="noopener noreferrer">validator.w3.org</a></td>
+<td>Find mistakes in your HTML</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer">MDN Web Docs</a></td>
+<td>Look up any tag or property</td>
+</tr>
+</tbody></table></div>
+</div></div><div class="nsec flat" id="basic-structure-of-html"><div class="fhead"><h3 class="nt">Basic structure of a page</h3></div><div class="nbody"><p>Every page has the same skeleton:</p>
+<pre><code class="language-html">&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Hello!&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- everything you see goes here --&gt;
+    This is the body.
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<ul>
+<li><code>&lt;head&gt;</code> holds information <strong>about</strong> the page (title, styles, meta tags).</li>
+<li><code>&lt;body&gt;</code> holds what is shown.</li>
+<li><code>&lt;!-- ... --&gt;</code> is a comment: the browser ignores it.</li>
+</ul>
+</div></div><div class="nsec flat" id="html-content-models"><div class="fhead"><h3 class="nt">Block and inline elements</h3></div><div class="nbody"><figure class="ndia"><svg viewBox="0 0 640 218" role="img" aria-label="Block elements stack vertically; inline elements flow within a line"><text x="20" y="22" class="tb" text-anchor="start">Block: each starts on a new line, full width</text><rect x="20" y="32" width="600" height="28" rx="6" class="box hi" /><text x="32" y="51" class="code" text-anchor="start">&lt;div&gt;</text><rect x="20" y="66" width="600" height="28" rx="6" class="box hi" /><text x="32" y="85" class="code" text-anchor="start">&lt;p&gt;</text><rect x="20" y="100" width="600" height="28" rx="6" class="box hi" /><text x="32" y="119" class="code" text-anchor="start">&lt;h1&gt;</text><text x="20" y="158" class="tb" text-anchor="start">Inline: sits inside a line of text, only as wide as its content</text><rect x="20" y="168" width="600" height="40" rx="6" class="cell" /><text x="72.0" y="193" text-anchor="middle">Some text</text><rect x="120" y="176" width="70" height="24" rx="5" class="box hi" /><text x="155.0" y="193" class="code" text-anchor="middle">&lt;span&gt;</text><text x="238.0" y="193" text-anchor="middle">more text</text><rect x="286" y="176" width="46" height="24" rx="5" class="box hi" /><text x="309.0" y="193" class="code" text-anchor="middle">&lt;a&gt;</text><text x="358.0" y="193" text-anchor="middle">and</text><rect x="384" y="176" width="62" height="24" rx="5" class="box hi" /><text x="415.0" y="193" class="code" text-anchor="middle">&lt;img&gt;</text></svg><figcaption>Block elements stack; inline elements flow along the line.</figcaption></figure>
+
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Block</th>
+<th>Inline</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;h1&gt;</code>–<code>&lt;h6&gt;</code>, <code>&lt;form&gt;</code>, <code>&lt;ul&gt;</code></td>
+<td><code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;img&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code></td>
+</tr>
+<tr>
+<td>Starts on a new line</td>
+<td>Stays in the line</td>
+</tr>
+<tr>
+<td>Takes the full width</td>
+<td>Only as wide as its content</td>
+</tr>
+</tbody></table></div>
+<ul>
+<li>Put inline elements inside block elements, not the other way round.</li>
+<li>A well-written <code>&lt;h1&gt;</code> matters a lot for search engines (SEO).</li>
+</ul>
+</div></div><div id="html5-semantic-tags" class="nsec flat"><div class="fhead"><h3 class="nt">HTML5 semantic tags</h3></div><div class="nbody"><p>Semantic tags name the part of the page they hold, instead of a meaningless <code>&lt;div&gt;</code>.</p>
+<figure class="ndia"><svg viewBox="0 0 640 300" role="img" aria-label="HTML5 page layout: header, nav, main with section and article, aside, footer"><rect x="20" y="10" width="600" height="40" rx="8" class="box hi" /><text x="320.0" y="35.0" class="code" text-anchor="middle">&lt;header&gt;</text><rect x="20" y="58" width="600" height="30" rx="8" class="box" /><text x="320.0" y="78.0" class="code" text-anchor="middle">&lt;nav&gt;</text><rect x="20" y="96" width="420" height="150" rx="8" class="box" /><text x="36" y="118" class="code" text-anchor="start">&lt;main&gt;</text><rect x="36" y="128" width="388" height="50" rx="8" class="cell" /><text x="230.0" y="158.0" class="code" text-anchor="middle">&lt;section&gt;</text><rect x="36" y="186" width="388" height="48" rx="8" class="cell" /><text x="230.0" y="215.0" class="code" text-anchor="middle">&lt;article&gt;</text><rect x="450" y="96" width="170" height="150" rx="8" class="box" /><text x="535.0" y="176.0" class="code" text-anchor="middle">&lt;aside&gt;</text><rect x="20" y="254" width="600" height="36" rx="8" class="box hi" /><text x="320.0" y="277.0" class="code" text-anchor="middle">&lt;footer&gt;</text></svg><figcaption>A typical HTML5 page. Each tag says what its part <em>is</em>, which helps search engines and screen readers.</figcaption></figure>
+
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Tag</th>
+<th>Holds</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;header&gt;</code></td>
+<td>Logo, title, top links</td>
+</tr>
+<tr>
+<td><code>&lt;nav&gt;</code></td>
+<td>The main navigation links</td>
+</tr>
+<tr>
+<td><code>&lt;main&gt;</code></td>
+<td>The page's main content (one per page)</td>
+</tr>
+<tr>
+<td><code>&lt;section&gt;</code></td>
+<td>A themed part of the page</td>
+</tr>
+<tr>
+<td><code>&lt;article&gt;</code></td>
+<td>Something that stands on its own: a post, a card</td>
+</tr>
+<tr>
+<td><code>&lt;aside&gt;</code></td>
+<td>Side content: a sidebar, related links</td>
+</tr>
+<tr>
+<td><code>&lt;footer&gt;</code></td>
+<td>Copyright, privacy policy, contact</td>
+</tr>
+<tr>
+<td><code>&lt;details&gt;</code></td>
+<td>A box the reader can open and close</td>
+</tr>
+</tbody></table></div>
+<pre><code class="language-html">&lt;header&gt;
+  &lt;div class="container"&gt;
+    &lt;h1 id="branding"&gt;My site&lt;/h1&gt;
+    &lt;nav&gt;
+      &lt;ul&gt;&lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+    &lt;/nav&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+
+&lt;section class="boxes"&gt;
+  &lt;div class="container"&gt;
+    &lt;div class="box"&gt;&lt;img src="a.png" alt=""&gt;&lt;p&gt;...&lt;/p&gt;&lt;/div&gt;
+    &lt;div class="box"&gt;&lt;img src="b.png" alt=""&gt;&lt;p&gt;...&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;footer&gt;&lt;p&gt;&amp;copy; 2024&lt;/p&gt;&lt;/footer&gt;
+</code></pre>
+</div></div><div class="nsec flat" id="meta-tag"><div class="fhead"><h3 class="nt">Meta tags</h3></div><div class="nbody"><p>Meta tags sit in <code>&lt;head&gt;</code> and tell browsers and search engines about the page.</p>
+<pre><code class="language-html">&lt;meta charset="utf-8"&gt;                                     &lt;!-- text encoding --&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;   &lt;!-- needed for phones --&gt;
+&lt;meta name="description" content="Blog by Hasib"&gt;          &lt;!-- shown in search results --&gt;
+</code></pre>
+<blockquote>
+<p>Without the viewport tag, phones show the desktop layout zoomed out.</p>
+</blockquote>
+</div></div><div class="nsec flat" id="headings"><div class="fhead"><h3 class="nt">Headings</h3></div><div class="nbody"><p>Six levels, from <code>&lt;h1&gt;</code> (most important) to <code>&lt;h6&gt;</code>.</p>
+<pre><code class="language-html">&lt;h1&gt;Page title&lt;/h1&gt;
+&lt;h2&gt;Section&lt;/h2&gt;
+&lt;h3&gt;Sub-section&lt;/h3&gt;
+</code></pre>
+<p>Use one <code>&lt;h1&gt;</code> per page and don't skip levels. Search engines and screen readers use headings to understand the page.</p>
+</div></div><div class="nsec flat" id="paragraphs"><div class="fhead"><h3 class="nt">Paragraphs</h3></div><div class="nbody"><p><code>&lt;p&gt;</code> is a block element for a paragraph of text.</p>
+<pre><code class="language-html">&lt;p&gt;This is a paragraph.&lt;/p&gt;
+</code></pre>
+</div></div><div class="nsec flat" id="text-highlight"><div class="fhead"><h3 class="nt">Bold and italic</h3></div><div class="nbody"><pre><code class="language-html">&lt;strong&gt;Important&lt;/strong&gt;   &lt;!-- bold, and means "this matters" --&gt;
+&lt;em&gt;Emphasis&lt;/em&gt;            &lt;!-- italic, and means "stress this" --&gt;
+</code></pre>
+</div></div><div class="nsec flat" id="lists"><div class="fhead"><h3 class="nt">Lists</h3></div><div class="nbody"><p>Lists are used for content and also for navigation menus.</p>
+<pre><code class="language-html">&lt;ol&gt;                &lt;!-- ordered: 1, 2, 3 --&gt;
+  &lt;li&gt;First&lt;/li&gt;
+  &lt;li&gt;Second&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;                &lt;!-- unordered: bullets --&gt;
+  &lt;li&gt;Apples&lt;/li&gt;
+  &lt;li&gt;Pears&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+</div></div><div class="nsec flat" id="table"><div class="fhead"><h3 class="nt">Tables</h3></div><div class="nbody"><pre><code class="language-html">&lt;table&gt;
+  &lt;thead&gt;              &lt;!-- the column names --&gt;
+    &lt;tr&gt;               &lt;!-- a row --&gt;
+      &lt;th&gt;Name&lt;/th&gt;    &lt;!-- a header cell --&gt;
+      &lt;th&gt;Age&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;              &lt;!-- the data --&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Rafi&lt;/td&gt;    &lt;!-- a data cell --&gt;
+      &lt;td&gt;24&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre>
+</div></div><div id="forms" class="nsec flat"><div class="fhead"><h3 class="nt">Forms</h3></div><div class="nbody"><p>A form collects input and sends it to the server.</p>
+<pre><code class="language-html">&lt;form action="process.php" method="POST"&gt;
+  &lt;label for="first"&gt;First name&lt;/label&gt;
+  &lt;input id="first" type="text" name="first_name" placeholder="Enter first name"&gt;
+
+  &lt;textarea name="message"&gt;&lt;/textarea&gt;
+
+  &lt;select name="gender"&gt;
+    &lt;option value="male"&gt;Male&lt;/option&gt;
+    &lt;option value="female"&gt;Female&lt;/option&gt;
+  &lt;/select&gt;
+
+  &lt;input type="number" name="age" value="30"&gt;
+  &lt;input type="submit" value="Send"&gt;
+&lt;/form&gt;
+</code></pre>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>action</code></td>
+<td>Where the data is sent</td>
+</tr>
+<tr>
+<td><code>method</code></td>
+<td><code>GET</code> (data in the URL) or <code>POST</code> (data in the request body)</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>The key the value is sent under</td>
+</tr>
+<tr>
+<td><code>placeholder</code></td>
+<td>Grey hint text that disappears when typing</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td>A starting value</td>
+</tr>
+</tbody></table></div>
+<p>Common <code>type</code>s: <code>text</code>, <code>email</code>, <code>password</code>, <code>number</code>, <code>date</code>, <code>checkbox</code>, <code>radio</code>, <code>submit</code>.</p>
+</div></div><div class="nsec flat" id="buttons"><div class="fhead"><h3 class="nt">Buttons</h3></div><div class="nbody"><pre><code class="language-html">&lt;button type="button" onclick="sayHi()"&gt;Click me&lt;/button&gt;
+</code></pre>
+<p>A button does nothing by itself; JavaScript gives it a job.</p>
+</div></div><div class="nsec flat" id="quotations"><div class="fhead"><h3 class="nt">Quotes, abbreviations and citations</h3></div><div class="nbody"><pre><code class="language-html">&lt;blockquote cite="https://example.com"&gt;A long quote, shown indented.&lt;/blockquote&gt;
+&lt;p&gt;The &lt;abbr title="World Wide Web"&gt;WWW&lt;/abbr&gt; is awesome.&lt;/p&gt;   &lt;!-- hover shows the full name --&gt;
+&lt;p&gt;&lt;cite&gt;HTML is Cool&lt;/cite&gt; by me&lt;/p&gt;                            &lt;!-- title of a work --&gt;
+</code></pre>
+</div></div><div class="nsec flat" id="html-character-entity-reference"><div class="fhead"><h3 class="nt">Special characters</h3></div><div class="nbody"><p>Some characters mean something in HTML, so you write them as <strong>entities</strong>:</p>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Write</th>
+<th>To show</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&amp;lt;</code></td>
+<td>&lt;</td>
+</tr>
+<tr>
+<td><code>&amp;gt;</code></td>
+<td>&gt;</td>
+</tr>
+<tr>
+<td><code>&amp;amp;</code></td>
+<td>&amp;</td>
+</tr>
+<tr>
+<td><code>&amp;quot;</code></td>
+<td>"</td>
+</tr>
+<tr>
+<td><code>&amp;copy;</code></td>
+<td>©</td>
+</tr>
+<tr>
+<td><code>&amp;nbsp;</code></td>
+<td>a space that never breaks the line</td>
+</tr>
+</tbody></table></div>
+</div></div><div class="nsec flat" id="creating-links"><div class="fhead"><h3 class="nt">Links</h3></div><div class="nbody"><pre><code class="language-html">&lt;a href="about.html"&gt;About&lt;/a&gt;                              &lt;!-- a page in the same folder --&gt;
+&lt;a href="https://example.com" target="_blank"&gt;Example&lt;/a&gt;   &lt;!-- opens in a new tab --&gt;
+</code></pre>
+<p><code>&lt;a&gt;</code> is inline, but it may wrap block content (a whole card, for example).</p>
+</div></div><div class="nsec flat" id="linking-sections-of-a-page"><div class="fhead"><h3 class="nt">Linking to part of a page</h3></div><div class="nbody"><p>Give the target an <code>id</code>, then link to <code>#</code> plus that id:</p>
+<pre><code class="language-html">&lt;section id="contact"&gt;...&lt;/section&gt;
+
+&lt;a href="#contact"&gt;Go to contact&lt;/a&gt;
+</code></pre>
+</div></div><div class="nsec flat" id="displaying-images"><div class="fhead"><h3 class="nt">Images</h3></div><div class="nbody"><pre><code class="language-html">&lt;img src="images/photo.jpg" width="300" height="255" alt="A red bicycle"&gt;
+</code></pre>
+<ul>
+<li><code>alt</code> describes the image for screen readers, and shows if the image fails to load.</li>
+<li>Setting <code>width</code> and <code>height</code> stops the page jumping while the image loads.</li>
+<li>An image can be a link: wrap it in <code>&lt;a href="..."&gt;...&lt;/a&gt;</code>.</li>
+</ul>
+</div></div><div class="nsec flat" id="display-video"><div class="fhead"><h3 class="nt">Video</h3></div><div class="nbody"><p>A video file of your own:</p>
+<pre><code class="language-html">&lt;video width="640" controls&gt;
+  &lt;source src="clip.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+</code></pre>
+<p><code>controls</code> shows play, pause and the seek bar. <code>autoplay</code> starts it by itself (most browsers require <code>muted</code> too).</p>
+<p>From YouTube: <strong>Share → Embed</strong>, then paste the <code>&lt;iframe&gt;</code>:</p>
+<pre><code class="language-html">&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen&gt;&lt;/iframe&gt;
+</code></pre>
+</div></div></div></details><details class="ngrp" id="g-css-overview" data-ids="css-overview element-class-id-selection combining-selectors pseudo-class-link-selectors style-placement conflict-resolution-cascading styling-text the-box-model list-styling the-background-property positioning-elements-by-floating relative-and-absolute-element-positioning fixed-elements media-queries grid-layout flexbox-layout"><summary><span class="gt">CSS</span><span class="gc">16 topics</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-css-overview" aria-label="Mark CSS as read"><span>Read</span></label></summary><div class="gbody"><div class="nsec flat" id="css-overview"><div class="fhead"><h3 class="nt">CSS overview</h3></div><div class="nbody"><p><strong>CSS</strong> (Cascading Style Sheets) decides how HTML looks. A rule picks elements with a <strong>selector</strong>, then sets <strong>properties</strong>:</p>
+<pre><code class="language-css">p {               /* selector: every &lt;p&gt; */
+  color: blue;    /* declaration: property: value; */
+}
+</code></pre>
+</div></div><div class="nsec flat" id="element-class-id-selection"><div class="fhead"><h3 class="nt">Selectors: element, class and id</h3></div><div class="nbody"><pre><code class="language-css">p      { color: blue; }    /* every &lt;p&gt; */
+.note  { color: blue; }    /* every element with class="note" */
+#title { color: blue; }    /* the one element with id="title" */
+div, .note { color: blue; }  /* several selectors at once */
+</code></pre>
+<pre><code class="language-html">&lt;p class="note"&gt;Uses the .note rule&lt;/p&gt;
+&lt;h1 id="title"&gt;Uses the #title rule&lt;/h1&gt;
+</code></pre>
+<p>An <code>id</code> must be unique on the page; a class can be used any number of times.</p>
+</div></div><div class="nsec flat" id="combining-selectors"><div class="fhead"><h3 class="nt">Combining selectors</h3></div><div class="nbody"><div class="ntable"><table>
+<thead>
+<tr>
+<th>Selector</th>
+<th>Picks</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>p.big</code></td>
+<td><code>&lt;p&gt;</code> elements that have the class <code>big</code></td>
+</tr>
+<tr>
+<td><code>article &gt; p</code></td>
+<td><code>&lt;p&gt;</code> elements <strong>directly</strong> inside an <code>&lt;article&gt;</code></td>
+</tr>
+<tr>
+<td><code>article p</code></td>
+<td><code>&lt;p&gt;</code> elements <strong>anywhere</strong> inside an <code>&lt;article&gt;</code></td>
+</tr>
+</tbody></table></div>
+<pre><code class="language-css">p.big       { font-size: 20px; }
+article &gt; p { color: blue; }
+</code></pre>
+</div></div><div id="pseudo-class-link-selectors" class="nsec flat"><div class="fhead"><h3 class="nt">Pseudo-classes</h3></div><div class="nbody"><p>A pseudo-class picks an element in a certain <strong>state</strong> or <strong>position</strong>: <code>selector:pseudo-class</code>.</p>
+<pre><code class="language-css">a:link, a:visited { color: teal; }     /* links, before and after visiting */
+a:hover           { color: orange; }   /* pointer over it */
+a:active          { color: red; }      /* while being clicked */
+
+header li:nth-child(3)     { font-weight: bold; }  /* the 3rd item */
+section div:nth-child(odd) { background: #eee; }   /* 1st, 3rd, 5th... */
+section div:nth-child(4):hover { color: red; }      /* can be combined */
+</code></pre>
+</div></div><div class="nsec flat" id="style-placement"><div class="fhead"><h3 class="nt">Where to put CSS</h3></div><div class="nbody"><p>Keep CSS in its own file and link it in <code>&lt;head&gt;</code>:</p>
+<pre><code class="language-html">&lt;link rel="stylesheet" href="style.css"&gt;
+</code></pre>
+<p>One file can style every page, and the browser caches it.</p>
+</div></div><div class="nsec flat" id="conflict-resolution-cascading"><div class="fhead"><h3 class="nt">The cascade: which rule wins</h3></div><div class="nbody"><p>When several rules style the same element, the browser decides in this order:</p>
+<ol>
+<li><strong>Specificity:</strong> the more specific selector wins.</li>
+<li><strong>Order:</strong> on a tie, the rule written last wins.</li>
+<li><strong>Inheritance:</strong> some properties (<code>color</code>, <code>font</code>) pass from parent to child when nothing else sets them.</li>
+</ol>
+<p>Rules that don't clash all apply together.</p>
+<figure class="ndia"><svg viewBox="0 0 640 200" role="img" aria-label="CSS specificity: inline style, then id, then class, then element"><defs><marker id="asp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk" /></marker></defs><rect x="20" y="14" width="600" height="38" rx="8" class="box hi" /><text x="34" y="38" class="tb" text-anchor="start">inline style</text><text x="606" y="38" class="code" text-anchor="end">style="..."   1,0,0,0</text><rect x="20" y="60" width="510" height="38" rx="8" class="box" /><text x="34" y="84" class="tb" text-anchor="start">id</text><text x="516" y="84" class="code" text-anchor="end">#nav   0,1,0,0</text><rect x="20" y="106" width="420" height="38" rx="8" class="box" /><text x="34" y="130" class="tb" text-anchor="start">class, :hover, [attr]</text><text x="426" y="130" class="code" text-anchor="end">.btn   0,0,1,0</text><rect x="20" y="152" width="330" height="38" rx="8" class="box" /><text x="34" y="176" class="tb" text-anchor="start">element</text><text x="336" y="176" class="code" text-anchor="end">p   0,0,0,1</text></svg><figcaption>When two rules clash, the more specific one wins. Count from the left: one id beats any number of classes. On a tie, the later rule wins.</figcaption></figure>
+
+</div></div><div id="styling-text" class="nsec flat"><div class="fhead"><h3 class="nt">Styling text</h3></div><div class="nbody"><pre><code class="language-css">body {
+  font-family: "Open Sans", Arial, sans-serif;  /* fallbacks, then a generic family */
+  font-size: 16px;            /* the browser default */
+  font-weight: bold;
+  font-style: italic;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: underline;
+  line-height: 1.6;           /* line spacing */
+  letter-spacing: 0.05em;
+  word-spacing: 0.2em;
+  color: #0000ff;
+}
+</code></pre>
+<p><strong>Relative sizes</strong> grow with the reader's settings:</p>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Unit</th>
+<th>Relative to</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>%</code></td>
+<td>The parent's font size</td>
+<td><code>120%</code> of 16px = 19.2px</td>
+</tr>
+<tr>
+<td><code>em</code></td>
+<td>The parent's font size</td>
+<td><code>2em</code> = twice the parent's size</td>
+</tr>
+<tr>
+<td><code>rem</code></td>
+<td>The root (<code>&lt;html&gt;</code>) font size</td>
+<td><code>1.5rem</code> = 24px, everywhere</td>
+</tr>
+</tbody></table></div>
+</div></div><div id="the-box-model" class="nsec flat"><div class="fhead"><h3 class="nt">The box model</h3></div><div class="nbody"><figure class="ndia"><svg viewBox="0 0 640 260" role="img" aria-label="CSS box model: margin, border, padding, content"><rect x="20" y="12" width="600" height="236" rx="6" class="vb" style="stroke:var(--steel);stroke-dasharray:5 4" /><text x="30" y="32" class="code" text-anchor="start">margin</text><rect x="64" y="46" width="512" height="168" rx="6" class="box hi" style="stroke:var(--steel);stroke-dasharray:0" /><text x="74" y="66" class="code" text-anchor="start">border</text><rect x="108" y="80" width="424" height="100" rx="6" class="box" style="stroke:var(--steel);stroke-dasharray:0" /><text x="118" y="100" class="code" text-anchor="start">padding</text><rect x="152" y="114" width="336" height="32" rx="6" class="cell" style="stroke:var(--steel);stroke-dasharray:0" /><text x="162" y="134" class="code" text-anchor="start">content</text><text x="320" y="150" class="mu" text-anchor="middle">width × height</text></svg><figcaption>Every element is a box: content, then padding, border and margin around it. With <code>box-sizing: border-box</code>, <code>width</code> includes padding and border.</figcaption></figure>
+
+<pre><code class="language-css">* { box-sizing: border-box; }   /* put this at the top of every stylesheet */
+
+.card {
+  width: 300px;                 /* includes padding and border, thanks to border-box */
+  padding: 10px;                /* all four sides */
+  border: 3px solid black;      /* width, style, colour */
+  margin: 40px 20px;            /* top/bottom 40px, left/right 20px */
+  overflow: auto;               /* scroll bar if the content doesn't fit */
+}
+</code></pre>
+<ul>
+<li>Four values go clockwise from the top: <code>padding: 10px 20px 10px 20px</code> is top, right, bottom, left.</li>
+<li><strong>Vertical margins collapse:</strong> between two stacked boxes, only the bigger margin is used. Side-by-side margins add up.</li>
+<li>Browsers give <code>&lt;body&gt;</code> an 8px margin. Reset it with <code>body { margin: 0; }</code>.</li>
+</ul>
+</div></div><div class="nsec flat" id="list-styling"><div class="fhead"><h3 class="nt">Styling lists</h3></div><div class="nbody"><pre><code class="language-css">.menu {
+  list-style: none;          /* remove the bullets */
+  padding: 0;
+}
+.menu li { display: inline; }             /* items side by side */
+.fancy   { list-style: square; }          /* change the bullet */
+.custom li { list-style-image: url("star.png"); }   /* your own bullet */
+</code></pre>
+</div></div><div class="nsec flat" id="the-background-property"><div class="fhead"><h3 class="nt">Backgrounds</h3></div><div class="nbody"><pre><code class="language-css">.hero {
+  background-color: blue;
+  background-image: url("sky.jpg");
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: cover;      /* fill the box */
+}
+
+.hero { background: url("sky.jpg") no-repeat top right / cover; }   /* the same, in one line */
+</code></pre>
+</div></div><div class="nsec flat" id="positioning-elements-by-floating"><div class="fhead"><h3 class="nt">Floats</h3></div><div class="nbody"><p><code>float</code> pushes an element to the left or right and lets text wrap around it, like a photo in a newspaper.</p>
+<pre><code class="language-css">img.side { float: right; }
+.footer  { clear: both; }    /* start below any floats */
+</code></pre>
+<ul>
+<li>A floated element leaves the normal flow.</li>
+<li><code>clear: left | right | both</code> moves an element below earlier floats.</li>
+</ul>
+<blockquote>
+<p>For page layout, use <strong>flexbox</strong> or <strong>grid</strong> instead. Floats are now mainly for wrapping text around images.</p>
+</blockquote>
+</div></div><div class="nsec flat" id="relative-and-absolute-element-positioning"><div class="fhead"><h3 class="nt">Relative and absolute positioning</h3></div><div class="nbody"><div class="ntable"><table>
+<thead>
+<tr>
+<th><code>position</code></th>
+<th>Moves relative to</th>
+<th>Keeps its space in the page?</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>static</code> (default)</td>
+<td>Doesn't move</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>relative</code></td>
+<td>Where it would normally be</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>absolute</code></td>
+<td>The nearest <strong>positioned</strong> ancestor (or the page)</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>fixed</code></td>
+<td>The browser window</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>sticky</code></td>
+<td>Normal, until it reaches the given offset when scrolling</td>
+<td>Yes</td>
+</tr>
+</tbody></table></div>
+<pre><code class="language-css">.card  { position: relative; }   /* becomes the reference point */
+.badge { position: absolute; top: 10px; right: 10px; }   /* corner of .card */
+</code></pre>
+</div></div><div class="nsec flat" id="fixed-elements"><div class="fhead"><h3 class="nt">Fixed elements</h3></div><div class="nbody"><p>A fixed element stays in the same place on screen while the page scrolls: good for headers and "back to top" buttons.</p>
+<pre><code class="language-css">.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+</code></pre>
+</div></div><div class="nsec flat" id="media-queries"><div class="fhead"><h3 class="nt">Media queries</h3></div><div class="nbody"><p>Change the styles depending on screen size.</p>
+<pre><code class="language-css">p { color: black; }                         /* base styles for every screen */
+
+@media (max-width: 600px) {                 /* phones */
+  p { color: blue; }
+}
+@media (min-width: 900px) and (max-width: 991px) { ... }   /* and: both must be true */
+@media (max-width: 900px), (min-width: 1220px) { ... }     /* comma: either one */
+</code></pre>
+<ul>
+<li>Write base styles first, then override them for particular sizes.</li>
+<li>Don't let ranges overlap: end one at 991px and start the next at 992px.</li>
+</ul>
+</div></div><div id="grid-layout" class="nsec flat"><div class="fhead"><h3 class="nt">CSS grid</h3></div><div class="nbody"><p>Grid lays things out in <strong>rows and columns at the same time</strong> (flexbox does one direction).</p>
+<figure class="ndia"><svg viewBox="0 0 640 226" role="img" aria-label="CSS grid with three columns; one item spans two columns, another two rows"><text x="20" y="20" class="code" text-anchor="start">grid-template-columns: repeat(3, 1fr);  gap: 1em;</text><rect x="20" y="32" width="396" height="52" rx="8" class="box hi" /><text x="218.0" y="63.0" class="code" text-anchor="middle">grid-column: 1 / 3</text><rect x="428" y="32" width="192" height="116" rx="8" class="box hi" /><text x="524.0" y="95.0" class="code" text-anchor="middle">grid-row: 1 / 3</text><rect x="20" y="96" width="192" height="52" rx="8" class="cell" /><rect x="224" y="96" width="192" height="52" rx="8" class="cell" /><rect x="20" y="160" width="192" height="52" rx="8" class="cell" /><rect x="224" y="160" width="192" height="52" rx="8" class="cell" /><rect x="428" y="160" width="192" height="52" rx="8" class="cell" /></svg><figcaption>Grid works in two directions at once. Items can span several columns or rows.</figcaption></figure>
+
+<pre><code class="language-css">.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);   /* 3 equal columns; fr = a share of the free space */
+  grid-auto-rows: minmax(100px, auto);     /* rows at least 100px, taller if needed */
+  gap: 1em;                                /* space between rows and columns */
+}
+.wide { grid-column: 1 / 3; }   /* from line 1 to line 3: two columns */
+.tall { grid-row: 1 / 3; }      /* two rows */
+</code></pre>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Property</th>
+<th>On</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>justify-items</code></td>
+<td>the grid</td>
+<td>Places every item inside its cell, horizontally</td>
+</tr>
+<tr>
+<td><code>align-items</code></td>
+<td>the grid</td>
+<td>...vertically</td>
+</tr>
+<tr>
+<td><code>justify-self</code>, <code>align-self</code></td>
+<td>one item</td>
+<td>The same, for one item</td>
+</tr>
+</tbody></table></div>
+<p>Values: <code>start</code>, <code>center</code>, <code>end</code>, <code>stretch</code>.</p>
+</div></div><div id="flexbox-layout" class="nsec flat"><div class="fhead"><h3 class="nt">Flexbox</h3></div><div class="nbody"><p>Flexbox lines items up in <strong>one direction</strong> and shares out the space between them.</p>
+<figure class="ndia"><svg viewBox="0 0 640 180" role="img" aria-label="Flexbox main axis horizontal and cross axis vertical"><defs><marker id="afx" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk" /></marker></defs><rect x="20" y="20" width="600" height="150" rx="10" class="box" /><text x="34" y="40" class="code" text-anchor="start">display: flex</text><rect x="60" y="70" width="100" height="60" rx="8" class="box hi" /><text x="110.0" y="105.0" class="tb" text-anchor="middle">item 1</text><rect x="180" y="70" width="100" height="60" rx="8" class="box hi" /><text x="230.0" y="105.0" class="tb" text-anchor="middle">item 2</text><rect x="300" y="70" width="100" height="60" rx="8" class="box hi" /><text x="350.0" y="105.0" class="tb" text-anchor="middle">item 3</text><path d="M40 155L600 155" class="ln" marker-end="url(#afx)" /><text x="580" y="148" class="mu" text-anchor="end">main axis (flex-direction: row)</text><path d="M600 52V140" class="ln" marker-end="url(#afx)" /><text x="588" y="66" class="mu" text-anchor="end">cross axis</text></svg><figcaption><code>justify-content</code> places items along the main axis; <code>align-items</code> along the cross axis. <code>flex-direction: column</code> swaps the two.</figcaption></figure>
+
+<pre><code class="language-css">.row {
+  display: flex;
+  flex-direction: row;              /* or column */
+  flex-wrap: wrap;                  /* move items to a new line when there's no room */
+  justify-content: space-between;   /* along the main axis */
+  align-items: center;              /* along the cross axis */
+  gap: 1rem;
+}
+.row .grow { flex: 1; }             /* take the space that's left */
+</code></pre>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>On the container</th>
+<th>Values</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>justify-content</code></td>
+<td><code>flex-start</code> <code>center</code> <code>flex-end</code> <code>space-between</code> <code>space-around</code> <code>space-evenly</code></td>
+</tr>
+<tr>
+<td><code>align-items</code></td>
+<td><code>flex-start</code> <code>center</code> <code>flex-end</code> <code>stretch</code></td>
+</tr>
+<tr>
+<td><code>flex-wrap</code></td>
+<td><code>nowrap</code> <code>wrap</code> <code>wrap-reverse</code></td>
+</tr>
+</tbody></table></div>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>On an item</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>flex-grow</code></td>
+<td>How much of the extra space it takes</td>
+</tr>
+<tr>
+<td><code>flex-shrink</code></td>
+<td>How much it gives up when space is short</td>
+</tr>
+<tr>
+<td><code>flex-basis</code></td>
+<td>Its starting size (like <code>width</code>)</td>
+</tr>
+<tr>
+<td><code>flex: 1</code></td>
+<td>Shorthand for all three</td>
+</tr>
+<tr>
+<td><code>align-self</code></td>
+<td>Its own cross-axis alignment</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>Its position, without changing the HTML</td>
+</tr>
+</tbody></table></div>
+</div></div></div></details><details class="ngrp" id="g-bootstrap-overview" data-ids="wireframe nav-bar grid-system"><summary><span class="gt">Bootstrap</span><span class="gc">3 topics</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-bootstrap-overview" aria-label="Mark Bootstrap as read"><span>Read</span></label></summary><div class="gbody"><div class="nsec flat" id="wireframe"><div class="fhead"><h3 class="nt">Wireframes</h3></div><div class="nbody"><p>Sketch the layout on paper before writing code: boxes for the header, content and footer. Browse <a href="https://dribbble.com/" target="_blank" rel="noopener noreferrer">Dribbble</a> for ideas.</p>
+</div></div><div class="nsec flat" id="nav-bar"><div class="fhead"><h3 class="nt">Navigation bar</h3></div><div class="nbody"><p>Bootstrap's <a href="https://getbootstrap.com/docs/5.3/components/navbar/" target="_blank" rel="noopener noreferrer">navbar component</a> is a good starting point: copy the example and change it to fit. It already collapses into a menu button on phones.</p>
+</div></div><div class="nsec flat" id="grid-system"><div class="fhead"><h3 class="nt">Bootstrap grid</h3></div><div class="nbody"><figure class="ndia"><svg viewBox="0 0 640 170" role="img" aria-label="Bootstrap 12-column grid examples"><rect x="20" y="14" width="44" height="26" rx="4" class="cell" /><text x="42" y="32" class="mu" text-anchor="middle">1</text><rect x="70" y="14" width="44" height="26" rx="4" class="cell" /><text x="92" y="32" class="mu" text-anchor="middle">2</text><rect x="120" y="14" width="44" height="26" rx="4" class="cell" /><text x="142" y="32" class="mu" text-anchor="middle">3</text><rect x="170" y="14" width="44" height="26" rx="4" class="cell" /><text x="192" y="32" class="mu" text-anchor="middle">4</text><rect x="220" y="14" width="44" height="26" rx="4" class="cell" /><text x="242" y="32" class="mu" text-anchor="middle">5</text><rect x="270" y="14" width="44" height="26" rx="4" class="cell" /><text x="292" y="32" class="mu" text-anchor="middle">6</text><rect x="320" y="14" width="44" height="26" rx="4" class="cell" /><text x="342" y="32" class="mu" text-anchor="middle">7</text><rect x="370" y="14" width="44" height="26" rx="4" class="cell" /><text x="392" y="32" class="mu" text-anchor="middle">8</text><rect x="420" y="14" width="44" height="26" rx="4" class="cell" /><text x="442" y="32" class="mu" text-anchor="middle">9</text><rect x="470" y="14" width="44" height="26" rx="4" class="cell" /><text x="492" y="32" class="mu" text-anchor="middle">10</text><rect x="520" y="14" width="44" height="26" rx="4" class="cell" /><text x="542" y="32" class="mu" text-anchor="middle">11</text><rect x="570" y="14" width="44" height="26" rx="4" class="cell" /><text x="592" y="32" class="mu" text-anchor="middle">12</text><rect x="20" y="52" width="294" height="30" rx="6" class="box hi" /><text x="167.0" y="72" class="code" text-anchor="middle">col-6</text><rect x="320" y="52" width="294" height="30" rx="6" class="box hi" /><text x="467.0" y="72" class="code" text-anchor="middle">col-6</text><rect x="20" y="90" width="194" height="30" rx="6" class="box hi" /><text x="117.0" y="110" class="code" text-anchor="middle">col-4</text><rect x="220" y="90" width="194" height="30" rx="6" class="box hi" /><text x="317.0" y="110" class="code" text-anchor="middle">col-4</text><rect x="420" y="90" width="194" height="30" rx="6" class="box hi" /><text x="517.0" y="110" class="code" text-anchor="middle">col-4</text><rect x="20" y="128" width="394" height="30" rx="6" class="box hi" /><text x="217.0" y="148" class="code" text-anchor="middle">col-md-8</text><rect x="420" y="128" width="194" height="30" rx="6" class="box hi" /><text x="517.0" y="148" class="code" text-anchor="middle">col-md-4</text></svg><figcaption>A Bootstrap row has 12 columns; the numbers in the class names must add up to 12.</figcaption></figure>
+
+<pre><code class="language-html">&lt;div class="container"&gt;              &lt;!-- centres the content and adds side padding --&gt;
+  &lt;div class="row"&gt;                  &lt;!-- a row of columns --&gt;
+    &lt;div class="col-md-8"&gt;Main&lt;/div&gt;
+    &lt;div class="col-md-4"&gt;Sidebar&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p><code>col-{size}-{span}</code>: the columns sit side by side from that screen size up, and stack below it.</p>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Side by side from</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>col-</code></td>
+<td>always</td>
+</tr>
+<tr>
+<td><code>col-sm-</code></td>
+<td>576px</td>
+</tr>
+<tr>
+<td><code>col-md-</code></td>
+<td>768px</td>
+</tr>
+<tr>
+<td><code>col-lg-</code></td>
+<td>992px</td>
+</tr>
+<tr>
+<td><code>col-xl-</code></td>
+<td>1200px</td>
+</tr>
+</tbody></table></div>
+<p>Classes can be combined: <code>col-12 col-md-6 col-lg-4</code> is full width on phones, half on tablets and a third on laptops.</p>
+</div></div></div></details></div></div>
+<button type="button" class="ntop" id="ntop" aria-label="Back to top" hidden>↑</button>
+<script>
+(function(){
+  var secs=[].slice.call(document.querySelectorAll('.nsec,.ngrp')), top=document.getElementById('ntop'), nav=document.querySelector('.nnav-box');
+  function show(){var id=decodeURIComponent(location.hash.slice(1)); if(!id) return; var el=document.getElementById(id); if(!el) return; for(var d=el.closest('details');d;d=d.parentElement&&d.parentElement.closest('details')) d.open=true; setTimeout(function(){el.scrollIntoView({block:'start'});},30);}
+  if(window.matchMedia('(max-width:820px)').matches&&nav) nav.open=false;
+  document.getElementById('nopen').onclick=function(){secs.forEach(function(d){d.open=true;});};
+  document.getElementById('nshut').onclick=function(){secs.forEach(function(d){d.open=false;});};
+  document.querySelectorAll('.nnav a').forEach(function(a){a.addEventListener('click',function(){if(window.matchMedia('(max-width:820px)').matches&&nav) nav.open=false;});});
+  addEventListener('hashchange',show); show();
+  addEventListener('scroll',function(){top.hidden=scrollY<600;},{passive:true});
+  top.onclick=function(){scrollTo({top:0,behavior:'smooth'});};
+})();
+</script><script>
+(function(){
+  var KEY='notes:html-css:read', done=Object.create(null);
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; Object.keys(saved).forEach(function(k){done[k]=1;});}catch(e){}
+  var boxes=[].slice.call(document.querySelectorAll('.nread input'));
+  function paint(){
+    var n=0; boxes.forEach(function(b){var id=b.dataset.id, on=!!done[id]; b.checked=on; if(on) n++;
+      var s=document.getElementById(id); if(s) s.classList.toggle('isread',on);
+      var a=document.querySelector('.nnav a[href="#'+id+'"]'); if(a) a.classList.toggle('isread',on);});
+    document.getElementById('nprog').textContent=n+' of '+boxes.length+' read';
+  }
+  boxes.forEach(function(b){
+    b.addEventListener('click',function(e){e.stopPropagation(); if(b.checked) done[b.dataset.id]=1; else delete done[b.dataset.id];
+      try{localStorage.setItem(KEY,JSON.stringify(done));}catch(x){} paint();});
+    b.closest('label').addEventListener('click',function(e){e.stopPropagation();});
+  });
+  paint();
+})();
+</script></section>
+<script src="{{ '/notes/notes.js' | relative_url }}" defer></script>

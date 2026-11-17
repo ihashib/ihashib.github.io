@@ -29,16 +29,377 @@ description: "My ROS notes: nodes, topics, messages, services, launch files and 
 @media (max-width:820px){.nlay{display:block}.nnav{position:static;max-height:none;margin:0 0 1rem;padding:0}.nnav-box{border:1px solid rgba(127,127,127,.35);border-radius:12px;padding:0}
 .nnav-box>summary{display:block;padding:.85rem 1.1rem;font-weight:700;cursor:pointer}.nnav-box .ngroup{padding:0 1rem}.nnav-box[open]>summary{border-bottom:1px solid rgba(127,127,127,.3);margin-bottom:.8rem}}
 </style>
-<section class="section wrap notes" id="note" aria-labelledby="note-title">
-  <p><a href="{{ '/notes/' | relative_url }}">&larr; All notes</a></p>
+<link rel="stylesheet" href="{{ '/notes/notes.css' | relative_url }}">
+<section class="section wrap notes" id="note" data-note="ros" aria-labelledby="note-title">
+  <p><a href="{{ '/notes/' | relative_url }}">← All notes</a></p>
   <h1 id="note-title">ROS</h1>
   <p style="margin:.5rem 0 0"><a href="https://docs.google.com/document/d/1b-hxFQEpyJdGvQQ6R9W-_728KhA0NQpjPXgCMtgSJMw/edit" target="_blank" rel="noopener noreferrer"><i class="fab fa-google-drive" aria-hidden="true"></i> Open the full notes in Google Docs</a></p>
-<div class="nlay"><nav class="nnav" aria-label="Contents"><details class="nnav-box" open><summary>Contents</summary><div class="ngroup"><b><a href="#g-basics">Basics and setup</a></b><ul><li><a href="#1-basics-of-ros">Basics of ROS</a></li><li><a href="#2-install-tips">Install tips</a></li><li><a href="#3-setup-workspace-ros-package">Setup workspace &amp; ROS package</a></li></ul></div><div class="ngroup"><b><a href="#g-concepts">Core concepts</a></b><ul><li><a href="#4-ros-concept">ROS concept</a></li><li><a href="#5-ros-topics-nodes-massages">ROS topics, nodes, massages</a></li><li><a href="#6-how-ros-works">How ROS works</a></li></ul></div><div class="ngroup"><b><a href="#g-writing">Nodes, messages and services</a></b><ul><li><a href="#7-writing-publisher-and-subscriber-nodes">Writing publisher and subscriber nodes</a></li><li><a href="#8-create-custom-ros-messages">Create custom ROS messages</a></li><li><a href="#9-ros-services">ROS Services</a></li></ul></div><div class="ngroup"><b><a href="#g-robot">Robot and network</a></b><ul><li><a href="#10-network-configuration">Network configuration</a></li><li><a href="#11-ros-launch-command">ROS Launch command</a></li><li><a href="#12-using-ros-serial">Using ROS serial</a></li></ul></div></details></nav><div class="nmain"><div class="nbar"><span class="nprog" id="nprog" aria-live="polite"></span><button type="button" id="nopen">Expand all</button><button type="button" id="nshut">Collapse all</button></div><details class="ngrp" id="g-basics" data-ids="1-basics-of-ros 2-install-tips 3-setup-workspace-ros-package"><summary><span class="gt">Basics and setup</span><span class="gc"></span></summary><div class="gbody"><details class="nsec" id="1-basics-of-ros"><summary><span class="nt">Basics of ROS</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="1-basics-of-ros" aria-label="Mark Basics of ROS as read"><span>Read</span></label></summary><div class="nbody"><ul><li>For detailed explanation of all the topics covered here visit: <a href="http://wiki.ros.org/" target="_blank" rel="noopener noreferrer">http://wiki.ros.org/</a></li><li>For better understanding here are some slides: <a href="https://docs.google.com/presentation/d/1KBc8gXuB7iRfSZVZKymB-WWmuelxNX4I9XBWPFZidKA/edit?usp=sharing" target="_blank" rel="noopener noreferrer">https://docs.google.com/presentation/d/1KBc8gXuB7iRfSZVZKymB-WWmuelxNX4I9XBWPFZidKA/edit?usp=sharing</a></li><li>This document is written based on the official ROS WIKI and  Udemy course about ROS by Anis Koubaa ( <a href="https://www.udemy.com/course/ros-essentials/" target="_blank" rel="noopener noreferrer">https://www.udemy.com/course/ros-essentials/</a> )</li><li>10 year montage of ROS: <a href="https://vimeo.com/245826128" target="_blank" rel="noopener noreferrer">https://vimeo.com/245826128</a></li><li>The Robot Operating System (ROS) is a flexible framework for writing robot software. It is a collection of tools, libraries, and conventions that aim to simplify the task of creating complex and robust robot behavior across a wide variety of robotic platforms.</li><li>Why? Because creating truly robust, general-purpose robot software is hard. From the robot&#x27;s perspective, problems that seem trivial to humans often vary wildly between instances of tasks and environments. Dealing with these variations is so hard that no single individual, laboratory, or institution can hope to do it on their own.</li><li>As a result, ROS was built from the ground up to encourage collaborative robotics software development. For example, one laboratory might have experts in mapping indoor environments, and could contribute a world-class system for producing maps. Another group might have experts at using maps to navigate, and yet another group might have discovered a computer vision approach that works well for recognizing small objects in clutter. ROS was designed specifically for groups like these to collaborate and build upon each other&#x27;s work, as is described throughout this site.</li></ul><h3 id="requirements">Requirements</h3><ul><li>You have to have experience using Ubuntu. Personally, I prefer Kubuntu, which is much better than vanilla Ubuntu. ROS natively supports Ubuntu and it’s flavors. So use these for best compatibility. Also, it’s best practice not to mix ROS distributions.</li><li>Python language</li><li>Basics of C++ language ( for arduino interfacing )</li><li>Patience and debugging skills.</li></ul></div></details><div class="nsec flat" id="2-install-tips"><div class="fhead"><h3 class="nt">Install tips</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="2-install-tips" aria-label="Mark Install tips as read"><span>Read</span></label></div><div class="nbody"><ul><li><a href="http://wiki.ros.org/ROS/Installation" target="_blank" rel="noopener noreferrer">http://wiki.ros.org/ROS/Installation</a></li><li>In the ROS website, all previous versions of ROS versions will be available but you should Install the LTS version that has matured for at least 2 years, so that all the packages are available.</li><li>All the ROS versions also list out the compatible versions of Ubuntu as well. For example, Melodic supports Ubuntu 18.04 and all it’s flavors, Kinetic supports 16.04.</li><li>Use ROS wiki to install the full version.</li><li>A Python/C++ editor will be needed, any program can be used but Visual studio code is recommended, as it is lighter.</li></ul></div></div><details class="nsec" id="3-setup-workspace-ros-package"><summary><span class="nt">Setup workspace &amp; ROS package</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="3-setup-workspace-ros-package" aria-label="Mark Setup workspace &amp; ROS package as read"><span>Read</span></label></summary><div class="nbody"><h3 id="workspace">Workspace</h3><ul><li>Install directory: opt/ros</li><li>Every Time terminal opens, to work on ROS, the setup.bash must be executed, thus in terminal:</li><ul><li>nano ~/.bashrc</li><li>at the end of the file: source /opt/ros/melodic/setup.bash</li></ul><li>Create a workspace to work on. To do that use catkin workspace</li><ul><li>mkdir -p ~/catkin_ws/src</li><li>Go in the dir:  cd catkin_ws</li><li>Compile the workspace: catkin_make</li><li>To enable the workspace every time, so in terminal:</li><ul><li>nano ~/.bashrc</li><li>at the end: source /home/hasib/catkin_ws/devel/setup.bash</li></ul></ul></ul><h3 id="package">Package</h3><ul><li>Your projects on ROS are known as ROS Packages</li><ul><li>To create a package,</li><ul><li>go to the src of your workspace</li><li>in terminal: catkin_create_pkg name_of_package dependencies_of_the_projects</li><li>naming convention: the package name must be all lower case</li><li>common dependencies that must be used:</li><ul><li>std_msgs rospy roscpp</li></ul><li>example:</li><ul><li>catkin_create_pkg beginner_tutorials std_msgs rospy roscpp</li></ul><li>the dependencies can be added later as well</li><li>When using rosrun to run the packages, you can always press &#x27;tab&#x27; twice after typing package name to know the nodes inside the package</li><li>After creating a new package, compile it.</li><ul><li>go to the workspace root folder</li><li>catkin_make</li></ul><li>in catkin_ws/src/ :</li><ul><li>there’s another ‘src’, all the code goes there</li><li>in the ‘include’ folder, all the libraries go</li></ul><li>In the visual studio, drag and drop the folder is possible and new files can be created.</li><li>Everytime editing any file in ‘src’, the workspace will need to be recompiled</li><li>Get a package from github: git clone &lt;link of git repo&gt;</li></ul></ul></ul></div></details></div></details><details class="ngrp" id="g-concepts" data-ids="4-ros-concept 5-ros-topics-nodes-massages 6-how-ros-works"><summary><span class="gt">Core concepts</span><span class="gc"></span></summary><div class="gbody"><div class="nsec flat" id="4-ros-concept"><div class="fhead"><h3 class="nt">ROS concept</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="4-ros-concept" aria-label="Mark ROS concept as read"><span>Read</span></label></div><div class="nbody"><ul><li>To Start working on ROS, in terminal:</li><ul><li>roscore</li></ul><li>To see all the ROS node:</li><ul><li>rosnode list</li></ul><li>To see topics:</li><ul><li>rostopic list</li></ul></ul></div></div><details class="nsec" id="5-ros-topics-nodes-massages"><summary><span class="nt">ROS topics, nodes, massages</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="5-ros-topics-nodes-massages" aria-label="Mark ROS topics, nodes, massages as read"><span>Read</span></label></summary><div class="nbody"><ul><li>First run, roscore</li><li>rosNODE:</li><ul><li>ROS node is an application that can be executed. Nodes can publish or subscribe to each other using ROS topics and send values to each other called ROS massages.</li><li>To run a ros application:</li><ul><li>rosrun &lt;application name&gt;</li><ul><li>rosrun turtlesim       //‘tab’ 2 times shows all commands related</li><li>rosrun turtlesim turtlesim_node     //turtlesim gui should come</li></ul></ul><li>Some ROS node commands:</li><ul><li>rosnode             //shows all commands</li><li>rosnode list      //list of all nodes running</li><li>rosnode info &lt;name of node&gt;       // give full info about a node</li></ul></ul></ul><h3 id="topic">Topic</h3><ul><li>ROS topics are just mediums that is used by nodes to send ROS massages</li><li>Some ROS topic commands:</li><ul><li>rostopic    //shows all commands</li><li>rostopic list  //shows all the topics currently running</li><li>rostopic info &lt;name of topic&gt; //shows info about the topic</li><li>rostopic type     //show the type of the bus</li><li>rostopic echo &lt;name of topic&gt;   //prints out the values being transferred</li><li>rostopic pub &lt;topic&gt; &lt;msg type&gt; &lt;args&gt;  //directly sends msg to node</li><ul><li>rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- &#x27;[2.0, 0.0, 0.0]&#x27; &#x27;[0.0, 0.0, 1.8]&#x27;</li><li>‘-1’ here tells the publisher to run once then exit</li><li>‘--’ tell it none of the ags are an option, required when using negative number</li></ul></ul></ul><h3 id="using-rqt-graph">Using rqt graph</h3><ul><li>Install:</li><ul><li>$ sudo apt-get install ros-&lt;distro&gt;-rqt</li><li>$ sudo apt-get install ros-&lt;distro&gt;-rqt-common-plugins</li></ul></ul><h3 id="commands">Commands</h3><ul><li>rosrun rqt_graph rqt_graph  // visually shows connected nodes and topics</li><li>rosrun rqt_plot rqt_plot     //shows plots of the topics over time</li></ul><h3 id="messages">Messages</h3><ul><li>ROS nodes generate values that get sent via topics to other nodes, the values are called messages.</li><li>Some ROS msg commands:</li><ul><li>rosmsg    //show all commands</li><li>rosmsg show &lt;name of a topic type&gt;  //shows the structure of values that are sent</li></ul></ul></div></details><details class="nsec" id="6-how-ros-works"><summary><span class="nt">How ROS works</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="6-how-ros-works" aria-label="Mark How ROS works as read"><span>Read</span></label></summary><div class="nbody"><h3 id="basic-info">Basic info</h3><ul><li>ROS is a collection of nodes</li><li>Nodes that give massages are publishers</li><li>Nodes that take massages are subscribers</li><li>The nodes exchange messages between each other using certain Topics</li><li>The messages will be of a certain format/type.</li></ul><h3 id="how-publisher-and-subscriber-communicate">How publisher and subscriber communicate</h3><ul><li>Master node is responsible for identifying all the nodes, topics and messages and communicates which nodes are publishers and subscribers and what topic are they to use.</li><li>So, lets say:</li><ul><li>There&#x27;s node1, which connects with roscore and gives its name, subscribing node name , subscribing topic name, required topic and massage type.</li><li>roscore will store this information.</li><li>Another node, node2 now connects to the roscore and also gives its name, publishing topic name, message type.</li><li>Since roscore has global knowledge, it will tell node2 that node1 has it’s required topic name, massage type and is a publisher.</li><li>Node2 will connect to node1 using the rosTCP protocol.</li><li>Node1 replies back to node2 using the rosTCP protocol.</li><li>The publishing node(node1) sends messages via topics periodically, which is coded into the publishing node.</li><li>The subscribing node(node2) will have a callback function that executes whatever message the publisher sends.</li></ul></ul><h3 id="publisher-node-creation-rules">Publisher node creation rules</h3><ul><li>determine NAME of topic to publish.</li><li>determine the type of massage to publish.</li><li>determine the frequency of topic publication. How many massages per sec.</li><li>Create a publisher object with parameters chosen</li><li>Keep publishing the topic message using while loop at the selected frequency</li></ul><h3 id="subscriber-node-creation-rules">Subscriber node creation rules</h3><ul><li>Identify the name for the topic to listen to. This allows which channel to use for communication.</li><li>Identify the type of messages will be received. This allows how to extract the information.</li><li>Define a callback function that will automatically be executed when a new message arrives.</li><li>Start listening for the topic messages</li></ul></div></details></div></details><details class="ngrp" id="g-writing" data-ids="7-writing-publisher-and-subscriber-nodes 8-create-custom-ros-messages 9-ros-services"><summary><span class="gt">Nodes, messages and services</span><span class="gc"></span></summary><div class="gbody"><details class="nsec" id="7-writing-publisher-and-subscriber-nodes"><summary><span class="nt">Writing publisher and subscriber nodes</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="7-writing-publisher-and-subscriber-nodes" aria-label="Mark Writing publisher and subscriber nodes as read"><span>Read</span></label></summary><div class="nbody"><ul><li>Nodes can be written in C++ or Python. I prefer python for the moment.</li><li>for detailed info on the codes below, visit: <a href="http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29" target="_blank" rel="noopener noreferrer">http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29</a></li></ul><h3 id="publisher-node">Publisher node</h3><ul><li>#!/usr/bin/env python    #mandatory,this line declare the program as python</li><li>import rospy    #import library required for ros</li><li>from std_msgs.msg import String    ‘’’the type of message, if the message is custom, then from pacakage_name.msg import type’’’</li><li>def talker():</li><ul><li>rospy.init_node(“Talker”, anonymous = True)   ‘’’very important, as this declares node name, anonymous = True enables the nodes to have a unique name when executed, if the same name node is launched, the previous node is kicked off. Thus, anonymous = true gives the power to run multiple versions of the same node.’’’</li></ul><li>pub = rospy.Publisher(“chatter”, String, queue_size=10)</li></ul><pre><code>                ‘’’declaring the node as a publisher, “chatter” is the topic name, String is the                                  message type and queue_size=10 is the maximum queued messages if . .         .                          subscriber fail to receive them’’’</code></pre><ul><li>rospy.rate(10)           ‘’’The rate of which the node sends messages, 10 means  10 messages per second, the nodes have to process the code at that speed as well, thus be careful of this setting’’’</li><li>while not rospy.is_shutdown():  #checking the node is still running</li><ul><li>hello_str = ‘This is a message’</li><li>rospy.loginfo(hello_str)</li></ul></ul><pre><code>                             ‘’’This prints msg on the screen, logs activity and writes it to rosout, .      .                                          rosout is used to debug’’’</code></pre><ul><li>rospy.publish(hello_str)  #publishes the message</li><li>rate.sleep()   #gives a chance to exit the node</li><li>if __name__ = ‘__main__’:</li></ul><pre><code>                        try:
-                             talker()
-                        except:
-                                rospy.ROSInteruptException  #prevents accidental executing . . .                                                                                                 even after shutting the node down
-                        pass</code></pre><h3 id="subscriber-node">Subscriber node</h3><ul><li>#!/usr/bin/env python</li><li>import rospy</li><li>from std_msgs.msg import String</li><li>def callback(message):</li><ul><li>rospy.loginfo(“I heard %s”, message.data)</li></ul><li>def listener():</li><ul><li>rospy.init_node(“Listener”, anonymous = True)</li><li>rospy.Subscriber(“chatter”, String, callback)   ‘’’make the node a subscriber, “chatter” is the topic it’ll want, String is the type of message and callback is a function that executes the commands received from the publisher.’’’</li><li>rospy.spin()   #Keep the code running until it’s shutdown</li></ul><li>if __name__ = ‘__main__’:</li><ul><li>listener()</li></ul></ul><h3 id="some-troubleshooting-while-writing-nodes">Some troubleshooting while writing nodes</h3><ul><li>Make sure to name packages properly and navigate to them properly</li><li>when writing the topic to a node if writing for an existing node, like turtlesim, make sure to write the whole topic name.</li><ul><li>rospy.Publisher(“turtle1/cmd_vel”, Twist……)</li></ul><li>While writing subscriber node, make sure that you use the data passed in the function</li><ul><li>def callback(pose_msg):</li><ul><li>rospy.loginfo(“%s”, pose_msg.x)</li></ul></ul></ul></div></details><details class="nsec" id="8-create-custom-ros-messages"><summary><span class="nt">Create custom ROS messages</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="8-create-custom-ros-messages" aria-label="Mark Create custom ROS messages as read"><span>Read</span></label></summary><div class="nbody"><ul><li>ROS does not include all types of messages, thus when a new device with a different type of messages is used, we have to create a new message type in ROS.</li></ul><h3 id="ros-message-structure">ROS message structure</h3><ul><li>lets understand the structure of a ROS message.</li><ul><li>package_name/message_type</li><ul><li>std_msgs/String</li><li>geometry_msgs/Twist</li></ul></ul></ul><h3 id="ros-message-content">ROS message content</h3><ul><li>Each message type contains the type and a field that contains that kind of data</li><ul><li>type field</li><ul><li>string data  //here, String is the type and data contains the values</li><li>data types can be found here:</li><ul><li><a href="http://wiki.ros.org/msg" target="_blank" rel="noopener noreferrer">http://wiki.ros.org/msg</a></li></ul></ul></ul></ul><h3 id="steps-to-create-a-new-ros-message">Steps to create a new ROS message</h3><ul><li>create a msg folder in your package, not anywhere else</li><li>create the message file with the extension .msg</li><li>Edit the .msg file by adding attributes and one line per attributes.</li><ul><li>ie: int32 id     // here int32 is the type and id is the field will contain data</li><li>data types can be found here:</li><ul><li><a href="http://wiki.ros.org/msg" target="_blank" rel="noopener noreferrer">http://wiki.ros.org/msg</a></li></ul></ul><li>Update the dependencies:</li><ul><li>in package.xml</li><ul><li>make sure these files are there:</li><ul><li>&lt;build_depend&gt;message_generation&lt;/build_depend&gt;</li><li>&lt;exec_depend&gt;message_runtime&lt;/exec_depend&gt;</li></ul></ul><li>in CMakeList.txt</li><ul><li>Add these lines in the following functions, make sure to  uncomment the # commented functions.</li><ul><li>find_package:</li><ul><li>messsage_generation</li></ul><li>add_message_files</li><ul><li>edit message1.msg to your .msg name, ie: IOTSensor.msg</li></ul></ul></ul></ul></ul><ul><li>generate_message</li><ul><li>uncomment</li></ul><ul><li>catkin_package</li><ul><li>in the line, “CATKIN_DEPENDS roscpp rospy std_msgs” add message_runtime</li></ul></ul><ul><li>Compile the package using catkin_make</li><li>To check if the message is created, use rosmsg show</li></ul></ul><h3 id="some-troubleshooting">Some troubleshooting</h3><ul><li>keep a backup of Cmake file</li><li>double check the edits</li><li>in .msg file make sure you write the types  properly. ie:</li><ul><li>String name //wrong, S is capital, it should be string or it&#x27;ll give ‘massage_generation” error while catkin_make  is compiling.</li></ul><li>if the message is custom, then from pacakage_name.msg import type</li><ul><li>ie: from iot_bot.msg import iotSensor</li></ul></ul></div></details><details class="nsec" id="9-ros-services"><summary><span class="nt">ROS Services</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="9-ros-services" aria-label="Mark ROS Services as read"><span>Read</span></label></summary><div class="nbody"><ul><li>ROS services work on a one time communication, there are 2 parts, ROS Service and ROS Client. Client requests for a service, the server serves the service.</li><li>ROS services are used when a specific action is needed to be performed.</li><ul><li>Spawning a new turtle in turtlesim</li></ul></ul><h3 id="commands">Commands</h3><ul><li>rosservice</li><li>rosservice list  //gives the list of all servies of all nodes running</li><li>rosservice info &lt;name of service&gt;</li><ul><li>gives the node of the service</li><li>location of the node</li><li>type of the service</li><li>the arguments that it processes</li></ul><li>rossrv info turtlesim/spawn //gives the parameters that the service type gives</li><li>rosservice call /spam 7 7 0 t2</li><ul><li>executes the service</li><li>/spam 7 7 0 t2   //name of service x_val y_val theta_val name</li></ul><li>CMD tools to check the services</li><ul><li>rossrv list  //all the ros services in the system</li><li>rossrv show &lt;name of service&gt;</li></ul></ul><h3 id="creating-a-new-ros-service">Creating a new ROS service</h3><ul><li>Define the service message, define the request response data type.</li><ul><li>Go to you package folder and create a folder named srv, just like msg</li><li>Inside the srv folder, create a file with the extension .srv, just like msg</li><li>in the .srv file, add the type data</li><ul><li>since service has 2 parts, server and client, the .srv file will also have 2 parts, ie:</li><ul><li>int64 a   //the client sent a and b’s values using the service</li><li>int64 b</li><li>---         //divider</li><li>int64 sum   //the server responds with the sum of a, b</li></ul></ul><li>Compile the srv file</li><ul><li>package.xml</li><ul><li>&lt;build_depend&gt;message_generation&lt;/build_depend&gt;</li><li>&lt;exec_depend&gt;message_runtime&lt;/exec_depend&gt;</li></ul><li>cmakelist.txt (python)</li><ul><li>add the lines in the functions:</li><ul><li>find_package</li><ul><li>message_generation</li></ul><li>add_service_files</li><ul><li>your .srv file name</li></ul></ul></ul></ul><li>compile workspace</li><ul><li>catkin_make</li></ul><li>verify</li><ul><li>go to catkin_ws&gt;devel&gt;include&gt;packagename, the .srv file should be ther</li></ul></ul><li>Create ROS node that has the service implemented</li><li>create ROS node that can be the client for the service</li><li>Execute the service</li><li>Consume the service by the client</li></ul><p>________________</p><h3 id="writing-ros-service-nodes">Writing ros service nodes</h3><ul><li>detailed: <a href="http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29" target="_blank" rel="noopener noreferrer">http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29</a></li><li>Server:</li><ul><li>Steps:  the server can be implemented in a Publisher/subscriber node</li><ul><li>import everything from package.srv</li><li>create function</li><ul><li>create ros node</li><li>rospy.Service(“name of service”, service_type, handler_function)  //much like subscriber node, handler_fucntion executes any commands that the service need to perform</li><li>loginfo</li><li>rospy.spin</li></ul><li>create handler function:</li><ul><li>to return the result name_of_serviceResponse(..)</li></ul></ul></ul><li>Client:</li><ul><li>steps: client sends the command, it will appear in services list</li><ul><li>take input from user using argv list in python</li><li>pass the argv list values in a function that will do the rest</li><li>create a function that takes the argv values</li><ul><li>wait for the service to be available</li><ul><li>rospy.wait_for_service(“name of service”)</li></ul></ul></ul></ul><li>create the service proxy that’ll pass the arguments to the server</li><ul><li>service = rospy.ServiceProxy(“name of service”, type of service)</li></ul><li>use the service object to pass the arguments</li><ul><li>req = service(arg1, ag2,...)</li><li>req receives the return value sent by the server</li></ul><li>return the server message that was received by req</li><ul><li>return req.name_of_server_variable_in_serv_file</li></ul></ul></div></details></div></details><details class="ngrp" id="g-robot" data-ids="10-network-configuration 11-ros-launch-command 12-using-ros-serial"><summary><span class="gt">Robot and network</span><span class="gc"></span></summary><div class="gbody"><details class="nsec" id="10-network-configuration"><summary><span class="nt">Network configuration</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="10-network-configuration" aria-label="Mark Network configuration as read"><span>Read</span></label></summary><div class="nbody"><p>When running ROS on different devices on the same network, the following settings need to be set:</p><h3 id="config-the-robot">Config the robot</h3><ul><li>On the robot ROS, the roscore will be running</li><li>in terminal:</li><ul><li>nano ~/.bashrc, add the following lines (copy paste)</li><ul><li>#Robot machine Configuration</li><li>#the localhost IP address - IP address for the master node</li><li>export ROS_MASTER_URI=<a href="http://localhost:11311" target="_blank" rel="noopener noreferrer">http://localhost:11311</a></li><li>#this is telling other ROS nodes the location of the master #node, 11311 is the default port</li><li>#The IP address for the Master node</li><li>export ROS_HOSTNAME= &lt;enter ip address of the robot machine, Find ip address using ifconfig in terminal 192.168.1.2&gt;</li><li>export ROS_IP=&lt;enter ip address of the robot machine 192.168.1.2&gt;</li><li>#lines above send the ip address of the master node</li><li>#printing info</li><li>echo ”ROS_HOSTNAME:  “ $ROS_HOSTNAME</li><li>echo “ROS_IP: “$ROS_IP</li><li>echo “ROS_MASTER_URI: “$ROS_MASTER_URI</li></ul></ul></ul><h3 id="config-the-devices-in-the-network">Config the devices in the network</h3><ul><li>do not run roscore on this device after the config</li><li>In terminal: (copy paste)</li><ul><li>nano ~/.bashrc</li><li>#network device config</li><li>export ROS_IP=&lt;enter device’s ip address ie: 192.168.1.2&gt;</li><li>export ROS_HOSTNAME=&lt;enter device’s ip address ie: 192.168.1.2(same as ros_ip)&gt;</li><li>export ROS_MASTER_URI=&lt;enter robot’s ip address with port, or where the roscore will run&gt; (ie: <a href="http://192.168.2.1:11311)" target="_blank" rel="noopener noreferrer">http://192.168.2.1:11311)</a></li><li>#print info</li><li>echo “ROS_HOSTNAME: “$ROS_HOSTNAME</li><li>echo “ROS_IP:  “$ROS_IP</li><li>echo “ROS_MASTER_URI: “$ROS_MASTER_URI</li></ul></ul></div></details><details class="nsec" id="11-ros-launch-command"><summary><span class="nt">ROS Launch command</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="11-ros-launch-command" aria-label="Mark ROS Launch command as read"><span>Read</span></label></summary><div class="nbody"><ul><li>To run multiple nodes and give parameters at once, roslaunch is used</li><li>The files are written in XML format</li><li>Placed in launch folder in the package folder, or can be placed in subfolder of the package folder</li><li>Create roslaunch file:</li><ul><li>&lt;launch&gt;</li><ul><li>&lt;node pkg=”name_of_package1” type=”name_of_node1” name=”give name” /&gt;</li><li>&lt;node pkg=”name_of_package2” type=”name_of_node2” name=”give name” /&gt;</li></ul><li>&lt;/launch&gt;</li></ul><li>Use other roslaunch files in a new roslaunch file</li><ul><li>&lt;launch&gt;</li><ul><li>&lt;include file=”$(find package_name)/src/subfolder_if_exsists/existing_launch_file.launch</li><li>&lt;node pkg=”name_of_package1” type=”name_of_node1” ”/&gt; name=”give name” /&gt;</li><li>&lt;node pkg=”name_of_package2” type=”name_of_node2” name=”give name” /&gt;</li></ul><li>&lt;/launch&gt;</li></ul></ul></div></details><details class="nsec" id="12-using-ros-serial"><summary><span class="nt">Using ROS serial</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="12-using-ros-serial" aria-label="Mark Using ROS serial as read"><span>Read</span></label></summary><div class="nbody"><ul><li>For more details: <a href="http://wiki.ros.org/rosserial" target="_blank" rel="noopener noreferrer">http://wiki.ros.org/rosserial</a></li><ul><li>rosserial protocol allows you to connect with devices for which drivers are not yet written in ROS, usually microcontrollers like Arduino.</li><li>How to run</li><ul><li>rosrun rosserial_python serial_node.py &lt;port of arduino&gt;</li><ul><li>run this on the device arduino is connected to.</li></ul><li>rostopic list</li><ul><li>there should be a chatter topic now</li></ul><li>rostopic echo /chatter</li><ul><li>can be run on other devices.</li></ul></ul><li>ROS serial architecture:</li><ul><li>rosserial_python runs on device</li><li>ros message</li><li>rosserial_ardino runs on the Arudino</li><ul><li>arduino can be set up into Subscriber or Publisher</li></ul><li>Installing rosserial:</li><ul><li>sudo apt install ros-melodic-rosserial-arduino</li><li>Install arduino IDE from the website</li><li>Generate ROS library folder in Arduino libraries folder</li><ul><li>rosrun rosserial_arduino make_libraries.py .</li></ul></ul><li>Installing rosserial on ros melodic Raspberry pi4</li><ul><li><a href="https://www.intorobotics.com/how-to-install-ros-melodic-rosserial-and-more-on-raspberry-pi-4-raspbian-buster/" target="_blank" rel="noopener noreferrer">https://www.intorobotics.com/how-to-install-ros-melodic-rosserial-and-more-on-raspberry-pi-4-raspbian-buster/</a></li><li>$cd catkin_ws/src</li><li><a href="https://github.com/ros/common_msgs" target="_blank" rel="noopener noreferrer">https://github.com/ros/common_msgs</a></li><li>$cd ..</li><li>$catkin_make</li><li>$catkin_install</li><li>$cd src</li><li>$git clone <a href="https://github.com/ros-drivers/rosserial.git" target="_blank" rel="noopener noreferrer">https://github.com/ros-drivers/rosserial.git</a></li><li>$cd ..</li><li>$catkin_make</li><li>$catkin_install</li><li>tip; install ros_lib in the arduino ide from the library manager, version 7.9</li></ul></ul></ul></ul><h3 id="creating-rosserial-arduino-pub-sub">Creating rosserial arduino pub/sub</h3><ul><li>In the examples, many ros arduino codes ar given</li><li>Ros Arduino uses C++ language</li><li>Running the arduino code in rosserial</li><ul><li>rosrun rosserial_python serial_node.py &lt;port number&gt;</li></ul><li>General structure of a arduino publier using c++</li><ul><li>#include &lt;ros.h&gt;</li><li>#include &lt;std_msgs/String.h&gt;         //message type</li><li>std_msgs : : String str_msg;        //creating message</li><li>ros : : NodeHandle node;                //creating instance of node</li><li>ros : : Publisher pub_var(“typic_name”, &amp;str_msg);</li><li>void setup(){</li><ul><li>node.initNode();                //node initiation</li><li>node.advertise(chatter);        //publishing the node</li></ul><li>}</li><li>void loop(){</li><ul><li>str_msg.data = “hello world”;</li><li>chatter.publish(&amp;str_msg);</li><li>node.spinOnce();</li></ul><li>}</li></ul></ul><ul><li>Creating ros arduino subscriber:(blink)</li><ul><li>to run the code: rostopic pub toggle_led std_msgs/Empty --once</li><li>#include &lt;ros.h&gt;</li><li>#include &lt;std_msgs/Empty.h&gt;</li><li>ros:: NodeHandle node;</li><li>void callback(const std_msgs::Empty&amp; toggle_msgs){</li><ul><li>digitalWrite(13, HIGH);</li><li>delay(1000);</li><li>digitalWrite(13, LOW);</li></ul><li>ros:: Subscriber&lt;std_msgs::Empty&gt; sub(“toggle’’, &amp;callback);</li><li>void setup(){</li><ul><li>pinMode(13, OUTPUT)</li><li>node.initNode()</li><li>node.subscribe(sub);</li></ul><li>}</li><li>void loop(){</li><ul><li>node.spinOnce();</li></ul><li>}</li></ul></ul></div></details></div></details></div></div>
-<button type="button" class="ntop" id="ntop" aria-label="Back to top" hidden>&uarr;</button>
+
+<div class="nlay"><nav class="nnav" aria-label="Contents"><details class="nnav-box" open><summary>Contents</summary><div class="ngroup"><b><a href="#g-basics">Basics and setup</a></b><ul><li><a href="#1-basics-of-ros">What ROS is</a></li><li><a href="#2-install-tips">Installing ROS</a></li><li><a href="#3-setup-workspace-ros-package">Workspace and packages</a></li></ul></div><div class="ngroup"><b><a href="#g-concepts">Core concepts</a></b><ul><li><a href="#4-ros-concept">First commands</a></li><li><a href="#5-ros-topics-nodes-massages">Nodes, topics and messages</a></li><li><a href="#6-how-ros-works">How nodes find each other</a></li></ul></div><div class="ngroup"><b><a href="#g-writing">Nodes, messages and services</a></b><ul><li><a href="#7-writing-publisher-and-subscriber-nodes">Writing a publisher and a subscriber</a></li><li><a href="#8-create-custom-ros-messages">Custom messages</a></li><li><a href="#9-ros-services">Services</a></li></ul></div><div class="ngroup"><b><a href="#g-robot">Robot and network</a></b><ul><li><a href="#10-network-configuration">Running ROS on several machines</a></li><li><a href="#11-ros-launch-command">Launch files</a></li><li><a href="#12-using-ros-serial">rosserial: Arduino as a ROS node</a></li></ul></div></details></nav><div class="nmain"><div class="nbar"><span class="nprog" id="nprog" aria-live="polite"></span><button type="button" id="nopen">Expand all</button><button type="button" id="nshut">Collapse all</button></div><details class="ngrp" id="g-basics" data-ids="1-basics-of-ros 2-install-tips 3-setup-workspace-ros-package"><summary><span class="gt">Basics and setup</span><span class="gc">3 topics</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-basics" aria-label="Mark Basics and setup as read"><span>Read</span></label></summary><div class="gbody"><div id="1-basics-of-ros" class="nsec flat"><div class="fhead"><h3 class="nt">What ROS is</h3></div><div class="nbody"><p>The <strong>Robot Operating System (ROS)</strong> isn't really an operating system. It's a framework: tools, libraries and conventions for writing robot software out of many small programs that talk to each other.</p>
+<p><strong>Why it exists:</strong> robust robot software is too hard for one team. ROS lets one lab's mapping, another's navigation and a third's object recognition plug together, because they all speak the same messages.</p>
+<figure class="ndia"><svg viewBox="0 0 640 150" role="img" aria-label="A talker node publishes to the /chatter topic; a listener node subscribes; roscore connects them"><defs><marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk" /></marker></defs><rect x="20" y="60" width="150" height="56" rx="28.0" class="box" /><text x="95.0" y="88.0" class="tb" text-anchor="middle">talker</text><text x="95.0" y="106.0" class="mu" text-anchor="middle">node</text><rect x="245" y="66" width="150" height="44" rx="6" class="box hi" /><text x="320" y="93" class="code" text-anchor="middle">/chatter</text><rect x="470" y="60" width="150" height="56" rx="28.0" class="box" /><text x="545.0" y="88.0" class="tb" text-anchor="middle">listener</text><text x="545.0" y="106.0" class="mu" text-anchor="middle">node</text><path d="M170 88L243 88" class="ln" marker-end="url(#ag)" /><path d="M395 88L468 88" class="ln" marker-end="url(#ag)" /><text x="207" y="80" class="mu" text-anchor="middle">publish</text><text x="432" y="80" class="mu" text-anchor="middle">subscribe</text><text x="320" y="136" class="code" text-anchor="middle">message type: std_msgs/String</text><rect x="245" y="0" width="150" height="40" rx="20.0" class="box" /><text x="320.0" y="25.0" class="tb" text-anchor="middle">roscore</text><path d="M95 60V20H243M545 60V20H397" class="ln" style="stroke-dasharray:4 4" /><text x="320" y="160" class="mu" text-anchor="middle" /></svg><figcaption>Nodes never call each other by name. A publisher sends messages to a topic; any node subscribed to that topic receives them. roscore (dashed) just introduces them.</figcaption></figure>
+
+<h3>Before you start</h3>
+<ul>
+<li>Comfort with <strong>Ubuntu</strong> and the terminal. ROS runs natively on Ubuntu and its flavours (Kubuntu, Xubuntu...).</li>
+<li><strong>Python</strong> for nodes, and some <strong>C++</strong> for Arduino work.</li>
+<li>Patience for debugging.</li>
+</ul>
+<h3>Sources</h3>
+<p>These notes follow the <a href="http://wiki.ros.org/" target="_blank" rel="noopener noreferrer">ROS Wiki</a> and Anis Koubaa's <a href="https://www.udemy.com/course/ros-essentials/" target="_blank" rel="noopener noreferrer">ROS Essentials course</a>. For fun: <a href="https://vimeo.com/245826128" target="_blank" rel="noopener noreferrer">10 years of ROS</a>.</p>
+<blockquote>
+<p>These notes are <strong>ROS 1</strong> (Melodic, Noetic). ROS 1 reached end of life in May 2025; new projects should use <strong>ROS 2</strong>. The ideas (nodes, topics, services) carry over.</p>
+</blockquote>
+</div></div><div class="nsec flat" id="2-install-tips"><div class="fhead"><h3 class="nt">Installing ROS</h3></div><div class="nbody"><ul>
+<li>Follow the <a href="http://wiki.ros.org/ROS/Installation" target="_blank" rel="noopener noreferrer">ROS installation guide</a> and install the <strong>desktop-full</strong> version.</li>
+<li>Choose a long-term-support (LTS) release that has been out a while, so the packages you need exist for it.</li>
+<li>Each release matches one Ubuntu version:</li>
+</ul>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>ROS 1 release</th>
+<th>Ubuntu</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Kinetic</td>
+<td>16.04</td>
+</tr>
+<tr>
+<td>Melodic</td>
+<td>18.04</td>
+</tr>
+<tr>
+<td>Noetic (the last)</td>
+<td>20.04</td>
+</tr>
+</tbody></table></div>
+<ul>
+<li>Don't mix releases on one machine.</li>
+<li>Any editor works; VS Code with the ROS extension is a good choice.</li>
+</ul>
+</div></div><div id="3-setup-workspace-ros-package" class="nsec flat"><div class="fhead"><h3 class="nt">Workspace and packages</h3></div><div class="nbody"><h3>Load ROS in every terminal</h3>
+<p>ROS is installed in <code>/opt/ros/&lt;release&gt;</code>. Add it to <code>~/.bashrc</code> so every new terminal has it:</p>
+<pre><code class="language-bash">echo "source /opt/ros/melodic/setup.bash" &gt;&gt; ~/.bashrc
+</code></pre>
+<h3>Make a workspace</h3>
+<pre><code class="language-bash">mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws
+catkin_make                                   # build the empty workspace
+echo "source ~/catkin_ws/devel/setup.bash" &gt;&gt; ~/.bashrc
+</code></pre>
+<figure class="ndia"><svg viewBox="0 0 640 256" role="img" aria-label="Catkin workspace folder tree"><text x="24" y="24" class="code" text-anchor="start">catkin_ws/</text><text x="300" y="24" class="mu" text-anchor="start">workspace</text><text x="50" y="48" class="code" text-anchor="start">src/</text><text x="300" y="48" class="mu" text-anchor="start">your packages live here</text><path d="M34 34V44H46" class="ln" /><text x="76" y="72" class="code" text-anchor="start">beginner_tutorials/</text><text x="300" y="72" class="mu" text-anchor="start">a package</text><path d="M60 58V68H72" class="ln" /><text x="102" y="96" class="code" text-anchor="start">package.xml</text><text x="300" y="96" class="mu" text-anchor="start">name, version, dependencies</text><path d="M86 82V92H98" class="ln" /><text x="102" y="120" class="code" text-anchor="start">CMakeLists.txt</text><text x="300" y="120" class="mu" text-anchor="start">how to build it</text><path d="M86 106V116H98" class="ln" /><text x="102" y="144" class="code" text-anchor="start">src/</text><text x="300" y="144" class="mu" text-anchor="start">your nodes (scripts)</text><path d="M86 130V140H98" class="ln" /><text x="102" y="168" class="code" text-anchor="start">msg/   srv/</text><text x="300" y="168" class="mu" text-anchor="start">custom message and service types</text><path d="M86 154V164H98" class="ln" /><text x="102" y="192" class="code" text-anchor="start">launch/</text><text x="300" y="192" class="mu" text-anchor="start">.launch files</text><path d="M86 178V188H98" class="ln" /><text x="50" y="216" class="code" text-anchor="start">build/</text><text x="300" y="216" class="mu" text-anchor="start">made by catkin_make</text><path d="M34 202V212H46" class="ln" /><text x="50" y="240" class="code" text-anchor="start">devel/</text><text x="300" y="240" class="mu" text-anchor="start">made by catkin_make: source devel/setup.bash</text><path d="M34 226V236H46" class="ln" /></svg><figcaption>A catkin workspace. You write code under <code>src/</code>; <code>catkin_make</code> fills <code>build/</code> and <code>devel/</code>.</figcaption></figure>
+
+<h3>Make a package</h3>
+<p>A <strong>package</strong> is one project: its nodes, messages and launch files.</p>
+<pre><code class="language-bash">cd ~/catkin_ws/src
+catkin_create_pkg beginner_tutorials std_msgs rospy roscpp   # name, then dependencies
+cd ~/catkin_ws &amp;&amp; catkin_make
+</code></pre>
+<ul>
+<li>Package names are <strong>lower case</strong>.</li>
+<li><code>std_msgs rospy roscpp</code> is the usual starting set; you can add dependencies later in <code>package.xml</code>.</li>
+<li>To use someone else's package, <code>git clone</code> it into <code>src/</code> and run <code>catkin_make</code>.</li>
+<li>Run <code>catkin_make</code> again after adding or changing messages, services or C++ code.</li>
+</ul>
+<blockquote>
+<p><strong>Tip:</strong> after <code>rosrun &lt;package&gt;</code>, press <kbd>Tab</kbd> twice to list that package's nodes.</p>
+</blockquote>
+</div></div></div></details><details class="ngrp" id="g-concepts" data-ids="4-ros-concept 5-ros-topics-nodes-massages 6-how-ros-works"><summary><span class="gt">Core concepts</span><span class="gc">3 topics</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-concepts" aria-label="Mark Core concepts as read"><span>Read</span></label></summary><div class="gbody"><div class="nsec flat" id="4-ros-concept"><div class="fhead"><h3 class="nt">First commands</h3></div><div class="nbody"><pre><code class="language-bash">roscore          # start the master: always first, in its own terminal
+rosnode list     # the nodes running now
+rostopic list    # the topics in use
+</code></pre>
+</div></div><div id="5-ros-topics-nodes-massages" class="nsec flat"><div class="fhead"><h3 class="nt">Nodes, topics and messages</h3></div><div class="nbody"><div class="ntable"><table>
+<thead>
+<tr>
+<th>Word</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Node</strong></td>
+<td>One running program (a camera driver, a planner)</td>
+</tr>
+<tr>
+<td><strong>Topic</strong></td>
+<td>A named channel nodes send messages over, like <code>/turtle1/cmd_vel</code></td>
+</tr>
+<tr>
+<td><strong>Message</strong></td>
+<td>The data sent, with a fixed type, like <code>geometry_msgs/Twist</code></td>
+</tr>
+</tbody></table></div>
+<p>Try it with the turtle simulator:</p>
+<pre><code class="language-bash">roscore
+rosrun turtlesim turtlesim_node        # a window with a turtle
+rosrun turtlesim turtle_teleop_key     # drive it with the arrow keys
+</code></pre>
+<h3>Node commands</h3>
+<pre><code class="language-bash">rosnode list
+rosnode info /turtlesim     # its topics, services and connections
+</code></pre>
+<h3>Topic commands</h3>
+<pre><code class="language-bash">rostopic list
+rostopic info /turtle1/cmd_vel     # who publishes and subscribes
+rostopic type /turtle1/cmd_vel     # the message type
+rostopic echo /turtle1/pose        # print the messages as they arrive
+rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'
+</code></pre>
+<p>In the last command, <code>-1</code> publishes once and exits; <code>--</code> means "no more options", needed before negative numbers.</p>
+<h3>Message commands</h3>
+<pre><code class="language-bash">rosmsg show geometry_msgs/Twist    # the fields inside a message type
+</code></pre>
+<h3>rqt: see it all</h3>
+<pre><code class="language-bash">sudo apt install ros-&lt;release&gt;-rqt ros-&lt;release&gt;-rqt-common-plugins
+rosrun rqt_graph rqt_graph     # a live map of nodes and topics
+rosrun rqt_plot rqt_plot       # plot topic values over time
+</code></pre>
+</div></div><div id="6-how-ros-works" class="nsec flat"><div class="fhead"><h3 class="nt">How nodes find each other</h3></div><div class="nbody"><ul>
+<li><strong>Publishers</strong> send messages on a topic; <strong>subscribers</strong> receive them.</li>
+<li>Each topic carries one message type.</li>
+<li><strong>roscore</strong> (the master) keeps track of who publishes and subscribes to what.</li>
+</ul>
+<figure class="ndia"><svg viewBox="0 0 640 310" role="img" aria-label="Sequence: subscriber and publisher register with roscore, roscore tells the subscriber where the publisher is, they connect directly"><defs><marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk" /></marker></defs><rect x="20" y="8" width="160" height="34" rx="8" class="box" /><text x="100" y="30" class="tb" text-anchor="middle">listener (subscriber)</text><path d="M100 42V300" class="ln" style="stroke-dasharray:3 4" /><rect x="240" y="8" width="160" height="34" rx="8" class="box hi" /><text x="320" y="30" class="tb" text-anchor="middle">roscore (master)</text><path d="M320 42V300" class="ln" style="stroke-dasharray:3 4" /><rect x="460" y="8" width="160" height="34" rx="8" class="box" /><text x="540" y="30" class="tb" text-anchor="middle">talker (publisher)</text><path d="M540 42V300" class="ln" style="stroke-dasharray:3 4" /><path d="M100 74H314" class="ln" marker-end="url(#am)" /><text x="210.0" y="66" text-anchor="middle">1. I subscribe to /chatter (String)</text><path d="M540 124H326" class="ln" marker-end="url(#am)" /><text x="430.0" y="116" text-anchor="middle">2. I publish /chatter (String)</text><path d="M320 174H106" class="ln" marker-end="url(#am)" /><text x="210.0" y="166" text-anchor="middle">3. talker publishes it, here is its address</text><path d="M100 224H534" class="ln" marker-end="url(#am)" /><text x="320.0" y="216" text-anchor="middle">4. connect directly (TCPROS)</text><path d="M540 274H106" class="ln" marker-end="url(#am)" style="stroke:var(--signal);stroke-width:2.2" /><text x="320.0" y="266" text-anchor="middle">5. messages, again and again</text></svg><figcaption>roscore only matchmakes. After step 4 the two nodes talk directly, so messages never pass through roscore.</figcaption></figure>
+
+<h3>Writing a publisher: the checklist</h3>
+<ol>
+<li>Choose the <strong>topic name</strong>.</li>
+<li>Choose the <strong>message type</strong>.</li>
+<li>Choose how often to publish (messages per second).</li>
+<li>Create the publisher.</li>
+<li>Publish in a loop at that rate.</li>
+</ol>
+<h3>Writing a subscriber: the checklist</h3>
+<ol>
+<li>Choose the <strong>topic</strong> to listen to.</li>
+<li>Know its <strong>message type</strong>, so you can read the fields.</li>
+<li>Write a <strong>callback</strong>, a function that runs for every message.</li>
+<li>Start listening, and keep the node alive.</li>
+</ol>
+</div></div></div></details><details class="ngrp" id="g-writing" data-ids="7-writing-publisher-and-subscriber-nodes 8-create-custom-ros-messages 9-ros-services"><summary><span class="gt">Nodes, messages and services</span><span class="gc">3 topics</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-writing" aria-label="Mark Nodes, messages and services as read"><span>Read</span></label></summary><div class="gbody"><div id="7-writing-publisher-and-subscriber-nodes" class="nsec flat"><div class="fhead"><h3 class="nt">Writing a publisher and a subscriber</h3></div><div class="nbody"><p>Nodes can be written in C++ or Python; these are Python. Official tutorial: <a href="http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29" target="_blank" rel="noopener noreferrer">Writing a publisher and subscriber</a>.</p>
+<h3>Publisher</h3>
+<pre><code class="language-python">#!/usr/bin/env python
+import rospy
+from std_msgs.msg import String        # for your own type: from my_pkg.msg import MyType
+
+def talker():
+    rospy.init_node("talker", anonymous=True)
+    pub = rospy.Publisher("chatter", String, queue_size=10)
+    rate = rospy.Rate(10)               # 10 messages a second
+
+    while not rospy.is_shutdown():
+        msg = "hello world %s" % rospy.get_time()
+        rospy.loginfo(msg)              # print it, and log it to /rosout
+        pub.publish(msg)
+        rate.sleep()                    # wait to keep the 10 Hz rate
+
+if __name__ == "__main__":
+    try:
+        talker()
+    except rospy.ROSInterruptException:   # Ctrl+C: exit quietly
+        pass
+</code></pre>
+<ul>
+<li><code>init_node</code> names the node. <code>anonymous=True</code> adds a random suffix so several copies can run; otherwise a new node with the same name kicks the old one off.</li>
+<li><code>queue_size=10</code> keeps up to 10 messages if subscribers fall behind.</li>
+<li>The loop must finish its work within each tick of <code>Rate</code>, so don't set it higher than you need.</li>
+</ul>
+<h3>Subscriber</h3>
+<pre><code class="language-python">#!/usr/bin/env python
+import rospy
+from std_msgs.msg import String
+
+def callback(message):
+    rospy.loginfo("I heard %s", message.data)
+
+def listener():
+    rospy.init_node("listener", anonymous=True)
+    rospy.Subscriber("chatter", String, callback)
+    rospy.spin()                        # keep running until Ctrl+C
+
+if __name__ == "__main__":
+    listener()
+</code></pre>
+<p>Make both files executable (<code>chmod +x talker.py listener.py</code>), then run each with <code>rosrun beginner_tutorials talker.py</code>.</p>
+<h3>Common mistakes</h3>
+<ul>
+<li>Using a topic of another node? Write its full name: <code>rospy.Publisher("turtle1/cmd_vel", Twist, queue_size=10)</code>.</li>
+<li>Read the fields of the message in the callback: <code>pose_msg.x</code>, not <code>pose_msg</code>.</li>
+<li>Wrong package or folder names: double-check them first.</li>
+</ul>
+</div></div><div id="8-create-custom-ros-messages" class="nsec flat"><div class="fhead"><h3 class="nt">Custom messages</h3></div><div class="nbody"><p>When no existing type fits your data, make one. A message type is named <code>package/Type</code>, like <code>std_msgs/String</code> or <code>geometry_msgs/Twist</code>. Each line of a type is a field: a field type and a name (<a href="http://wiki.ros.org/msg" target="_blank" rel="noopener noreferrer">all field types</a>).</p>
+<h3>1. Write the .msg file</h3>
+<p>In your package, create <code>msg/IoTSensor.msg</code>:</p>
+<pre><code>int32 id
+string name
+float32 temperature
+float32 humidity
+</code></pre>
+<blockquote>
+<p>Field types are lower case: <code>string</code>, not <code>String</code>. A capital letter gives a confusing <code>message_generation</code> error when building.</p>
+</blockquote>
+<h3>2. package.xml</h3>
+<pre><code class="language-xml">&lt;build_depend&gt;message_generation&lt;/build_depend&gt;
+&lt;exec_depend&gt;message_runtime&lt;/exec_depend&gt;
+</code></pre>
+<h3>3. CMakeLists.txt</h3>
+<p>Uncomment and edit these blocks:</p>
+<pre><code class="language-cmake">find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs message_generation)
+
+add_message_files(FILES IoTSensor.msg)
+
+generate_messages(DEPENDENCIES std_msgs)
+
+catkin_package(CATKIN_DEPENDS roscpp rospy std_msgs message_runtime)
+</code></pre>
+<h3>4. Build and check</h3>
+<pre><code class="language-bash">cd ~/catkin_ws &amp;&amp; catkin_make
+rosmsg show iot_bot/IoTSensor
+</code></pre>
+<p>Use it in Python: <code>from iot_bot.msg import IoTSensor</code>.</p>
+<blockquote>
+<p>Keep a copy of <code>CMakeLists.txt</code> before editing: one typo breaks the build.</p>
+</blockquote>
+</div></div><div id="9-ros-services" class="nsec flat"><div class="fhead"><h3 class="nt">Services</h3></div><div class="nbody"><p>A <strong>service</strong> is a one-off request and response, for actions such as "spawn a turtle" or "reset the map".</p>
+<figure class="ndia"><svg viewBox="0 0 640 124" role="img" aria-label="ROS service: client sends request, server sends response"><defs><marker id="asv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk" /></marker></defs><rect x="20" y="40" width="170" height="60" rx="30.0" class="box" /><text x="105.0" y="70.0" class="tb" text-anchor="middle">client node</text><text x="105.0" y="88.0" class="mu" text-anchor="middle">asks once</text><rect x="450" y="40" width="170" height="60" rx="30.0" class="box" /><text x="535.0" y="70.0" class="tb" text-anchor="middle">server node</text><text x="535.0" y="88.0" class="mu" text-anchor="middle">does the work</text><path d="M190 58H448" class="ln" marker-end="url(#asv)" /><text x="320" y="48" class="code" text-anchor="middle">request: a = 3, b = 4</text><path d="M450 86H192" class="ln" marker-end="url(#asv)" style="stroke:var(--signal)" /><text x="320" y="108" class="code" text-anchor="middle">response: sum = 7</text></svg><figcaption>A service is a function call between nodes: one request, one response, and the client waits for it. Topics are a stream; services are a question and an answer.</figcaption></figure>
+
+<h3>Commands</h3>
+<pre><code class="language-bash">rosservice list                     # every service on the running nodes
+rosservice info /spawn              # the node, its address, its type and arguments
+rossrv show turtlesim/Spawn         # the request and response fields
+rosservice call /spawn 7 7 0 t2     # x, y, angle, name: a second turtle
+</code></pre>
+<h3>Making a service</h3>
+<p><strong>1. The .srv file</strong>, <code>srv/AddTwoInts.srv</code>: request fields, <code>---</code>, then response fields.</p>
+<pre><code>int64 a
+int64 b
+---
+int64 sum
+</code></pre>
+<p><strong>2. Build it.</strong> Same <code>package.xml</code> lines as for messages; in <code>CMakeLists.txt</code> add <code>message_generation</code> to <code>find_package</code> and:</p>
+<pre><code class="language-cmake">add_service_files(FILES AddTwoInts.srv)
+</code></pre>
+<p>Then <code>catkin_make</code>.</p>
+<p><strong>3. The server</strong></p>
+<pre><code class="language-python">#!/usr/bin/env python
+import rospy
+from beginner_tutorials.srv import AddTwoInts, AddTwoIntsResponse
+
+def handle(req):
+    return AddTwoIntsResponse(req.a + req.b)
+
+rospy.init_node("add_server")
+rospy.Service("add_two_ints", AddTwoInts, handle)
+rospy.loginfo("Ready to add")
+rospy.spin()
+</code></pre>
+<p><strong>4. The client</strong></p>
+<pre><code class="language-python">#!/usr/bin/env python
+import sys, rospy
+from beginner_tutorials.srv import AddTwoInts
+
+rospy.wait_for_service("add_two_ints")             # wait until the server is up
+add = rospy.ServiceProxy("add_two_ints", AddTwoInts)
+resp = add(int(sys.argv[1]), int(sys.argv[2]))
+print(resp.sum)
+</code></pre>
+<p>Run the server, then <code>rosrun beginner_tutorials add_client.py 3 4</code> prints <code>7</code>.</p>
+</div></div></div></details><details class="ngrp" id="g-robot" data-ids="10-network-configuration 11-ros-launch-command 12-using-ros-serial"><summary><span class="gt">Robot and network</span><span class="gc">3 topics</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-robot" aria-label="Mark Robot and network as read"><span>Read</span></label></summary><div class="gbody"><div id="10-network-configuration" class="nsec flat"><div class="fhead"><h3 class="nt">Running ROS on several machines</h3></div><div class="nbody"><p>When a robot and a laptop share one ROS system, exactly one machine runs <code>roscore</code> and the others point at it.</p>
+<figure class="ndia"><svg viewBox="0 0 640 186" role="img" aria-label="Two machines on one network: the robot runs roscore, the laptop points at it"><defs><marker id="anet" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk" /></marker></defs><rect x="20" y="20" width="270" height="150" rx="12" class="box hi" /><text x="36" y="44" class="tb" text-anchor="start">Robot  192.168.1.2</text><text x="36" y="70" text-anchor="start">runs roscore</text><text x="36" y="100" class="code" text-anchor="start">ROS_MASTER_URI=http://localhost:11311</text><text x="36" y="120" class="code" text-anchor="start">ROS_IP=192.168.1.2</text><text x="36" y="140" class="code" text-anchor="start">ROS_HOSTNAME=192.168.1.2</text><rect x="350" y="20" width="270" height="150" rx="12" class="box" /><text x="366" y="44" class="tb" text-anchor="start">Laptop  192.168.1.5</text><text x="366" y="70" text-anchor="start">no roscore here</text><text x="366" y="100" class="code" text-anchor="start">ROS_MASTER_URI=http://192.168.1.2:11311</text><text x="366" y="120" class="code" text-anchor="start">ROS_IP=192.168.1.5</text><text x="366" y="140" class="code" text-anchor="start">ROS_HOSTNAME=192.168.1.5</text><path d="M348 95H292" class="ln" marker-end="url(#anet)" /><text x="320" y="88" class="mu" text-anchor="middle">Wi-Fi</text></svg><figcaption>Every machine points <code>ROS_MASTER_URI</code> at the one machine running roscore, and gives its own IP in <code>ROS_IP</code>.</figcaption></figure>
+
+<p>Find each machine's IP with <code>ip a</code> (or <code>ifconfig</code>), then add these lines to <code>~/.bashrc</code>.</p>
+<p><strong>On the robot</strong> (runs roscore):</p>
+<pre><code class="language-bash">export ROS_MASTER_URI=http://localhost:11311   # roscore is here; 11311 is the default port
+export ROS_IP=192.168.1.2                      # this machine's IP
+export ROS_HOSTNAME=192.168.1.2
+</code></pre>
+<p><strong>On every other machine</strong> (no roscore):</p>
+<pre><code class="language-bash">export ROS_MASTER_URI=http://192.168.1.2:11311   # the robot's IP
+export ROS_IP=192.168.1.5                        # this machine's IP
+export ROS_HOSTNAME=192.168.1.5
+</code></pre>
+<p>Check with <code>echo $ROS_MASTER_URI</code>, then <code>rostopic list</code> on the laptop should show the robot's topics.</p>
+</div></div><div id="11-ros-launch-command" class="nsec flat"><div class="fhead"><h3 class="nt">Launch files</h3></div><div class="nbody"><p><code>roslaunch</code> starts several nodes (and roscore, if it isn't running) with one command. Launch files are XML, kept in the package's <code>launch/</code> folder.</p>
+<pre><code class="language-xml">&lt;launch&gt;
+  &lt;node pkg="turtlesim" type="turtlesim_node" name="sim" /&gt;
+  &lt;node pkg="beginner_tutorials" type="talker.py" name="talker" output="screen" /&gt;
+&lt;/launch&gt;
+</code></pre>
+<pre><code class="language-bash">roslaunch beginner_tutorials demo.launch
+</code></pre>
+<p>Reuse another launch file with <code>include</code>:</p>
+<pre><code class="language-xml">&lt;launch&gt;
+  &lt;include file="$(find other_pkg)/launch/robot.launch" /&gt;
+  &lt;node pkg="beginner_tutorials" type="listener.py" name="listener" /&gt;
+&lt;/launch&gt;
+</code></pre>
+</div></div><div id="12-using-ros-serial" class="nsec flat"><div class="fhead"><h3 class="nt">rosserial: Arduino as a ROS node</h3></div><div class="nbody"><p><a href="http://wiki.ros.org/rosserial" target="_blank" rel="noopener noreferrer">rosserial</a> connects devices that have no ROS drivers, usually microcontrollers like an Arduino, to ROS.</p>
+<figure class="ndia"><svg viewBox="0 0 640 130" role="img" aria-label="rosserial: Arduino talks over USB serial to serial_node.py, which bridges to ROS topics"><defs><marker id="ars" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk" /></marker></defs><rect x="20" y="30" width="160" height="70" rx="10" class="box" /><text x="100" y="60" class="tb" text-anchor="middle">Arduino</text><text x="100" y="80" class="code" text-anchor="middle">rosserial_arduino</text><rect x="250" y="30" width="160" height="70" rx="10" class="box hi" /><text x="330" y="60" class="code" text-anchor="middle">serial_node.py</text><text x="330" y="80" class="mu" text-anchor="middle">on the computer</text><rect x="480" y="30" width="140" height="70" rx="10" class="box" /><text x="550" y="60" class="tb" text-anchor="middle">ROS topics</text><text x="550" y="80" class="code" text-anchor="middle">/chatter, /toggle</text><path d="M182 58H248M248 72H182" class="ln" marker-end="url(#ars)" /><text x="215" y="120" class="mu" text-anchor="middle">USB serial</text><path d="M412 58H478M478 72H412" class="ln" marker-end="url(#ars)" /></svg><figcaption>rosserial lets a microcontroller be a ROS node: <code>serial_node.py</code> relays its messages between the USB cable and real ROS topics.</figcaption></figure>
+
+<h3>Install</h3>
+<pre><code class="language-bash">sudo apt install ros-melodic-rosserial-arduino ros-melodic-rosserial
+# in the Arduino libraries folder:
+rosrun rosserial_arduino make_libraries.py .
+</code></pre>
+<p>Or install <strong>Rosserial Arduino Library</strong> from the Arduino IDE's library manager (version 0.7.9 works well).</p>
+<p>On a <strong>Raspberry Pi</strong> you may need to build it from source (see this <a href="https://www.intorobotics.com/how-to-install-ros-melodic-rosserial-and-more-on-raspberry-pi-4-raspbian-buster/" target="_blank" rel="noopener noreferrer">Raspberry Pi guide</a>):</p>
+<pre><code class="language-bash">cd ~/catkin_ws/src
+git clone https://github.com/ros/common_msgs
+git clone https://github.com/ros-drivers/rosserial.git
+cd .. &amp;&amp; catkin_make &amp;&amp; catkin_make install
+</code></pre>
+<h3>Run</h3>
+<pre><code class="language-bash">rosrun rosserial_python serial_node.py /dev/ttyACM0   # on the computer the Arduino is plugged into
+rostopic echo /chatter                                # from any machine on the network
+</code></pre>
+<h3>Arduino publisher</h3>
+<pre><code class="language-cpp">#include &lt;ros.h&gt;
+#include &lt;std_msgs/String.h&gt;
+
+ros::NodeHandle nh;
+std_msgs::String str_msg;
+ros::Publisher chatter("chatter", &amp;str_msg);
+
+void setup() {
+  nh.initNode();
+  nh.advertise(chatter);
+}
+
+void loop() {
+  str_msg.data = "hello world";
+  chatter.publish(&amp;str_msg);
+  nh.spinOnce();          // let rosserial send and receive
+  delay(1000);
+}
+</code></pre>
+<h3>Arduino subscriber: blink on command</h3>
+<pre><code class="language-cpp">#include &lt;ros.h&gt;
+#include &lt;std_msgs/Empty.h&gt;
+
+ros::NodeHandle nh;
+
+void callback(const std_msgs::Empty&amp; msg) {
+  digitalWrite(13, !digitalRead(13));   // toggle the LED
+}
+
+ros::Subscriber&lt;std_msgs::Empty&gt; sub("toggle_led", &amp;callback);
+
+void setup() {
+  pinMode(13, OUTPUT);
+  nh.initNode();
+  nh.subscribe(sub);
+}
+
+void loop() {
+  nh.spinOnce();
+  delay(1);
+}
+</code></pre>
+<p>Toggle it from a terminal: <code>rostopic pub toggle_led std_msgs/Empty --once</code>.</p>
+<p>More examples ship with the library: <strong>File → Examples → Rosserial Arduino Library</strong>.</p>
+</div></div></div></details></div></div>
+<button type="button" class="ntop" id="ntop" aria-label="Back to top" hidden>↑</button>
 <script>
 (function(){
   var secs=[].slice.call(document.querySelectorAll('.nsec,.ngrp')), top=document.getElementById('ntop'), nav=document.querySelector('.nnav-box');
@@ -69,10 +430,5 @@ description: "My ROS notes: nodes, topics, messages, services, launch files and 
   });
   paint();
 })();
-</script><script>
-(function(){
-  function count(){var G=document.querySelectorAll('.ngrp'); G.forEach(function(g){var ids=g.dataset.ids.split(' '), n=0; ids.forEach(function(i){var s=document.getElementById(i); if(s&&s.classList.contains('isread')) n++;});
-    g.querySelector('.gc').textContent=n+' of '+ids.length+' read'; g.classList.toggle('alldone',n===ids.length);});}
-  document.addEventListener('click',function(){setTimeout(count,0);},true); count();
-})();
 </script></section>
+<script src="{{ '/notes/notes.js' | relative_url }}" defer></script>

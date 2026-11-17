@@ -490,10 +490,12 @@ kbd {
 }
 /* "See my work" is the one orange call to action; the other two are quieter */
 .hero-actions .btn-solid {
+  background: var(--signal);
   background: color-mix(in srgb, var(--signal) 78%, #1a1a2e);
   color: #fff;
 }
 .hero-actions .btn-solid:hover {
+  background: var(--signal);
   background: color-mix(in srgb, var(--signal) 88%, #1a1a2e);
   color: #fff;
 }
@@ -849,6 +851,7 @@ kbd {
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .job-body:hover {
+  border-color: var(--line);
   border-color: color-mix(in srgb, var(--ink) 30%, var(--line));
   box-shadow: var(--shadow);
 }
@@ -1336,6 +1339,7 @@ details li::marker {
   flex-direction: column;
 }
 .project:hover {
+  border-color: var(--line);
   border-color: color-mix(in srgb, var(--ink) 30%, var(--line));
   box-shadow: var(--shadow);
 }
@@ -1638,11 +1642,13 @@ iframe.media-video {
   box-shadow: var(--glass-shadow);
 }
 :is(.project, .feat, .edu):hover {
+  border-color: var(--signal);
   border-color: color-mix(in srgb, var(--glass-border) 60%, var(--signal));
   box-shadow: var(--glass-shadow-hover);
 }
 .feat-main,
 .feat-main:hover {
+  border-color: var(--signal);
   border-color: color-mix(in srgb, var(--signal) 55%, transparent);
 }
 main:has(> .crumbs-band) {
@@ -2394,6 +2400,7 @@ button.tag.is-active {
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .post-card:hover {
+  border-color: var(--line);
   border-color: color-mix(in srgb, var(--ink) 30%, var(--line));
   box-shadow: var(--shadow);
 }
@@ -3618,6 +3625,7 @@ button.tag.is-active {
 }
 .play-card:hover {
   transform: translateY(-3px);
+  border-color: var(--signal);
   border-color: color-mix(in srgb, var(--glass-border) 60%, var(--signal));
   box-shadow: var(--glass-shadow-hover);
 }
@@ -3684,4 +3692,93 @@ button.tag.is-active {
 .nav-links .nav-play i {
   margin-right: 4px;
   color: var(--signal);
+}
+
+/* Without Skills: on the 6 x 6 desktop grid Notes is a normal 2 x 2 tile and
+   the four link tiles go 2 wide to fill the last two rows. On the phone and
+   landscape grids Notes is a full-width strip and the links stay 1 x 1. */
+.tiles .tile-notes {
+  grid-column: span 2;
+}
+.tiles .tile-s {
+  grid-column: span 2;
+}
+@media (max-width: 640px), (max-height: 520px) and (orientation: landscape) {
+  .tiles .tile-notes {
+    grid-column: span 4;
+    grid-row: span 1;
+  }
+  /* a short, wide tile: the drawing fills the right side at full height */
+  .tiles .tile-notes .tile-art {
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    width: auto;
+    height: calc(100% - 16px);
+    aspect-ratio: 92 / 76;
+    margin: 0;
+  }
+  .tiles .tile-s {
+    grid-column: span 1;
+  }
+}
+
+/* ---------- iOS Safari and older WebKit ----------
+   Keep text the size we set when an iPhone turns sideways; stop iOS zooming
+   into form fields (it does that for fonts under 16px); give search boxes our
+   own look instead of Safari's; and fall back where older iOS lacks a feature. */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+@supports not (overflow: clip) {
+  body {
+    overflow-x: hidden;
+  }
+}
+input[type="search"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+@supports (-webkit-touch-callout: none) {
+  input,
+  select,
+  textarea {
+    font-size: max(16px, 1em);
+  }
+}
+a,
+button,
+summary,
+.tile {
+  -webkit-tap-highlight-color: rgba(228, 87, 46, 0.15);
+}
+/* Touch screens have no hover: don't leave a tapped card lifted */
+@media (hover: none) {
+  .tile:hover,
+  .note-card:hover {
+    transform: none;
+  }
+}
+pre,
+.ntable {
+  -webkit-overflow-scrolling: touch;
+}
+/* Small phones (iPhone SE, 320px): the prev / next links must fit beside the home button */
+.pager {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+@media (max-width: 380px) {
+  .pager {
+    gap: 6px;
+  }
+  .pager-link {
+    padding: 8px 11px;
+    font-size: 0.82rem;
+    gap: 6px;
+  }
 }

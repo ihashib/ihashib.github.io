@@ -29,22 +29,589 @@ description: "My MySQL notes: installing, SQL commands, joins, indexes, ACID and
 @media (max-width:820px){.nlay{display:block}.nnav{position:static;max-height:none;margin:0 0 1rem;padding:0}.nnav-box{border:1px solid rgba(127,127,127,.35);border-radius:12px;padding:0}
 .nnav-box>summary{display:block;padding:.85rem 1.1rem;font-weight:700;cursor:pointer}.nnav-box .ngroup{padding:0 1rem}.nnav-box[open]>summary{border-bottom:1px solid rgba(127,127,127,.3);margin-bottom:.8rem}}
 </style>
-<section class="section wrap notes" id="note" aria-labelledby="note-title">
-  <p><a href="{{ '/notes/' | relative_url }}">&larr; All notes</a></p>
+<link rel="stylesheet" href="{{ '/notes/notes.css' | relative_url }}">
+<section class="section wrap notes" id="note" data-note="mysql" aria-labelledby="note-title">
+  <p><a href="{{ '/notes/' | relative_url }}">← All notes</a></p>
   <h1 id="note-title">MySQL</h1>
   <p style="margin:.5rem 0 0"><a href="https://docs.google.com/document/d/1je8XlDD_k4tixs48BYX82CbtXgtFYoptRubh5uo6qbs/edit" target="_blank" rel="noopener noreferrer"><i class="fab fa-google-drive" aria-hidden="true"></i> Open the full notes in Google Docs</a></p>
-<div class="nlay"><nav class="nnav" aria-label="Contents"><details class="nnav-box" open><summary>Contents</summary><div class="ngroup"><b><a href="#g-getting-started">Getting started</a></b><ul><li><a href="#youtube-tutorials">Youtube Tutorials</a></li><li><a href="#for-practice">For practice</a></li><li><a href="#mysql-ubuntu-install">MySQL Ubuntu install</a></li><li><a href="#mysql-windows-install">MySQL Windows Install</a></li></ul></div><div class="ngroup"><b><a href="#g-basics">SQL basics</a></b><ul><li><a href="#variables-and-data-types">Variables and Data types</a></li><li><a href="#sql-manual-trace">SQL Manual Trace</a></li><li><a href="#sql-commands">SQL Commands</a></li><li><a href="#sql-arithmetics-and-operators">SQL Arithmetics and operators</a></li><li><a href="#sql-logical-operators">SQL Logical operators</a></li><li><a href="#logical-operations">Logical operations</a></li><li><a href="#handling-null">Handling NULL</a></li><li><a href="#string-operations">String operations</a></li></ul></div><div class="ngroup"><b><a href="#g-querying">Querying</a></b><ul><li><a href="#sql-causes">SQL Causes</a></li><li><a href="#sql-aggregate-functions">SQL Aggregate functions</a></li><li><a href="#sql-join">SQL JOIN</a></li><li><a href="#sql-set-operation">SQL Set operation</a></li><li><a href="#common-table-expressions-cte">Common Table Expressions (CTE)</a></li><li><a href="#temp-tables">Temp Tables</a></li></ul></div></details></nav><div class="nmain"><div class="nbar"><span class="nprog" id="nprog" aria-live="polite"></span><button type="button" id="nopen">Expand all</button><button type="button" id="nshut">Collapse all</button></div><details class="ngrp" id="g-getting-started" data-ids="youtube-tutorials for-practice mysql-ubuntu-install mysql-windows-install"><summary><span class="gt">Getting started</span><span class="gc"></span></summary><div class="gbody"><div class="nsec flat" id="youtube-tutorials"><div class="fhead"><h3 class="nt">Youtube Tutorials</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="youtube-tutorials" aria-label="Mark Youtube Tutorials as read"><span>Read</span></label></div><div class="nbody"><ul><li>SQL Explained in 100 Seconds</li><li>Introduction to Database Management Systems</li><li>MySQL Tutorial for Beginners [Full Course]</li></ul></div></div><div class="nsec flat" id="for-practice"><div class="fhead"><h3 class="nt">For practice</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="for-practice" aria-label="Mark For practice as read"><span>Read</span></label></div><div class="nbody"><ul><li><a href="https://sqlzoo.net/wiki/SQL_Tutorial" target="_blank" rel="noopener noreferrer">https://sqlzoo.net/wiki/SQL_Tutorial</a></li><li><a href="https://leetcode.com/studyplan/top-sql-50/" target="_blank" rel="noopener noreferrer">https://leetcode.com/studyplan/top-sql-50/</a></li></ul><p>NOTE: If you wish only to learn SQL then skip the installation process, just use an online SQL</p><ul><li><a href="https://www.programiz.com/sql/online-compiler/" target="_blank" rel="noopener noreferrer">https://www.programiz.com/sql/online-compiler/</a></li></ul></div></div><div class="nsec flat" id="mysql-ubuntu-install"><div class="fhead"><h3 class="nt">MySQL Ubuntu install</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="mysql-ubuntu-install" aria-label="Mark MySQL Ubuntu install as read"><span>Read</span></label></div><div class="nbody"><ul><li>MySQL</li><ul><li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04" target="_blank" rel="noopener noreferrer">https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04</a></li></ul><li>PHPMyAdmin</li><ul><li><a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-20-04" target="_blank" rel="noopener noreferrer">https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-20-04</a></li><li>If phpmyadmin does not load:</li><ul><li>Do this first</li><ul><li>sudo nano /etc/apache2/apache2.conf</li></ul><li>add this line somewhere</li><ul><li>Include /etc/phpmyadmin/apache.confs</li></ul><li>and finally restart apache.</li><ul><li>sudo service apache2 restart</li></ul></ul></ul></ul></div></div><div class="nsec flat" id="mysql-windows-install"><div class="fhead"><h3 class="nt">MySQL Windows Install</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="mysql-windows-install" aria-label="Mark MySQL Windows Install as read"><span>Read</span></label></div><div class="nbody"><ul><li>MySQL</li><ul><li><a href="https://dev.mysql.com/downloads/installer/" target="_blank" rel="noopener noreferrer">https://dev.mysql.com/downloads/installer/</a></li></ul></ul></div></div></div></details><details class="ngrp" id="g-basics" data-ids="variables-and-data-types sql-manual-trace sql-commands sql-arithmetics-and-operators sql-logical-operators logical-operations handling-null string-operations"><summary><span class="gt">SQL basics</span><span class="gc"></span></summary><div class="gbody"><div class="nsec flat" id="variables-and-data-types"><div class="fhead"><h3 class="nt">Variables and Data types</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="variables-and-data-types" aria-label="Mark Variables and Data types as read"><span>Read</span></label></div><div class="nbody"><ul><li>INT</li><ul><li>Whole numbers</li></ul><li>Decimal(m, n)</li><ul><li>m is before decimal point and n after decimal point</li></ul><li>Varchar(x)</li><ul><li>String and x is the length of string.</li></ul><li>BLOB</li><ul><li>Binary Large Object, used to store image or files</li></ul><li>Date</li><ul><li>Only date, YYYY-MM-DD</li></ul><li>Timestamp</li><ul><li>Time and date, YYYY-MM-DD, HH:MM:SS</li></ul></ul></div></div><details class="nsec" id="sql-manual-trace"><summary><span class="nt">SQL Manual Trace</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="sql-manual-trace" aria-label="Mark SQL Manual Trace as read"><span>Read</span></label></summary><div class="nbody"><ul><li>Table Understanding</li><li>Columns &amp; Data Types: Be aware of the names, data types (text, number, date, etc.) of columns in all involved tables.</li><li>Sample Data: Visualize a small subset of data in your head, or sketch it out.</li><li>Break Down the Query (Order Matters!)</li><li>SELECT:</li><ul><li>Identify columns for the final output.</li><li>Note aggregate functions (SUM, COUNT, AVG, etc.), if any.</li></ul><li>FROM: Your base table(s).</li><li>JOIN:</li><ul><li>Type of join (INNER, LEFT, RIGHT, FULL)</li><li>Join condition (ON ...) – the key to linking tables</li></ul><li>WHERE: Pre-filtering of rows.</li><li>GROUP BY: Columns used for grouping.</li><li>HAVING: Filters on groups formed by GROUP BY.</li><li>ORDER BY: Sorting of final results (not relevant to intermediate steps).</li><li>Step-by-Step &quot;Simulation&quot;</li><li>Start with your &#x27;Sample Data&#x27;: Imagine your mini version of the table(s).</li><li>WHERE Filter: Eliminate rows not meeting the WHERE criteria.</li><li>JOIN Action:</li><ul><li>INNER JOIN: Only keep rows having matches in BOTH tables as per the ON condition.</li><li>LEFT/RIGHT JOIN: Keep ALL rows from the specified table, fill missing matches with NULL.</li><li>FULL JOIN: Keep ALL rows from both, fill gaps with NULL.</li></ul><li>GROUP BY Form Groups: Mentally create sub-groups for each unique value in the GROUP BY columns.</li><li>Aggregates in SELECT:</li><ul><li>AVG: Imagine calculating the average within each group.</li><li>SUM: Picture summing up values within each group.</li><li>COUNT: Visualize counting rows within each group.</li></ul><li>HAVING Eliminate Groups: Remove whole groups that don&#x27;t fulfill the HAVING condition.</li><li>SELECT Finalize: Pick out only the columns needed from the remaining data.</li><li>Visual Representation: Simple &#x27;Order&#x27; Example</li><ul><li>SELECT department, COUNT(employee_id) as employee_count</li></ul></ul><pre><code>FROM employees
+
+<div class="nlay"><nav class="nnav" aria-label="Contents"><details class="nnav-box" open><summary>Contents</summary><div class="ngroup"><b><a href="#g-getting-started">Getting started</a></b><ul><li><a href="#youtube-tutorials">Video tutorials</a></li><li><a href="#for-practice">Practice sites</a></li><li><a href="#mysql-ubuntu-install">Installing on Ubuntu</a></li><li><a href="#mysql-windows-install">Installing on Windows</a></li></ul></div><div class="ngroup"><b><a href="#g-basics">SQL basics</a></b><ul><li><a href="#variables-and-data-types">Data types</a></li><li><a href="#sql-manual-trace">Tracing a query by hand</a></li><li><a href="#sql-commands">SQL commands</a></li><li><a href="#sql-arithmetics-and-operators">Arithmetic and comparison</a></li><li><a href="#sql-logical-operators">Filtering with WHERE</a></li><li><a href="#logical-operations">CASE and IF</a></li><li><a href="#handling-null">Handling NULL</a></li><li><a href="#string-operations">Text functions</a></li></ul></div><div class="ngroup"><b><a href="#g-querying">Querying</a></b><ul><li><a href="#sql-causes">GROUP BY, HAVING, ORDER BY and window functions</a></li><li><a href="#sql-aggregate-functions">Aggregate functions</a></li><li><a href="#sql-join">Joins</a></li><li><a href="#sql-set-operation">UNION and set operations</a></li><li><a href="#common-table-expressions-cte">Common table expressions (CTE)</a></li><li><a href="#temp-tables">Temporary tables</a></li></ul></div></details></nav><div class="nmain"><div class="nbar"><span class="nprog" id="nprog" aria-live="polite"></span><button type="button" id="nopen">Expand all</button><button type="button" id="nshut">Collapse all</button></div><details class="ngrp" id="g-getting-started" data-ids="youtube-tutorials for-practice mysql-ubuntu-install mysql-windows-install"><summary><span class="gt">Getting started</span><span class="gc">4 topics</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-getting-started" aria-label="Mark Getting started as read"><span>Read</span></label></summary><div class="gbody"><div class="nsec flat" id="youtube-tutorials"><div class="fhead"><h3 class="nt">Video tutorials</h3></div><div class="nbody"><p>Three videos to start with, shortest first:</p>
+<ol>
+<li><a href="https://www.youtube.com/results?search_query=SQL+Explained+in+100+Seconds+fireship" target="_blank" rel="noopener noreferrer">SQL Explained in 100 Seconds</a>: the big picture in under two minutes.</li>
+<li><a href="https://www.youtube.com/results?search_query=Introduction+to+Database+Management+Systems" target="_blank" rel="noopener noreferrer">Introduction to Database Management Systems</a>: what a DBMS is and why we use one.</li>
+<li><a href="https://www.youtube.com/results?search_query=MySQL+Tutorial+for+Beginners+Full+Course+mosh" target="_blank" rel="noopener noreferrer">MySQL Tutorial for Beginners (Full Course)</a>: hands-on, start to finish.</li>
+</ol>
+</div></div><div class="nsec flat" id="for-practice"><div class="fhead"><h3 class="nt">Practice sites</h3></div><div class="nbody"><ul>
+<li><a href="https://sqlzoo.net/wiki/SQL_Tutorial" target="_blank" rel="noopener noreferrer">SQLZoo</a>: short interactive lessons.</li>
+<li><a href="https://leetcode.com/studyplan/top-sql-50/" target="_blank" rel="noopener noreferrer">LeetCode Top SQL 50</a>: interview-style problems.</li>
+</ul>
+<blockquote>
+<p><strong>Only want to learn SQL?</strong> Skip installing anything and use an online editor such as <a href="https://www.programiz.com/sql/online-compiler/" target="_blank" rel="noopener noreferrer">Programiz SQL</a>.</p>
+</blockquote>
+</div></div><div class="nsec flat" id="mysql-ubuntu-install"><div class="fhead"><h3 class="nt">Installing on Ubuntu</h3></div><div class="nbody"><ul>
+<li><strong>MySQL:</strong> follow DigitalOcean's <a href="https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04" target="_blank" rel="noopener noreferrer">How to install MySQL on Ubuntu</a>.</li>
+<li><strong>phpMyAdmin</strong> (a web page for managing the database): <a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-20-04" target="_blank" rel="noopener noreferrer">How to install and secure phpMyAdmin</a>.</li>
+</ul>
+<p><strong>If phpMyAdmin does not load</strong>, tell Apache about it:</p>
+<pre><code class="language-bash">sudo nano /etc/apache2/apache2.conf
+# add this line anywhere in the file:
+Include /etc/phpmyadmin/apache.conf
+# then restart Apache
+sudo service apache2 restart
+</code></pre>
+</div></div><div class="nsec flat" id="mysql-windows-install"><div class="fhead"><h3 class="nt">Installing on Windows</h3></div><div class="nbody"><p>Download the <a href="https://dev.mysql.com/downloads/installer/" target="_blank" rel="noopener noreferrer">MySQL Installer</a> and pick <strong>Developer Default</strong>: it installs the server, MySQL Workbench and the command-line client together.</p>
+</div></div></div></details><details class="ngrp" id="g-basics" data-ids="variables-and-data-types sql-manual-trace sql-commands sql-arithmetics-and-operators sql-logical-operators logical-operations handling-null string-operations"><summary><span class="gt">SQL basics</span><span class="gc">8 topics</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-basics" aria-label="Mark SQL basics as read"><span>Read</span></label></summary><div class="gbody"><div class="nsec flat" id="variables-and-data-types"><div class="fhead"><h3 class="nt">Data types</h3></div><div class="nbody"><p>The type you choose decides what a column can hold and how much space it takes.</p>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Holds</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>INT</code></td>
+<td>Whole numbers</td>
+<td><code>42</code></td>
+</tr>
+<tr>
+<td><code>DECIMAL(m, n)</code></td>
+<td>Exact decimals: <code>m</code> digits in total, <code>n</code> of them after the point</td>
+<td><code>DECIMAL(6,2)</code> holds <code>1234.56</code></td>
+</tr>
+<tr>
+<td><code>VARCHAR(x)</code></td>
+<td>Text up to <code>x</code> characters</td>
+<td><code>VARCHAR(50)</code></td>
+</tr>
+<tr>
+<td><code>BLOB</code></td>
+<td>Binary data (images, files)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>DATE</code></td>
+<td>A date, <code>YYYY-MM-DD</code></td>
+<td><code>2024-03-15</code></td>
+</tr>
+<tr>
+<td><code>TIMESTAMP</code></td>
+<td>Date and time, <code>YYYY-MM-DD HH:MM:SS</code></td>
+<td><code>2024-03-15 09:30:00</code></td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>Use <code>DECIMAL</code> for money, never <code>FLOAT</code>: floats round, decimals don't.</p>
+</blockquote>
+</div></div><div id="sql-manual-trace" class="nsec flat"><div class="fhead"><h3 class="nt">Tracing a query by hand</h3></div><div class="nbody"><p>When a query confuses you, run it in your head on a tiny table. Two steps.</p>
+<h3>1. Know the tables</h3>
+<ul>
+<li><strong>Columns and types:</strong> the names and types (text, number, date) of every column involved.</li>
+<li><strong>Sample data:</strong> picture or sketch three or four rows.</li>
+</ul>
+<h3>2. Follow the order SQL really runs in</h3>
+<p>You write <code>SELECT</code> first, but the database runs it almost last:</p>
+<figure class="ndia"><svg viewBox="0 0 640 210" role="img" aria-label="Query run order: FROM, WHERE, GROUP BY, HAVING, SELECT, ORDER BY"><defs><marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk" /></marker></defs><rect x="20" y="30" width="180" height="58" rx="10" class="box" /><circle cx="44" cy="59" r="13" class="dot" /><text x="44" y="64" class="dn" text-anchor="middle">1</text><text x="66" y="56" class="tb" text-anchor="start">FROM / JOIN</text><text x="66" y="75" class="mu" text-anchor="start">pick the tables</text><rect x="230" y="30" width="180" height="58" rx="10" class="box" /><circle cx="254" cy="59" r="13" class="dot" /><text x="254" y="64" class="dn" text-anchor="middle">2</text><text x="276" y="56" class="tb" text-anchor="start">WHERE</text><text x="276" y="75" class="mu" text-anchor="start">filter rows</text><rect x="440" y="30" width="180" height="58" rx="10" class="box" /><circle cx="464" cy="59" r="13" class="dot" /><text x="464" y="64" class="dn" text-anchor="middle">3</text><text x="486" y="56" class="tb" text-anchor="start">GROUP BY</text><text x="486" y="75" class="mu" text-anchor="start">make groups</text><rect x="440" y="140" width="180" height="58" rx="10" class="box" /><circle cx="464" cy="169" r="13" class="dot" /><text x="464" y="174" class="dn" text-anchor="middle">4</text><text x="486" y="166" class="tb" text-anchor="start">HAVING</text><text x="486" y="185" class="mu" text-anchor="start">filter groups</text><rect x="230" y="140" width="180" height="58" rx="10" class="box hi" /><circle cx="254" cy="169" r="13" class="dot" /><text x="254" y="174" class="dn" text-anchor="middle">5</text><text x="276" y="166" class="tb" text-anchor="start">SELECT</text><text x="276" y="185" class="mu" text-anchor="start">pick columns</text><rect x="20" y="140" width="180" height="58" rx="10" class="box" /><circle cx="44" cy="169" r="13" class="dot" /><text x="44" y="174" class="dn" text-anchor="middle">6</text><text x="66" y="166" class="tb" text-anchor="start">ORDER BY</text><text x="66" y="185" class="mu" text-anchor="start">sort the result</text><path d="M200 59L228 59" class="ln" marker-end="url(#ao)" /><path d="M410 59L438 59" class="ln" marker-end="url(#ao)" /><path d="M530 88L530 138" class="ln" marker-end="url(#ao)" /><path d="M440 169L412 169" class="ln" marker-end="url(#ao)" /><path d="M230 169L202 169" class="ln" marker-end="url(#ao)" /></svg><figcaption>The order a query runs in. <code>SELECT</code> is written first but runs fifth.</figcaption></figure>
+
+<p>How each join behaves:</p>
+<ul>
+<li><code>INNER JOIN</code> keeps only rows that match in <strong>both</strong> tables.</li>
+<li><code>LEFT</code> / <code>RIGHT JOIN</code> keeps <strong>every</strong> row of one side and fills missing matches with <code>NULL</code>.</li>
+<li><code>FULL JOIN</code> keeps every row of both sides.</li>
+</ul>
+<h3>Example</h3>
+<pre><code class="language-sql">SELECT department, COUNT(employee_id) AS employee_count
+FROM employees
 GROUP BY department
-ORDER BY employee_count DESC;</code></pre><ul><li>Visualization:</li><ul><li>Table (&#x27;employees&#x27;)</li></ul><ul><li>Imagine a miniature version</li></ul></ul><h3 id="group-by">GROUP BY</h3><ul><li>Create mental groups for &#x27;Sales&#x27;, &#x27;Marketing&#x27;, etc.</li></ul><ul><li>SELECT &amp; COUNT</li><ul><li>Calculate employee count within each group</li></ul></ul><h3 id="order-by">ORDER BY</h3><ul><li>Arrange groups by their count (this doesn&#x27;t trace, it&#x27;s final presentation)</li></ul></div></details><details class="nsec" id="sql-commands"><summary><span class="nt">SQL Commands</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="sql-commands" aria-label="Mark SQL Commands as read"><span>Read</span></label></summary><div class="nbody"><h3 id="sql-sublanguages">SQL Sublanguages</h3><h3 id="data-definition-language-ddl">Data Definition Language (DDL)</h3><h4 id="create">CREATE</h4><ul><li>Database</li><ul><li>CREATE DATABASE database_name</li></ul><li>Table</li><ul><li>CREATE TABLE table_name (column_name Data_type Constraint,.....)</li><li>Constraints</li><ul><li>NOT NULL - Restricts NULL value from being inserted into a column.</li><li>CHECK - Verifies that all values in a field satisfy a condition.</li><li>DEFAULT - Automatically assigns a default value if no value has been specified for the field.</li><li>UNIQUE - Ensures unique values to be inserted into the field.</li><li>INDEX - Indexes a field providing faster retrieval of records.</li><li>Primary Key(column_name)</li><li>NULL, NOT NULL</li><li>AUTO INCREMENT</li><li>DEFAULT = “ ”</li><li>Foreign Key(column) REFERENCES foreign_table(foreign_pk)</li></ul><li>Example:</li><ul><li>CREATE TABLE employees(</li><ul><li>id NOT NULL AUTO_INCREMENT,</li><li>Name NOT NULL,</li><li>Phone NOT NULL,</li><li>fId NOT NULL,</li><li>PRIMARY KEY(id)</li><li>FOREIGN KEY(fId) REFERENCES department(DEVOPS));</li></ul></ul></ul></ul><h4 id="drop">DROP</h4><ul><li>Database</li><ul><li>DROP DATABASE database_name</li></ul><li>Table</li><ul><li>DROP TABLE table_name</li></ul></ul><h4 id="alter">ALTER</h4><ul><li>ADD</li><ul><li>ALTER TABLE table_name ADD (Column_name Data_type);</li></ul><li>MODIFY Data type</li><ul><li>ALTER TABLE table_name MODIFY(existing_Column Data_type);</li></ul></ul><h4 id="drop">DROP</h4><ul><li>ALTER TABLE table_name DROP column</li></ul><h4 id="truncate">TRUNCATE</h4><ul><li>Clear table’s data</li><li>TRUNCATE TABLE table_name</li></ul><h3 id="data-manipulation-language-dml">Data Manipulation Language (DML)</h3><h4 id="insert">INSERT</h4><ul><li>All column data</li><ul><li>INSERT INTO table_name VALUES(v1, v2, v3, vN);</li></ul><li>One or more data</li><ul><li>INSERT INTO table_name (c1, c2, cN) VALUES(v1, v2, v3, vN),(v1, v2, v3, vN);</li></ul></ul><h4 id="update">UPDATE</h4><ul><li>UPDATE table_name SET c1=v1, c2=v2, cN=vN WHERE &lt;condition&gt;</li></ul><h4 id="delete">DELETE</h4><ul><li>All records</li><ul><li>DELETE FROM table_name</li></ul><li>Condition</li><ul><li>DELETE FROM table_name WHERE condition</li></ul></ul><h3 id="data-control-language-dcl">Data Control Language (DCL)</h3><h4 id="grant">GRANT</h4><h4 id="revoke">REVOKE</h4><h3 id="data-query-language-dql">Data Query Language (DQL)</h3><h4 id="select">SELECT</h4><h3 id="transaction-control-language-tcl">Transaction Control Language (TCL)</h3><h4 id="commit">COMMIT</h4><h4 id="save-point">SAVE POINT</h4><h4 id="rollback">ROLLBACK</h4></div></details><div class="nsec flat" id="sql-arithmetics-and-operators"><div class="fhead"><h3 class="nt">SQL Arithmetics and operators</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="sql-arithmetics-and-operators" aria-label="Mark SQL Arithmetics and operators as read"><span>Read</span></label></div><div class="nbody"><h3 id="arithmetics">Arithmetics</h3><ul><li>+, -, *, /, %</li></ul><h3 id="operators">Operators</h3><ul><li>&gt;, &gt;=, &lt;, &lt;=, =</li><li>&lt;&gt;, !=</li></ul></div></div><details class="nsec" id="sql-logical-operators"><summary><span class="nt">SQL Logical operators</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="sql-logical-operators" aria-label="Mark SQL Logical operators as read"><span>Read</span></label></summary><div class="nbody"><h3 id="all">ALL</h3><ul><li>“return TRUE if the comparison is TRUE for ALL of the values in the column that the subquery returns.”</li><li>For example: SELECT s1 FROM t1 WHERE s1 &gt; ALL (SELECT s1 FROM t2);</li></ul><h3 id="and">AND</h3><ul><li>All conditions must be true</li><li>SELECT column_name FROM table_name WHERE condition1 AND condition2</li></ul><h3 id="any">ANY</h3><ul><li>Just like ALL but any of the subqueries can be TRUE;</li></ul><h3 id="between">BETWEEN</h3><ul><li>To select values between 2 values, like salary &gt; 50 AND salary &lt; 100, replace this with “salary BETWEEN 50 AND 100”.</li><li>SELECT column_name FROM tablename WHERE column_name BETWEEN value1 AND value2;</li></ul><h3 id="in">IN</h3><ul><li>Shorthand for multiple OR commands. NOT IN will cause the reverse.</li><li>SELECT column_names FROM table_name WHERE column_name IN (con1, con2);</li></ul><h3 id="not">NOT</h3><ul><li>Negative operator</li><li>SELECT column_name FROM table_name WHERE NOT(condition1);</li><ul><li>This will print the opposite of condition 1, example NOT(department=’CSE’), this will print all data except CSE department data.</li></ul></ul><h3 id="or">OR</h3><ul><li>At Least one condition has to be true</li><li>SELECT column_name FROM table_name WHERE condition1 OR condition2</li></ul><h3 id="like">LIKE</h3><ul><li>LIKE is used with WHERE to find a specific pattern in data.</li><li>SELECT column_name FROM table_name WHERE column_name LIKE condition</li><li>Example</li><ul><li>All names that start with letter M.</li><li>SELECT * FROM employees WHERE First_name LIKE M%</li></ul><li>% indicates one or many characters.</li><li>_ indicates only one character.</li><li>Note: LIKE and ILIKE do the same thing but LIKE is case sensitive.</li></ul><h3 id="exist">EXIST</h3><h3 id="limit">LIMIT</h3><ul><li>Limits the amount of data being shown.</li><li>SELECT column_name FROM table_name LIMIT value</li><ul><li>NOTE: LIMIT skip_values, value. like: 5, 2. After 5 data, print 6 and 7.</li></ul></ul></div></details><div class="nsec flat" id="logical-operations"><div class="fhead"><h3 class="nt">Logical operations</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="logical-operations" aria-label="Mark Logical operations as read"><span>Read</span></label></div><div class="nbody"><h3 id="case">CASE</h3><ul><li>SELECT col_name</li></ul><h3 id="case">CASE</h3><ul><li>WHEN con1 THEN res1</li><li>WHEN con2 THEN res2</li><li>WHEN con3 THEN res3</li><li>ELSE res</li><li>END AS alias_name</li><li>FROM table_name;</li><li>CASE can also be used by ORDER BY.</li></ul><h3 id="if">IF</h3><ul><li>SELECT column_names</li><li>if(condition, if true, if false) AS alias_name</li><li>FROM table_name</li></ul></div></div><div class="nsec flat" id="handling-null"><div class="fhead"><h3 class="nt">Handling NULL</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="handling-null" aria-label="Mark Handling NULL as read"><span>Read</span></label></div><div class="nbody"><h3 id="coalesce">COALESCE</h3><ul><li>When there are null values and want to use a default value.</li><li>SELECT COALESCE(email, ‘email not found’) FROM user_data</li></ul><h3 id="division-by-0-with-nullif">Division by 0 with NULLIF</h3><ul><li>NULLIF(val1, val2) returns val1 if val1 and val2 are not equal and if they are equal it returns null.</li><li>Dividing anything with NULL will not give an error.</li><li>SELECT COALESCE(10 / NULLIF(0,0), 0)</li><li>This will return null and not an error.</li></ul></div></div><div class="nsec flat" id="string-operations"><div class="fhead"><h3 class="nt">String operations</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="string-operations" aria-label="Mark String operations as read"><span>Read</span></label></div><div class="nbody"><h3 id="trim-column-name">TRIM(column_name)</h3><ul><li>LTRIM()</li><li>RTRIM()</li></ul><h3 id="replace-column-name-tobe-replaced-replacee">REPLACE(column_name, tobe_replaced, replacee)</h3><ul><li>SELECT REPLACE(Department, “communications”, “NV”) AS Dept</li><li>FROM team;</li></ul><h3 id="substring-column-name-start-idx-end-idx">SUBSTRING(column_name, start_idx, end_idx)</h3><ul><li>NOTE: SQL index starts at 1.</li></ul><h3 id="concat-str1-str2">CONCAT(str1, str2)</h3></div></div></div></details><details class="ngrp" id="g-querying" data-ids="sql-causes sql-aggregate-functions sql-join sql-set-operation common-table-expressions-cte temp-tables"><summary><span class="gt">Querying</span><span class="gc"></span></summary><div class="gbody"><details class="nsec" id="sql-causes"><summary><span class="nt">SQL Causes</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="sql-causes" aria-label="Mark SQL Causes as read"><span>Read</span></label></summary><div class="nbody"><h3 id="group-by">GROUP BY</h3><ul><li>The GROUP BY statement groups rows that have the same values into summary rows, like &quot;find the number of customers in each country&quot;.</li><li>This is basically finding categories of each kind of row from the table.</li><li>The GROUP BY statement is often used with aggregate functions (COUNT(), MAX(), MIN(), SUM(), AVG()) to group the result-set by one or more columns.</li><li>SELECT column_name(s)</li><li>FROM table_name</li><li>WHERE condition</li><li>GROUP BY column_name(s)</li></ul><h3 id="having">HAVING</h3><ul><li>The HAVING clause was added to SQL because the WHERE keyword cannot be used with aggregate functions and after Group By.</li><li>SELECT column_name(s)</li><li>FROM table_name</li><li>WHERE condition</li><li>GROUP BY column_name(s)</li><li>HAVING condition</li><li>ORDER BY column_name(s);</li></ul><h3 id="order-by">ORDER BY</h3><ul><li>Used to sort the output of select.</li><li>ASC for ascending which is default and DESC for descending.</li><li>SELECT column_names FROM table_name ORDER BY column_name ASC;</li><ul><li>NOTE: In MySQL the column name after ORDER BY can be any of the columns and not from the SELECT part. But in other DBMS, this is not allowed.</li><li>example: SELECT name, country FROM employees ORDER BY salary DESC</li></ul></ul><h3 id="over-window-functions">OVER( Window functions)</h3><ul><li>Used for Window Functions</li><ul><li>Aggregate functions return a single row for the multirow data given but window functions return calculated results for each row in the given windows(Groups of data).</li><li>Can be applied on aggregate functions to return window functions.</li><li>The functions return table views with an added column and doesn’t modify any contents from the table.</li></ul><li>Syntax</li><ul><li>SELECT column_name,</li><ul><li>&lt;WINDOW_FUNCTION&gt;</li><li>OVER(PARTITION BY column ORDER BY column ASC/DESC) as column</li><ul><li>OVER() is the bread and butter to window function</li><li>PARTITION BY is like GROUP BY but the former returns multirow results and later returns a single row result.</li><li>ORDER BY can be used after PARTITION BY as it’s like GROUP BY.</li></ul></ul></ul><li>Types of  window functions</li><ul><li>Aggregate functions</li><ul><li>Same functionality as normal aggregate functions but returns all row result</li></ul></ul></ul><h4 id="select">SELECT</h4><ul><li>region,</li><li>sales_amount,</li><li>SUM(sales_amount) OVER (PARTITION BY region) AS regional_total</li><li>FROM sales;</li></ul><ul><li>Ranking functions</li><ul><li>RANK()</li><ul><li>Ranks the partitions/groups/categories with gaps in the ranking sequence.</li><li>If same ranked categories are found, then they are ranked the same but the next category will have skipped ranking. The skip is equal to the number of the same value category.</li><ul><li>Example:</li><li>Table:</li><ul><li>Name        Value</li><li>east        100</li><li>west        100</li><li>north        101</li><li>south   102</li></ul><li>SELECT Name, Value,</li><ul><li>RANK() OVER (PARTITION BY Value ORDER BY Value ASC) as rank</li></ul><li>FROM tableName;</li><ul><li>Name                 Value                 rank</li><li>east                100                1</li><li>west                100                1</li><li>north                101                3</li><li>south                102                4</li></ul></ul></ul><li>DENSE_RANK()</li><ul><li>Ranks the partitions without gaps in the ranking sequence.</li><li>If same ranked partitions are found, then they are sequenced the same and the next partition is sequenced without any skips.</li><li>SELECT Name, Value,</li><ul><li>RANK() OVER (PARTITION BY Value ORDER BY Value ASC) as rank</li></ul><li>FROM tableName;</li><ul><li>Name                 Value                 rank</li><li>east                100                1</li><li>west                100                1</li><li>north                101                2</li><li>south                102                3</li></ul></ul><li>ROW_NUMBER()</li></ul><li>Analytic functions</li><ul><li>LEAD(), LAG(), NTILE() (TBS)</li></ul></ul></div></details><div class="nsec flat" id="sql-aggregate-functions"><div class="fhead"><h3 class="nt">SQL Aggregate functions</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="sql-aggregate-functions" aria-label="Mark SQL Aggregate functions as read"><span>Read</span></label></div><div class="nbody"><h3 id="count">COUNT</h3><ul><li>SELECT COUNT(column_name) FROM table_name</li></ul><h3 id="sum">SUM</h3><ul><li>SELECT SUM(collumn_name) FROM table_name</li></ul><h3 id="avg">AVG</h3><ul><li>SELECT AVG(column_name) FROM table_name</li></ul><h3 id="min">MIN</h3><ul><li>SELECT MIN(column_name) FROM table_name</li></ul><h3 id="max">MAX</h3><ul><li>SELECT MAX(column_name) FROM table_name</li></ul></div></div><details class="nsec" id="sql-join"><summary><span class="nt">SQL JOIN</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="sql-join" aria-label="Mark SQL JOIN as read"><span>Read</span></label></summary><div class="nbody"><h3 id="inner-join">INNER JOIN</h3><ul><li>SELECT column_name</li><li>FROM table_a</li><li>INNER JOIN table_b</li><li>ON table_a.foreign_key = table_b.primary_key</li><li>WHERE condition</li><li>Only takes data that match in both tables, data that don’t match will not be taken.</li><li>Table: Customer, Orders</li><li>Get all customers with orders</li><li>SELECT customer.name, orders.name</li><li>FROM customer</li><li>INNER JOIN order</li><li>ON customer.cus_id = orders.cus_id</li><li>Customer table</li><li>cus_id                name</li><li>1                hamim</li><li>2                rabbi</li><li>Order table</li><li>cus_id                name</li><li>1                Pizza</li><li>1                Shake</li><li>Output</li><li>cus.name        ord.name</li><li>hamim                Pizza</li><li>hamim                Shake</li></ul><h3 id="left-join">LEFT JOIN</h3><ul><li>We will get all values from table_a and only the common values from table_b.</li><li>SELECT column_name</li><li>FROM table_a</li><li>LEFT JOIN table_b</li><li>ON table_a.foreign_key = table_b.primary_key</li><li>WHERE condition</li><li>Takes all values from table1 and only matching values from table2, keeps values from table2 that don&#x27;t match with table1 as NULL.</li><ul><li>Table: Customer, Orders</li><li>Get all customers with orders</li><li>SELECT customer.name, orders.name</li><li>FROM customer</li><li>LEFT JOIN order</li><li>ON customer.cus_id = orders.cus_id</li><li>Customer table</li><li>cus_id                name</li><li>1                hamim</li><li>2                rabbi</li><li>Order table</li><li>cus_id                name</li><li>1                Pizza</li><li>1                Shake</li><li>Output</li><li>cus.name        ord.name</li><li>hamim                Pizza</li><li>hamim                Shake</li><li>rabbi                 NULL</li></ul></ul><h3 id="right-join">RIGHT JOIN</h3><ul><li>We will get all values from table_b and only common values from table_a</li><li>SELECT column_name</li><li>FROM table_a</li><li>RIGHT JOIN table_b</li><li>ON table_a.foreign_key = table_b.primary_key</li><li>WHERE condition</li><li>Takes all values from table2 and only matching values from table1, keeps values from table1 that don&#x27;t match with table1 as NULL.</li><ul><li>Table: Customer, Orders</li><li>Get all customers with orders</li><li>SELECT customer.name, orders.name</li><li>FROM customer</li><li>RIGHT JOIN order</li><li>ON customer.cus_id = orders.cus_id</li><li>Customer table</li><li>cus_id                name</li><li>1                hamim</li><li>2                rabbi</li><li>Order table</li><li>cus_id                name</li><li>1                Pizza</li><li>1                Shake</li><li>4                Chicken</li><li>Output</li><li>cus.name        ord.name</li><li>hamim                Pizza</li><li>hamim                Shake</li><li>NULL                Chicken</li><li>Here, this is an example, cust_id 4 is needed in real production or it’ll cause issues but the output NULL Chicken is correct for right join</li></ul></ul><h3 id="full-join">FULL JOIN</h3><ul><li>NOTE: MySQL Full join is not available.</li><li>SELECT column_name</li><li>FROM table_a</li><li>FULL JOIN table_b</li><li>ON table_a.foreign_key = table_b.primary_key</li><li>WHERE condition</li><li>Combination off left and right joins</li></ul><h3 id="self-join">SELF-JOIN</h3><h3 id="cross-join">CROSS-JOIN</h3></div></details><details class="nsec" id="sql-set-operation"><summary><span class="nt">SQL Set operation</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="sql-set-operation" aria-label="Mark SQL Set operation as read"><span>Read</span></label></summary><div class="nbody"><h3 id="union">UNION</h3><ul><li>UNION is used to unite results of SELECT statements.</li><li>Conditions</li><li>All SELECT must have the same number of columns</li><li>The columns must have the same data types.</li><li>SELECT comun_name FROM table1_name</li></ul><h3 id="union">UNION</h3><ul><li>SELECT column_name FROM table2_name</li><li>Example</li><li>customers_region1: c_id                name                region</li><li>1                Alice                East</li><li>2                Bob                West</li><li>customers_region2:c_id                name                region</li><li>2                Bob                West</li><li>3                Charlie                North</li><li>SQL:</li><li>SELECT customer_id, name, region FROM customers_region1</li></ul><h3 id="union">UNION</h3><ul><li>SELECT customer_id, name, region FROM customers_region2;</li><li>Output_table:         c_id                name                region</li><li>1                Alice                East</li><li>2                Bob                West</li><li>3                Charlie                North</li></ul><h3 id="union-all">UNION ALL</h3><ul><li>UNION gives distinct values but UNION ALL gives all values.</li></ul><h3 id="intersect">INTERSECT</h3><h3 id="minus">MINUS</h3></div></details><details class="nsec" id="common-table-expressions-cte"><summary><span class="nt">Common Table Expressions (CTE)</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="common-table-expressions-cte" aria-label="Mark Common Table Expressions (CTE) as read"><span>Read</span></label></summary><div class="nbody"><ul><li>CTE are named subqueries inside a SQL query.</li><li>A CTE is limited to on memory and the scope is inside the query it’s defined in.</li></ul><h3 id="syntax-structure">Syntax structure</h3><ul><li>WITH        cte_name (col1, col2…) AS (&lt;your SQL queries&gt;)</li><li>SELECT * FROM cte_name;</li><li>Note:</li><li>Here, WITH is the keyword for CTE.</li><li>(col1 DataType, col2 dataType…)</li><li>Explicit override, it’s good practice to name your columns</li><li>The explicit syntax is the same as the CREATE TABLE command.</li><li>If the data type does not match with original table, then it converts to String.</li><li>Implicit declaration of the cte_table will inherit all the columns and datatypes.</li><li>Example</li><li>Calculate the average sales per region, and then find regions with sales above that average:</li></ul><pre><code>WITH regional_averages AS (
-   SELECT region, AVG(sales_amount) AS avg_sales
-   FROM sales_data
-   GROUP BY region
+ORDER BY employee_count DESC;
+</code></pre>
+<ol>
+<li>Picture a small <code>employees</code> table.</li>
+<li><strong>GROUP BY:</strong> make one pile per department: Sales, Marketing...</li>
+<li><strong>SELECT and COUNT:</strong> count the rows in each pile.</li>
+<li><strong>ORDER BY:</strong> put the biggest pile first. This only changes how the result is shown.</li>
+</ol>
+</div></div><div id="sql-commands" class="nsec flat"><div class="fhead"><h3 class="nt">SQL commands</h3></div><div class="nbody"><p>SQL is split into smaller languages by job:</p>
+<figure class="ndia"><svg viewBox="0 0 640 216" role="img" aria-label="SQL families: DDL, DML, DQL, DCL, TCL and their commands"><rect x="260" y="8" width="120" height="38" rx="10" class="box hi" /><text x="320" y="32" class="tb" text-anchor="middle">SQL</text><path d="M320 46V62H66V80" class="ln" fill="none" /><rect x="8" y="80" width="116" height="128" rx="10" class="box" /><text x="66" y="102" class="tb" text-anchor="middle">DDL</text><text x="66" y="120" class="mu" text-anchor="middle">shape tables</text><text x="66" y="146" class="code" text-anchor="middle">CREATE</text><text x="66" y="164" class="code" text-anchor="middle">ALTER</text><text x="66" y="182" class="code" text-anchor="middle">DROP</text><text x="66" y="200" class="code" text-anchor="middle">TRUNCATE</text><path d="M320 46V62H192V80" class="ln" fill="none" /><rect x="134" y="80" width="116" height="128" rx="10" class="box" /><text x="192" y="102" class="tb" text-anchor="middle">DML</text><text x="192" y="120" class="mu" text-anchor="middle">change rows</text><text x="192" y="146" class="code" text-anchor="middle">INSERT</text><text x="192" y="164" class="code" text-anchor="middle">UPDATE</text><text x="192" y="182" class="code" text-anchor="middle">DELETE</text><path d="M320 46V62H318V80" class="ln" fill="none" /><rect x="260" y="80" width="116" height="128" rx="10" class="box" /><text x="318" y="102" class="tb" text-anchor="middle">DQL</text><text x="318" y="120" class="mu" text-anchor="middle">read rows</text><text x="318" y="146" class="code" text-anchor="middle">SELECT</text><path d="M320 46V62H444V80" class="ln" fill="none" /><rect x="386" y="80" width="116" height="128" rx="10" class="box" /><text x="444" y="102" class="tb" text-anchor="middle">DCL</text><text x="444" y="120" class="mu" text-anchor="middle">permissions</text><text x="444" y="146" class="code" text-anchor="middle">GRANT</text><text x="444" y="164" class="code" text-anchor="middle">REVOKE</text><path d="M320 46V62H570V80" class="ln" fill="none" /><rect x="512" y="80" width="116" height="128" rx="10" class="box" /><text x="570" y="102" class="tb" text-anchor="middle">TCL</text><text x="570" y="120" class="mu" text-anchor="middle">transactions</text><text x="570" y="146" class="code" text-anchor="middle">COMMIT</text><text x="570" y="164" class="code" text-anchor="middle">SAVEPOINT</text><text x="570" y="182" class="code" text-anchor="middle">ROLLBACK</text></svg><figcaption>SQL is five small languages, each with its own job.</figcaption></figure>
+
+<p><strong>DDL</strong> Data Definition · <strong>DML</strong> Data Manipulation · <strong>DQL</strong> Data Query · <strong>DCL</strong> Data Control · <strong>TCL</strong> Transaction Control</p>
+<h3>CREATE</h3>
+<pre><code class="language-sql">CREATE DATABASE shop;
+
+CREATE TABLE employees (
+  id      INT NOT NULL AUTO_INCREMENT,
+  name    VARCHAR(50) NOT NULL,
+  phone   VARCHAR(20) UNIQUE,
+  dept_id INT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (dept_id) REFERENCES departments(id)
+);
+</code></pre>
+<p>Constraints you can put on a column:</p>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Constraint</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>NOT NULL</code></td>
+<td>The column must have a value</td>
+</tr>
+<tr>
+<td><code>UNIQUE</code></td>
+<td>No two rows may share a value</td>
+</tr>
+<tr>
+<td><code>DEFAULT x</code></td>
+<td>Use <code>x</code> when no value is given</td>
+</tr>
+<tr>
+<td><code>CHECK (cond)</code></td>
+<td>Every value must pass the condition</td>
+</tr>
+<tr>
+<td><code>PRIMARY KEY</code></td>
+<td>Unique and not null: the row's identity</td>
+</tr>
+<tr>
+<td><code>FOREIGN KEY ... REFERENCES</code></td>
+<td>Must match a key in another table</td>
+</tr>
+<tr>
+<td><code>AUTO_INCREMENT</code></td>
+<td>MySQL numbers new rows for you</td>
+</tr>
+<tr>
+<td><code>INDEX</code></td>
+<td>Faster lookups on this column</td>
+</tr>
+</tbody></table></div>
+<h3>ALTER, DROP and TRUNCATE</h3>
+<pre><code class="language-sql">ALTER TABLE employees ADD (email VARCHAR(100));   -- add a column
+ALTER TABLE employees MODIFY phone VARCHAR(30);   -- change a column's type
+ALTER TABLE employees DROP COLUMN email;          -- remove a column
+
+TRUNCATE TABLE employees;   -- empty the table, keep its structure
+DROP TABLE employees;       -- delete the table itself
+DROP DATABASE shop;         -- delete the whole database
+</code></pre>
+<h3>INSERT, UPDATE and DELETE</h3>
+<pre><code class="language-sql">INSERT INTO employees VALUES (1, 'Rafi', '017...', 2);          -- every column, in order
+INSERT INTO employees (name, dept_id) VALUES ('Nila', 1), ('Tamim', 2);
+
+UPDATE employees SET phone = '018...' WHERE id = 1;
+
+DELETE FROM employees WHERE id = 3;   -- the matching rows
+DELETE FROM employees;                -- every row
+</code></pre>
+<blockquote>
+<p>Always write the <code>WHERE</code> before running an <code>UPDATE</code> or <code>DELETE</code>. Without it, every row changes.</p>
+</blockquote>
+<h3>Access and transactions</h3>
+<pre><code class="language-sql">GRANT SELECT, INSERT ON shop.* TO 'app'@'localhost';
+REVOKE INSERT ON shop.* FROM 'app'@'localhost';
+
+START TRANSACTION;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+SAVEPOINT after_debit;
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+COMMIT;      -- keep both changes (ROLLBACK would undo them)
+</code></pre>
+</div></div><div class="nsec flat" id="sql-arithmetics-and-operators"><div class="fhead"><h3 class="nt">Arithmetic and comparison</h3></div><div class="nbody"><div class="ntable"><table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Operators</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Arithmetic</td>
+<td><code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>%</code> (remainder)</td>
+</tr>
+<tr>
+<td>Comparison</td>
+<td><code>=</code> <code>&gt;</code> <code>&gt;=</code> <code>&lt;</code> <code>&lt;=</code></td>
+</tr>
+<tr>
+<td>Not equal</td>
+<td><code>&lt;&gt;</code> or <code>!=</code></td>
+</tr>
+</tbody></table></div>
+<pre><code class="language-sql">SELECT name, salary * 12 AS yearly FROM employees WHERE salary &gt;= 50000;
+</code></pre>
+</div></div><div id="sql-logical-operators" class="nsec flat"><div class="fhead"><h3 class="nt">Filtering with WHERE</h3></div><div class="nbody"><h3>AND, OR, NOT</h3>
+<pre><code class="language-sql">SELECT * FROM employees WHERE dept = 'CSE' AND salary &gt; 50000;   -- both true
+SELECT * FROM employees WHERE dept = 'CSE' OR dept = 'EEE';      -- at least one true
+SELECT * FROM employees WHERE NOT (dept = 'CSE');                -- everyone except CSE
+</code></pre>
+<h3>BETWEEN</h3>
+<p>A shorter way to write a range. It includes both ends.</p>
+<pre><code class="language-sql">SELECT * FROM employees WHERE salary BETWEEN 50 AND 100;   -- same as salary &gt;= 50 AND salary &lt;= 100
+</code></pre>
+<h3>IN</h3>
+<p>A shorter way to write many <code>OR</code>s. <code>NOT IN</code> gives the opposite.</p>
+<pre><code class="language-sql">SELECT * FROM employees WHERE dept IN ('CSE', 'EEE', 'ME');
+</code></pre>
+<h3>LIKE</h3>
+<p>Finds a text pattern.</p>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Wildcard</th>
+<th>Matches</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>%</code></td>
+<td>any number of characters</td>
+<td><code>'M%'</code>: starts with M</td>
+</tr>
+<tr>
+<td><code>_</code></td>
+<td>exactly one character</td>
+<td><code>'_a%'</code>: second letter is a</td>
+</tr>
+</tbody></table></div>
+<pre><code class="language-sql">SELECT * FROM employees WHERE first_name LIKE 'M%';
+</code></pre>
+<blockquote>
+<p>In MySQL, <code>LIKE</code> ignores case with the usual settings. <code>ILIKE</code> (case-insensitive <code>LIKE</code>) exists in PostgreSQL, not MySQL.</p>
+</blockquote>
+<h3>ALL and ANY</h3>
+<p>Compare a value with every row a subquery returns.</p>
+<pre><code class="language-sql">SELECT s1 FROM t1 WHERE s1 &gt; ALL (SELECT s1 FROM t2);   -- bigger than every value
+SELECT s1 FROM t1 WHERE s1 &gt; ANY (SELECT s1 FROM t2);   -- bigger than at least one
+</code></pre>
+<h3>EXISTS</h3>
+<p>True when the subquery returns any row at all.</p>
+<pre><code class="language-sql">SELECT name FROM customers c
+WHERE EXISTS (SELECT 1 FROM orders o WHERE o.cus_id = c.cus_id);
+</code></pre>
+<h3>LIMIT</h3>
+<p>Shows only some of the rows.</p>
+<pre><code class="language-sql">SELECT * FROM employees LIMIT 5;      -- first 5 rows
+SELECT * FROM employees LIMIT 5, 2;   -- skip 5, then show 2 (rows 6 and 7)
+</code></pre>
+</div></div><div class="nsec flat" id="logical-operations"><div class="fhead"><h3 class="nt">CASE and IF</h3></div><div class="nbody"><h3>CASE</h3>
+<p>SQL's if / else-if / else. The first <code>WHEN</code> that is true wins.</p>
+<pre><code class="language-sql">SELECT name,
+  CASE
+    WHEN salary &gt;= 100000 THEN 'High'
+    WHEN salary &gt;= 50000  THEN 'Medium'
+    ELSE 'Low'
+  END AS band
+FROM employees;
+</code></pre>
+<p><code>CASE</code> works inside <code>ORDER BY</code> too.</p>
+<h3>IF</h3>
+<p>A one-line choice between two values.</p>
+<pre><code class="language-sql">SELECT name, IF(salary &gt; 50000, 'Yes', 'No') AS well_paid
+FROM employees;
+</code></pre>
+</div></div><div class="nsec flat" id="handling-null"><div class="fhead"><h3 class="nt">Handling NULL</h3></div><div class="nbody"><h3>COALESCE</h3>
+<p>Returns the first value that is not <code>NULL</code>. Good for defaults.</p>
+<pre><code class="language-sql">SELECT COALESCE(email, 'email not found') FROM user_data;
+</code></pre>
+<h3>Safe division with NULLIF</h3>
+<p><code>NULLIF(a, b)</code> returns <code>NULL</code> when <code>a = b</code>, otherwise <code>a</code>. Dividing by <code>NULL</code> gives <code>NULL</code> instead of an error, so this avoids divide-by-zero:</p>
+<pre><code class="language-sql">SELECT COALESCE(10 / NULLIF(0, 0), 0);   -- 0, not an error
+</code></pre>
+</div></div><div class="nsec flat" id="string-operations"><div class="fhead"><h3 class="nt">Text functions</h3></div><div class="nbody"><div class="ntable"><table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Does</th>
+<th>Example → result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>TRIM(s)</code></td>
+<td>Removes spaces at both ends (<code>LTRIM</code> / <code>RTRIM</code>: one end)</td>
+<td><code>TRIM('  hi ')</code> → <code>'hi'</code></td>
+</tr>
+<tr>
+<td><code>REPLACE(s, from, to)</code></td>
+<td>Replaces every <code>from</code> with <code>to</code></td>
+<td><code>REPLACE('a-b', '-', '+')</code> → <code>'a+b'</code></td>
+</tr>
+<tr>
+<td><code>SUBSTRING(s, start, length)</code></td>
+<td>Part of the text</td>
+<td><code>SUBSTRING('MySQL', 3, 3)</code> → <code>'SQL'</code></td>
+</tr>
+<tr>
+<td><code>CONCAT(a, b, ...)</code></td>
+<td>Joins texts</td>
+<td><code>CONCAT('My', 'SQL')</code> → <code>'MySQL'</code></td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>Positions in SQL start at <strong>1</strong>, not 0.</p>
+</blockquote>
+<pre><code class="language-sql">SELECT REPLACE(department, 'communications', 'NV') AS dept FROM team;
+</code></pre>
+</div></div></div></details><details class="ngrp" id="g-querying" data-ids="sql-causes sql-aggregate-functions sql-join sql-set-operation common-table-expressions-cte temp-tables"><summary><span class="gt">Querying</span><span class="gc">6 topics</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-querying" aria-label="Mark Querying as read"><span>Read</span></label></summary><div class="gbody"><div id="sql-causes" class="nsec flat"><div class="fhead"><h3 class="nt">GROUP BY, HAVING, ORDER BY and window functions</h3></div><div class="nbody"><h3>GROUP BY</h3>
+<p>Puts rows with the same value in one group, usually so you can count or add them up per group: "how many customers in each country?"</p>
+<pre><code class="language-sql">SELECT country, COUNT(*) AS customers
+FROM customers
+GROUP BY country;
+</code></pre>
+<h3>HAVING</h3>
+<p><code>WHERE</code> filters rows <strong>before</strong> grouping and can't use aggregates. <code>HAVING</code> filters groups <strong>after</strong>.</p>
+<pre><code class="language-sql">SELECT country, COUNT(*) AS customers
+FROM customers
+WHERE active = 1
+GROUP BY country
+HAVING COUNT(*) &gt; 10
+ORDER BY customers DESC;
+</code></pre>
+<h3>ORDER BY</h3>
+<p>Sorts the result: <code>ASC</code> (the default) or <code>DESC</code>.</p>
+<pre><code class="language-sql">SELECT name, country FROM employees ORDER BY salary DESC;
+</code></pre>
+<blockquote>
+<p>MySQL lets you sort by a column you didn't select (like <code>salary</code> above). Some other databases don't.</p>
+</blockquote>
+<h3>Window functions: OVER()</h3>
+<p>An aggregate squashes many rows into one. A <strong>window function</strong> works out the same kind of value but keeps every row, adding the result as a new column.</p>
+<figure class="ndia"><svg viewBox="0 0 640 300" role="img" aria-label="GROUP BY collapses rows; a window function keeps every row and adds the total"><defs><marker id="aw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk" /></marker></defs><text x="20" y="40" class="mu" text-anchor="start">sales</text><rect x="20" y="50" width="70" height="26" rx="0" class="cell hd" /><text x="30" y="68" class="code" text-anchor="start">region</text><rect x="90" y="50" width="70" height="26" rx="0" class="cell hd" /><text x="100" y="68" class="code" text-anchor="start">amount</text><rect x="20" y="76" width="70" height="26" rx="0" class="cell" /><text x="30" y="94" text-anchor="start">East</text><rect x="90" y="76" width="70" height="26" rx="0" class="cell" /><text x="100" y="94" text-anchor="start">10</text><rect x="20" y="102" width="70" height="26" rx="0" class="cell" /><text x="30" y="120" text-anchor="start">East</text><rect x="90" y="102" width="70" height="26" rx="0" class="cell" /><text x="100" y="120" text-anchor="start">20</text><rect x="20" y="128" width="70" height="26" rx="0" class="cell" /><text x="30" y="146" text-anchor="start">West</text><rect x="90" y="128" width="70" height="26" rx="0" class="cell" /><text x="100" y="146" text-anchor="start">5</text><rect x="20" y="154" width="70" height="26" rx="0" class="cell" /><text x="30" y="172" text-anchor="start">West</text><rect x="90" y="154" width="70" height="26" rx="0" class="cell" /><text x="100" y="172" text-anchor="start">15</text><text x="250" y="24" class="tb" text-anchor="start">GROUP BY region: one row per group</text><rect x="250" y="34" width="70" height="26" rx="0" class="cell hd" /><text x="260" y="52" class="code" text-anchor="start">region</text><rect x="320" y="34" width="70" height="26" rx="0" class="cell hd" /><text x="330" y="52" class="code" text-anchor="start">total</text><rect x="250" y="60" width="70" height="26" rx="0" class="cell" /><text x="260" y="78" text-anchor="start">East</text><rect x="320" y="60" width="70" height="26" rx="0" class="cell ac" /><text x="330" y="78" text-anchor="start">30</text><rect x="250" y="86" width="70" height="26" rx="0" class="cell" /><text x="260" y="104" text-anchor="start">West</text><rect x="320" y="86" width="70" height="26" rx="0" class="cell ac" /><text x="330" y="104" text-anchor="start">20</text><text x="250" y="136" class="tb" text-anchor="start">Window function: every row stays</text><text x="250" y="152" class="code" text-anchor="start">SUM(amount) OVER (PARTITION BY region)</text><rect x="250" y="160" width="70" height="26" rx="0" class="cell hd" /><text x="260" y="178" class="code" text-anchor="start">region</text><rect x="320" y="160" width="70" height="26" rx="0" class="cell hd" /><text x="330" y="178" class="code" text-anchor="start">amount</text><rect x="390" y="160" width="70" height="26" rx="0" class="cell hd" /><text x="400" y="178" class="code" text-anchor="start">total</text><rect x="250" y="186" width="70" height="26" rx="0" class="cell" /><text x="260" y="204" text-anchor="start">East</text><rect x="320" y="186" width="70" height="26" rx="0" class="cell" /><text x="330" y="204" text-anchor="start">10</text><rect x="390" y="186" width="70" height="26" rx="0" class="cell ac" /><text x="400" y="204" text-anchor="start">30</text><rect x="250" y="212" width="70" height="26" rx="0" class="cell" /><text x="260" y="230" text-anchor="start">East</text><rect x="320" y="212" width="70" height="26" rx="0" class="cell" /><text x="330" y="230" text-anchor="start">20</text><rect x="390" y="212" width="70" height="26" rx="0" class="cell ac" /><text x="400" y="230" text-anchor="start">30</text><rect x="250" y="238" width="70" height="26" rx="0" class="cell" /><text x="260" y="256" text-anchor="start">West</text><rect x="320" y="238" width="70" height="26" rx="0" class="cell" /><text x="330" y="256" text-anchor="start">5</text><rect x="390" y="238" width="70" height="26" rx="0" class="cell ac" /><text x="400" y="256" text-anchor="start">20</text><rect x="250" y="264" width="70" height="26" rx="0" class="cell" /><text x="260" y="282" text-anchor="start">West</text><rect x="320" y="264" width="70" height="26" rx="0" class="cell" /><text x="330" y="282" text-anchor="start">15</text><rect x="390" y="264" width="70" height="26" rx="0" class="cell ac" /><text x="400" y="282" text-anchor="start">20</text><path d="M166 100L244 70" class="ln" marker-end="url(#aw)" /><path d="M166 140L244 214" class="ln" marker-end="url(#aw)" /></svg><figcaption>An aggregate with <code>GROUP BY</code> squashes each group into one row. A window function adds the same total to every row.</figcaption></figure>
+<pre><code class="language-sql">SELECT region, sales_amount,
+       SUM(sales_amount) OVER (PARTITION BY region) AS regional_total
+FROM sales;
+</code></pre>
+<ul>
+<li><code>OVER()</code> turns a function into a window function.</li>
+<li><code>PARTITION BY</code> is like <code>GROUP BY</code>, but every row stays.</li>
+<li><code>ORDER BY</code> inside <code>OVER()</code> sets the order within each partition.</li>
+</ul>
+<p><strong>Ranking functions</strong>, on this table:</p>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>name</th>
+<th>value</th>
+<th><code>RANK()</code></th>
+<th><code>DENSE_RANK()</code></th>
+<th><code>ROW_NUMBER()</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>east</td>
+<td>100</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>west</td>
+<td>100</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>north</td>
+<td>101</td>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>south</td>
+<td>102</td>
+<td>4</td>
+<td>3</td>
+<td>4</td>
+</tr>
+</tbody></table></div>
+<pre><code class="language-sql">SELECT name, value,
+       RANK()       OVER (ORDER BY value) AS rnk,
+       DENSE_RANK() OVER (ORDER BY value) AS dense,
+       ROW_NUMBER() OVER (ORDER BY value) AS row_no
+FROM t;
+</code></pre>
+<ul>
+<li><code>RANK()</code>: ties share a rank and the next rank is skipped (1, 1, 3).</li>
+<li><code>DENSE_RANK()</code>: ties share a rank, nothing is skipped (1, 1, 2).</li>
+<li><code>ROW_NUMBER()</code>: every row gets its own number.</li>
+</ul>
+<p><strong>Analytic functions:</strong> <code>LAG()</code> and <code>LEAD()</code> read the previous or next row; <code>NTILE(n)</code> splits the rows into <code>n</code> buckets.</p>
+</div></div><div class="nsec flat" id="sql-aggregate-functions"><div class="fhead"><h3 class="nt">Aggregate functions</h3></div><div class="nbody"><p>Each one turns many rows into one value.</p>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>COUNT(col)</code></td>
+<td>How many values (not <code>NULL</code>); <code>COUNT(*)</code> counts rows</td>
+</tr>
+<tr>
+<td><code>SUM(col)</code></td>
+<td>The total</td>
+</tr>
+<tr>
+<td><code>AVG(col)</code></td>
+<td>The average</td>
+</tr>
+<tr>
+<td><code>MIN(col)</code> / <code>MAX(col)</code></td>
+<td>The smallest / largest</td>
+</tr>
+</tbody></table></div>
+<pre><code class="language-sql">SELECT COUNT(*), AVG(salary), MAX(salary) FROM employees;
+</code></pre>
+</div></div><div id="sql-join" class="nsec flat"><div class="fhead"><h3 class="nt">Joins</h3></div><div class="nbody"><p>Every example uses these two tables:</p>
+<div class="ntable"><table class="pair"><tr><th colspan="2">customer</th><td class="gap"></td><th colspan="2">orders</th></tr><tr><th>cus_id</th><th>name</th><td class="gap"></td><th>cus_id</th><th>item</th></tr><tr><td>1</td><td>hamim</td><td class="gap"></td><td>1</td><td>Pizza</td></tr><tr><td>2</td><td>rabbi</td><td class="gap"></td><td>1</td><td>Shake</td></tr><tr><td></td><td></td><td class="gap"></td><td>4</td><td>Chicken</td></tr></table></div>
+
+<pre><code class="language-sql">SELECT c.name, o.item
+FROM customer c
+INNER JOIN orders o ON c.cus_id = o.cus_id;   -- swap INNER for LEFT or RIGHT
+</code></pre>
+<figure class="ndia"><svg viewBox="0 0 640 150" role="img" aria-label="Venn diagrams of INNER, LEFT, RIGHT and FULL joins"><defs><clippath id="jA"><circle cx="-24" r="42" /></clippath></defs><g transform="translate(80 66)"><g opacity=".6"><circle cx="24" r="42" class="vf" clip-path="url(#jA)" /></g><circle cx="-24" r="42" class="vl" /><circle cx="24" r="42" class="vl" /><text x="-46" y="5" class="tb" text-anchor="middle">A</text><text x="46" y="5" class="tb" text-anchor="middle">B</text></g><text x="80" y="138" class="code" text-anchor="middle">INNER JOIN</text><g transform="translate(240 66)"><g opacity=".6"><circle cx="-24" r="42" class="vf" /></g><circle cx="-24" r="42" class="vl" /><circle cx="24" r="42" class="vl" /><text x="-46" y="5" class="tb" text-anchor="middle">A</text><text x="46" y="5" class="tb" text-anchor="middle">B</text></g><text x="240" y="138" class="code" text-anchor="middle">LEFT JOIN</text><g transform="translate(400 66)"><g opacity=".6"><circle cx="24" r="42" class="vf" /></g><circle cx="-24" r="42" class="vl" /><circle cx="24" r="42" class="vl" /><text x="-46" y="5" class="tb" text-anchor="middle">A</text><text x="46" y="5" class="tb" text-anchor="middle">B</text></g><text x="400" y="138" class="code" text-anchor="middle">RIGHT JOIN</text><g transform="translate(560 66)"><g opacity=".6"><circle cx="-24" r="42" class="vf" /><circle cx="24" r="42" class="vf" /></g><circle cx="-24" r="42" class="vl" /><circle cx="24" r="42" class="vl" /><text x="-46" y="5" class="tb" text-anchor="middle">A</text><text x="46" y="5" class="tb" text-anchor="middle">B</text></g><text x="560" y="138" class="code" text-anchor="middle">FULL JOIN</text></svg><figcaption>A is the left table, B the right. The shaded part is what each join returns.</figcaption></figure>
+
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Join</th>
+<th>Keeps</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>INNER JOIN</code></td>
+<td>Only rows that match on both sides</td>
+<td>hamim–Pizza, hamim–Shake</td>
+</tr>
+<tr>
+<td><code>LEFT JOIN</code></td>
+<td>Every customer; no order → <code>NULL</code></td>
+<td>...plus rabbi–<code>NULL</code></td>
+</tr>
+<tr>
+<td><code>RIGHT JOIN</code></td>
+<td>Every order; no customer → <code>NULL</code></td>
+<td>...plus <code>NULL</code>–Chicken</td>
+</tr>
+<tr>
+<td><code>FULL JOIN</code></td>
+<td>Everything from both sides</td>
+<td>all of the above</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>MySQL has no <code>FULL JOIN</code>. Get the same result with a <code>LEFT JOIN</code> <code>UNION</code> a <code>RIGHT JOIN</code>.</p>
+</blockquote>
+<blockquote>
+<p>The <code>NULL</code>–Chicken row is right for a right join, but in a real database an order for customer 4 who doesn't exist should be blocked by a foreign key.</p>
+</blockquote>
+<h3>Self join and cross join</h3>
+<ul>
+<li><strong>Self join:</strong> a table joined with itself, e.g. each employee next to their manager.<pre><code class="language-sql">SELECT e.name, m.name AS manager
+FROM employees e LEFT JOIN employees m ON e.manager_id = m.id;
+</code></pre>
+</li>
+<li><strong>Cross join:</strong> every row of one table with every row of the other (3 × 4 = 12 rows).</li>
+</ul>
+</div></div><div id="sql-set-operation" class="nsec flat"><div class="fhead"><h3 class="nt">UNION and set operations</h3></div><div class="nbody"><p><code>UNION</code> stacks the results of two <code>SELECT</code>s. Both must have the <strong>same number of columns</strong> with <strong>matching types</strong>.</p>
+<figure class="ndia"><svg viewBox="0 0 640 150" role="img" aria-label="Venn diagrams of UNION, INTERSECT and EXCEPT"><defs><clippath id="sA"><circle cx="-24" r="42" /></clippath></defs><g transform="translate(160 66)"><g opacity=".6"><circle cx="-24" r="42" class="vf" /><circle cx="24" r="42" class="vf" /></g><circle cx="-24" r="42" class="vl" /><circle cx="24" r="42" class="vl" /><text x="-46" y="5" class="tb" text-anchor="middle">A</text><text x="46" y="5" class="tb" text-anchor="middle">B</text></g><text x="160" y="138" class="code" text-anchor="middle">UNION</text><g transform="translate(320 66)"><g opacity=".6"><circle cx="24" r="42" class="vf" clip-path="url(#sA)" /></g><circle cx="-24" r="42" class="vl" /><circle cx="24" r="42" class="vl" /><text x="-46" y="5" class="tb" text-anchor="middle">A</text><text x="46" y="5" class="tb" text-anchor="middle">B</text></g><text x="320" y="138" class="code" text-anchor="middle">INTERSECT</text><g transform="translate(480 66)"><g opacity=".6"><circle cx="-24" r="42" class="vf" /><circle cx="24" r="42" class="vb" /></g><circle cx="-24" r="42" class="vl" /><circle cx="24" r="42" class="vl" /><text x="-46" y="5" class="tb" text-anchor="middle">A</text><text x="46" y="5" class="tb" text-anchor="middle">B</text></g><text x="480" y="138" class="code" text-anchor="middle">EXCEPT</text></svg><figcaption><code>UNION</code> takes both results, <code>INTERSECT</code> only rows in both, <code>EXCEPT</code> rows of A that are not in B.</figcaption></figure>
+
+<pre><code class="language-sql">SELECT customer_id, name, region FROM customers_region1
+UNION
+SELECT customer_id, name, region FROM customers_region2;
+</code></pre>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>region1</th>
+<th>region2</th>
+<th><code>UNION</code></th>
+<th><code>UNION ALL</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1 Alice East</td>
+<td>2 Bob West</td>
+<td>1 Alice East</td>
+<td>1 Alice East</td>
+</tr>
+<tr>
+<td>2 Bob West</td>
+<td>3 Charlie North</td>
+<td>2 Bob West</td>
+<td>2 Bob West</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>3 Charlie North</td>
+<td>2 Bob West</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>3 Charlie North</td>
+</tr>
+</tbody></table></div>
+<ul>
+<li><code>UNION</code> removes duplicates (Bob appears once).</li>
+<li><code>UNION ALL</code> keeps them all, and is faster.</li>
+<li><code>INTERSECT</code> keeps rows found in both; <code>EXCEPT</code> (called <code>MINUS</code> in Oracle) keeps rows of the first not in the second. MySQL has both since version 8.0.31.</li>
+</ul>
+</div></div><div id="common-table-expressions-cte" class="nsec flat"><div class="fhead"><h3 class="nt">Common table expressions (CTE)</h3></div><div class="nbody"><p>A CTE is a <strong>named subquery</strong> written at the top of a query with <code>WITH</code>. It exists only while that query runs, and it makes long queries read top to bottom.</p>
+<pre><code class="language-sql">WITH cte_name (col1, col2) AS (
+  SELECT ...
 )
-SELECT region, sales_amount
-FROM sales_data
-JOIN regional_averages ra ON sales_data.region = ra.region
-WHERE sales_data.sales_amount &gt; ra.avg_sales;</code></pre><h3 id="recursive-cte">Recursive CTE</h3></div></details><div class="nsec flat" id="temp-tables"><div class="fhead"><h3 class="nt">Temp Tables</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="temp-tables" aria-label="Mark Temp Tables as read"><span>Read</span></label></div><div class="nbody"><ul><li>Temp tables are regular tables that are stored in a temporary space within the database.</li><li>Types</li><li>Local temp tables</li><li>Syntax: #local_table</li><li>Exists in the current session, destroyed when ending the session.</li><li>Global temp tables</li><li>Syntex: ##global_table</li><li>Exists in all sessions until explicitly deleted.</li><li>Example: Sales Data Filtering</li><li>CREATE TABLE #high_value_orders (</li><li>order_id INT,</li><li>customer_id INT,</li><li>order_amount DECIMAL(10,2)</li><li>);</li><li>INSERT INTO #high_value_orders</li><li>SELECT order_id, customer_id, total_amount</li><li>FROM sales</li><li>WHERE total_amount &gt; 1000;</li></ul></div></div></div></details></div></div>
-<button type="button" class="ntop" id="ntop" aria-label="Back to top" hidden>&uarr;</button>
+SELECT * FROM cte_name;
+</code></pre>
+<ul>
+<li>Listing the column names <code>(col1, col2)</code> is optional, but good practice.</li>
+<li>Without the list, the CTE takes the names of the columns its query selects.</li>
+</ul>
+<h3>Example</h3>
+<p>Find the sales that are above their region's average:</p>
+<pre><code class="language-sql">WITH regional_averages AS (
+  SELECT region, AVG(sales_amount) AS avg_sales
+  FROM sales_data
+  GROUP BY region
+)
+SELECT s.region, s.sales_amount
+FROM sales_data s
+JOIN regional_averages ra ON s.region = ra.region
+WHERE s.sales_amount &gt; ra.avg_sales;
+</code></pre>
+<h3>Recursive CTE</h3>
+<p>A CTE that refers to itself, for trees and hierarchies (org charts, categories):</p>
+<pre><code class="language-sql">WITH RECURSIVE nums (n) AS (
+  SELECT 1
+  UNION ALL
+  SELECT n + 1 FROM nums WHERE n &lt; 5
+)
+SELECT n FROM nums;   -- 1, 2, 3, 4, 5
+</code></pre>
+</div></div><div class="nsec flat" id="temp-tables"><div class="fhead"><h3 class="nt">Temporary tables</h3></div><div class="nbody"><p>A temporary table works like a normal table but lives only for <strong>your session</strong>. It disappears when you disconnect, and other sessions can't see it.</p>
+<pre><code class="language-sql">CREATE TEMPORARY TABLE high_value_orders (
+  order_id     INT,
+  customer_id  INT,
+  order_amount DECIMAL(10,2)
+);
+
+INSERT INTO high_value_orders
+SELECT order_id, customer_id, total_amount
+FROM sales
+WHERE total_amount &gt; 1000;
+</code></pre>
+<blockquote>
+<p>The <code>#local</code> and <code>##global</code> temp tables you may see online are <strong>SQL Server</strong> syntax. In MySQL it's <code>CREATE TEMPORARY TABLE</code>, and there are no global temp tables.</p>
+</blockquote>
+</div></div></div></details></div></div>
+<button type="button" class="ntop" id="ntop" aria-label="Back to top" hidden>↑</button>
 <script>
 (function(){
   var secs=[].slice.call(document.querySelectorAll('.nsec,.ngrp')), top=document.getElementById('ntop'), nav=document.querySelector('.nnav-box');
@@ -75,10 +642,5 @@ WHERE sales_data.sales_amount &gt; ra.avg_sales;</code></pre><h3 id="recursive-c
   });
   paint();
 })();
-</script><script>
-(function(){
-  function count(){var G=document.querySelectorAll('.ngrp'); G.forEach(function(g){var ids=g.dataset.ids.split(' '), n=0; ids.forEach(function(i){var s=document.getElementById(i); if(s&&s.classList.contains('isread')) n++;});
-    g.querySelector('.gc').textContent=n+' of '+ids.length+' read'; g.classList.toggle('alldone',n===ids.length);});}
-  document.addEventListener('click',function(){setTimeout(count,0);},true); count();
-})();
 </script></section>
+<script src="{{ '/notes/notes.js' | relative_url }}" defer></script>

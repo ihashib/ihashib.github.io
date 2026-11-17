@@ -29,210 +29,889 @@ description: "My Spring Boot notes: Spring, JPA and Hibernate, MVC, SOLID, depen
 @media (max-width:820px){.nlay{display:block}.nnav{position:static;max-height:none;margin:0 0 1rem;padding:0}.nnav-box{border:1px solid rgba(127,127,127,.35);border-radius:12px;padding:0}
 .nnav-box>summary{display:block;padding:.85rem 1.1rem;font-weight:700;cursor:pointer}.nnav-box .ngroup{padding:0 1rem}.nnav-box[open]>summary{border-bottom:1px solid rgba(127,127,127,.3);margin-bottom:.8rem}}
 </style>
-<section class="section wrap notes" id="note" aria-labelledby="note-title">
-  <p><a href="{{ '/notes/' | relative_url }}">&larr; All notes</a></p>
+<link rel="stylesheet" href="{{ '/notes/notes.css' | relative_url }}">
+<section class="section wrap notes" id="note" data-note="spring-boot" aria-labelledby="note-title">
+  <p><a href="{{ '/notes/' | relative_url }}">← All notes</a></p>
   <h1 id="note-title">Spring Boot</h1>
   <p style="margin:.5rem 0 0"><a href="https://docs.google.com/document/d/1cbX1lAXBuPG9y6WgnTy-fmP1s8IZWKnzof0dIsNWTr8/edit" target="_blank" rel="noopener noreferrer"><i class="fab fa-google-drive" aria-hidden="true"></i> Open the full notes in Google Docs</a></p>
-<div class="nlay"><nav class="nnav" aria-label="Contents"><details class="nnav-box" open><summary>Contents</summary><div class="ngroup"><b><a href="#g-getting-started">Getting started</a></b><ul><li><a href="#spring-initializer">Spring initializer</a></li><li><a href="#spring-boot-maven-project">Spring boot + maven project</a></li></ul></div><div class="ngroup"><b><a href="#g-web-app">Building a web app</a></b><ul><li><a href="#jpa-java-persistence-api">JPA(Java Persistence API)</a></li><li><a href="#spring-data-repository">Spring Data Repository</a></li><li><a href="#spring-mvc">Spring MVC</a></li><li><a href="#configuring-spring-controller">Configuring Spring Controller</a></li></ul></div><div class="ngroup"><b><a href="#g-core">Spring core and design</a></b><ul><li><a href="#spring-framework">Spring Framework</a></li><li><a href="#spring-context">Spring Context</a></li><li><a href="#annotations">Annotations</a></li><li><a href="#solid">SOLID</a></li></ul></div><div class="ngroup"><b><a href="#g-data">Data: Hibernate and Mongo</a></b><ul><li><a href="#hibernate">Hibernate</a></li><li><a href="#mongo-geojson-gis">Mongo GeoJSON (GIS)</a></li></ul></div></details></nav><div class="nmain"><div class="nbar"><span class="nprog" id="nprog" aria-live="polite"></span><button type="button" id="nopen">Expand all</button><button type="button" id="nshut">Collapse all</button></div><details class="ngrp" id="g-getting-started" data-ids="spring-initializer spring-boot-maven-project"><summary><span class="gt">Getting started</span><span class="gc"></span></summary><div class="gbody"><div class="nsec flat" id="spring-initializer"><div class="fhead"><h3 class="nt">Spring initializer</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="spring-initializer" aria-label="Mark Spring initializer as read"><span>Read</span></label></div><div class="nbody"><ul><li>Initialize the project using website</li><li><a href="https://start.spring.io/" target="_blank" rel="noopener noreferrer">https://start.spring.io/</a></li><li>Source code: <a href="https://github.com/spring-io/start.spring.io" target="_blank" rel="noopener noreferrer">https://github.com/spring-io/start.spring.io</a></li><li>Initialize the project using Intellij Ultimate</li><ul><li>Under the new project option, select Spring and you will find all the options that the website has.</li></ul><li>Example</li><ul><li>Select Java 11 or above</li><li>Select Maven project</li><li>Spring boot 2.2+</li><li>Spring dependencies</li><ul><li>Spring Web, Spring JPA, H2 Database</li></ul></ul></ul></div></div><details class="nsec" id="spring-boot-maven-project"><summary><span class="nt">Spring boot + maven project</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="spring-boot-maven-project" aria-label="Mark Spring boot + maven project as read"><span>Read</span></label></summary><div class="nbody"><ul><li>In Intellij, create a new spring project.</li><li>Select Maven in type</li><li>Spring boot</li><li>Spring web, Lombok, Spring Data JPA, database driver</li><li>After creating project, to build the Zar file:</li><li>Go to Project structure (ctrl+alt+shift+s)</li><li>“Artifacts” &gt; “+” &gt; ZAR &gt; From modules with dependencies &gt; main Class &gt; extract the target jar &gt; ok</li><li>Setting up database connection:</li><li>In Application properties</li><li>spring.datasource.url=jdbc:SQLNAME://localhost:port/your_database_name</li><li>spring.datasource.username=your_database_username</li><li>spring.datasource.password=your_database_password</li><li>Make sure that the db exists</li></ul><h3 id="maven">Maven</h3><ul><li>mvn clean package &gt; cleans and builds the package</li><li>mvn test -pl sub-module-name</li><li>mvn test</li><li>Manage Java with Maven</li><li>Source java</li><li>export JAVA_HOME=usr/lib/jvm/jdk-17-oracle-x64</li><li>Change default java version</li><li>sudo update-alternatives --config java</li></ul></div></details></div></details><details class="ngrp" id="g-web-app" data-ids="jpa-java-persistence-api spring-data-repository spring-mvc configuring-spring-controller"><summary><span class="gt">Building a web app</span><span class="gc"></span></summary><div class="gbody"><details class="nsec" id="jpa-java-persistence-api"><summary><span class="nt">JPA(Java Persistence API)</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="jpa-java-persistence-api" aria-label="Mark JPA(Java Persistence API) as read"><span>Read</span></label></summary><div class="nbody"><ul><li>JPA Model</li><ul><li>Spring JPA is an abstraction on top of JPA. JPA is a specification on managing data and objects. Hibernate is an implementation of JPA. Hibernate takes java objects and maps it to ORM. ORM is Object Relation Map that maps the java objects to database tables so that we can work on the databases. Spring JPA makes it easier.</li><li>To tell the compiler it’s JPA object</li><li>@Entity</li><li>Class Author{..........}</li><li>POJO</li><li>Plain Old Java Object.</li><li>Create classes that will map to the database.</li><li>Example:</li><li>Class Author{</li><li>Private FirstName;</li><li>Private lastName;</li><li>empty constructor</li><li>Full constructor</li><li>Getter setters</li><li>Equals and hashcode</li><li>To String</li><li>}</li><li>JPA id</li><li>Every JPA class needs a unique id.</li><li>Example</li><li>@Id</li><li>@GenaratedValue(Strategy = GenerationType.AUTO)</li><li>JPA relationships</li><li>This sets the relations between tables.</li><li>Many to many</li></ul></ul></div></details><div class="nsec flat" id="spring-data-repository"><div class="fhead"><h3 class="nt">Spring Data Repository</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="spring-data-repository" aria-label="Mark Spring Data Repository as read"><span>Read</span></label></div><div class="nbody"><ul><li>Repository provides the mechanism for data storage, update, delete. It’s an interface that extends to specific functionalities.</li><li>One group of repository is the JPA repositories</li><li>CrudRepository</li><li>PagingAndSortingRepository</li><li>JpaRepository</li><li>Example of CrudRepository</li><li>Interface AuthorRepo Extends CrudRepository&lt;Authors, Long&gt;{.....}</li></ul></div></div><div class="nsec flat" id="spring-mvc"><div class="fhead"><h3 class="nt">Spring MVC</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="spring-mvc" aria-label="Mark Spring MVC as read"><span>Read</span></label></div><div class="nbody"><ul><li>Model View Controller</li><ul><li>Model:</li><li>Simple POJO that contains the collection of properties that may or may not be used by View.</li><li>View</li><li>Data requested by the client.</li><li>Controller</li><li>Java class to handle request mapping.</li></ul></ul></div></div><div class="nsec flat" id="configuring-spring-controller"><div class="fhead"><h3 class="nt">Configuring Spring Controller</h3><label class="nread" title="Mark as read"><input type="checkbox" data-id="configuring-spring-controller" aria-label="Mark Configuring Spring Controller as read"><span>Read</span></label></div><div class="nbody"><ul><li>Annotate controller class with @Controller</li><li>This will mark the class as a Spring bean and as a controller in Spring MVC.</li><li>To map methods to http rest paths use, @RequestMapping</li><li>Example</li></ul><h4 id="controller">@Controller</h4><ul><li>public class BookController{</li><li>private final BookRepo bookRepo;</li><li>//constructor</li><li>@ReqestMapping</li><li>public String getBook(Model model){</li><li>model.addAttribute(“books”, bookRepo.finalAll());</li><li>return “books”;</li><li>}</li><li>}</li></ul></div></div></div></details><details class="ngrp" id="g-core" data-ids="spring-framework spring-context annotations solid"><summary><span class="gt">Spring core and design</span><span class="gc"></span></summary><div class="gbody"><details class="nsec" id="spring-framework"><summary><span class="nt">Spring Framework</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="spring-framework" aria-label="Mark Spring Framework as read"><span>Read</span></label></summary><div class="nbody"><p>https://roadmap.sh/spring-boot</p><h3 id="core">Core</h3><h3 id="java-beans">Java Beans</h3><ul><li>Java beans are classes that have many objects into a single object for encapsulation. This enables software reusability.</li></ul><h3 id="spring-beans">Spring Beans</h3><ul><li>Spring beans are beans that are created, managed and destroyed by Spring Containers. We can inject beans into Spring Container using metadata (xml or annotation)</li></ul><h3 id="bean-life-cycle">Bean Life Cycle</h3><ul><li>Bean life cycle is managed by the spring container. When we run the program then, first of all, the spring container gets started. After that, the container creates the instance of a bean as per the request, and then dependencies are injected. And finally, the bean is destroyed when the spring container is closed. Therefore, if we want to execute some code on the bean instantiation and just after closing the spring container, then we can write that code inside the custom init() method and the destroy() method.</li></ul><h4 id="3-ways-of-implementation">3 ways of implementation</h4><h5 id="by-xml">By XML</h5><ul><li>Create class and properties of the bean</li><li>Register the beans in the XML spring.xml file</li><li>Create driver to run the bean</li></ul><h5 id="by-programmatic-approach">By Programmatic approach</h5><ul><li>Create the bean and using spring interfaces and overrides, write your logic.</li><li>Register the bean in spring.xml file</li><li>Create driver to run the bean</li></ul><h5 id="using-annotation">Using Annotation</h5><ul><li>Use annotations while creating the bean</li><li>Register the bean in spring.xml file</li><li>Create driver to run the bean</li></ul><h3 id="dependency-injection">Dependency Injection</h3><ul><li>DI is when a class cannot instantiate without another object that provides the necessary parameters.</li><li>The class itself does not have any responsibilities getting the dependencies.</li><li>DI is a RUNTIME process.</li></ul><h3 id="di-components">DI Components</h3><h4 id="service-class">Service class</h4><ul><li>Should be designed with base class or interface.</li><li>Example:</li><li>Service Interface</li></ul><pre><code>public interface MessageService{
-    sendMessage(String sender, String reci);
-}</code></pre><ul><li>Email implementation</li></ul><pre><code>class EmailService implements MessageService{
-    @override
-    sendMessage(String sender, String reci){
-        sout(sender+&quot; &quot;+reci);
-    }</code></pre><ul><li>Instant message implementation</li></ul><pre><code>class InstantService implements MessageService{
-   @override
-   sendMessage(String sender, String reci){
-       sout(sender+&quot; &quot;+reci);
-   }</code></pre><h4 id="consumer-class">Consumer class</h4><ul><li>Should be written in terms of service interface</li><li>Example:</li></ul><pre><code>@Component
-class PotterMail{
-    private MessageService mservice;
 
+<div class="nlay"><nav class="nnav" aria-label="Contents"><details class="nnav-box" open><summary>Contents</summary><div class="ngroup"><b><a href="#g-getting-started">Getting started</a></b><ul><li><a href="#spring-initializer">Spring Initializr</a></li><li><a href="#spring-boot-maven-project">Maven, the database and the JDK</a></li></ul></div><div class="ngroup"><b><a href="#g-web-app">Building a web app</a></b><ul><li><a href="#jpa-java-persistence-api">JPA entities</a></li><li><a href="#spring-data-repository">Repositories</a></li><li><a href="#spring-mvc">MVC: Model, View, Controller</a></li><li><a href="#configuring-spring-controller">Controllers</a></li></ul></div><div class="ngroup"><b><a href="#g-core">Spring core and design</a></b><ul><li><a href="#spring-framework">Beans, dependency injection and IoC</a></li><li><a href="#spring-aop">Aspect-oriented programming (AOP)</a></li><li><a href="#bean-scopes">Bean scopes</a></li><li><a href="#spring-security">Spring Security</a></li><li><a href="#spring-context">The application context</a></li><li><a href="#annotations">Choosing between beans</a></li><li><a href="#solid">SOLID principles</a></li></ul></div><div class="ngroup"><b><a href="#g-data">Data: Hibernate and Mongo</a></b><ul><li><a href="#hibernate">Hibernate and Spring Data JPA in depth</a></li><li><a href="#mongo-geojson-gis">MongoDB GeoJSON (maps and locations)</a></li></ul></div></details></nav><div class="nmain"><div class="nbar"><span class="nprog" id="nprog" aria-live="polite"></span><button type="button" id="nopen">Expand all</button><button type="button" id="nshut">Collapse all</button></div><details class="ngrp" id="g-getting-started" data-ids="spring-initializer spring-boot-maven-project"><summary><span class="gt">Getting started</span><span class="gc">2 topics</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-getting-started" aria-label="Mark Getting started as read"><span>Read</span></label></summary><div class="gbody"><div class="nsec flat" id="spring-initializer"><div class="fhead"><h3 class="nt">Spring Initializr</h3></div><div class="nbody"><p>The quickest way to start a Spring Boot project is <a href="https://start.spring.io/" target="_blank" rel="noopener noreferrer">start.spring.io</a> (<a href="https://github.com/spring-io/start.spring.io" target="_blank" rel="noopener noreferrer">source code</a>). IntelliJ IDEA Ultimate has the same form under <strong>New Project → Spring Boot</strong>.</p>
+<p>A good starting setup:</p>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Pick</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Project</td>
+<td>Maven</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>Java 17 or newer</td>
+</tr>
+<tr>
+<td>Spring Boot</td>
+<td>the latest stable 3.x</td>
+</tr>
+<tr>
+<td>Dependencies</td>
+<td>Spring Web, Spring Data JPA, a database driver (H2 to start, MySQL later), Lombok</td>
+</tr>
+</tbody></table></div>
+<p>Click <strong>Generate</strong>, unzip, and open the folder in your IDE.</p>
+</div></div><div id="spring-boot-maven-project" class="nsec flat"><div class="fhead"><h3 class="nt">Maven, the database and the JDK</h3></div><div class="nbody"><h3>Connect a database</h3>
+<p>In <code>src/main/resources/application.properties</code>:</p>
+<pre><code class="language-properties">spring.datasource.url=jdbc:mysql://localhost:3306/shop
+spring.datasource.username=root
+spring.datasource.password=secret
+spring.jpa.hibernate.ddl-auto=update   # create and update tables from your entities
+</code></pre>
+<blockquote>
+<p>The database (<code>shop</code> here) must already exist.</p>
+</blockquote>
+<h3>Maven commands</h3>
+<pre><code class="language-bash">mvn clean package            # delete old build output, compile, test, make the .jar
+mvn test                     # run the tests
+mvn test -pl orders-service  # tests of one module only
+mvn spring-boot:run          # start the app
+java -jar target/app.jar     # run the built jar
+</code></pre>
+<blockquote>
+<p>Maven builds the runnable jar itself, so there's no need to set up IntelliJ's <strong>Artifacts</strong>.</p>
+</blockquote>
+<h3>Choose the Java version</h3>
+<pre><code class="language-bash">sudo update-alternatives --config java              # pick the default java
+export JAVA_HOME=/usr/lib/jvm/jdk-17-oracle-x64     # the JDK Maven uses
+</code></pre>
+</div></div></div></details><details class="ngrp" id="g-web-app" data-ids="jpa-java-persistence-api spring-data-repository spring-mvc configuring-spring-controller"><summary><span class="gt">Building a web app</span><span class="gc">4 topics</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-web-app" aria-label="Mark Building a web app as read"><span>Read</span></label></summary><div class="gbody"><div id="jpa-java-persistence-api" class="nsec flat"><div class="fhead"><h3 class="nt">JPA entities</h3></div><div class="nbody"><p>Databases store tables; Java has objects. An <strong>ORM</strong> (object–relational mapping) translates between them, so you work with objects and it writes the SQL.</p>
+<figure class="ndia"><svg viewBox="0 0 640 232" role="img" aria-label="Spring Data JPA sits on JPA, implemented by Hibernate, over JDBC and the database"><rect x="20" y="10" width="600" height="36" rx="8" class="box hi" /><text x="36" y="33" class="tb" text-anchor="start">Spring Data JPA</text><text x="604" y="33" class="mu" text-anchor="end">repositories: you write an interface</text><rect x="40" y="54" width="560" height="36" rx="8" class="box" /><text x="56" y="77" class="tb" text-anchor="start">JPA (Jakarta Persistence)</text><text x="584" y="77" class="mu" text-anchor="end">the specification: annotations and interfaces</text><rect x="60" y="98" width="520" height="36" rx="8" class="box" /><text x="76" y="121" class="tb" text-anchor="start">Hibernate</text><text x="564" y="121" class="mu" text-anchor="end">the implementation: writes the SQL</text><rect x="80" y="142" width="480" height="36" rx="8" class="box" /><text x="96" y="165" class="tb" text-anchor="start">JDBC driver</text><text x="544" y="165" class="mu" text-anchor="end">talks to the database</text><rect x="100" y="186" width="440" height="36" rx="8" class="box" /><text x="116" y="209" class="tb" text-anchor="start">Database</text><text x="524" y="209" class="mu" text-anchor="end">MySQL, PostgreSQL...</text></svg><figcaption>Each layer hides the one below. You mostly touch the top one; Hibernate does the work.</figcaption></figure>
 
-    PotterMail(MessageService mservice){
-        this.mservice = mservice;
+<h3>An entity</h3>
+<p>Mark a class with <code>@Entity</code> and it becomes a table; each field becomes a column.</p>
+<pre><code class="language-java">@Entity
+public class Author {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;              // every entity needs a primary key
+
+    private String firstName;
+    private String lastName;
+
+    protected Author() {}         // JPA needs an empty constructor
+
+    public Author(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    // getters, setters, equals/hashCode and toString
+    // (or Lombok's @Getter @Setter to skip the typing)
+}
+</code></pre>
+<p>An entity is a <strong>POJO</strong> (Plain Old Java Object): just fields, constructors and getters/setters, no framework base class.</p>
+<h3>Relationships</h3>
+<pre><code class="language-java">@ManyToMany
+@JoinTable(name = "author_book",
+           joinColumns = @JoinColumn(name = "author_id"),
+           inverseJoinColumns = @JoinColumn(name = "book_id"))
+private Set&lt;Book&gt; books = new HashSet&lt;&gt;();
+</code></pre>
+<p>More on relationships in <strong>Hibernate</strong> below.</p>
+</div></div><div class="nsec flat" id="spring-data-repository"><div class="fhead"><h3 class="nt">Repositories</h3></div><div class="nbody"><p>A <strong>repository</strong> gives you saving, finding and deleting without writing SQL. You write an interface; Spring writes the class at runtime.</p>
+<figure class="ndia"><svg viewBox="0 0 640 210" role="img" aria-label="Repository interface hierarchy"><rect x="20" y="10" width="330" height="38" rx="8" class="box" /><text x="36" y="34" class="code" text-anchor="start">Repository</text><text x="370" y="34" class="mu" text-anchor="start">marker, no methods</text><rect x="50" y="60" width="330" height="38" rx="8" class="box" /><text x="66" y="84" class="code" text-anchor="start">CrudRepository</text><text x="400" y="84" class="mu" text-anchor="start">save, findById, findAll, delete</text><path d="M64 60V48H34" class="ln" /><rect x="80" y="110" width="330" height="38" rx="8" class="box" /><text x="96" y="134" class="code" text-anchor="start">PagingAndSortingRepository</text><text x="430" y="134" class="mu" text-anchor="start">findAll(Pageable), findAll(Sort)</text><path d="M94 110V98H64" class="ln" /><rect x="110" y="160" width="330" height="38" rx="8" class="box hi" /><text x="126" y="184" class="code" text-anchor="start">JpaRepository</text><text x="460" y="184" class="mu" text-anchor="start">flush, saveAll, batch deletes...</text><path d="M124 160V148H94" class="ln" /></svg><figcaption>Each repository interface adds methods to the one above it. Extend <code>JpaRepository</code> and you get them all.</figcaption></figure>
+
+<pre><code class="language-java">public interface AuthorRepository extends JpaRepository&lt;Author, Long&gt; {   // &lt;entity, id type&gt;
+
+    List&lt;Author&gt; findByLastName(String lastName);              // Spring writes the query from the name
+    List&lt;Author&gt; findByFirstNameContainingIgnoreCase(String s);
+
+    @Query("SELECT a FROM Author a WHERE size(a.books) &gt; :n")  // JPQL, for anything harder
+    List&lt;Author&gt; prolific(@Param("n") int n);
+}
+</code></pre>
+<pre><code class="language-java">authorRepository.save(new Author("Humayun", "Ahmed"));
+authorRepository.findById(1L);   // Optional&lt;Author&gt;
+authorRepository.findAll();
+authorRepository.deleteById(1L);
+</code></pre>
+</div></div><div class="nsec flat" id="spring-mvc"><div class="fhead"><h3 class="nt">MVC: Model, View, Controller</h3></div><div class="nbody"><p>MVC splits a web app into three jobs. In a restaurant:</p>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Job</th>
+<th>Restaurant</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Model</strong></td>
+<td>The data and the rules</td>
+<td>The kitchen</td>
+</tr>
+<tr>
+<td><strong>View</strong></td>
+<td>What the user sees (an HTML page, or JSON)</td>
+<td>The plate in front of you</td>
+</tr>
+<tr>
+<td><strong>Controller</strong></td>
+<td>Takes the request, asks the model, picks the view</td>
+<td>The waiter</td>
+</tr>
+</tbody></table></div>
+<h3>How Spring does it</h3>
+<p>Spring MVC uses a <strong>front controller</strong>: one servlet, the <code>DispatcherServlet</code>, receives every request and passes it on.</p>
+<figure class="ndia"><svg viewBox="0 0 640 156" role="img" aria-label="Spring MVC request flow"><defs><marker id="amv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk" /></marker></defs><rect x="20" y="30" width="120" height="56" rx="8" class="box" /><text x="80" y="54" class="tb" text-anchor="middle">Browser</text><text x="80" y="72" class="mu" text-anchor="middle">GET /books</text><rect x="150" y="30" width="130" height="56" rx="8" class="box hi" /><text x="215" y="54" class="tb" text-anchor="middle">DispatcherServlet</text><text x="215" y="72" class="mu" text-anchor="middle">front controller</text><rect x="300" y="30" width="120" height="56" rx="8" class="box" /><text x="360" y="54" class="tb" text-anchor="middle">@Controller</text><text x="360" y="72" class="mu" text-anchor="middle">BookController</text><rect x="430" y="30" width="120" height="56" rx="8" class="box" /><text x="490" y="54" class="tb" text-anchor="middle">@Service</text><text x="490" y="72" class="mu" text-anchor="middle">business logic</text><rect x="550" y="30" width="80" height="56" rx="8" class="box" /><text x="590" y="54" class="tb" text-anchor="middle">@Repository</text><text x="590" y="72" class="mu" text-anchor="middle">BookRepo</text><path d="M140 50L148 50" class="ln" marker-end="url(#amv)" /><path d="M280 50L298 50" class="ln" marker-end="url(#amv)" /><path d="M420 50L428 50" class="ln" marker-end="url(#amv)" /><path d="M540 50L548 50" class="ln" marker-end="url(#amv)" /><path d="M548 70L542 70" class="ln" marker-end="url(#amv)" /><path d="M428 70L422 70" class="ln" marker-end="url(#amv)" /><path d="M298 70L282 70" class="ln" marker-end="url(#amv)" /><path d="M148 70L142 70" class="ln" marker-end="url(#amv)" /><rect x="550" y="110" width="80" height="36" rx="6" class="cell" /><text x="590" y="133" text-anchor="middle">Database</text><path d="M590 86V108" class="ln" /><text x="320" y="125" class="mu" text-anchor="middle">the reply goes back the same way: a view (HTML) or JSON</text></svg><figcaption>Every request enters through one front door, the DispatcherServlet, which hands it to the controller mapped to that URL.</figcaption></figure>
+
+<ol>
+<li>The <code>DispatcherServlet</code> receives the HTTP request.</li>
+<li>It finds the controller method mapped to that URL (its <strong>handler mapping</strong>).</li>
+<li>The controller does its work, usually through a service, and returns a model and a view name (or an object to turn into JSON).</li>
+<li>The <code>DispatcherServlet</code> renders the view and sends the response.</li>
+</ol>
+<h3>MVC in plain Java</h3>
+<p>The same idea without Spring:</p>
+<pre><code class="language-java">class Student {                         // Model
+    private String name;
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+}
+
+class StudentView {                     // View
+    public void print(String name) { System.out.println("Name: " + name); }
+}
+
+class StudentController {               // Controller
+    private final Student model;
+    private final StudentView view;
+
+    StudentController(Student model, StudentView view) { this.model = model; this.view = view; }
+
+    public void setName(String name) { model.setName(name); }
+    public void updateView() { view.print(model.getName()); }
+}
+</code></pre>
+</div></div><div class="nsec flat" id="configuring-spring-controller"><div class="fhead"><h3 class="nt">Controllers</h3></div><div class="nbody"><p><code>@Controller</code> marks a class as a Spring bean that handles web requests; <code>@GetMapping</code>, <code>@PostMapping</code> and friends map methods to URLs.</p>
+<h3>Returning a page</h3>
+<pre><code class="language-java">@Controller
+public class BookController {
+
+    private final BookRepository bookRepo;
+
+    public BookController(BookRepository bookRepo) {   // injected by Spring
+        this.bookRepo = bookRepo;
     }
 
-    public processMessage(String sender, String reci){
-        this.mservice.sendMessage(sender, reci);
+    @GetMapping("/books")
+    public String list(Model model) {
+        model.addAttribute("books", bookRepo.findAll());
+        return "books";             // the template books.html renders the list
     }
-}</code></pre><h4 id="injector-class">Injector class</h4><ul><li>Should initialize the service beans then consumer</li><li>Example:</li><li>DI Config:</li></ul><pre><code>@Configuration
-@ComponentScan(value=&quot;path.to.package&quot;)
-public class DiConfiguration{
-    @Bean
-    public MessageService getMessageService(){
-        return new EmailService();
-    }
-}</code></pre><ul><li>Client application:</li></ul><pre><code>public class ClientApplication{
-    public static void main(String args[]){
-        AnnotationConfigApplicationContext context = new       AnnotationConfigApplicationContext(DiConfiguration.class);
+}
+</code></pre>
+<h3>Returning JSON (a REST API)</h3>
+<p><code>@RestController</code> = <code>@Controller</code> + <code>@ResponseBody</code> on every method: return values become JSON.</p>
+<pre><code class="language-java">@RestController
+@RequestMapping("/api/books")
+public class BookApi {
 
+    @GetMapping("/{id}")                      // GET /api/books/7
+    public Book one(@PathVariable Long id) { ... }
 
-        PotterMail app = context.getBean(PotterMail.class);
-        app.processMessage(“sender@mail.com”, “reci@mail.com”);
+    @GetMapping                               // GET /api/books?author=Rafi
+    public List&lt;Book&gt; byAuthor(@RequestParam String author) { ... }
+
+    @PostMapping                              // the JSON body becomes a Book
+    public Book create(@RequestBody Book book) { ... }
+}
+</code></pre>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>Reads</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@PathVariable</code></td>
+<td>A part of the path: <code>/books/{id}</code></td>
+</tr>
+<tr>
+<td><code>@RequestParam</code></td>
+<td>A query parameter: <code>?author=Rafi</code></td>
+</tr>
+<tr>
+<td><code>@RequestBody</code></td>
+<td>The request body (JSON)</td>
+</tr>
+<tr>
+<td><code>@RequestHeader</code></td>
+<td>A header</td>
+</tr>
+<tr>
+<td><code>@ModelAttribute</code></td>
+<td>Form fields, bound to an object</td>
+</tr>
+</tbody></table></div>
+</div></div></div></details><details class="ngrp" id="g-core" data-ids="spring-framework spring-aop bean-scopes spring-security spring-context annotations solid"><summary><span class="gt">Spring core and design</span><span class="gc">7 topics</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-core" aria-label="Mark Spring core and design as read"><span>Read</span></label></summary><div class="gbody"><div id="spring-framework" class="nsec flat"><div class="fhead"><h3 class="nt">Beans, dependency injection and IoC</h3></div><div class="nbody"><p>A guided path through the whole ecosystem: <a href="https://roadmap.sh/spring-boot" target="_blank" rel="noopener noreferrer">Spring Boot roadmap</a>.</p>
+<h3>Beans</h3>
+<p>A <strong>Spring bean</strong> is an object that Spring creates, wires up and destroys for you. You declare beans with annotations (<code>@Component</code>, <code>@Bean</code>); older projects used XML.</p>
+<figure class="ndia"><svg viewBox="0 0 640 102" role="img" aria-label="Bean lifecycle: start, instantiate, inject, init, use, destroy"><defs><marker id="abeanlife" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk" /></marker></defs><rect x="20" y="20" width="86" height="62" rx="10" class="box" /><text x="63.0" y="46" class="tb" text-anchor="middle">Container starts</text><text x="63.0" y="66" class="mu" text-anchor="middle">reads config</text><rect x="132" y="20" width="86" height="62" rx="10" class="box" /><text x="175.0" y="46" class="tb" text-anchor="middle">Instantiate</text><text x="175.0" y="66" class="mu" text-anchor="middle">new the bean</text><path d="M108 51L130 51" class="ln" marker-end="url(#abeanlife)" /><rect x="244" y="20" width="86" height="62" rx="10" class="box" /><text x="287.0" y="46" class="tb" text-anchor="middle">Inject</text><text x="287.0" y="66" class="mu" text-anchor="middle">dependencies</text><path d="M220 51L242 51" class="ln" marker-end="url(#abeanlife)" /><rect x="356" y="20" width="86" height="62" rx="10" class="box hi" /><text x="399.0" y="46" class="tb" text-anchor="middle">Init</text><text x="399.0" y="66" class="mu" text-anchor="middle">@PostConstruct</text><path d="M332 51L354 51" class="ln" marker-end="url(#abeanlife)" /><rect x="468" y="20" width="86" height="62" rx="10" class="box" /><text x="511.0" y="46" class="tb" text-anchor="middle">Use</text><text x="511.0" y="66" class="mu" text-anchor="middle">your app runs</text><path d="M444 51L466 51" class="ln" marker-end="url(#abeanlife)" /><rect x="580" y="20" width="86" height="62" rx="10" class="box" /><text x="623.0" y="46" class="tb" text-anchor="middle">Destroy</text><text x="623.0" y="66" class="mu" text-anchor="middle">@PreDestroy</text><path d="M556 51L578 51" class="ln" marker-end="url(#abeanlife)" /></svg><figcaption>A bean's life. Spring calls your init and destroy hooks at the right moments.</figcaption></figure>
+
+<h3>Dependency injection (DI)</h3>
+<p>A class shouldn't build the things it needs; it should <strong>receive</strong> them. Then you can swap the implementation (email, SMS, a fake for tests) without touching the class.</p>
+<p><strong>1. A service interface and its implementations</strong></p>
+<pre><code class="language-java">public interface MessageService {
+    void send(String from, String to);
+}
+
+@Component
+class EmailService implements MessageService {
+    public void send(String from, String to) { System.out.println("Email " + from + " → " + to); }
+}
+</code></pre>
+<p><strong>2. A consumer that depends on the interface, not on a class</strong></p>
+<pre><code class="language-java">@Component
+class PotterMail {
+    private final MessageService service;
+
+    PotterMail(MessageService service) {      // constructor injection
+        this.service = service;
     }
-}</code></pre><h4 id="spring-injects-the-emailservice-instance-into-the-pottermail-class-through-a-process-called-constructor-injection-here-s-a-breakdown-of-how-it-works">Spring injects the EmailService instance into the PotterMail class through a process called constructor injection. Here&#x27;s a breakdown of how it works:</h4><h4 id="bean-creation">Bean Creation:</h4><ul><li>When you run your application, Spring&#x27;s AnnotationConfigApplicationContext reads the DiConfiguration class.</li><li>Based on the @Bean annotation on the getMessageService method, Spring creates an instance of EmailService. This becomes a managed bean in the application context.</li></ul><h4 id="dependency-injection">Dependency Injection:</h4><ul><li>When you request a PotterMail bean from the context, Spring examines its constructor:</li><li>It sees that the constructor takes a MessageService argument.</li><li>Spring checks if it has any managed beans implementing the MessageService interface.</li><li>Since it has created an EmailService instance earlier, it matches that to the required dependency.</li><li>Spring creates a new PotterMail instance, passing the managed</li></ul><h3 id="types-of-di">Types of DI</h3><ul><li>By Class properties</li><li>Avoid</li><li>By Setters</li><li>Unrecommended</li><li>By constructor</li><li>Preferred</li></ul><h3 id="di-using-concrete-classes-and-interfaces">DI using concrete classes and interfaces</h3><ul><li>Using concrete classes is not recommended, using interfaces is most preferred.</li><li>Interface implementation allows</li><li>Allows runtime injection</li><li>Follows interface segregation principle of SOLID</li><li>Makes code more testable.</li></ul><h3 id="best-practices">Best practices</h3><ul><li>Use constructors for DI</li><li>The properties of a dependent class should have private final, so that only constructors can define them.</li><li>Use an interface whenever practical.</li></ul><h3 id="spring-ioc-inversion-of-control">Spring IoC (Inversion of Control)</h3><ul><li>Is a technique to allow Dependencies to be injected runtime.</li><li>The dependency to be injected is not predetermined.</li><li>The framework can determine which dependency to inject.</li><li>Example: MySQL data source injection.</li><li>The framework should call the user defined methods instead of the user application. IoC allows frameworks to serve as extensible skeletons.</li></ul><h3 id="two-types">Two types</h3><h4 id="beanfactory">BeanFactory</h4><h4 id="applicationcontext">ApplicationContext</h4><h3 id="ioc-vs-di">IoC vs DI</h3><ul><li>DI focuses on creating the dependent classes that require dependency injection. It is the process.</li><li>IoC is the runtime environment of the program, the DI classes are injected by the framework.</li></ul><h3 id="beanfactory-and-application-context">BeanFactory and Application Context</h3><ul><li>Spring&#x27;s DI, the injection mechanism, is the concrete implementation of IoC. When you define a bean with @Bean annotation and Spring creates an instance based on it, you&#x27;re delegating control of object creation to the container. Similarly, when Spring injects dependencies into other beans, it&#x27;s taking control of how those dependencies are provided and managed.</li><li>So, IoC provides the overall principle of delegating control, while the injection mechanism in Spring&#x27;s DI implements that principle in a specific way.</li><li>Here&#x27;s an analogy to illustrate:</li><li>Imagine building a robot. In traditional coding, you&#x27;d directly create and assemble all the robot&#x27;s parts (arms, legs, etc.). This is similar to having tight control over dependencies.</li><li>With IoC (and Spring&#x27;s DI), it&#x27;s like having a factory that manufactures individual parts and delivers them to you as needed. You simply specify what you need, and the factory takes care of creating and providing them. This translates to loose coupling and centralized configuration.</li><li>In essence, Spring&#x27;s DI is built on the foundation of IoC, providing a practical and efficient way to achieve its benefits in your applications.</li></ul><h3 id="spring-web">Spring Web</h3><h3 id="spring-annotations">Spring Annotations</h3><ul><li>An alternative to XML based configuration, this is a Java annotation based approach.</li></ul><h4 id="spring-annotation-list">Spring annotation list</h4><h5 id="configuration">@configuration</h5><ul><li>Used to indicate that a class declares one or more Bean methods.</li></ul><h5 id="bean">@Bean</h5><ul><li>Indicates that the method produces a spring bean that will be managed by the spring container.</li><li>Can have parameters</li><li>name</li><li>name of the bean</li><li>initMethod</li><li>method to be invoked at execution</li><li>destroyMethod</li><li>method to be invoked at shutdown</li></ul><pre><code>@Configuration
+
+    void process(String from, String to) { service.send(from, to); }
+}
+</code></pre>
+<p><strong>3. The container wires them together</strong></p>
+<pre><code class="language-java">@Configuration
+@ComponentScan("com.example.mail")
+public class AppConfig {}
+
+public class Main {
+    public static void main(String[] args) {
+        var context = new AnnotationConfigApplicationContext(AppConfig.class);
+        context.getBean(PotterMail.class).process("harry@hogwarts.uk", "ron@hogwarts.uk");
+    }
+}
+</code></pre>
+<figure class="ndia"><svg viewBox="0 0 640 216" role="img" aria-label="Spring container creates EmailService and injects it into PotterMail"><defs><marker id="adi" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk" /></marker></defs><rect x="20" y="14" width="600" height="190" rx="14" class="box" /><text x="36" y="38" class="tb" text-anchor="start">Spring container (ApplicationContext)</text><rect x="40" y="60" width="190" height="120" rx="10" class="box hi" /><text x="135" y="84" class="code" text-anchor="middle">@Configuration</text><text x="135" y="110" class="code" text-anchor="middle">@Bean MessageService</text><text x="135" y="130" class="code" text-anchor="middle">→ new EmailService()</text><rect x="300" y="60" width="140" height="50" rx="8" class="cell" /><text x="370" y="82" class="tb" text-anchor="middle">EmailService</text><text x="370" y="100" class="mu" text-anchor="middle">implements MessageService</text><rect x="300" y="130" width="140" height="50" rx="8" class="cell" /><text x="370" y="152" class="tb" text-anchor="middle">PotterMail</text><text x="370" y="170" class="mu" text-anchor="middle">needs a MessageService</text><path d="M232 90L298 85" class="ln" marker-end="url(#adi)" /><text x="262" y="76" class="mu" text-anchor="middle">1. creates</text><path d="M370 112V128" class="ln" marker-end="url(#adi)" /><text x="470" y="124" class="mu" text-anchor="start">2. injects into the constructor</text></svg><figcaption>You say what each class needs; the container builds the objects and hands them over. PotterMail never writes <code>new EmailService()</code>.</figcaption></figure>
+
+<p>What happens: Spring reads <code>AppConfig</code>, scans the package, and creates an <code>EmailService</code> bean. When it builds <code>PotterMail</code>, it sees the constructor needs a <code>MessageService</code>, finds the one bean that implements it, and passes it in.</p>
+<h3>Three ways to inject</h3>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Way</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Constructor</strong></td>
+<td>Use this. Fields can be <code>private final</code>, and the class is easy to test.</td>
+</tr>
+<tr>
+<td>Setter</td>
+<td>Only for optional dependencies</td>
+</tr>
+<tr>
+<td>Field (<code>@Autowired</code> on a field)</td>
+<td>Avoid: hidden dependencies, hard to test</td>
+</tr>
+</tbody></table></div>
+<p><strong>Good habits:</strong> inject through constructors, make injected fields <code>private final</code>, and depend on interfaces rather than concrete classes.</p>
+<h3>Inversion of control (IoC)</h3>
+<p>Normally your code calls libraries. With IoC, the <strong>framework calls your code</strong>: it decides when to create objects and which implementation to use (say, which <code>DataSource</code>). DI is the way Spring achieves IoC.</p>
+<blockquote>
+<p><strong>Analogy:</strong> without IoC you build every robot part yourself. With IoC there's a factory: you say what you need and the parts are delivered.</p>
+</blockquote>
+<p>The container comes in two forms: <code>BeanFactory</code>, the basic one, and <code>ApplicationContext</code>, which adds events, internationalisation and AOP. You'll almost always use <code>ApplicationContext</code>.</p>
+<h3>Core annotations</h3>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@Component</code></td>
+<td>"Make a bean of this class"</td>
+</tr>
+<tr>
+<td><code>@Service</code>, <code>@Repository</code>, <code>@Controller</code></td>
+<td>The same, with a role (<code>@Repository</code> also translates database errors)</td>
+</tr>
+<tr>
+<td><code>@Configuration</code></td>
+<td>A class that declares beans with <code>@Bean</code> methods</td>
+</tr>
+<tr>
+<td><code>@Bean</code></td>
+<td>This method returns a bean</td>
+</tr>
+<tr>
+<td><code>@ComponentScan</code></td>
+<td>Where to look for components (default: this package and below)</td>
+</tr>
+<tr>
+<td><code>@PropertySource</code></td>
+<td>Load a <code>.properties</code> file</td>
+</tr>
+<tr>
+<td><code>@SpringBootApplication</code></td>
+<td><code>@Configuration</code> + <code>@EnableAutoConfiguration</code> + <code>@ComponentScan</code></td>
+</tr>
+</tbody></table></div>
+<h3>Init and destroy hooks</h3>
+<pre><code class="language-java">@Configuration
 public class AppConfig {
+    @Bean(initMethod = "on", destroyMethod = "off")
+    Computer computer() { return new Computer(); }
+}
+</code></pre>
+<p>or, inside the bean itself:</p>
+<pre><code class="language-java">public class Computer {
+    @PostConstruct void on()  { System.out.println("Load operating system"); }
+    @PreDestroy    void off() { System.out.println("Close all programs"); }
+}
+</code></pre>
+</div></div><div id="spring-aop" class="nsec flat"><div class="fhead"><h3 class="nt">Aspect-oriented programming (AOP)</h3></div><div class="nbody"><p>Some code is needed everywhere: logging, security checks, transactions. These are <strong>cross-cutting concerns</strong>, as opposed to <strong>core concerns</strong> (the business logic). AOP keeps them in one place instead of copying them into every method.</p>
+<figure class="ndia"><svg viewBox="0 0 640 156" role="img" aria-label="Spring AOP proxy wraps the target bean with before and after advice"><defs><marker id="aao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk" /></marker></defs><rect x="20" y="50" width="130" height="60" rx="10" class="box" /><text x="85" y="85" class="tb" text-anchor="middle">caller</text><rect x="190" y="20" width="280" height="120" rx="12" class="box hi" /><text x="206" y="42" class="tb" text-anchor="start">proxy (made by Spring)</text><rect x="206" y="54" width="120" height="30" rx="6" class="cell" /><text x="266" y="74" class="code" text-anchor="middle">@Before advice</text><rect x="206" y="94" width="120" height="30" rx="6" class="cell" /><text x="266" y="114" class="code" text-anchor="middle">@After advice</text><rect x="346" y="54" width="110" height="70" rx="8" class="box" /><text x="401" y="84" class="tb" text-anchor="middle">your bean</text><text x="401" y="102" class="mu" text-anchor="middle">(target)</text><path d="M150 80L188 80" class="ln" marker-end="url(#aao)" /><path d="M326 69H344" class="ln" marker-end="url(#aao)" /><path d="M344 109H328" class="ln" marker-end="url(#aao)" /><rect x="500" y="30" width="120" height="100" rx="8" class="cell" /><text x="560" y="62" text-anchor="middle">logging</text><text x="560" y="84" text-anchor="middle">security</text><text x="560" y="106" text-anchor="middle">transactions</text><path d="M498 80H472" class="ln" style="stroke-dasharray:4 4" /></svg><figcaption>The caller thinks it calls your bean, but it calls a proxy that runs the advice around the real method. The cross-cutting code stays in one place.</figcaption></figure>
 
-   @Bean(name = &quot;comp&quot;, initMethod = &quot;On&quot;, destroyMethod = &quot;Off&quot;)
-   Computer computer(){
-       return new Computer();
-   }
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Join point</strong></td>
+<td>A point where extra code can run. In Spring: always a method call.</td>
+</tr>
+<tr>
+<td><strong>Advice</strong></td>
+<td>The extra code</td>
+</tr>
+<tr>
+<td><strong>Pointcut</strong></td>
+<td>An expression that picks the join points, e.g. "every method in the service package"</td>
+</tr>
+<tr>
+<td><strong>Aspect</strong></td>
+<td>A class holding advice and pointcuts</td>
+</tr>
+<tr>
+<td><strong>Target</strong></td>
+<td>The object whose methods are advised</td>
+</tr>
+<tr>
+<td><strong>Weaving</strong></td>
+<td>Attaching aspects to targets. Spring does it at runtime with proxies; AspectJ can also do it while classes load.</td>
+</tr>
+</tbody></table></div>
+<h3>Kinds of advice</h3>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Advice</th>
+<th>Runs</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@Before</code></td>
+<td>Before the method (can't stop it, except by throwing)</td>
+</tr>
+<tr>
+<td><code>@AfterReturning</code></td>
+<td>After it returns normally</td>
+</tr>
+<tr>
+<td><code>@AfterThrowing</code></td>
+<td>After it throws</td>
+</tr>
+<tr>
+<td><code>@After</code></td>
+<td>After it finishes, either way</td>
+</tr>
+<tr>
+<td><code>@Around</code></td>
+<td>Around it: can run code before and after, change the result, or skip the call</td>
+</tr>
+</tbody></table></div>
+<pre><code class="language-java">@Aspect
+@Component
+public class Timing {
+    @Around("execution(* com.example.service.*.*(..))")
+    public Object time(ProceedingJoinPoint jp) throws Throwable {
+        long start = System.nanoTime();
+        try {
+            return jp.proceed();                 // call the real method
+        } finally {
+            System.out.println(jp.getSignature() + " took " + (System.nanoTime() - start) / 1_000_000 + " ms");
+        }
+    }
 }
-===============
-public class Computer {
+</code></pre>
+<p>Add <code>spring-boot-starter-aop</code>; Boot turns it on (otherwise use <code>@EnableAspectJAutoProxy</code>).</p>
+<p><strong>How the proxy is made:</strong> a JDK dynamic proxy if the bean implements an interface, otherwise a CGLIB subclass.</p>
+<blockquote>
+<p><strong>Limits:</strong> only public, non-static methods called from <strong>outside</strong> the bean are advised; <code>final</code> classes and methods can't be proxied.</p>
+</blockquote>
+</div></div><div id="bean-scopes" class="nsec flat"><div class="fhead"><h3 class="nt">Bean scopes</h3></div><div class="nbody"><div class="ntable"><table>
+<thead>
+<tr>
+<th>Scope</th>
+<th>Instances</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>singleton</code> (default)</td>
+<td>One for the whole app, shared by everyone</td>
+</tr>
+<tr>
+<td><code>prototype</code></td>
+<td>A new one every time it's requested</td>
+</tr>
+<tr>
+<td><code>request</code></td>
+<td>One per HTTP request</td>
+</tr>
+<tr>
+<td><code>session</code></td>
+<td>One per user session</td>
+</tr>
+<tr>
+<td><code>application</code></td>
+<td>One per servlet context</td>
+</tr>
+<tr>
+<td><code>websocket</code></td>
+<td>One per WebSocket session</td>
+</tr>
+</tbody></table></div>
+<pre><code class="language-java">@Component
+@Scope("prototype")
+public class ShoppingCart { ... }
+</code></pre>
+<blockquote>
+<p>A singleton is shared, so keep it <strong>stateless</strong>: no fields that change per user.</p>
+</blockquote>
+</div></div><div id="spring-security" class="nsec flat"><div class="fhead"><h3 class="nt">Spring Security</h3></div><div class="nbody"><p>A clear guide: <a href="https://www.marcobehler.com/guides/spring-security" target="_blank" rel="noopener noreferrer">Spring Security explained (Marco Behler)</a>.</p>
+<ul>
+<li><strong>Authentication:</strong> <em>who are you?</em> Checking the user is who they claim to be.</li>
+<li><strong>Authorization:</strong> <em>what may you do?</em> Checking access to each part of the app.</li>
+</ul>
+<h3>Filters</h3>
+<p>Security runs as a chain of servlet filters, before any controller:</p>
+<figure class="ndia"><svg viewBox="0 0 640 136" role="img" aria-label="Spring Security filter chain before the DispatcherServlet"><defs><marker id="afc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="mk" /></marker></defs><text x="20" y="26" class="tb" text-anchor="start">HTTP request</text><rect x="20" y="40" width="116" height="56" rx="8" class="box hi" /><text x="78" y="64" class="code" text-anchor="middle">UsernamePassword</text><text x="78" y="82" class="mu" text-anchor="middle">reads login form</text><rect x="150" y="40" width="116" height="56" rx="8" class="box hi" /><text x="208" y="64" class="code" text-anchor="middle">BasicAuth</text><text x="208" y="82" class="mu" text-anchor="middle">reads Basic header</text><path d="M138 68L148 68" class="ln" marker-end="url(#afc)" /><rect x="280" y="40" width="116" height="56" rx="8" class="box hi" /><text x="338" y="64" class="code" text-anchor="middle">...</text><text x="338" y="82" class="mu" text-anchor="middle">~15 filters</text><path d="M268 68L278 68" class="ln" marker-end="url(#afc)" /><rect x="410" y="40" width="116" height="56" rx="8" class="box hi" /><text x="468" y="64" class="code" text-anchor="middle">Authorization</text><text x="468" y="82" class="mu" text-anchor="middle">checks access</text><path d="M398 68L408 68" class="ln" marker-end="url(#afc)" /><path d="M540 68L556 68" class="ln" marker-end="url(#afc)" /><rect x="558" y="40" width="72" height="56" rx="8" class="box" /><text x="594" y="64" class="code" text-anchor="middle">Dispatcher</text><text x="594" y="82" class="code" text-anchor="middle">Servlet</text><text x="20" y="124" class="mu" text-anchor="start">A filter that fails sends 401 / 403 back at once; the controller is never reached.</text></svg><figcaption>Spring Security is a chain of servlet filters that runs <em>before</em> the DispatcherServlet.</figcaption></figure>
 
-   public void on(){
-       System.out.println(&quot;Load operating system&quot;);
-   }
-   public void off(){
-       System.out.println(&quot;Close all programs&quot;);
-   }
-}</code></pre><h5 id="postconstruct-predestroy">@PostConstruct &amp; @PreDestroy</h5><ul><li>Alternatives to initMethod &amp; destroyMethod, these can be used in the bean to automatically execute.</li></ul><pre><code>public class Computer {
+<p>A Spring Boot app has about 15 by default, for example:</p>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>UsernamePasswordAuthenticationFilter</code></td>
+<td>Reads a username and password from a login form</td>
+</tr>
+<tr>
+<td><code>BasicAuthenticationFilter</code></td>
+<td>Reads an HTTP Basic <code>Authorization</code> header</td>
+</tr>
+<tr>
+<td><code>DefaultLoginPageGeneratingFilter</code></td>
+<td>Makes the default login page (why one appears when you add Security)</td>
+</tr>
+<tr>
+<td><code>AuthorizationFilter</code></td>
+<td>Checks whether the user may access the URL</td>
+</tr>
+</tbody></table></div>
+<h3>Configuring it</h3>
+<pre><code class="language-java">@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
 
-   @PostConstruct
-   public void turnOn(){
-       System.out.println(&quot;Load operating system&quot;);
-   }
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(auth -&gt; auth
+                .requestMatchers("/", "/home").permitAll()   // open to everyone
+                .anyRequest().authenticated())                // everything else needs a login
+            .formLogin(form -&gt; form.loginPage("/login").permitAll())
+            .logout(logout -&gt; logout.permitAll())
+            .httpBasic(Customizer.withDefaults());            // also accept Basic auth
+        return http.build();
+    }
+}
+</code></pre>
+<blockquote>
+<p>Older tutorials extend <code>WebSecurityConfigurerAdapter</code> and use <code>antMatchers</code>. Both were removed in Spring Security 6: declare a <code>SecurityFilterChain</code> bean as above.</p>
+</blockquote>
+<h3>Where the users come from</h3>
+<p><strong>You have the passwords</strong> (your own users table): provide a <code>UserDetailsService</code> and a <code>PasswordEncoder</code>.</p>
+<pre><code class="language-java">@Service
+public class DbUserDetailsService implements UserDetailsService {
+    private final UserRepository users;
+    public DbUserDetailsService(UserRepository users) { this.users = users; }
 
-   @PreDestroy
-   public void turnOff(){
-       System.out.println(&quot;Close all programs&quot;);
-   }
-}</code></pre><h3 id="componentscan">@ComponentScan</h3><ul><li>This annotation is used alongside @configuration to find the desired packages.</li><li>Without arguments, it will scan the current package and all sub-packages.</li><li>With arguments, it will scan the desired packages.</li></ul><h3 id="component">@Component</h3><h3 id="propertysource">@PropertySource</h3><ul><li>For adding property sources to the spring environment.</li></ul><h3 id="service">@Service</h3><ul><li>Another name for Component</li></ul><h3 id="repository">@Repository</h3><ul><li>Another name for Component</li></ul><h3 id="autowired-test-in-ide">@Autowired TEST IN IDE</h3><ul><li>Use automatic injection of beans.</li><li>Autowired can be use on</li></ul><pre><code>@Component(&quot;fooFormatter&quot;)
-public class FooFormatter {
-   public String format() {
-       return &quot;foo&quot;;
-   }
-}</code></pre><ul><li>Properties</li></ul><pre><code>@Component
-public class FooService {
-   @Autowired
-   private FooFormatter fooFormatter;
-}</code></pre><ul><li>Setters</li></ul><pre><code>public class FooService {
-   private FooFormatter fooFormatter;
-   @Autowired
-   public void setFormatter(FooFormatter fooFormatter) {
-       this.fooFormatter = fooFormatter;
-   }
-}</code></pre><ul><li>Constructors</li></ul><pre><code>public class FooService {
-   private FooFormatter fooFormatter;
-   @Autowired
-   public FooService(FooFormatter fooFormatter) {
-       this.fooFormatter = fooFormatter;
-   }
-}</code></pre><ul><li>@Qualifer annotation is used to avoid confusion when there are 2 or more beans with the same type.</li></ul><pre><code>@Component(&quot;fooFormatter&quot;)
-public class FooFormatter implements Formatter {
-   public String format() {
-       return &quot;foo&quot;;
-   }
+    @Override
+    public UserDetails loadUserByUsername(String username) {
+        return users.findByUsername(username)
+                .map(u -&gt; User.withUsername(u.getUsername()).password(u.getPasswordHash()).roles("USER").build())
+                .orElseThrow(() -&gt; new UsernameNotFoundException(username));
+    }
 }
-=============
-@Component(&quot;barFormatter&quot;)
-public class BarFormatter implements Formatter {
-   public String format() {
-       return &quot;bar&quot;;
-   }
+</code></pre>
+<p>Ready-made alternatives: <code>JdbcUserDetailsManager</code>, and <code>InMemoryUserDetailsManager</code> for tests.</p>
+<p><strong>Password encoders</strong> never decrypt. They hash what the user typed and compare it with the stored hash.</p>
+<pre><code class="language-java">@Bean
+PasswordEncoder passwordEncoder() {
+    return PasswordEncoderFactories.createDelegatingPasswordEncoder();   // bcrypt by default
 }
-=============
-public class FooService {
-   @Autowired
-   @Qualifier(&quot;fooFormatter&quot;)
-   private Formatter formatter;
-}</code></pre><h3 id="spring-mvc-annotations">Spring MVC Annotations</h3><h4 id="controller">@Controller</h4><h4 id="requestmapping">@RequestMapping</h4><h4 id="pathvariable">@PathVariable</h4><h4 id="requestparam">@RequestParam</h4><h4 id="modelattribute">@ModelAttribute</h4><h4 id="requestbody-and-responsebody">@RequestBody and @ResponseBody</h4><h4 id="requestheader-and-responseheader">@RequestHeader and @ResponseHeader</h4><h3 id="spring-boot-annotations">Spring boot Annotations</h3><h4 id="springbootapplication">@SpringBootApplication</h4><ul><li>Combination of the following annotations</li><li>Configuration</li><li>EnableAutoConfiguration</li><li>ComponentScan</li><li>Spring MVC</li></ul><h4 id="mvc-model-view-controller">MVC (Model View Controller)</h4><ul><li>Model: Data and logic. This is the cook of the restaurant.</li><li>View: The response for the user’s request. Consumer in the restaurant.</li><li>Controller: The logic and connection between model and view. This is the waiter for the restaurant.</li><li>Example</li></ul><pre><code>class Student {              //Model
-   private String name;
-   public String getName() {
-       return name;
-   }
-   public void setName(String name) {
-       this.name = name;
-   }
+</code></pre>
+<p>The delegating encoder reads the <code>{prefix}</code> of each stored hash (<code>{bcrypt}$2a$...</code>, <code>{sha256}...</code>), so old and new hashes can live side by side.</p>
+<p><strong>Someone else has the passwords</strong> (a company directory, Atlassian Crowd): provide an <code>AuthenticationProvider</code> that asks that server.</p>
+<p><strong>Sign in with Google, GitHub...:</strong> use OAuth 2 / OpenID Connect (<code>spring-boot-starter-oauth2-client</code>).</p>
+</div></div><div id="spring-context" class="nsec flat"><div class="fhead"><h3 class="nt">The application context</h3></div><div class="nbody"><p>The <strong>context</strong> is Spring's container: every bean your app has lives in it. When a class needs a bean, Spring finds it there. That's IoC in practice.</p>
+<p><code>SpringApplication.run</code> returns the context, so you can ask it for beans directly:</p>
+<pre><code class="language-java">@SpringBootApplication
+public class App {
+    public static void main(String[] args) {
+        ApplicationContext ctx = SpringApplication.run(App.class, args);
+        MyController c = ctx.getBean(MyController.class);   // by type: no cast needed
+        MyController same = (MyController) ctx.getBean("myController");   // by name
+    }
 }
-class StudentView {          //View
-   public void printStudentDetails(String studentName){
-       System.out.println(&quot;Name: &quot; + studentName);
-   }
-}
-class StudentController {    //Controller
-   private Student model;
-   private StudentView view;
-   public StudentController(Student model, StudentView view){
-       this.model = model;
-       this.view = view;
-   }
-   public void setStudentName(String name){
-       model.setName(name);
-   }
-   public String getStudentName(){
-       return model.getName();
-   }
-   public void updateView(){
-       view.printStudentDetails(model.getName(), model.getRollNo());
-   }
-}
-class MVCPattern {    //Driver
-   public static void main(String[] args) {
-       Student model  = retriveStudentFromDatabase();
-       StudentView view = new StudentView();
-       StudentController controller = new StudentController(model, view);
-       controller.updateView();
-       controller.setStudentName(&quot;Hashib&quot;);
-       controller.updateView();
-   }
-}</code></pre><ul><li>Spring MVC</li></ul><ul><li>Spring implements MVC using front controller pattern using DispatcherServlet</li></ul><h5 id="dispatcherservlet">DispatcherServlet</h5><ul><li>This is the front controller that manages all HTTP requests and responses.</li><li>When a HTTP request is received by the front controller, it receives the request and decides which controller to send the request to.</li></ul><h5 id="working-process">Working process</h5><ul><li>HTTP requests are intercepted by the DispatchServerlet.</li><li>DispatchServerlet gets handler mapping in the XML file and forwards the request to the specific controller.</li><li>The specific controller returns a model and view object.</li><li>The dispatch servlet checks the entry in the XML file for a specific view for the object and invokes the view component.</li></ul><h3 id="spring-aop">Spring AOP</h3><h4 id="concerns">Concerns</h4><ul><li>Concern in a system is a part that is divided by functionality.</li><li>Usually, code can be separated into logical sections, each addressing separate concerns.</li></ul><h5 id="types">Types</h5><h3 id="core-concerns">Core concerns</h3><ul><li>Core concerns represent single and specific functionality for primary requirements. e.g. business logic.</li></ul><h3 id="cross-cutting-concerns">Cross-cutting concerns</h3><ul><li>These concerns are shared across multiple modules in the system, they are also called System wide concerns</li><li>Usually these are secondary functionality like Logging, Security, Data transfer.</li></ul><h4 id="aop-architecture">AOP Architecture</h4><ul><li>Spring AOP is based on the proxy design pattern. This means, spring AOP creates proxy objects for the cross-cutting concern so that other concerns calling it have controlled access to it.</li><li>In runtime, spring analyzes cross-cutting concerns the ApplicationContext and generates proxy beans dynamically in runtime. The proxy bean for the cross-cutting concern is created only when it’s called by another object.</li><li>Spring has two proxy implementation</li></ul><h5 id="jdk-dynamic-proxies">JDK dynamic proxies</h5><ul><li>When the target object advised implements an interface.</li></ul><h5 id="cglib-proxies">CGLIB proxies</h5><ul><li>When the target object advised does not implement an interface.</li></ul><h4 id="limitations">Limitations</h4><ul><li>Final or static can not be proxied.</li><li>Spring AOP only applies to public, non-static methods.</li></ul><h4 id="terminologies">Terminologies</h4><h5 id="joinpoint">Joinpoint</h5><ul><li>Joinpoint in an application are the points where methods are called or exceptions are thrown.</li><li>In Spring AOP join points are always a method execution.</li><li>Join Points are the points where you can insert AOP logic.</li></ul><h5 id="advice">Advice</h5><ul><li>Advice is the code that is executed at a join point.</li><li>There are 5 types of advice.</li></ul><h3 id="before">Before</h3><ul><li>Executed before a join point but can not prevent the execution of the join point.</li></ul><h3 id="after-returning">After returning</h3><ul><li>Executed after a join point that does not throw an exception.</li></ul><h3 id="after-throwing">After throwing</h3><ul><li>Executed after a method throws an exception.</li></ul><h3 id="after">After</h3><ul><li>Executed after a join point (normal/exception throw)</li></ul><h3 id="around">Around</h3><ul><li>The most powerful advice.</li><li>Can perform custom behavior before and after the method execution.</li><li>Can change the flow of the join point and return/throw its own value.</li></ul><h5 id="aspect">Aspect</h5><ul><li>Aspects are encapsulated classes that contain the advice and pointcuts.</li></ul><h5 id="weaving">Weaving</h5><ul><li>is the process of inserting aspects into the application code at the appropriate point. AspectJ supports a weaving mechanism called load time weaving (LTW), in which it intercepts the underlying JVM class loader and provides weaving to the bytecode when it is being loaded by the class loader.</li></ul><h5 id="target">Target</h5><ul><li>Also known as the advised object, it’s the object that has its workflow modified by Spring AOP.</li></ul><h4 id="pointcut-expression">Pointcut expression</h4><ul><li>TBA</li></ul><h4 id="spring-aop-application">Spring AOP application</h4><h5 id="dependencies">Dependencies</h5><h3 id="maven">Maven</h3><ul><li>spring-context, spring-context-support, spring-aop, aspectjrt, aspectjweaver</li></ul><h3 id="spring">Spring</h3><ul><li>spring-boot-starter-aop</li></ul><h5 id="enabling-spring-aop">Enabling Spring AOP</h5><ul><li>@EnableAspectJAutoProxy</li></ul><h3 id="spring-bean-scope">Spring Bean Scope</h3><h4 id="singleton">singleton</h4><ul><li>Has only a single instance of the object. So any modification to the object will reflect the single instance.</li><li>@scope(“singleton”);</li></ul><h4 id="prototype">prototype</h4><ul><li>Everytime the object is called, a new instance will be returned.</li><li>@scope(“prototype”)</li><li>request</li><li>session</li><li>application</li><li>websocket</li></ul><h3 id="spring-security">Spring Security</h3><ul><li><a href="https://www.marcobehler.com/guides/spring-security" target="_blank" rel="noopener noreferrer">https://www.marcobehler.com/guides/spring-security</a></li></ul><h4 id="web-security-101">Web security 101</h4><h5 id="authentication">Authentication</h5><ul><li>Authentication is verifying that the user is the person they claim to be.</li></ul><h5 id="authorization">Authorization</h5><ul><li>Authorization is verifying access to the sub-systems.</li></ul><h5 id="servlet-filters">Servlet filters</h5><ul><li>A Java servlet filter like dispatcher Servlet handles all HTTP requests but does not have security built into it.</li><li>We can write the security and configuration in the servlet container like Tomcat. So the security is handled before it reaches the dispatcher servlet.</li><li>Example:</li><ul><li>HTTP request</li><li>First goes though the Login filter, that extracts the user credential</li><li>Then the Authentication filter checks if the user is valid.</li><li>After That, the Authorization filter checks the user’s access rights.</li><li>Finally, the request is sent to the dispatcher servlet.</li><li>These filters are chained thus known as Filter chains.</li></ul></ul><h4 id="filterchain-security-configuration-dsl">FilterChain &amp; Security Configuration DSL</h4><h5 id="filterchain">FilterChain</h5><ul><li>Spring Security is a collection of these filterchains.</li><li>There are 15 default filters in a spring boot application.</li><li>By default these filters are well configured but you can modify them to your application.</li><li>Some of the filters:</li><li>BasicAuthenticationFilter: Tries to find a Basic Auth HTTP Header on the request and if found, tries to authenticate the user with the header’s username and password.</li><li>UsernamePasswordAuthenticationFilter: Tries to find a username/password request parameter/POST body and if found, tries to authenticate the user with those values.</li><li>DefaultLoginPageGeneratingFilter: Generates a login page for you, if you don’t explicitly disable that feature. THIS filter is why you get a default login page when enabling Spring Security.</li><li>DefaultLogoutPageGeneratingFilter: Generates a logout page for you, if you don’t explicitly disable that feature.</li><li>FilterSecurityInterceptor: Does your authorization.</li></ul><h5 id="security-configuration-dsl">Security Configuration DSL</h5><pre><code>@Configuration
-@EnableWebSecurity // (1)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // (1)
- @Override
- protected void configure(HttpSecurity http) throws Exception{//(2)
-     http
-       .authorizeRequests()
-         .antMatchers(&quot;/&quot;, &quot;/home&quot;).permitAll() // (3)
-         .anyRequest().authenticated() // (4)
-         .and()
-      .formLogin() // (5)
-        .loginPage(&quot;/login&quot;) // (5)
-        .permitAll()
-        .and()
-     .logout() // (6)
-       .permitAll()
-       .and()
-     .httpBasic(); // (7)
- }
-}
+</code></pre>
+<blockquote>
+<p>A bean's default name is its class name with a lower-case first letter: <code>MyController</code> → <code>"myController"</code>.</p>
+</blockquote>
+</div></div><div id="annotations" class="nsec flat"><div class="fhead"><h3 class="nt">Choosing between beans</h3></div><div class="nbody"><p>When two beans implement the same interface, Spring can't guess which one to inject and fails at startup. Three ways to decide:</p>
+<h3>@Primary: the default choice</h3>
+<pre><code class="language-java">@Component @Primary
+class EmailService implements MessageService { ... }
+</code></pre>
+<h3>@Qualifier: name the one you want</h3>
+<pre><code class="language-java">@Component("smsService")
+class SmsService implements MessageService { ... }
 
-
-                           1. A normal Spring @Configuration with the @EnableWebSecurity annotation, extending from WebSecurityConfigurerAdapter.
-                           2. By overriding the adapter’s configure(HttpSecurity) method.
-                           3. All requests going to / and /home are allowed (permitted) - the user does not have to authenticate.
-                           4. Any other request needs the user to be authenticated first, i.e. the user needs to login.
-                           5. You are allowing form login (username/password in a form), with a custom loginPage (/login, i.e. not Spring Security’s auto-generated one). Anyone should be able to access the login page, without having to log in first (permitAll; otherwise we would have a Catch-22!).
-                           6. The same goes for the logout page
-                           7. On top of that, you are also allowing Basic Auth, i.e. sending in an HTTP Basic Auth Header to authenticate.</code></pre><h3 id="authentication-with-spring-security">Authentication with Spring Security</h3><ul><li>Three ways to authenticate using Spring Security</li></ul><h5 id="userdetailsservice-have-access-of-user-details">UserDetailsService: Have access of user details</h5><ul><li>if you are using Spring Security and have access to the user’s password, then:</li><li>Specify a UserDetailsService. Either a custom implementation or use and configure one that Spring Security offers.</li><li>Specify a PasswordEncoder.</li></ul><h3 id="manual-userdatailsservice">Manual UserDatailsService</h3><ul><li>If the database table has a username and password column. We need 2 spring beans.</li><li>UserDetailsService</li></ul><pre><code>@Bean
-public UserDetailsService userDetailsService() {
-  return new MyDatabaseUserDetailsService();
-}</code></pre><ul><li>MyDatabaseUserDetailsService implements UserDetailsService, a very simple interface, which consists of one method returning a UserDetails object.</li></ul><pre><code>public class MyDatabaseUserDetailsService implements UserDetailsService {
-
-        UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-// 1. Load the user from the users table by username. If not found, throw UsernameNotFoundException.
-// 2. Convert/wrap the user to a UserDetails object and return it.
-       return someUserDetails;
-   }
+class Alerts {
+    Alerts(@Qualifier("smsService") MessageService service) { ... }
 }
-public interface UserDetails extends Serializable {
-   String getUsername();
-   String getPassword();
-   // more methods:
-   // isAccountNonExpired,isAccountNonLocked,
-   // isCredentialsNonExpired,isEnabled
-}</code></pre><ul><li>Off the shelf implementations:</li></ul><h5 id="jdbcuserdetailsmanager">JdbcUserDetailsManager</h5><h5 id="inmemoryuserdetailsmanager-for-test">InMemoryUserDetailsManager (for test)</h5><h4 id="passwordencoder">PasswordEncoder</h4><ul><li>Encodes the raw password.</li><li>We can specify which algorithm to use or delegate to the function to read the hash algorithm at the front of a file, called {prefix}.</li><li>The encoder takes the user&#x27;s given password and encodes it then compares it to the DB’s pw hash.</li></ul><h5 id="bcrypt">bcrypt</h5><ul><li>Spring security’s default password hash.</li></ul><pre><code>@Bean
-public BCryptPasswordEncoder bCryptPasswordEncoder() {
-   return new BCryptPasswordEncoder();
-}</code></pre><h5 id="delegation">Delegation</h5><ul><li>When you don’t know which hash has been used in db.</li><li>It reads the {prefix} of the hash to determine.</li></ul><pre><code>@Bean
-public PasswordEncoder passwordEncoder() {
-   return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-}</code></pre><ul><li>example: {bcrypt}$2… or {sha256}5f…</li></ul><h5 id="authenticationprovider-not-having-user-details">AuthenticationProvider: Not having user details</h5><ul><li>if you are using Spring Security and do not have access to the user’s password, then implement and provide an AuthenticationProvider @Bean.</li><li>You use an API to send the username and pw to the 3rd party server to get authentication.</li></ul><pre><code>@Bean
-   public AuthenticationProvider authenticationProvider() {
-       return new AtlassianCrowdAuthenticationProvider();
-   }</code></pre><h5 id="oauth2-or-openid">OAuth2 or OpenID</h5><ul><li>Spring JPA &amp; Hibernate</li><li>Core concepts</li><li>JPA (Jakarta Persistence API)</li><li>The specification.</li><li>It is merely a document defining a set of interfaces and annotations. It does not run code itself.</li></ul></div></details><details class="nsec" id="spring-context"><summary><span class="nt">Spring Context</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="spring-context" aria-label="Mark Spring Context as read"><span>Read</span></label></summary><div class="nbody"><ul><li>Context is the spring stuff around your application.</li><li>Any spring annotated class is loaded in the spring context and when another class is looking for it, it searches in the spring context.</li><li>This enables IoC in spring.</li><li>Example</li><li>MyController.java</li><li>In main</li><li>The SpringApplication run returns a context.</li><li>So we can use</li><li>ApplicationContext var = SpringApplication.run(app.class, args)</li><li>To have an object with the context and manipulate it.</li><li>MyController c = (MyController) var.getBean(“myController”);</li><li>var.getBean will return an object which needs casting.</li><li>“myContoller” starts with small letters as context stored them like this.</li></ul></div></details><details class="nsec" id="annotations"><summary><span class="nt">Annotations</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="annotations" aria-label="Mark Annotations as read"><span>Read</span></label></summary><div class="nbody"><h3 id="qualifiers">@Qualifiers</h3><ul><li>Using the qualifier annotation we can eliminate the issue of which bean needs to be injected.</li><li>When there are more than one beans that have the same type of interface, the framework will throw an exception.</li></ul><h3 id="primary">@Primary</h3><ul><li>When there are multiple beans that implement the same type of interface, we can use the primary annotation to say this is the default implementation.</li></ul><h3 id="profiles">@Profiles</h3><ul><li>Using profiles, spring beans can be configured to change their behavior.</li><li>Example</li><li>Use @Profile(“name”) with the class.</li><li>Then in Application config file, add</li><li>spring.profiles.active=&lt;profile name&gt;</li><li>default profile</li><li>When profiles are not active in the config, you can use “default”</li><li>Use @Profile({“name”, “default});</li></ul></div></details><details class="nsec" id="solid"><summary><span class="nt">SOLID</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="solid" aria-label="Mark SOLID as read"><span>Read</span></label></summary><div class="nbody"><h3 id="single-responsibility-principle">Single responsibility principle</h3><ul><li>Every class should have a single responsibility</li><li>Classes should be small and big classes should be split into smaller classes.</li></ul><h3 id="open-closed-principle">Open closed principle</h3><ul><li>Classes should be open for extension but closed for modification.</li><li>Class’s behavior can be changed without modifying it.</li><li>Use getters and setters only when you need them.</li><li>Use abstract base classes</li><li>Example</li><li>We have a class student validator which works fine by itself but if we want to add another feature to validate faculties as well, we will have to modify the student validator to have different added methods and properties. Which defies the principle.</li></ul><h3 id="liskov-substitution-principle">Liskov substitution principle</h3><ul><li>Objects in a program should be replaceable with instances of its subtypes without altering the correctness of the program.</li><li>Basically, when inheriting from a superclass, the inherited class should not change the properties or methods of the superclass that change the way they behave .</li><li>Example</li><li>The parent class requires one type of object but the child class requires another type of object in the constructor.</li></ul><h3 id="interface-segregation-principle">Interface segregation principle</h3><ul><li>Make fine grained interfaces that are client specific.</li><li>Many client specific interfaces are better than a general purpose big interface.</li><li>Keep components focused and minimize dependencies between them.</li><li>Make an interface plug and play.</li></ul><h3 id="dependency-inversion-principle">Dependency inversion principle</h3><ul><li>Classes should be loosely coupled.</li><li>Abstractions should not depend on details and details should depend on abstraction.</li><li>Higher level and lower level objects should depend on the same abstract interaction.</li></ul></div></details></div></details><details class="ngrp" id="g-data" data-ids="hibernate mongo-geojson-gis"><summary><span class="gt">Data: Hibernate and Mongo</span><span class="gc"></span></summary><div class="gbody"><details class="nsec" id="hibernate"><summary><span class="nt">Hibernate</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="hibernate" aria-label="Mark Hibernate as read"><span>Read</span></label></summary><div class="nbody"><ul><li>The implementation.</li><li>The library that actually performs the logic, manages the database connection, generates SQL and maps results of objects.</li><li>Spring data JPA</li><li>The abstraction layer.</li><li>A framework that wraps hibernate. It significantly reduces boilerplate by providing “Repository” interfaces and generating implementation code at run time via Dynamic proxies.</li><li>Core Annotations:</li><li>@Entity: Marking classes as persistent entities.</li><li>@Id</li><li>Designates the Primary Key.</li><li>@GeneratedValue</li><li>GenerationType.IDENTITY: Relies on an auto-increment column (MySQL/Postgres). Disables JDBC batch inserts.</li><li>GenerationType.SEQUENCE: Uses a database sequence. Most efficient for high-performance batching (Oracle/Postgres).</li><li>GenerationType.UUID: Generates a specialized string UUID. Good for distributed systems (Microservices).</li><li>@Column</li><li>name: DB column name.</li><li>nullable: Adds NOT NULL constraint.</li><li>updatable=false: Useful for creation timestamps or IDs that shouldn&#x27;t change.</li><li>@Transient</li><li>Fields ignored by the persistence engine (e.g., calculated fields like age derived from birthDate).</li><li>@Enumerated</li><li>EnumType.ORDINAL: Saves the index (0, 1). Brittle if enum order changes.</li><li>EnumType.STRING: Saves the name (&quot;ACTIVE&quot;, &quot;BANNED&quot;). Readable but takes more space.</li><li>Inheritance Strategies</li><li>How to map Java Inheritance (Employee extends User) to SQL tables.</li><li>Single Table (Default)</li><li>One giant table for all subclasses with a &quot;Discriminator Column&quot; (e.g., dtype). Fast reads, but columns for subclasses must be nullable.</li><li>Joined</li><li>Separate tables for Parent and Child, joined by PK. Normalized, but slow writes/reads due to JOINs.</li><li>Table Per Class</li><li>One table per concrete class. No joins, but polymorphic queries (searching the Parent type) are very slow (UNION SQL).</li><li>Relationships:</li><li>@OneToOne: One entity has a single relationship with another entity.</li><li>@OneToMany: One entity has multiple relationships with another entity.</li><li>@ManyToOne: The inverse side of a @OneToMany relationship.</li><li>@ManyToMany: When entities have many-to-many relationships.</li><li>Basic CRUD operations:</li><li>Using an EntityManager (the key JPA interface) for:</li><li>persist(): Saving new entities.</li><li>find(): Retrieving entities by ID.</li><li>merge(): Updating detached entities.</li><li>remove(): Deleting entities.</li><li>JPQL (Java Persistence Query Language):</li><li>Similar syntax to SQL but operates on entities and their properties.</li><li>Creating queries with SELECT, FROM, WHERE, JOIN, etc.</li><li>Lifecycle Events:</li><li>@PrePersist, @PostPersist, etc. - hooking into entity creation, updates, etc.</li><li>Spring JPA: The Power of Spring</li><li>Simplifying Setup:</li><li>How spring-boot-starter-data-jpa pulls in the right dependencies.</li><li>Understanding Spring&#x27;s auto-configuration based on your application setup.</li><li>Repositories:</li><li>The magic of JpaRepository and CrudRepository: instant data access operations.</li><li>Defining custom query methods by name (e.g., findByTitleContaining(String title))</li><li>Using @Query for more complex JPQL queries.</li><li>Transactions:</li><li>@Transactional annotation for declarative transaction management.</li><li>Understanding its integration with JPA.</li><li>Advanced Topics (We can go deep as needed):</li><li>Performance Optimization:</li><li>Fetching strategies (eager vs. lazy)</li><li>Caching (first level, second level)</li><li>Different strategies for ID generation.</li><li>Spring Data JPA Features:</li><li>Paging and Sorting</li><li>Specifications</li><li>Beyond JPA:</li><li>Criteria API (for dynamically constructed queries)</li></ul><p>Hibernate</p><ul><li>ORM Tool</li></ul></div></details><details class="nsec" id="mongo-geojson-gis"><summary><span class="nt">Mongo GeoJSON (GIS)</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="mongo-geojson-gis" aria-label="Mark Mongo GeoJSON (GIS) as read"><span>Read</span></label></summary><div class="nbody"><h3 id="core-concepts">Core Concepts</h3><ul><li>Coordinate Order</li><li>[Longitude, Latitude] (X, Y)</li><li>⚠ Warning: Google Maps gives you [Lat, Long]. You must swap them for MongoDB/GeoJSON.</li><li>Winding Order (Polygons)</li><li>Counter-Clockwise (CCW): The filled area (The shape itself).</li><li>Clockwise (CW): The hole (Exclusion zone).</li><li>Indexing</li><li>@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)</li></ul><h3 id="varieties">Varieties</h3><h4 id="point">Point</h4><ul><li>A single specific location in space.</li><li>Structure</li><li>[Longitude, Latitude]</li><li>When to use</li><li>User location.</li><li>Store address.</li><li>Vehicle position.</li><li>Example</li><li>GeoJsonPoint</li><li>// x=Long, y=Lat</li><li>GeoJsonPoint point = new GeoJsonPoint(-73.93, 40.73);</li></ul><h4 id="linestring">LineString</h4><ul><li>An ordered list of two or more points forming a path.</li><li>Does not have to be closed.</li><li>Structure</li><li>[ [x,y], [x,y], [x,y] ]</li><li>When to use</li><li>GPS Route (Uber trip path).</li><li>Rivers.</li><li>Street segments.</li><li>Java Implementation</li><li>GeoJsonLineString</li><li>Example</li><li>List&lt;Point&gt; points = Arrays.asList(</li><li>new Point(-73.9, 40.7),</li><li>new Point(-74.0, 40.8)</li><li>);</li><li>GeoJsonLineString route = new GeoJsonLineString(points);</li></ul><h4 id="polygon">Polygon</h4><ul><li>A closed shape defining an area.</li><li>Structure</li><li>Ring 1 (Outer): The boundary (Must be CCW).</li><li>Ring 2+ (Inner): Optional holes (Must be CW).</li><li>Rules</li><li>Closed Loop: First and Last point must be identical.</li><li>Minimum Points: 4 points (3 to make a triangle + 1 to close loop).</li><li>When to use</li><li>City boundary.</li><li>A specific park.</li><li>A Geofence.</li><li>Example</li><li>GeoJsonPolygon</li><li>// Define points (Last point == First point)</li><li>Point p1 = new Point(0,0);</li><li>Point p2 = new Point(0,10);</li><li>Point p3 = new Point(10,10);</li><li>Point p4 = new Point(10,0);</li><li>// CCW order</li><li>GeoJsonPolygon poly = new GeoJsonPolygon(p1, p2, p3, p4, p1);</li></ul><h4 id="multipoint">MultiPoint</h4><ul><li>A collection of points treated as a single document/entity.</li><li>Structure</li><li>[ [x,y], [x,y], ... ]</li><li>When to use</li><li>&quot;All bus stops for Route 55&quot; (stored as one object).</li><li>Scattered data points belonging to one dataset.</li><li>Example:</li><li>GeoJsonMultiPoint</li><li>List&lt;Point&gt; stops = Arrays.asList(point1, point2, point3);</li><li>GeoJsonMultiPoint busStops = new GeoJsonMultiPoint(stops);</li></ul><h4 id="multilinestring">MultiLineString</h4><ul><li>A collection of LineStrings that are not connected.</li><li>Structure</li><li>Array of LineString arrays.</li><li>When to use</li><li>A road network with gaps.</li><li>A river system with tributaries (where lines branch off).</li><li>Example</li><li>GeoJsonMultiLineString</li><li>List&lt;GeoJsonLineString&gt; lines = Arrays.asList(routeA, routeB);</li><li>GeoJsonMultiLineString network = new GeoJsonMultiLineString(lines);</li></ul><h4 id="multipolygon">MultiPolygon</h4><ul><li>A collection of disjointed Polygons treated as one entity.</li><li>Structure</li><li>Array of Polygon arrays.</li><li>When to use</li><li>Countries with islands (USA = Mainland + Hawaii + Alaska).</li><li>A delivery zone that covers two separate neighborhoods.</li><li>Example</li><li>GeoJsonMultiPolygon</li><li>List&lt;GeoJsonPolygon&gt; areas = Arrays.asList(downtown, airport);</li><li>GeoJsonMultiPolygon serviceZone = new GeoJsonMultiPolygon(areas);</li></ul><h4 id="geometrycollection">GeometryCollection</h4><ul><li>A mixed bag of different geometry types in one object.</li><li>Can contain a Point AND a LineString AND a Polygon.</li><li>Structure</li><li>geometries: [ {type: &quot;Point&quot;...}, {type: &quot;Polygon&quot;...} ]</li><li>When to use</li><li>Complex CAD drawings.</li><li>A &quot;Feature&quot; that includes a station (Point) and the track leading to it (LineString).</li><li>Note: Less common in standard &quot;Find nearby&quot; queries.</li><li>Example</li><li>GeoJsonGeometryCollection</li><li>List&lt;GeoJson&lt;?&gt;&gt; mixed = Arrays.asList(myPoint, myPolygon);</li><li>GeoJsonGeometryCollection collection = new GeoJsonGeometryCollection(mixed);</li></ul></div></details></div></details></div></div>
-<button type="button" class="ntop" id="ntop" aria-label="Back to top" hidden>&uarr;</button>
+</code></pre>
+<h3>@Profile: different beans per environment</h3>
+<pre><code class="language-java">@Component @Profile("dev")
+class FakeMailer implements MessageService { ... }
+
+@Component @Profile({"prod", "default"})   // "default" applies when no profile is active
+class SmtpMailer implements MessageService { ... }
+</code></pre>
+<p>Pick the profile in <code>application.properties</code>:</p>
+<pre><code class="language-properties">spring.profiles.active=dev
+</code></pre>
+</div></div><div id="solid" class="nsec flat"><div class="fhead"><h3 class="nt">SOLID principles</h3></div><div class="nbody"><p>Five rules for classes that are easy to change.</p>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th></th>
+<th>Principle</th>
+<th>In one line</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>S</strong></td>
+<td>Single responsibility</td>
+<td>A class has one reason to change</td>
+</tr>
+<tr>
+<td><strong>O</strong></td>
+<td>Open/closed</td>
+<td>Add behaviour by extending, not by editing what works</td>
+</tr>
+<tr>
+<td><strong>L</strong></td>
+<td>Liskov substitution</td>
+<td>A subclass must work wherever its parent does</td>
+</tr>
+<tr>
+<td><strong>I</strong></td>
+<td>Interface segregation</td>
+<td>Many small, focused interfaces beat one big one</td>
+</tr>
+<tr>
+<td><strong>D</strong></td>
+<td>Dependency inversion</td>
+<td>Depend on abstractions (interfaces), not on concrete classes</td>
+</tr>
+</tbody></table></div>
+<h3>Examples</h3>
+<ul>
+<li><strong>S:</strong> a <code>UserService</code> that also sends emails and writes PDFs has three reasons to change. Split it into <code>UserService</code>, <code>Mailer</code> and <code>PdfWriter</code>.</li>
+<li><strong>O:</strong> a <code>StudentValidator</code> works. To validate faculty too, don't add <code>if (faculty)</code> branches to it: write a <code>Validator</code> interface with a <code>StudentValidator</code> and a <code>FacultyValidator</code>.</li>
+<li><strong>L:</strong> if a subclass needs a different kind of object in its constructor, or throws where the parent didn't, code written for the parent breaks.</li>
+<li><strong>I:</strong> a <code>Printer</code> interface with <code>print()</code>, <code>scan()</code> and <code>fax()</code> forces a simple printer to fake <code>fax()</code>. Split it into <code>Printer</code>, <code>Scanner</code> and <code>Fax</code>.</li>
+<li><strong>D:</strong> <code>PotterMail</code> depends on <code>MessageService</code>, not on <code>EmailService</code>. That's what makes dependency injection work.</li>
+</ul>
+</div></div></div></details><details class="ngrp" id="g-data" data-ids="hibernate mongo-geojson-gis"><summary><span class="gt">Data: Hibernate and Mongo</span><span class="gc">2 topics</span><label class="nread" title="Mark as read"><input type="checkbox" data-id="g-data" aria-label="Mark Data: Hibernate and Mongo as read"><span>Read</span></label></summary><div class="gbody"><div id="hibernate" class="nsec flat"><div class="fhead"><h3 class="nt">Hibernate and Spring Data JPA in depth</h3></div><div class="nbody"><div class="ntable"><table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>JPA</strong> (Jakarta Persistence)</td>
+<td>The specification: interfaces and annotations, no code that runs</td>
+</tr>
+<tr>
+<td><strong>Hibernate</strong></td>
+<td>The implementation: manages connections, generates SQL, maps rows to objects</td>
+</tr>
+<tr>
+<td><strong>Spring Data JPA</strong></td>
+<td>A layer on top: you write repository interfaces; it generates the classes at runtime</td>
+</tr>
+</tbody></table></div>
+<h3>Mapping annotations</h3>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@Entity</code></td>
+<td>This class is a table</td>
+</tr>
+<tr>
+<td><code>@Id</code></td>
+<td>The primary key</td>
+</tr>
+<tr>
+<td><code>@GeneratedValue</code></td>
+<td>How the key is made (below)</td>
+</tr>
+<tr>
+<td><code>@Column(name, nullable = false, updatable = false)</code></td>
+<td>Column name, <code>NOT NULL</code>, never updated (good for created-at times)</td>
+</tr>
+<tr>
+<td><code>@Transient</code></td>
+<td>Not stored (e.g. an <code>age</code> worked out from <code>birthDate</code>)</td>
+</tr>
+<tr>
+<td><code>@Enumerated(EnumType.STRING)</code></td>
+<td>Store an enum by name</td>
+</tr>
+</tbody></table></div>
+<p><strong>ID strategies</strong></p>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th><code>GenerationType</code></th>
+<th>How</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>IDENTITY</code></td>
+<td>The database's auto-increment column</td>
+<td>Simple (MySQL). Turns off JDBC batch inserts.</td>
+</tr>
+<tr>
+<td><code>SEQUENCE</code></td>
+<td>A database sequence</td>
+<td>Fastest for batch inserts (PostgreSQL, Oracle)</td>
+</tr>
+<tr>
+<td><code>UUID</code></td>
+<td>A random UUID</td>
+<td>Good across many services</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>Store enums as <code>STRING</code>. With <code>ORDINAL</code> (0, 1, 2...) reordering the enum silently corrupts your data.</p>
+</blockquote>
+<h3>Relationships</h3>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>@OneToOne</code></td>
+<td>User ↔ Profile</td>
+</tr>
+<tr>
+<td><code>@OneToMany</code> / <code>@ManyToOne</code></td>
+<td>Author → many Books; each Book → one Author</td>
+</tr>
+<tr>
+<td><code>@ManyToMany</code></td>
+<td>Students ↔ Courses, through a join table</td>
+</tr>
+</tbody></table></div>
+<h3>Inheritance: Employee extends User</h3>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Tables</th>
+<th>Trade-off</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>SINGLE_TABLE</code> (default)</td>
+<td>One table for all, plus a type column</td>
+<td>Fastest; subclass columns must allow <code>NULL</code></td>
+</tr>
+<tr>
+<td><code>JOINED</code></td>
+<td>One per class, joined by key</td>
+<td>Normalised; slower because of joins</td>
+</tr>
+<tr>
+<td><code>TABLE_PER_CLASS</code></td>
+<td>One per concrete class</td>
+<td>No joins, but queries on the parent use slow <code>UNION</code>s</td>
+</tr>
+</tbody></table></div>
+<h3>Using JPA directly</h3>
+<p>The <code>EntityManager</code> is the core JPA interface:</p>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>persist(e)</code></td>
+<td>Save a new entity</td>
+</tr>
+<tr>
+<td><code>find(Type.class, id)</code></td>
+<td>Load by id</td>
+</tr>
+<tr>
+<td><code>merge(e)</code></td>
+<td>Save changes to a detached entity</td>
+</tr>
+<tr>
+<td><code>remove(e)</code></td>
+<td>Delete</td>
+</tr>
+</tbody></table></div>
+<p><strong>JPQL</strong> looks like SQL but uses entity and field names:</p>
+<pre><code class="language-java">em.createQuery("SELECT b FROM Book b WHERE b.author.lastName = :n", Book.class)
+  .setParameter("n", "Ahmed")
+  .getResultList();
+</code></pre>
+<p><strong>Lifecycle hooks:</strong> <code>@PrePersist</code>, <code>@PostPersist</code>, <code>@PreUpdate</code>, <code>@PostLoad</code>... run code when an entity is saved or loaded (e.g. set <code>createdAt</code>).</p>
+<h3>What Spring adds</h3>
+<ul>
+<li><code>spring-boot-starter-data-jpa</code> brings Hibernate and sets it up from your <code>application.properties</code>.</li>
+<li><strong>Repositories:</strong> query methods from names (<code>findByTitleContaining</code>), or <code>@Query</code> for JPQL.</li>
+<li><strong><code>@Transactional</code>:</strong> the method runs in one transaction; an exception rolls it all back.</li>
+<li><strong>Paging and sorting:</strong> <code>findAll(PageRequest.of(0, 20, Sort.by("title")))</code>.</li>
+<li><strong>Specifications</strong> and the <strong>Criteria API</strong> for queries built at runtime (search forms).</li>
+</ul>
+<h3>Performance</h3>
+<ul>
+<li><strong>Lazy vs eager:</strong> collections load lazily by default (only when touched). Lazy loading in a loop causes the <strong>N+1 problem</strong>: one query for the list, then one per item. Fix with <code>JOIN FETCH</code> or an entity graph.</li>
+<li><strong>Caching:</strong> the first-level cache (per transaction) is always on; a second-level cache (shared) is optional.</li>
+</ul>
+</div></div><div id="mongo-geojson-gis" class="nsec flat"><div class="fhead"><h3 class="nt">MongoDB GeoJSON (maps and locations)</h3></div><div class="nbody"><h3>The three rules</h3>
+<ol>
+<li><strong>Coordinates are <code>[longitude, latitude]</code></strong> (x, y). Google Maps shows lat, lng: swap them.</li>
+<li><strong>Polygon rings:</strong> the outer ring goes counter-clockwise (the shape); inner rings go clockwise (holes). The first and last points must be the same.</li>
+<li><strong>Index the field</strong> or geo queries won't work:<pre><code class="language-java">@GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
+private GeoJsonPoint location;
+</code></pre>
+</li>
+</ol>
+<figure class="ndia"><svg viewBox="0 0 640 172" role="img" aria-label="GeoJSON Point, LineString and Polygon with a hole"><text x="20" y="22" class="tb" text-anchor="start">Point</text><circle cx="80" cy="90" r="7" class="dot" /><text x="80" y="160" class="code" text-anchor="middle">[lng, lat]</text><text x="180" y="22" class="tb" text-anchor="start">LineString</text><path d="M180 130L215 70L255 105L290 50" class="ln" style="stroke:var(--signal);stroke-width:3" /><circle cx="180" cy="130" r="4" class="dot" /><circle cx="215" cy="70" r="4" class="dot" /><circle cx="255" cy="105" r="4" class="dot" /><circle cx="290" cy="50" r="4" class="dot" /><text x="235" y="160" class="mu" text-anchor="middle">a path, open</text><text x="360" y="22" class="tb" text-anchor="start">Polygon with a hole</text><path d="M370 140L380 45L500 40L520 135Z" class="vf" style="opacity:.55" /><path d="M420 75L470 75L465 115L425 112Z" class="vb" style="stroke:var(--steel);stroke-dasharray:3 3" /><text x="445" y="160" class="mu" text-anchor="middle">outer ring CCW, hole CW</text><text x="535" y="60" class="mu" text-anchor="start">first point</text><text x="535" y="76" class="mu" text-anchor="start">= last point</text></svg><figcaption>The three basic GeoJSON shapes. Coordinates are always <strong>[longitude, latitude]</strong>.</figcaption></figure>
+
+<h3>The types</h3>
+<div class="ntable"><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Is</th>
+<th>Use it for</th>
+<th>Spring Data class</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Point</strong></td>
+<td>One location</td>
+<td>A user, a shop, a vehicle</td>
+<td><code>GeoJsonPoint</code></td>
+</tr>
+<tr>
+<td><strong>LineString</strong></td>
+<td>An ordered path of 2+ points, open</td>
+<td>A GPS route, a river, a street</td>
+<td><code>GeoJsonLineString</code></td>
+</tr>
+<tr>
+<td><strong>Polygon</strong></td>
+<td>A closed area (min. 4 points: a triangle plus the closing point), optional holes</td>
+<td>A city boundary, a park, a geofence</td>
+<td><code>GeoJsonPolygon</code></td>
+</tr>
+<tr>
+<td><strong>MultiPoint</strong></td>
+<td>Several points as one object</td>
+<td>All bus stops on route 55</td>
+<td><code>GeoJsonMultiPoint</code></td>
+</tr>
+<tr>
+<td><strong>MultiLineString</strong></td>
+<td>Several separate lines</td>
+<td>A road network with gaps</td>
+<td><code>GeoJsonMultiLineString</code></td>
+</tr>
+<tr>
+<td><strong>MultiPolygon</strong></td>
+<td>Several separate areas</td>
+<td>A country with islands; a delivery zone in two parts</td>
+<td><code>GeoJsonMultiPolygon</code></td>
+</tr>
+<tr>
+<td><strong>GeometryCollection</strong></td>
+<td>A mix of types</td>
+<td>A station (point) and its track (line)</td>
+<td><code>GeoJsonGeometryCollection</code></td>
+</tr>
+</tbody></table></div>
+<h3>Examples</h3>
+<pre><code class="language-java">GeoJsonPoint shop = new GeoJsonPoint(-73.93, 40.73);          // x = longitude, y = latitude
+
+GeoJsonLineString route = new GeoJsonLineString(List.of(
+        new Point(-73.9, 40.7),
+        new Point(-74.0, 40.8)));
+
+GeoJsonPolygon zone = new GeoJsonPolygon(                     // counter-clockwise, closed
+        new Point(0, 0), new Point(10, 0), new Point(10, 10), new Point(0, 10), new Point(0, 0));
+
+GeoJsonMultiPoint stops = new GeoJsonMultiPoint(List.of(p1, p2, p3));
+GeoJsonMultiPolygon service = new GeoJsonMultiPolygon(List.of(downtown, airport));
+GeoJsonGeometryCollection mixed = new GeoJsonGeometryCollection(List.of(shop, zone));
+</code></pre>
+</div></div></div></details></div></div>
+<button type="button" class="ntop" id="ntop" aria-label="Back to top" hidden>↑</button>
 <script>
 (function(){
   var secs=[].slice.call(document.querySelectorAll('.nsec,.ngrp')), top=document.getElementById('ntop'), nav=document.querySelector('.nnav-box');
@@ -263,10 +942,5 @@ public PasswordEncoder passwordEncoder() {
   });
   paint();
 })();
-</script><script>
-(function(){
-  function count(){var G=document.querySelectorAll('.ngrp'); G.forEach(function(g){var ids=g.dataset.ids.split(' '), n=0; ids.forEach(function(i){var s=document.getElementById(i); if(s&&s.classList.contains('isread')) n++;});
-    g.querySelector('.gc').textContent=n+' of '+ids.length+' read'; g.classList.toggle('alldone',n===ids.length);});}
-  document.addEventListener('click',function(){setTimeout(count,0);},true); count();
-})();
 </script></section>
+<script src="{{ '/notes/notes.js' | relative_url }}" defer></script>
